@@ -1,0 +1,55 @@
+
+<app-navbar [clienteId]="clienteId"></app-navbar>
+
+
+
+<body class="container m-4">
+    
+    <table className="table">
+        
+        <tbody *ngFor="let articulo of articulosManofaturados">
+
+            <body class="card text-white bg-dark">
+                
+                <tr>
+                    <td >
+                        <div>
+                            <a href=''>
+                                (Imagen)
+                                
+                            </a>
+                        </div>
+                    </td>
+                    
+                    <td >
+                        <tr>
+                            <a >{{articulo.denominacion}}</a>
+                        </tr>
+                        <tr>
+                            <a>
+                                {{articulo.precioVenta}}
+                                
+                            </a>
+                        </tr>
+                        <tr>
+                            <a>
+                                Tiempo Cocina: {{articulo.tiempoEstimadoCocina}}
+                            </a>
+                        </tr>
+                        
+                    </td>
+                    
+                </tr> 
+                <td>
+                    <button type="button" class="btn btn-success" routerLinkActive="active">Agregar al carrito</button>
+
+                </td>
+                
+            </body>
+            <p></p>
+            
+
+    </tbody>
+</table>
+
+</body>
