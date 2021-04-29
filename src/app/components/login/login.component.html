@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+
+<button type="button" class="btn btn-danger m-4" routerLink="/home" routerLinkActive="active">Volver</button>  
+
+
+<div class="card text-white bg-secondary mb-3 " >
+    <div class="card-body">
+        <label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputUser" [(ngModel)]="usuario.usuario">
+        </div>
+    </div>
+    <div class="card-body">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword" [(ngModel)]="usuario.clave"> 
+        </div>
+
+    </div>
+    <button type="button" class="btn btn-success" (click)="login()" routerLinkActive="active">Login</button>
+</div>
+
+
+<p></p>
+<div class="card text-white bg-secondary mb-3">
+    <label for="inputPassword" class="col-sm-2 col-form-label">No estas registrado? REGISTRATE!</label>
+    
+    <button type="button" class="btn btn-warning" routerLink="/register" routerLinkActive="active">REGISTRAR</button>
+    
+</div>
+
