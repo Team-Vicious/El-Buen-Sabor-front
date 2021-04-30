@@ -32,11 +32,15 @@ export class NavbarComponent implements OnInit {
     @Input() articuloInsumoCarrito!:ArticuloInsumo[];
 
     ngOnInit(): void {
-      
+
+      //si trae id del home que haga la consulta, esto para evitar errores en consola
+      if (this.clienteId) {
+        
         this.clienteService.ver(+this.clienteId).subscribe( cliente =>{
           this.cliente = cliente;
         
         });
+      }
       
         
     }
