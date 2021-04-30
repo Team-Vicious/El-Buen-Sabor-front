@@ -7,13 +7,13 @@
     <div class="card-body">
         <label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputUser">
+            <input type="text" class="form-control" id="inputUser" [(ngModel)]="usuario.usuario">
         </div>
     </div>
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword">
+            <input type="password" class="form-control" id="inputPassword" [(ngModel)]="usuario.clave">
         </div>
 
     </div>
@@ -25,28 +25,28 @@
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Nombre</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputNombre">
+            <input type="text" class="form-control" id="inputNombre" [(ngModel)]="cliente.nombre">
         </div>
 
     </div>
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Apellido</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputApellido">
+            <input type="text" class="form-control" id="inputApellido" [(ngModel)]="cliente.apellido">
         </div>
 
     </div>
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">telefono</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputTelefono">
+            <input type="text" class="form-control" id="inputTelefono" [(ngModel)]="cliente.telefono">
         </div>
 
     </div>
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEmail">
+            <input type="text" class="form-control" id="inputEmail" [(ngModel)]="cliente.email">
         </div>
 
     </div>
@@ -58,23 +58,23 @@
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Calle</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputCalle">
+            <input type="text" class="form-control" id="inputCalle" [(ngModel)]="domicilio.calle">
         </div>
 
     </div>
     <div class="card-body">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Nro</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label">Nro. Domicilio</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputNro">
+            <input type="text" class="form-control" id="inputNro" [(ngModel)]="domicilio.numero">
         </div>
 
     </div>
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Localidad</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputLocalidad">
+            <input type="text" class="form-control" id="inputLocalidad" [(ngModel)]="domicilio.localidad">
         </div>
 
     </div>
-    <button type="button" class="btn btn-warning"  routerLink="/home" routerLinkActive="active">REGISTRAR!</button>
+    <button type="button" class="btn btn-warning"  (click)="registrar()" routerLinkActive="active">REGISTRAR!</button>
 </div>
