@@ -11,6 +11,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { LayoutModule } from './layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CajeroComponent } from './components/cajero/cajero.component';
+import { CocineroComponent } from './components/cocinero/cocinero.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    CajeroComponent,
+    CocineroComponent
   ],
   imports: [
     BrowserModule,

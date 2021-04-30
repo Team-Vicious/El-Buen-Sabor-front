@@ -21,7 +21,18 @@ export class LoginComponent implements OnInit {
   login():void{
     this.service.validarUser(this.usuario.usuario,this.usuario.clave).subscribe(user => {
       this.usuario = user;
-      this.router.navigate(['/home/',this.usuario.cliente.id]);
+      if (this.usuario.rol == "admin") {
+        this.router.navigate(['/admin/',this.usuario.id]);
+      }
+      if (this.usuario.rol == "cocinero") {
+        this.router.navigate(['/cocinero/',this.usuario.id]);
+      }
+      if (this.usuario.rol == "cajero") {
+        this.router.navigate(['/cajero/',this.usuario.id]);
+      }
+      if (this.usuario.rol == "user") {
+        this.router.navigate(['/home/',this.usuario.id]);
+      }
     })
   }
 }

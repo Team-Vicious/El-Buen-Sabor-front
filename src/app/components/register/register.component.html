@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar [usuarioId]="usuarioId"></app-navbar>
 <div class="card text-white bg-primary p-4 b-5 m-4">
     <div class="card text-white bg-secondary mb-3">
 
@@ -76,5 +76,6 @@
         </div>
 
     </div>
-    <button type="button" class="btn btn-warning"  (click)="registrar()" routerLinkActive="active">REGISTRAR!</button>
+    <button *ngIf="!usuarioId" type="button" class="btn btn-warning"  (click)="registrar()" routerLinkActive="active">REGISTRAR!</button>
+    <button *ngIf="usuarioId" type="button" class="btn btn-success"  (click)="actualizar()" routerLinkActive="active">ACTUALIZAR!</button>
 </div>

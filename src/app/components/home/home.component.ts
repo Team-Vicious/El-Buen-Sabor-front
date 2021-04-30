@@ -23,12 +23,12 @@ export class HomeComponent implements OnInit {
   articulosInsumoGeneral: ArticuloInsumo[] = [];
   articulosInsumoNoEsInsumo: ArticuloInsumo[] = [];
   articuloInsumoCarrito: ArticuloInsumo[] = [];
-  clienteId!: number;
+  usuarioId!: number;
 
   ngOnInit(): void {
     this.traerArticulos();
     //traer id del cliente para pasar al navbar
-    this.clienteId = +this.route.snapshot.paramMap.get('idc')!;
+    this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
 
 
   }
