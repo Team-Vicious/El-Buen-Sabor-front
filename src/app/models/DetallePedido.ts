@@ -6,7 +6,7 @@ import { Base } from "./Base";
 export class DetallePedido implements Base{
     id!: number;
     cantidad!: number;
-    subtoral!: number;
+    subtotal!: number;
     articuloManofacturado!: ArticuloManofacturado;
     articuloInsumo!: ArticuloInsumo;
     
