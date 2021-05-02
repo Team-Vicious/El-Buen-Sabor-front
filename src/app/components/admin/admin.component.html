@@ -1,4 +1,4 @@
-<app-navbar [usuarioId]="usuarioId"></app-navbar>
+<app-navbar [adminId]="adminId"></app-navbar>
 
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <li class="nav-item dropdown p-3 b-5 m-3">
@@ -9,7 +9,7 @@
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">agregar articulo manofacturado</a></li>
             <li><a class="dropdown-item" href="#">agregar articulo insumo</a></li>
-            
+
         </ul>
     </li>
 
@@ -19,150 +19,154 @@
         </a>
 
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" routerLink="/register">agregar usuario</a></li>
-            
+            <li><a class="dropdown-item" href="#" [routerLink]="['/register/admin',adminId]">agregar usuario</a></li>
+
         </ul>
     </li>
     <button type="button" class="btn btn-secondary" (click)="listarUsuarios()">Listar Usuarios</button>
-    <button type="button" class="btn btn-secondary" (click)="listarArticuloManofacturados()">Listar Articulos Manofacturados</button>
+    <button type="button" class="btn btn-secondary" (click)="listarArticuloManofacturados()">Listar Articulos
+        Manofacturados</button>
     <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos()">Listar Articulos insumo</button>
 
 </nav>
 
 <table className="table">
-        
+
     <tbody>
         <th *ngIf="listarUsuario">
-        <body  class="card text-white bg-dark m-2 b-2" *ngFor="let usuario of usuarios">
-            
-            <tr>
-                <td>
-                    <tr>
-                        <a >{{usuario.cliente.nombre}}</a>
-                    </tr>
-                    <tr>
-                        <a>
-                            {{usuario.cliente.apellido}}
-                            
-                        </a>
-                    </tr>
-                    <tr>
-                        <a>
-                            {{usuario.cliente.email}}
-                        </a>
-                    </tr>
-                </td>
-            </tr> 
-            <td>
-                <button type="button" class="btn btn-warning"  routerLinkActive="active">Editar</button>
-                <button type="button" class="btn btn-danger"  routerLinkActive="active">Eliminar</button>
-            </td>
-            
-        </body>
-    </th>
-    
-    
-    <th *ngIf="listarArticuloManofacturado">
-        <body  class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado">
-            
-            <tr>
-                <td >
-                    <div>
-                        <a href=''>
-                            (Imagen)
-                            
-                        </a>
-                    </div>
-                </td>
-                
-                <td >
-                    <tr>
-                        <a >{{articulo.denominacion}}</a>
-                    </tr>
-                    <tr>
-                        <a>
-                            {{articulo.precioVenta}}
-                            
-                        </a>
-                    </tr>
-                    <tr>
-                        <a>
-                            Tiempo Cocina: {{articulo.tiempoEstimadoCocina}} min
-                        </a>
-                    </tr>
-                    
-                </td>
-                
-            </tr>
-            <td>
-                <button type="button" class="btn btn-warning"  routerLinkActive="active">Editar</button>
-                <button type="button" class="btn btn-danger"  routerLinkActive="active">Eliminar</button>
-            </td>
-            
-        </body>
-    </th>
 
-    <th *ngIf="listarArticuloInsumo">
-        <body  class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloInsumo">
-            
-            <tr>
-                <td >
-                    <div>
-                        <a href=''>
-                            (Imagen)
-                            
-                        </a>
-                    </div>
+            <body class="card text-white bg-dark m-2 b-2" *ngFor="let usuario of usuarios">
+
+                <tr>
+                    <td>
+                        <tr>
+                            <a>{{usuario.cliente.nombre}}</a>
+                        </tr>
+                        <tr>
+                            <a>
+                                {{usuario.cliente.apellido}}
+
+                            </a>
+                        </tr>
+                        <tr>
+                            <a>
+                                {{usuario.cliente.email}}
+                            </a>
+                        </tr>
+                    </td>
+                </tr>
+                <td>
+                    <button type="button" class="btn btn-warning" (click)="editarUsuario(usuario.id)" routerLinkActive="active">Editar</button>
+                    <button type="button" class="btn btn-danger"  (click)="eliminarUsuario(usuario.id)" routerLinkActive="active">Eliminar</button>
                 </td>
-                
-                <td >
-                    <tr>
-                        <a >{{articulo.denominacion}}</a>
-                    </tr>
-                    <tr>
-                        <a>
-                            precio venta: ${{articulo.precioVenta}}
-                            
-                        </a>
-                    </tr>
-                    <tr>
-                        <a>
-                            precio compra: ${{articulo.precioCompra}}
-                            
-                        </a>
-                    </tr>
-                    <tr>
-                        <a>
-                            Stock actual: {{articulo.stockActual}}
-                        </a>
-                    </tr>
-                    <tr>
-                        <a>
-                            Stock minimo: {{articulo.stockMinimo}}
-                        </a>
-                    </tr>
-                    <tr>
-                        <a>
-                            Unidad medida: {{articulo.unidadMedida}}
-                        </a>
-                    </tr>
-                    <tr>
-                        <a>
-                            Es insumo: {{articulo.esInsumo}}
-                        </a>
-                    </tr>
-                    
+
+            </body>
+        </th>
+
+
+        <th *ngIf="listarArticuloManofacturado">
+
+            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado">
+
+                <tr>
+                    <td>
+                        <div>
+                            <a href=''>
+                                (Imagen)
+
+                            </a>
+                        </div>
+                    </td>
+
+                    <td>
+                <tr>
+                    <a>{{articulo.denominacion}}</a>
+                </tr>
+                <tr>
+                    <a>
+                        {{articulo.precioVenta}}
+
+                    </a>
+                </tr>
+                <tr>
+                    <a>
+                        Tiempo Cocina: {{articulo.tiempoEstimadoCocina}} min
+                    </a>
+                </tr>
+
                 </td>
-                
-            </tr>
-            <td>
-                <button type="button" class="btn btn-success"  routerLinkActive="active">Aumentar Stock</button>
-                <button type="button" class="btn btn-warning"  routerLinkActive="active">Editar</button>
-                <button type="button" class="btn btn-danger"  routerLinkActive="active">Eliminar</button>
-            </td>
-            
-        </body>
-    </th>
-    
+
+                </tr>
+                <td>
+                    <button type="button" class="btn btn-warning" routerLinkActive="active">Editar</button>
+                    <button type="button" class="btn btn-danger" routerLinkActive="active">Eliminar</button>
+                </td>
+
+            </body>
+        </th>
+
+        <th *ngIf="listarArticuloInsumo">
+
+            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloInsumo">
+
+                <tr>
+                    <td>
+                        <div>
+                            <a href=''>
+                                (Imagen)
+
+                            </a>
+                        </div>
+                    </td>
+
+                    <td>
+                <tr>
+                    <a>{{articulo.denominacion}}</a>
+                </tr>
+                <tr>
+                    <a>
+                        precio venta: ${{articulo.precioVenta}}
+
+                    </a>
+                </tr>
+                <tr>
+                    <a>
+                        precio compra: ${{articulo.precioCompra}}
+
+                    </a>
+                </tr>
+                <tr>
+                    <a>
+                        Stock actual: {{articulo.stockActual}}
+                    </a>
+                </tr>
+                <tr>
+                    <a>
+                        Stock minimo: {{articulo.stockMinimo}}
+                    </a>
+                </tr>
+                <tr>
+                    <a>
+                        Unidad medida: {{articulo.unidadMedida}}
+                    </a>
+                </tr>
+                <tr>
+                    <a>
+                        Es insumo: {{articulo.esInsumo}}
+                    </a>
+                </tr>
+
+                </td>
+
+                </tr>
+                <td>
+                    <button type="button" class="btn btn-success" routerLinkActive="active">Aumentar Stock</button>
+                    <button type="button" class="btn btn-warning" routerLinkActive="active">Editar</button>
+                    <button type="button" class="btn btn-danger" routerLinkActive="active">Eliminar</button>
+                </td>
+
+            </body>
+        </th>
+
     </tbody>
 </table>
