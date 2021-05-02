@@ -13,8 +13,10 @@ const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'home/:idu', component:HomeComponent},
   {path:'register', component:RegisterComponent},
+  {path:'register/admin/:ida', component:RegisterComponent},
   {path:'login', component:LoginComponent},
   {path:'update/:idu', component:RegisterComponent},
+  {path:'update/:idu/admin/:ida', component:RegisterComponent},
   {path:'admin/:idu', component:AdminComponent},
   {path:'cocinero/:idu', component:CocineroComponent},
   {path:'cajero/:idu', component:CajeroComponent}

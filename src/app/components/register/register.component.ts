@@ -17,10 +17,10 @@ export class RegisterComponent implements OnInit {
   cliente: Cliente = new Cliente();
   domicilio: Domicilio = new Domicilio();
   usuarioId!:number;
+  adminId!: number;
   
   constructor(
     private usuarioService: UsuarioService,
-    private domicilioService: DomicilioService,
     private router: Router,
     protected route: ActivatedRoute) { }
 
@@ -28,7 +28,10 @@ export class RegisterComponent implements OnInit {
 
     this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
 
-    //traer usuario-cliente y domicilio por usuario id
+    //si hay admin id -el register lo hace el admin y se agrega rol(html)
+    this.adminId = +this.route.snapshot.paramMap.get('ida')!;
+
+    //si existe usuarioId(update)traer usuario-cliente y domicilio por usuario id
     if (this.usuarioId) {
         
       this.usuarioService.ver(+this.usuarioId).subscribe( usuario =>{
@@ -38,6 +41,8 @@ export class RegisterComponent implements OnInit {
       });
 
     }
+    
+    
   }
 
   registrar(){
@@ -47,7 +52,13 @@ export class RegisterComponent implements OnInit {
 
     this.usuarioService.crear(this.usuario).subscribe(user => {
       console.log("registrado con exito usuario: "+user.usuario);
-      this.router.navigate(['/home/',user.cliente.id]);
+      
+      //si lo crea el admin vuelve al admin, sino es usuario normal y va al home
+      if (this.adminId) {
+        this.router.navigate(['/admin/',this.adminId]);
+      }else{
+        this.router.navigate(['/home/',user.cliente.id]);
+      }
 
     })
   }
@@ -59,9 +70,19 @@ export class RegisterComponent implements OnInit {
 
     this.usuarioService.editar(this.usuario).subscribe(user => {
       console.log("actualizado con exito usuario: "+user.usuario);
-      this.router.navigate(['/home/',user.cliente.id]);
+
+      //si lo actualiza el admin vuelve al admin, sino es usuario normal y va al home
+      if (this.adminId) {
+        this.router.navigate(['/admin/',this.adminId]);
+      }else{
+        this.router.navigate(['/home/',user.cliente.id]);
+      }
 
     })
+  }
+
+  setearRol(rol: string){
+    this.usuario.rol = rol;
   }
 
 }

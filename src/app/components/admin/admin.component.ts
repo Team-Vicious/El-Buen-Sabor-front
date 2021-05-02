@@ -14,7 +14,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class AdminComponent implements OnInit {
 
-  usuarioId!:number;
+  adminId!:number;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -24,7 +24,7 @@ export class AdminComponent implements OnInit {
     protected route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
+    this.adminId = +this.route.snapshot.paramMap.get('idu')!;
   }
 
   listarUsuario:boolean = false;
@@ -36,6 +36,20 @@ export class AdminComponent implements OnInit {
       this.listarArticuloInsumo = false;
       this.usuarios = usuarios as Usuario[];
     })
+  }
+
+  editarUsuario(usuarioId: number){
+    
+    this.router.navigate(['update/',usuarioId,'admin',this.adminId]);
+  }
+
+  eliminarUsuario(usuarioId: number){
+    this.usuarioService.eliminar(usuarioId).subscribe(usuario =>{
+      console.log("usuario eliminado: ",usuario);
+    })
+    this.router.navigate(['admin/',this.adminId]);
+    //para actualizar la vista
+    this.listarUsuarios();
   }
 
   listarArticuloManofacturado:boolean = false;

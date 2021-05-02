@@ -26,10 +26,13 @@ export class NavbarComponent implements OnInit {
     
     id:any;
     usuario!: Usuario;
+    usuarioAdmin!: Usuario;
     //pedidos: Pedido[] = [];
     pedido: Pedido = new Pedido();
+    validarLogin!: boolean;
 
     @Input() usuarioId!:number;
+    @Input() adminId!:number;
     @Input() articulosManofaturadosCarrito!:ArticuloManofacturado[];
     @Input() articuloInsumoCarrito!:ArticuloInsumo[];
 
@@ -43,7 +46,15 @@ export class NavbarComponent implements OnInit {
         
         });
       }
-      
+
+      //trae user admin si es que se lo pasan desde componente admin
+      if (this.adminId) {
+        
+        this.usuarioService.ver(+this.adminId).subscribe( usuario =>{
+          this.usuarioAdmin = usuario;
+        
+        });
+      }
         
     }
 
