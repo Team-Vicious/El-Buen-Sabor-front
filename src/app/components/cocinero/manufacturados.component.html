@@ -1,0 +1,44 @@
+<div>
+<app-navbar></app-navbar>    
+<button class="btn btn-primary my-2" routerLink="/manufacturado/form">crear</button>
+
+    <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado">
+
+        <tr>
+            <td>
+                <div>
+                    <a href=''>
+                        (Imagen)
+
+                    </a>
+                </div>
+            </td>
+
+            <td>
+        <tr>
+            <a>{{articulo.denominacion}}</a>
+        </tr>
+        <tr>
+            <a>
+                {{articulo.precioVenta}}
+
+            </a>
+        </tr>
+        <tr>
+            <a>
+                Tiempo Cocina: {{articulo.tiempoEstimadoCocina}} min
+            </a>
+        </tr>
+
+        </td>
+
+        </tr>
+        <td>
+            <button type="button" class="btn btn-warning" routerLinkActive="active" [routerLink]="['/manufacturados/form',articulo.id]">Editar</button>
+
+            <button type="button" class="btn btn-danger" routerLinkActive="active">Eliminar</button>
+        </td>
+
+    </body>
+
+</div>

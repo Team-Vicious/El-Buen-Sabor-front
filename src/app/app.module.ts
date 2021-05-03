@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CajeroComponent } from './components/cajero/cajero.component';
 import { CocineroComponent } from './components/cocinero/cocinero.component';
+import { ManufacturadosComponent } from './components/cocinero/manufacturados.component';
+import { ManufacturadosFormComponent } from './components/cocinero/manufacturados-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CocineroComponent } from './components/cocinero/cocinero.component';
     RegisterComponent,
     AdminComponent,
     CajeroComponent,
-    CocineroComponent
+    CocineroComponent,
+    ManufacturadosComponent,
+    ManufacturadosFormComponent
   ],
   imports: [
     BrowserModule,
