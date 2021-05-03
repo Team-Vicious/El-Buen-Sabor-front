@@ -1,97 +1,99 @@
-
-<app-navbar [usuarioId]="usuarioId" [articulosManofaturadosCarrito]="articulosManofaturadosCarrito" [articuloInsumoCarrito]="articuloInsumoCarrito">
+<app-navbar [usuarioId]="usuarioId" [articulosManofaturadosCarrito]="articulosManofaturadosCarrito"
+    [articuloInsumoCarrito]="articuloInsumoCarrito">
 </app-navbar>
+
 
 
 
 <body class="container m-4">
     
     <table className="table">
-        
+
         <tbody>
-
+            <div class="row">
             <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of articulosManofaturados">
-                
+
                 <tr>
-                    <td >
+                    <td>
+                        <div>
+                            <img class="card-img-top img-fluid" style="width: 200px;" src="assets/images/{{articulo.imagen}}">
+
+                            <!-- <img src="/src/assets/images/{{articulo.imagen}}"  style="max-height: 150px;"> -->
+                        </div>
+                    </td>
+
+                    <td>
+                <tr>
+                    <a>{{articulo.denominacion}}</a>
+                </tr>
+                <tr>
+                    <a>
+                        $ {{articulo.precioVenta}}
+
+                    </a>
+                </tr>
+               
+
+                </td>
+
+                </tr>
+                <td>
+                    <button type="button" class="btn btn-success"
+                        (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)"
+                        routerLinkActive="active">Agregar al carrito</button>
+
+                </td>
+
+            </body>
+
+        
+            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo">
+
+                <tr>
+                    <td>
                         <div>
                             <a href=''>
                                 (Imagen)
-                                
+
                             </a>
                         </div>
                     </td>
-                    
-                    <td >
-                        <tr>
-                            <a >{{articulo.denominacion}}</a>
-                        </tr>
-                        <tr>
-                            <a>
-                                {{articulo.precioVenta}}
-                                
-                            </a>
-                        </tr>
-                        <tr>
-                            <a>
-                                Tiempo Cocina: {{articulo.tiempoEstimadoCocina}} min
-                            </a>
-                        </tr>
-                        
-                    </td>
-                    
-                </tr> 
-                <td>
-                    <button type="button" class="btn btn-success" (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)" routerLinkActive="active">Agregar al carrito</button>
 
-                </td>
-                
-            </body>
-
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo" >
-                
+                    <td>
                 <tr>
-                    <td >
-                        <div>
-                            <a href=''>
-                                (Imagen)
-                                
-                            </a>
-                        </div>
-                    </td>
-                    
-                    <td >
-                        <tr>
-                            <a >{{articulo2.denominacion}}</a>
-                        </tr>
-                        <tr>
-                            <a>
-                                ${{articulo2.precioVenta}}
-                                
-                            </a>
-                        </tr>
-                        <tr>
-                            <a>
-                                esInsumo: {{articulo2.esInsumo}}
-                                
-                            </a>
-                        </tr>
-                        
-                        
-                    </td>
-                    
-                </tr> 
-                <td>
-                    <button type="button" class="btn btn-success" (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">Agregar al carrito</button>
+                    <a>{{articulo2.denominacion}}</a>
+                </tr>
+                <tr>
+                    <a>
+                        ${{articulo2.precioVenta}}
+
+                    </a>
+                </tr>
+                <tr>
+                    <a>
+                        esInsumo: {{articulo2.esInsumo}}
+
+                    </a>
+                </tr>
+
 
                 </td>
-                
-            </body>
-            
 
+                </tr>
+                <td>
+                    <button type="button" class="btn btn-success"
+                        (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">Agregar
+                        al carrito</button>
+
+                </td>
+
+            </body>
+
+        </div>
         </tbody>
+  
     </table>
 
-    
+
 
 </body>
