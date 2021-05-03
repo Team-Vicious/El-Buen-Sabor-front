@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class ManufacturadosFormComponent implements OnInit {
 
-  titulo = "Editar Manufacturado"
+  titulo = "Manufacturado"
   manufacturado: ArticuloManofacturado = new ArticuloManofacturado();
   error: any;
   constructor(
@@ -32,7 +32,7 @@ export class ManufacturadosFormComponent implements OnInit {
   public crear(): void {
     this.service.crear(this.manufacturado).subscribe(manufacturado => {
       Swal.fire('Nuevo:', `Manufacturado ${manufacturado.denominacion} creado con éxito`, 'success');
-      this.router.navigate(['/manufacturado']);
+      this.router.navigate(['/manufacturados']);
     }, err => {
       if(err.status === 400){
         this.error = err.error;
@@ -46,7 +46,7 @@ export class ManufacturadosFormComponent implements OnInit {
     this.service.editar(this.manufacturado).subscribe(manufacturado => {
       console.log(manufacturado);
       Swal.fire('Modificado:', `Manufacturado ${manufacturado.denominacion} actualizado con éxito`, 'success');
-      this.router.navigate(['/manufacturado']);
+      this.router.navigate(['/manufacturados']);
     }, err => {
       if(err.status === 400){
         this.error = err.error;
@@ -56,3 +56,4 @@ export class ManufacturadosFormComponent implements OnInit {
   }
 
 }
+
