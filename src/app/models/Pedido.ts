@@ -9,6 +9,7 @@ export class Pedido implements Base{
     id!: number;
     fecha!: string;
     numero!: number;
+    estado!: number;
     horaEstimadaFin!: string;
     tipoEnvio!: number;
     total!: number;

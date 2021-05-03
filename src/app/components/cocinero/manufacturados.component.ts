@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-manufacturados',
@@ -11,8 +11,13 @@ import { ArticuloManofacturadoService } from 'src/app/services/articuloManofactu
 })
 export class ManufacturadosComponent implements OnInit {
 
+
+  
+  titulo = "Manufacturado"
+  manufacturado: ArticuloManofacturado = new ArticuloManofacturado();
+  error: any;
   constructor(
-    private articuloManofacturadoService: ArticuloManofacturadoService,
+    private service: ArticuloManofacturadoService,
     private router: Router,
     protected route: ActivatedRoute) { }
 
@@ -25,8 +30,34 @@ export class ManufacturadosComponent implements OnInit {
 
   ArticuloManofacturado: ArticuloManofacturado[] = [];
   listarArticuloManofacturados(){
-    this.articuloManofacturadoService.listar().subscribe(articulos =>{
+    this.service.listar().subscribe(articulos =>{
       this.ArticuloManofacturado = articulos as ArticuloManofacturado[];
     })
   }
+
+  eliminar(manufacturado: ArticuloManofacturado):void{
+    let currentUrl = this.router.url;
+    Swal.fire({
+      title: 'Cuidado:',
+      text: `¿Seguro que desea eliminar a ${manufacturado.denominacion} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.service.eliminar(manufacturado.id).subscribe(
+          manufacturado => {
+            Swal.fire('Eliminado:',`Articulo eliminado con éxito.`,'success');
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+              this.router.navigate([currentUrl]);
+          });
+            });
+
+        }
+      
+      });
+    }
 }
