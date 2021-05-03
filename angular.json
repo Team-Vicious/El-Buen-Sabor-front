@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "elBuenSaborFront"
+  "defaultProject": "elBuenSaborFront",
+  "cli": {
+    "analytics": false
+  }
 }

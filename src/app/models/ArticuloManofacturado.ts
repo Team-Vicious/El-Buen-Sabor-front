@@ -8,7 +8,8 @@ export class ArticuloManofacturado implements Base{
     tiempoEstimadoCocina!: number;
     denominacion!: string;
     precioVenta!: number;
-    imagen!: string;
+    //fotoHashCode!: number;
+    imagen!:string;
     articuloManofactudaroDetalle!:ArticuloManofacturadoDetalle;
     rubroGeneral!: RubroGeneral;
 }
