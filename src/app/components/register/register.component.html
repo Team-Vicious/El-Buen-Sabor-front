@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar [usuarioId]="usuarioId" [adminId]="adminId"></app-navbar>
 <div class="card text-white bg-primary p-4 b-5 m-4">
     <div class="card text-white bg-secondary mb-3">
 
@@ -76,5 +76,17 @@
         </div>
 
     </div>
-    <button type="button" class="btn btn-warning"  (click)="registrar()" routerLinkActive="active">REGISTRAR!</button>
+    <div *ngIf="adminId" class="dropdown">
+        <button class="btn btn-dark dropdown-toggle b-2 m-2" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#fffffffd;">
+          Seleccionar Rol: {{usuario?.rol}}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" (click)="setearRol('user')">Usuario</a></li>
+          <li><a class="dropdown-item" (click)="setearRol('cocinero')">Cocinero</a></li>
+          <li><a class="dropdown-item" (click)="setearRol('cajero')">Cajero</a></li>
+          <li><a class="dropdown-item" (click)="setearRol('admin')">Admin</a></li>
+        </ul>
+    </div>
+    <button *ngIf="!usuarioId" type="button" class="btn btn-warning"  (click)="registrar()" routerLinkActive="active">REGISTRAR!</button>
+    <button *ngIf="usuarioId" type="button" class="btn btn-success"  (click)="actualizar()" routerLinkActive="active">ACTUALIZAR!</button>
 </div>

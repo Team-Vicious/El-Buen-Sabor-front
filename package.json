@@ -24,6 +24,7 @@
     "mercadopago": "^1.5.7",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^10.16.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

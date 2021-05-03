@@ -6,8 +6,10 @@ import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { Cliente } from 'src/app/models/Cliente';
 import { DetallePedido } from 'src/app/models/DetallePedido';
 import { Pedido } from 'src/app/models/Pedido';
+import { Usuario } from 'src/app/models/usuario';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,31 +19,42 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class NavbarComponent implements OnInit {
   
   constructor( 
-    protected clienteService: ClienteService,
+    protected usuarioService: UsuarioService,
     protected pedidoService: PedidoService,
     protected router: Router,
     protected route: ActivatedRoute) { }
     
     id:any;
-    cliente!: Cliente;
+    usuario!: Usuario;
+    usuarioAdmin!: Usuario;
     //pedidos: Pedido[] = [];
     pedido: Pedido = new Pedido();
+    validarLogin!: boolean;
 
-    @Input() clienteId!:number;
+    @Input() usuarioId!:number;
+    @Input() adminId!:number;
     @Input() articulosManofaturadosCarrito!:ArticuloManofacturado[];
     @Input() articuloInsumoCarrito!:ArticuloInsumo[];
 
     ngOnInit(): void {
 
       //si trae id del home que haga la consulta, esto para evitar errores en consola
-      if (this.clienteId) {
+      if (this.usuarioId) {
         
-        this.clienteService.ver(+this.clienteId).subscribe( cliente =>{
-          this.cliente = cliente;
+        this.usuarioService.ver(+this.usuarioId).subscribe( usuario =>{
+          this.usuario = usuario;
         
         });
       }
-      
+
+      //trae user admin si es que se lo pasan desde componente admin
+      if (this.adminId) {
+        
+        this.usuarioService.ver(+this.adminId).subscribe( usuario =>{
+          this.usuarioAdmin = usuario;
+        
+        });
+      }
         
     }
 
@@ -105,7 +118,7 @@ export class NavbarComponent implements OnInit {
       });
 
       //pasar y actualizar cliente con su pedido
-      this.cliente.pedido.push(pedido);
+      this.usuario.cliente.pedido.push(pedido);
     }
     
  

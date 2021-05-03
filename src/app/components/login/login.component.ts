@@ -10,18 +10,34 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class LoginComponent implements OnInit {
 
-  usuario: Usuario = new Usuario();
-
+  
+  usuario!: Usuario;
+  user!:string;
+  clave!:string;
   constructor(private service: UsuarioService,
-              private router: Router) { }
+    private router: Router) { }
+  
 
   ngOnInit(): void {
   }
 
-  login():void{
-    this.service.validarUser(this.usuario.usuario,this.usuario.clave).subscribe(user => {
+  login(){
+    this.service.validarUser(this.user,this.clave).subscribe(user => {
       this.usuario = user;
-      this.router.navigate(['/home/',this.usuario.cliente.id]);
-    })
+
+      if (this.usuario.rol == "admin") {
+        this.router.navigate(['/admin/',this.usuario.id]);
+      }
+      if (this.usuario.rol == "cocinero") {
+        this.router.navigate(['/cocinero/',this.usuario.id]);
+      }
+      if (this.usuario.rol == "cajero") {
+        this.router.navigate(['/cajero/',this.usuario.id]);
+      }
+      if (this.usuario.rol == "user") {
+        this.router.navigate(['/home/',this.usuario.id]);
+      }
+    });
+
   }
 }

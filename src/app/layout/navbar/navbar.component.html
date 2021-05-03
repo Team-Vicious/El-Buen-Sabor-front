@@ -18,10 +18,10 @@
   </div>
   
   <form class="d-flex">
-    <button *ngIf="!cliente?.id" class="btn btn-outline-success" routerLink="/login" routerLinkActive="active">Login</button>
+    <button *ngIf="!usuario?.cliente?.id && !usuarioAdmin?.cliente?.id && !adminId && !usuarioId" class="btn btn-outline-success" routerLink="/login" routerLinkActive="active">Login</button>
   </form>
 
-  <li *ngIf="cliente?.id" class="nav-item dropdown  p-3 b-5 m-3">
+  <li *ngIf="usuario?.cliente?.id && usuario?.rol != 'admin' && !adminId" class="nav-item dropdown  p-3 b-5 m-3">
     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:orange;">
       CARRITO
     </a>
@@ -62,14 +62,16 @@
   </li>
 
 
-  <li *ngIf="cliente?.id" class="nav-item dropdown p-3 b-5 m-3">
-    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:orange;">
-      {{cliente?.nombre}}
+  <li *ngIf="usuario?.cliente?.id ||usuarioAdmin?.cliente?.id" class="nav-item dropdown p-3 b-5 m-3">
+    <a *ngIf="usuarioId && !adminId" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:orange;">
+      {{usuario?.cliente?.nombre}}
+    </a>
+    <a *ngIf="adminId" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:orange;">
+      {{usuarioAdmin?.cliente?.nombre}}
     </a>
 
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Editar cuenta</a></li>
-      <li><a class="dropdown-item" href="#">Editar domicilio</a></li>
+      <li><a class="dropdown-item" href="#" [routerLink]="['/update', usuario?.cliente?.id]">Editar cuenta</a></li>
       <li><a class="dropdown-item" href="#">Another action</a></li>
       <li>
         <hr class="dropdown-divider">
