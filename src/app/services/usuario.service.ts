@@ -17,7 +17,9 @@ export class UsuarioService extends CommonService<Usuario>{
   protected baseEndPoint = BASE_ENDPOINT + '/usuario';
 
   validarUser(usuario:string, contraseña:string ): Observable<Usuario>{
+
     return this.http.get<Usuario>(`${this.baseEndPoint}/login/${usuario}/${contraseña}`,
+    
     {headers: this.cabeceras});
   }
 
