@@ -1,8 +1,21 @@
 <div>
     <app-navbar></app-navbar>   
 
-    <body class="card text-white bg-dark m-2 b-2" *ngFor="let pedido of Pedidos">
+    <div class="btn-group">
+        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+          Mostrar
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" onclick="javascript:console.log( $(event.target).data('mode'))">
+          <a class="dropdown-item" data-mode="mode1" (click)="mostrarEstado(1)">Pendientes</a>
+          <a class="dropdown-item " data-mode="mode2" (click)="mostrarEstado(2)">En proceso</a>
+          <a class="dropdown-item" data-mode="mode3" (click)="mostrarEstado(3)">Terminados</a>
+          <a class="dropdown-item" data-mode="mode4" (click)="mostrarEstado(4)">Todos</a>
+        </div>
+      </div>
 
+    <body class="card text-white bg-dark m-2 b-2" *ngFor="let pedido of Pedidos">
+        <a *ngIf="(pedido.estado)===(mostrar) || (mostrar)===4">
+        <a *ngIf="asignarEstado(pedido)"></a>
         <tr>
             <a>Número de pedido: {{pedido.id}}</a>
         </tr>
@@ -15,14 +28,11 @@
             </a>
         </tr>
         <tr>
-            <a>Estado: </a>
-            <a *ngIf="(pedido.estado)===1">Pendiente</a>
-            <a *ngIf="(pedido.estado)===2">En proceso</a>
-            <a *ngIf="(pedido.estado)===3">Terminado</a>
+            <a>Estado: {{estado}}</a>
         </tr>
         <td>
             <div class="btn-group">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                   Cambiar estado
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" onclick="javascript:console.log( $(event.target).data('mode'))">
@@ -32,6 +42,7 @@
                 </div>
               </div>
         </td>
+    </a>
     </body>
 
 </div>
