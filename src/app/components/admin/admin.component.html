@@ -7,7 +7,7 @@
         </a>
 
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">agregar articulo manofacturado</a></li>
+            <li><a class="dropdown-item" href="/manufacturados/form">agregar articulo manofacturado</a></li>
             <li><a class="dropdown-item" href="#">agregar articulo insumo</a></li>
 
         </ul>
@@ -30,10 +30,10 @@
 
 </nav>
 
-<table className="table">
 
-    <tbody>
-        <th *ngIf="listarUsuario">
+
+    
+        <body *ngIf="listarUsuario">
 
             <body class="card text-white bg-dark m-2 b-2" *ngFor="let usuario of usuarios">
 
@@ -61,10 +61,10 @@
                 </td>
 
             </body>
-        </th>
+        </body>
 
 
-        <th *ngIf="listarArticuloManofacturado">
+        <body *ngIf="listarArticuloManofacturado">
 
             <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado">
 
@@ -98,14 +98,14 @@
 
                 </tr>
                 <td>
-                    <button type="button" class="btn btn-warning" routerLinkActive="active">Editar</button>
+                    <button type="button" class="btn btn-warning" [routerLink]="['/manufacturados/form', articulo.id]" routerLinkActive="active">Editar</button>
                     <button type="button" class="btn btn-danger" routerLinkActive="active">Eliminar</button>
                 </td>
 
             </body>
-        </th>
+        </body>
 
-        <th *ngIf="listarArticuloInsumo">
+        <body *ngIf="listarArticuloInsumo">
 
             <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloInsumo">
 
@@ -122,7 +122,7 @@
                     <td>
                 <tr>
                     <p></p>
-                    <a>ARTICULO <br>{{articulo.denominacion}}</a>
+                    <a>{{articulo.denominacion}}</a>
                 </tr>
                 <tr>
                     <a>
@@ -167,7 +167,5 @@
                 </td>
 
             </body>
-        </th>
+        </body>
 
-    </tbody>
-</table>
