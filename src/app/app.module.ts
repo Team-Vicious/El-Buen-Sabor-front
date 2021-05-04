@@ -15,6 +15,7 @@ import { CajeroComponent } from './components/cajero/cajero.component';
 import { CocineroComponent } from './components/cocinero/cocinero.component';
 import { ManufacturadosComponent } from './components/cocinero/manufacturados.component';
 import { ManufacturadosFormComponent } from './components/cocinero/manufacturados-form.component';
+import { PedidosComponent } from './components/cocinero/pedidos.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ManufacturadosFormComponent } from './components/cocinero/manufacturado
     CajeroComponent,
     CocineroComponent,
     ManufacturadosComponent,
-    ManufacturadosFormComponent
+    ManufacturadosFormComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,

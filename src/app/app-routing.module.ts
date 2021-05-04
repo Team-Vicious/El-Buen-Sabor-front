@@ -5,6 +5,7 @@ import { CajeroComponent } from './components/cajero/cajero.component';
 import { CocineroComponent } from './components/cocinero/cocinero.component';
 import { ManufacturadosFormComponent } from './components/cocinero/manufacturados-form.component';
 import { ManufacturadosComponent } from './components/cocinero/manufacturados.component';
+import { PedidosComponent } from './components/cocinero/pedidos.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -23,7 +24,10 @@ const routes: Routes = [
   {path:'cocinero/:idu', component:CocineroComponent},
   {path:'cajero/:idu', component:CajeroComponent},
   {path:'manufacturados', component:ManufacturadosComponent},
-  {path:'manufacturados/form/:idu', component:ManufacturadosFormComponent}
+  {path:'manufacturados/form/:idu', component:ManufacturadosFormComponent},
+  {path:'manufacturados/form', component:ManufacturadosFormComponent},
+  {path:'pedidos', component:PedidosComponent}
+
 ];
 
 @NgModule({

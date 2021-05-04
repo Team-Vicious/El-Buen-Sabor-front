@@ -1,6 +1,6 @@
 <div>
 <app-navbar></app-navbar>    
-<button class="btn btn-primary my-2" routerLink="/manufacturado/form">crear</button>
+<button class="btn btn-primary my-2" routerLink="/manufacturados/form" >crear</button>
 
     <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado">
 
@@ -36,7 +36,7 @@
         <td>
             <button type="button" class="btn btn-warning" routerLinkActive="active" [routerLink]="['/manufacturados/form',articulo.id]">Editar</button>
 
-            <button type="button" class="btn btn-danger" routerLinkActive="active">Eliminar</button>
+            <button type="button" class="btn btn-danger" routerLinkActive="active"  (click)="eliminar(articulo)">Eliminar</button>
         </td>
 
     </body>

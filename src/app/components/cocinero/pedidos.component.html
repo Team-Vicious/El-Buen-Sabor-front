@@ -1,0 +1,37 @@
+<div>
+    <app-navbar></app-navbar>   
+
+    <body class="card text-white bg-dark m-2 b-2" *ngFor="let pedido of Pedidos">
+
+        <tr>
+            <a>Número de pedido: {{pedido.id}}</a>
+        </tr>
+        <tr>
+            <a>Total: {{pedido.total}}</a>
+        </tr>
+        <tr>
+            <a *ngFor="let detalle of pedido.detallePedido">
+                Detalles: {{detalle.articuloManofacturado.denominacion}}
+            </a>
+        </tr>
+        <tr>
+            <a>Estado: </a>
+            <a *ngIf="(pedido.estado)===1">Pendiente</a>
+            <a *ngIf="(pedido.estado)===2">En proceso</a>
+            <a *ngIf="(pedido.estado)===3">Terminado</a>
+        </tr>
+        <td>
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                  Cambiar estado
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" onclick="javascript:console.log( $(event.target).data('mode'))">
+                  <a class="dropdown-item" data-mode="mode1" (click)="cambiarEstado(pedido,1)">Pendiente</a>
+                  <a class="dropdown-item " data-mode="mode2" (click)="cambiarEstado(pedido,2)">En proceso</a>
+                  <a class="dropdown-item" data-mode="mode3" (click)="cambiarEstado(pedido,3)">Terminado</a>
+                </div>
+              </div>
+        </td>
+    </body>
+
+</div>
