@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Directive, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-manufacturados-form',
+  selector: '[app-manufacturados-form,backButton]',
   templateUrl: './manufacturados-form.component.html',
   styleUrls: ['./manufacturados-form.component.css']
 })
+
 export class ManufacturadosFormComponent implements OnInit {
 
   titulo = "Manufacturado"
@@ -17,7 +19,8 @@ export class ManufacturadosFormComponent implements OnInit {
   constructor(
     private service: ArticuloManofacturadoService, 
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private location: Location) { }
 
     ngOnInit() {
       this.route.paramMap.subscribe(params => {
@@ -54,6 +57,12 @@ export class ManufacturadosFormComponent implements OnInit {
       }
     });
   }
+
+  //boton para volver para atras ya que se usa en admin y el cocinero
+  @HostListener('click')
+    onClick() {
+        this.location.back();
+    }
 
 }
 
