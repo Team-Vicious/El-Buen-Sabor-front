@@ -12,6 +12,8 @@ export class PedidosComponent implements OnInit {
   
   Pedidos: Pedido[] = [];
   pedido: Pedido = new Pedido();
+  mostrar: number = 1;
+  estado!:String;
   constructor(
     private service: PedidoService,
     private router: Router,
@@ -27,6 +29,7 @@ export class PedidosComponent implements OnInit {
     this.service.listar().subscribe(pedido =>{
       this.Pedidos = pedido as Pedido[];
     })
+
   }
 
  
@@ -37,11 +40,21 @@ export class PedidosComponent implements OnInit {
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigate([currentUrl]);});
     })
-  
-    
-
   }
 
+  mostrarEstado(numero: number){
+    this.mostrar=numero;
+  }
 
+  asignarEstado(pedido:Pedido){
+    if(pedido.estado===1){
+      this.estado="Pendiente";
+    }
+    if(pedido.estado===2){
+      this.estado="En Proceso";
+    }
+    if(pedido.estado===3){
+      this.estado="Terminado";}
+    }
 
 }
