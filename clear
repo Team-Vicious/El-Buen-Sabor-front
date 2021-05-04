@@ -1,0 +1,27 @@
+[33m7a05200[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m Merge branch 'issuemauro' into develop
+[33m1beb2e8[m Merge branch 'develop' of https://github.com/Team-Vicious/El-Buen-Sabor-front into develop
+[33m9e47503[m[33m ([m[1;32missuemauro[m[33m)[m modificacion de componentes css & html
+[33m9f9b28c[m[33m ([m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #8 from Team-Vicious/IssueLuciano
+[33me26a3e9[m modificado el boton de volver atras del componente art-mf-form
+[33m36642d8[m Merge branch 'develop' of https://github.com/Team-Vicious/El-Buen-Sabor-front into issuemauro
+[33m2c9bb76[m modificaciones en component.html  & component.css
+[33m48803c1[m Merge pull request #7 from Team-Vicious/issueJoaquin
+[33mbea4bb3[m Merge branch 'develop' into issueJoaquin
+[33m1e02d85[m pedidos del cocinero
+[33m38879f1[m arreglando conflict
+[33m9da65f9[m diseño css
+[33m25e0366[m Merge pull request #6 from Team-Vicious/issueJoaquin
+[33m3ee74e0[m corregi cocinero
+[33m2d89127[m terminé el editar de cocinero
+[33m36f5811[m subo fotos y ordeno card de platos
+[33m71ce9a4[m Merge pull request #5 from Team-Vicious/IssueLuciano
+[33m3387ad4[m agregado abm de usuarios en la vista admin- modificaciones en el navbar en condicionales para mostrar elementos segun el tipo de usuario y el tipo de vista- login arreglado porque tiraba error al loguear
+[33m24137ff[m Merge pull request #4 from Team-Vicious/IssueLuciano
+[33m8a8a9c7[m agregada la funcion update usuario- componente admin desarrollado a la mitad-creacion de componetes cajero-cocinero-login modificado para redirigir al usuario depende su rol- navbar modificado para no mostrar el carrito al admin
+[33m56087f1[m Merge pull request #3 from Team-Vicious/IssueLuciano
+[33m64eaffe[m[33m ([m[1;31morigin/IssueLuciano[m[33m)[m agregada la funcionalidad registrar
+[33ma7ade1b[m Merge pull request #2 from Team-Vicious/IssueLuciano
+[33m0e3ce84[m carrito agregado y funcionando pero sin insertar en la db
+[33m2ec9f3b[m Merge pull request #1 from Team-Vicious/IssueLuciano
+[33m3b688b0[m entidades,services,componentes,config esteticos- el login esta funcional
+[33mb4fb86d[m[33m ([m[1;31morigin/master[m[33m)[m inicio de proyecto
