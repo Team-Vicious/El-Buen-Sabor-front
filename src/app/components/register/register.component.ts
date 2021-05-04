@@ -42,7 +42,15 @@ export class RegisterComponent implements OnInit {
 
     }
     
-    
+    if (this.adminId) {
+        
+      this.usuarioService.ver(+this.adminId).subscribe( usuario =>{
+        this.usuario = usuario;
+        this.cliente = this.usuario.cliente;
+        this.domicilio = this.usuario.cliente.domicilio;
+      });
+
+    }
   }
 
   registrar(){
