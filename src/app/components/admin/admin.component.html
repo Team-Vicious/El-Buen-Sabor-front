@@ -8,7 +8,7 @@
 
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/manufacturados/form">agregar articulo manofacturado</a></li>
-            <li><a class="dropdown-item" href="#">agregar articulo insumo</a></li>
+            <li><a class="dropdown-item" href="/insumo/ida/form">agregar articulo insumo</a></li>
 
         </ul>
     </li>
@@ -162,8 +162,8 @@
                 </tr>
                 <td>
                     <button type="button" class="btn btn-success" routerLinkActive="active">Aumentar Stock</button>
-                    <button type="button" class="btn btn-warning" routerLinkActive="active">Editar</button>
-                    <button type="button" class="btn btn-danger" routerLinkActive="active">Eliminar</button>
+                    <button type="button" class="btn btn-warning" [routerLink]="['insumo/ida/form',articulo.id]" routerLinkActive="active">Editar</button>
+                    <button type="button" class="btn btn-danger"  routerLinkActive="active">Eliminar</button>
                 </td>
 
             </body>
