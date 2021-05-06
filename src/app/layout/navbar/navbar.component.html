@@ -6,22 +6,31 @@
 <body>
 
   <!-- NAVIGATION -->
-<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-  <div class="container-fluid">
-  <a class="navbar-brand" href="/">
-      <img src="assets/images/logo1.png" alt="El Buen Sabor" style="width: 80%">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
 
-    </button>
+  <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="assets/images/logo1.png" alt="El Buen Sabor" style="width: 80%">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/home" routerLink="/home" routerLinkActive="active">Inicio</a>
-        </li>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/home" routerLink="/home" routerLinkActive="active">Inicio</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/home" routerLink="/home" routerLinkActive="active">Acerca de...</a>
+          </li>
+
+
+
+
 
         <li class="nav-item">
           <a class="nav-link" href="/home" routerLink="/home" routerLinkActive="active">Acerca de...</a>
@@ -58,16 +67,51 @@
           <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
 
         </div>
-      </div>
-      <li>
-        <hr class="dropdown-divider">
-      </li>
-      <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articuloInsumoCarrito">
-        <div class="card-body">
-          <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
-            (click)="eliminarInsumoDelCarro(articulo.id)">x</button>
-          <h6 class="card-title">
-            {{articulo.denominacion}}
+
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articuloInsumoCarrito">
+          <div class="card-body">
+            <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
+              (click)="eliminarInsumoDelCarro(articulo.id)">x</button>
+            <h6 class="card-title">
+              {{articulo.denominacion}}
+
+            </h6>
+
+            <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
+
+          </div>
+        </div>
+        <button type="submit" class="btn btn-danger m-2 b-2">COMPRAR</button>
+      </ul>
+    </li>
+
+
+    <li *ngIf="usuario?.cliente?.id ||usuarioAdmin?.cliente?.id" class="nav-item dropdown p-3 b-5 m-3">
+      <a *ngIf="usuarioId && !adminId" class="dropdown-toggle" data-toggle="dropdown" role="button"
+        aria-expanded="false" style="color:orange;">
+        {{usuario?.cliente?.nombre}}
+      </a>
+      <a *ngIf="adminId" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
+        style="color:orange;">
+        {{usuarioAdmin?.cliente?.nombre}}
+      </a>
+
+      <ul class="dropdown-menu">
+        <li><a *ngIf="!usuarioAdmin" class="dropdown-item" href="#" [routerLink]="['/update', usuario?.cliente?.id]">Editar Cuenta</a></li>
+        <li><a *ngIf="usuarioAdmin" class="dropdown-item" href="#" [routerLink]="['/update/',adminId,'admin',adminId]">Editar Cuenta</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="#" routerLink="/home">Log Out</a></li>
+      </ul>
+    </li>
+
+  </nav>
+
 
           </h6>
 
