@@ -26,8 +26,8 @@ const routes: Routes = [
   {path:'manufacturados', component:ManufacturadosComponent},
   {path:'manufacturados/form/:idu', component:ManufacturadosFormComponent},
   {path:'manufacturados/form', component:ManufacturadosFormComponent},
-  {path:'insumo/ida/form', component:InsumoFormComponent},
-  {path:'insumo/ida/form/:idi', component:InsumoFormComponent},
+  {path:'insumo/:ida/form', component:InsumoFormComponent},
+  {path:'insumo/:ida/form/:idi', component:InsumoFormComponent},
   {path:'pedidos', component:PedidosComponent}
 
 ];

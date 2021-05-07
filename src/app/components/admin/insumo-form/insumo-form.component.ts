@@ -62,9 +62,9 @@ export class InsumoFormComponent implements OnInit {
   }
 
   //boton para volver para atras ya que se usa en admin y el cocinero
-  @HostListener('click')
-    onClick() {
-        this.location.back();
+  
+  volver() {
+    this.location.back();
   }
 
   setearInsumo(esInsumo: boolean){

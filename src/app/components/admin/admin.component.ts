@@ -74,4 +74,13 @@ export class AdminComponent implements OnInit {
     })
   }
 
+  eliminarInsumo(insumoId: number){
+    this.articuloInsumoService.eliminar(insumoId).subscribe(insumo =>{
+      console.log("usuario eliminado: ",insumo);
+    })
+    this.router.navigate(['admin/',this.adminId]);
+    //para actualizar la vista
+    this.listarArticuloInsumos();
+  }
+
 }
