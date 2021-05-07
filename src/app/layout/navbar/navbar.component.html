@@ -7,7 +7,7 @@
 
   <!-- NAVIGATION -->
 
-  <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <img src="assets/images/logo1.png" alt="El Buen Sabor" style="width: 80%">
@@ -32,21 +32,15 @@
         </ul>
 
 
-
-
-
-        <li class="nav-item">
-          <a class="nav-link" href="/home" routerLink="/home" routerLinkActive="active">Acerca de...</a>
-        </li>
-
-      
-
+      </div>  
 
     </div>
 
     <form class="d-flex">
       <button *ngIf="!usuario?.cliente?.id && !usuarioAdmin?.cliente?.id && !adminId && !usuarioId"
-        class="btn btn-outline-success" routerLink="/login" routerLinkActive="active">Login</button>
+        class="btn btn-outline-success" routerLink="/login" routerLinkActive="active">
+        Login
+      </button>
     </form>
 
     <li *ngIf="usuario?.cliente?.id && usuario?.rol != 'admin' && !adminId" class="nav-item dropdown  p-3 b-5 m-3">
@@ -116,6 +110,7 @@
 
   
 
+  </nav>  
   <!-- HEADER -->
 
   <header class="header">
@@ -134,4 +129,5 @@
     integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
     crossorigin="anonymous">
   </script>
-
+  
+</body>
