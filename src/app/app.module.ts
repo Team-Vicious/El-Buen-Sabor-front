@@ -16,6 +16,7 @@ import { CocineroComponent } from './components/cocinero/cocinero.component';
 import { ManufacturadosComponent } from './components/cocinero/manufacturados.component';
 import { ManufacturadosFormComponent } from './components/cocinero/manufacturados-form.component';
 import { PedidosComponent } from './components/cocinero/pedidos.component';
+import { InsumoFormComponent } from './components/admin/insumo-form/insumo-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PedidosComponent } from './components/cocinero/pedidos.component';
     CocineroComponent,
     ManufacturadosComponent,
     ManufacturadosFormComponent,
-    PedidosComponent
+    PedidosComponent,
+    InsumoFormComponent
   ],
   imports: [
     BrowserModule,
