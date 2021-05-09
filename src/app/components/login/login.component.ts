@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
 
               Swal.fire({
                 title: 'Logueado con exito!',
-                text: `ahora solo queda llenar el formulario con los datos`,
+                text: `ahora solo queda ingresar su domicilio!`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit {
                 cancelButtonText: 'Acerlo mas tarde'
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.router.navigate(['/update/', this.usuario.id]);
+                  this.router.navigate(['/updateDomicilio/', this.usuario.id]);
                 }else{
                   this.router.navigate(['/home/', this.usuario.id]);
                 }

@@ -57,6 +57,7 @@ export class RegisterComponent implements OnInit {
     //asignar objetos al usuario/cliente
     this.usuario.cliente = this.cliente;
     this.usuario.cliente.domicilio =this.domicilio;
+    this.usuario.rol = "user";
 
     this.usuarioService.crear(this.usuario).subscribe(user => {
       console.log("registrado con exito usuario: "+user.usuario);
@@ -65,7 +66,7 @@ export class RegisterComponent implements OnInit {
       if (this.adminId) {
         this.router.navigate(['/admin/',this.adminId]);
       }else{
-        this.router.navigate(['/home/',user.cliente.id]);
+        this.router.navigate(['/home/',user.id]);
       }
 
     })
