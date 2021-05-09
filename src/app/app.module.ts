@@ -22,6 +22,7 @@ import {
   GoogleLoginProvider
 } from 'angularx-social-login';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
+import { DomicilioFormComponent } from './components/register/domicilio-form/domicilio-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
     ManufacturadosComponent,
     ManufacturadosFormComponent,
     PedidosComponent,
-    InsumoFormComponent
+    InsumoFormComponent,
+    DomicilioFormComponent
   ],
   imports: [
     BrowserModule,

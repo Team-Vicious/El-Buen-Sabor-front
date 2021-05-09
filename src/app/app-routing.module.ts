@@ -9,6 +9,7 @@ import { ManufacturadosComponent } from './components/cocinero/manufacturados.co
 import { PedidosComponent } from './components/cocinero/pedidos.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { DomicilioFormComponent } from './components/register/domicilio-form/domicilio-form.component';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'update/:idu', component:RegisterComponent},
   {path:'update/:idu/admin/:ida', component:RegisterComponent},
+  {path:'updateDomicilio/:idu', component:DomicilioFormComponent},
   {path:'admin/:idu', component:AdminComponent},
   {path:'cocinero/:idu', component:CocineroComponent},
   {path:'cajero/:idu', component:CajeroComponent},
