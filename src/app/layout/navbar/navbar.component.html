@@ -59,6 +59,10 @@
 
             </h6>
 
+            <img *ngIf="articulo.imagen"
+                            [src]="formatImage(articulo.imagen)"
+                            class= "img-thumbnail rounded"
+                            style= "width: 250px; cursor:pointer;">
 
             <p>Tiempo estimado de cocina:{{articulo.tiempoEstimadoCocina}}</p>
             <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
@@ -99,7 +103,9 @@
       </a>
 
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" [routerLink]="['/update', usuario?.cliente?.id]">Editar Cuenta</a></li>
+        <li><a *ngIf="usuario.rol != 'userg'" class="dropdown-item" [routerLink]="['/update', usuario?.cliente?.id]">Editar Cuenta</a></li>
+        <li><a class="dropdown-item" [routerLink]="['/updateDomicilio', usuario?.id]">Editar Domicilio</a></li>
+        <li><a class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">Historial de pedidos</a></li>
         <li><a *ngIf="adminId" class="dropdown-item" [routerLink]="['/admin', adminId]">Panel Admmin</a></li>
         <li>
           <hr class="dropdown-divider">

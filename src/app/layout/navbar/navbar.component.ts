@@ -121,5 +121,9 @@ export class NavbarComponent implements OnInit {
       this.usuario.cliente.pedido.push(pedido);
     }
     
+    //pasar imagenes de bytes a img
+    formatImage(img: any): any {
+      return 'data:image/jpeg;base64,' + img;
+    }
  
   }
