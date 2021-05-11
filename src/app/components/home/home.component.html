@@ -6,6 +6,8 @@
 
 
 <body class="container">
+    <h5 *ngIf="abierto">{{labelHorario}}</h5>
+    <h5 *ngIf="!abierto">{{labelHorario}}</h5>
     
     <table className="table">
 
@@ -16,8 +18,11 @@
                 <tr>
                     <td>
                         <div>
-                            <img class="card-img-top img-fluid" style="width: 200px; height: 150px;" src="assets/images/{{articulo.imagen}}">
-
+                            <!---img class="card-img-top img-fluid" style="width: 200px; height: 150px;" src="assets/images/{{articulo.imagen}}"--->
+                            <img *ngIf="articulo.imagen"
+                            [src]="formatImage(articulo.imagen)"
+                            class= "img-thumbnail rounded"
+                            style= "width: 250px; cursor:pointer;">
                             <!-- <img src="/src/assets/images/{{articulo.imagen}}"  style="max-height: 150px;"> -->
                         </div>
                     </td>
@@ -38,9 +43,12 @@
 
                 </tr>
                 <td>
-                    <button type="button" class="btn btn-success"
+                    <button *ngIf="abierto" type="button" class="btn btn-success"
                         (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)"
-                        routerLinkActive="active">Agregar al carrito</button>
+                        routerLinkActive="active">
+                        Agregar al carrito
+                    </button>
+                    <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5> 
 
                 </td>
 
@@ -78,9 +86,11 @@
 
                 </tr>
                 <td>
-                    <button type="button" class="btn btn-success"
-                        (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">Agregar
-                        al carrito</button>
+                    <button *ngIf="abierto" type="button" class="btn btn-success"
+                        (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">
+                        Agregar al carrito
+                    </button>
+                    <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>    
 
                 </td>
 

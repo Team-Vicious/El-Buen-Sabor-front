@@ -18,6 +18,11 @@ export class HomeComponent implements OnInit {
     protected router: Router,
     protected route: ActivatedRoute) { }
 
+  //validar horario
+  fechaActual = new Date();
+  abierto!:boolean;
+  labelHorario!: string;
+
   articulosManofaturados: ArticuloManofacturado[] = [];
   articulosManofaturadosCarrito: ArticuloManofacturado[] = [];
   articulosInsumoGeneral: ArticuloInsumo[] = [];
@@ -30,8 +35,19 @@ export class HomeComponent implements OnInit {
     //traer id del cliente para pasar al navbar
     this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
 
+    if(this.fechaActual.getHours() >= 0 && this.fechaActual.getHours() < 23){
+      this.abierto = true;
+      this.labelHorario = "El local esta Abierto!",this.fechaActual.getTime();
+      console.log("El local esta Abierto!",this.fechaActual.getHours());
+      
+    }else{
+      this.abierto = false;
+      this.labelHorario = "El local esta Cerrado!",this.fechaActual.getTime();
+      console.log("El local esta Cerrado!",this.fechaActual.getHours());
+    }
 
   }
+
 
   private traerArticulos() {
     //obtener art manofacturados
@@ -73,5 +89,10 @@ export class HomeComponent implements OnInit {
         this.articuloInsumoCarrito.push(articulo);
       }
     })
+  }
+
+  //pasar imagenes de bytes a img
+  formatImage(img: any): any {
+    return 'data:image/jpeg;base64,' + img;
   }
 }

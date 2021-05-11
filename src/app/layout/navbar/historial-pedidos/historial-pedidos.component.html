@@ -1,0 +1,31 @@
+<app-navbar [usuarioId]="usuarioId">
+</app-navbar>
+
+<body class="card text-white bg-dark m-2 b-2" *ngFor="let pedido of listaPedidos">
+    <tr>
+        <a>Número de pedido: {{pedido.id}}</a>
+    </tr>
+    <tr>
+        <a>Fecha del pedido: {{pedido.fecha}}</a>
+    </tr>
+    <tr>
+        <a>Total: {{pedido.total}}</a>
+    </tr>
+    <tr>
+        <a *ngFor="let detalle of pedido.detallePedido">
+            Detalles: {{detalle.articuloManofacturado.denominacion}}
+
+            <div>
+                <img *ngIf="detalle.articuloManofacturado"
+                [src]="formatImage(detalle.articuloManofacturado.imagen)"
+                class= "img-thumbnail rounded"
+                style= "width: 250px; cursor:pointer;">
+            </div>
+        </a>
+    </tr>
+    <button type="button" class="btn btn-warning" >
+        Mostrar Factura
+    </button>
+</body>
+
+

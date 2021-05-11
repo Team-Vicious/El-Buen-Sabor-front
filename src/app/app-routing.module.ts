@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { DomicilioFormComponent } from './components/register/domicilio-form/domicilio-form.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HistorialPedidosComponent } from './layout/navbar/historial-pedidos/historial-pedidos.component';
 
 const routes: Routes = [
   {path:'',pathMatch: 'full', redirectTo: '/home'},
@@ -32,7 +33,9 @@ const routes: Routes = [
   {path:'insumo/:ida/form', component:InsumoFormComponent},
   {path:'insumo/:ida/form/:idi', component:InsumoFormComponent},
   {path:'pedidos', component:PedidosComponent},
+  {path:'historialPedidos/:idu', component:HistorialPedidosComponent},
   {path:'entrantes', component:EntrantesComponent}
+
 
 ];
 
