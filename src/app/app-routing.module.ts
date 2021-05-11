@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
 import { InsumoFormComponent } from './components/admin/insumo-form/insumo-form.component';
 import { CajeroComponent } from './components/cajero/cajero.component';
+import { EntrantesComponent } from './components/cajero/entrantes.component';
 import { CocineroComponent } from './components/cocinero/cocinero.component';
 import { ManufacturadosFormComponent } from './components/cocinero/manufacturados-form.component';
 import { ManufacturadosComponent } from './components/cocinero/manufacturados.component';
@@ -30,7 +31,8 @@ const routes: Routes = [
   {path:'manufacturados/form', component:ManufacturadosFormComponent},
   {path:'insumo/:ida/form', component:InsumoFormComponent},
   {path:'insumo/:ida/form/:idi', component:InsumoFormComponent},
-  {path:'pedidos', component:PedidosComponent}
+  {path:'pedidos', component:PedidosComponent},
+  {path:'entrantes', component:EntrantesComponent}
 
 ];
 

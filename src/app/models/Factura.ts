@@ -9,7 +9,7 @@ export class Factura implements Base{
     montoDescuento!: number;
     formaPago!: string;
     nroTarjeta!: string;
-    TotalVenta!: number;
-    TotalCosto!: number;
+    totalVenta!: number;
+    totalCosto!: number;
     detalleFactura!: DetalleFactura[];
 }

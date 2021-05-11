@@ -16,4 +16,5 @@ export class FacturaService extends CommonService<Factura>{
 
   protected baseEndPoint = BASE_ENDPOINT + '/factura';
 
+  
 }
