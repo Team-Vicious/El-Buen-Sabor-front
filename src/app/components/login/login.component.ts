@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
             var clienteAux: Cliente = new Cliente();
             usuarioAux.usuario = this.socialUser.name;
             usuarioAux.clave = this.socialUser.email;
-            usuarioAux.rol = "user";
+            usuarioAux.rol = "userg";
             clienteAux.nombre = this.socialUser.firstName;
             clienteAux.apellido = this.socialUser.lastName;
             clienteAux.email = this.socialUser.email;

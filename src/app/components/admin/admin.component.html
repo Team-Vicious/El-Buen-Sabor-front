@@ -71,10 +71,10 @@
                 <tr>
                     <td>
                         <div>
-                            <a href=''>
-                                (Imagen)
-
-                            </a>
+                            <img *ngIf="articulo.imagen"
+                            [src]="formatImage(articulo.imagen)"
+                            class= "img-thumbnail rounded"
+                            style= "width: 250px; cursor:pointer;">
                         </div>
                     </td>
 
@@ -99,7 +99,7 @@
                 </tr>
                 <td>
                     <button type="button" class="btn btn-warning" [routerLink]="['/manufacturados/form', articulo.id]" routerLinkActive="active">Editar</button>
-                    <button type="button" class="btn btn-danger" routerLinkActive="active">Eliminar</button>
+                    <button type="button" class="btn btn-danger" (click)="eliminarArticuloManofacturado(articulo)" routerLinkActive="active">Eliminar</button>
                 </td>
 
             </body>
@@ -113,7 +113,7 @@
                     <td>
                         <div>
                             <a href=''>
-                                (Imagen)
+                                
 
                             </a>
                         </div>
@@ -122,7 +122,7 @@
                     <td>
                 <tr>
                     <p></p>
-                    <a>{{articulo.denominacion}}</a>
+                    <h2>{{articulo.denominacion}}</h2>
                 </tr>
                 <tr>
                     <a>
@@ -161,7 +161,7 @@
 
                 </tr>
                 <td>
-                    <button type="button" class="btn btn-success" routerLinkActive="active">Aumentar Stock</button>
+                    <button type="button" class="btn btn-success" (click)="aumentarStockInsumo(articulo)" routerLinkActive="active">Aumentar Stock</button>
                     <button type="button" class="btn btn-warning" [routerLink]="['/insumo',adminId,'form',articulo.id]" routerLinkActive="active">Editar</button>
                     <button type="button" class="btn btn-danger"  (click)="eliminarInsumo(articulo.id)" routerLinkActive="active">Eliminar</button>
                 </td>
