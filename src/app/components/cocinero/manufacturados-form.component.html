@@ -2,7 +2,7 @@
 <div class="card bg-light mb-3">
     <div class="card-header">{{titulo}}</div>
     <div class="card-body">
-        <button backButton class="btn btn-secondary my-2" >volver</button>
+        <button backButton class="btn btn-secondary my-2" (click)="volver()" >volver</button>
         <form>
             <div class="form-group">
                 <label for="denominacion">Denominacion</label>
@@ -29,8 +29,19 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile01">Upload Imagen</label>
+                    <input (change)="seleccionarFoto($event)" type="file" class="form-control" id="inputGroupFile01">
+                </div>
+                <img *ngIf="manufacturado.imagen"
+                            [src]="formatImage(manufacturado.imagen)"
+                            class= "img-thumbnail rounded"
+                            style= "width: 250px; cursor:pointer;">
+            </div>
+           
+            <div class="form-group">
                 <button type="button" class="btn btn-primary" 
-                (click)="manufacturado.id? editar(): crear()">
+                (click)="manufacturado.id? editarConFoto(): crearConFoto()">
                 {{ manufacturado.id? 'Editar': 'Crear' }}
                 </button>
            

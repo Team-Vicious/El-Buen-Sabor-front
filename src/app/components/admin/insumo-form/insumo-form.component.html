@@ -1,0 +1,73 @@
+<app-navbar [adminId]="adminId"></app-navbar>    
+<div class="card bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <button backButton class="btn btn-secondary my-2" (click)="volver()">volver</button>
+        <form>
+            <div class="form-group">
+                <label for="denominacion">Denominacion</label>
+                <input type="text" name="denominacion" class="form-control" id="denominacion" 
+                [(ngModel)]="insumo.denominacion">
+                <div class="alert alert-danger" *ngIf="error?.denominacion">
+                  {{ error.denominacion }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="precioCompra">Precio Compra</label>
+                <input type="text" name="precioCompra" class="form-control" id="precioCompra" 
+                [(ngModel)]="insumo.precioCompra">
+                <div class="alert alert-danger" *ngIf="error?.precioCompra">
+                    {{ error.precioCompra}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="precioVenta">Precio Venta</label>
+                <input type="text" name="precioVenta" class="form-control" id="precioVenta" 
+                [(ngModel)]="insumo.precioVenta">
+                <div class="alert alert-danger" *ngIf="error?.precioVenta">
+                    {{ error.precioVenta }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="stockActual">Stock Actual</label>
+                <input type="text" name="stockActual" class="form-control" id="stockActual" 
+                [(ngModel)]="insumo.stockActual">
+                <div class="alert alert-danger" *ngIf="error?.stockActual">
+                    {{ error.stockActual }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="stockMinimo">Stock Minimo</label>
+                <input type="text" name="stockMinimo" class="form-control" id="stockMinimo" 
+                [(ngModel)]="insumo.stockMinimo">
+                <div class="alert alert-danger" *ngIf="error?.stockMinimo">
+                    {{ error.stockMinimo }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="unidadMedida">Unidad de medida</label>
+                <input type="text" name="unidadMedida" class="form-control" id="unidadMedida" 
+                [(ngModel)]="insumo.unidadMedida">
+                <div class="alert alert-danger" *ngIf="error?.unidadMedida">
+                    {{ error.unidadMedida }}
+                </div>
+            </div>
+            <div class="btn-group my-4">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                  Es insumo? {{insumo?.esInsumo}}
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" onclick="javascript:console.log( $(event.target).data('mode'))">
+                  <a class="dropdown-item" data-mode="mode1" (click)="setearInsumo(true)">Es insumo</a>
+                  <a class="dropdown-item " data-mode="mode2" (click)="setearInsumo(false)">No es insumo</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" 
+                (click)="insumo.id? editar(): crear()">
+                {{ insumo.id? 'Editar': 'Crear' }}
+                </button>
+           
+            </div>
+        </form>
+    </div>
+</div>

@@ -16,7 +16,13 @@ import { CocineroComponent } from './components/cocinero/cocinero.component';
 import { ManufacturadosComponent } from './components/cocinero/manufacturados.component';
 import { ManufacturadosFormComponent } from './components/cocinero/manufacturados-form.component';
 import { PedidosComponent } from './components/cocinero/pedidos.component';
-
+import { InsumoFormComponent } from './components/admin/insumo-form/insumo-form.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider
+} from 'angularx-social-login';
+import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
+import { DomicilioFormComponent } from './components/register/domicilio-form/domicilio-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +34,9 @@ import { PedidosComponent } from './components/cocinero/pedidos.component';
     CocineroComponent,
     ManufacturadosComponent,
     ManufacturadosFormComponent,
-    PedidosComponent
+    PedidosComponent,
+    InsumoFormComponent,
+    DomicilioFormComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +47,26 @@ import { PedidosComponent } from './components/cocinero/pedidos.component';
     AppRoutingModule,
     LayoutModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SocialLoginModule,
+    NgxBootstrapIconsModule.pick(allIcons)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '293888155544-30jj2jbh8rk1hlacbtfq0lpm26popne7.apps.googleusercontent.com'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

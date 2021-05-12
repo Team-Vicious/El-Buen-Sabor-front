@@ -1,0 +1,31 @@
+<app-navbar [usuarioId]="usuarioId"></app-navbar>
+
+<div class="card text-white bg-primary p-4 b-5 m-4">
+    <div class="card text-white bg-secondary mb-3">
+        <h3>Datos del domicilio</h3>
+
+    </div>
+    <div class="card-body">
+        <label for="inputCalle" class="col-sm-2 col-form-label">Calle</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputCalle" [(ngModel)]="domicilio.calle">
+        </div>
+
+    </div>
+    <div class="card-body">
+        <label for="inputNumero" class="col-sm-2 col-form-label">Nro. Domicilio</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputNro" [(ngModel)]="domicilio.numero">
+        </div>
+
+    </div>
+    <div class="card-body">
+        <label for="inputLocalidad" class="col-sm-2 col-form-label">Localidad</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputLocalidad" [(ngModel)]="domicilio.localidad">
+        </div>
+
+    </div>
+
+    <button *ngIf="usuarioId" type="button" class="btn btn-success"  (click)="actualizar()" routerLinkActive="active">ACTUALIZAR!</button>
+</div>

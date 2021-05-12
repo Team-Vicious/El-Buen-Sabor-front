@@ -16,6 +16,7 @@ export class ManufacturadosFormComponent implements OnInit {
   titulo = "Manufacturado"
   manufacturado: ArticuloManofacturado = new ArticuloManofacturado();
   error: any;
+  fotoSeleccionada!: File;
   constructor(
     private service: ArticuloManofacturadoService, 
     private router: Router,
@@ -59,10 +60,62 @@ export class ManufacturadosFormComponent implements OnInit {
   }
 
   //boton para volver para atras ya que se usa en admin y el cocinero
-  @HostListener('click')
-    onClick() {
-        this.location.back();
-    }
+  
+  volver() {
+    this.location.back();
+  }
 
+  //FOTO
+  //pasar imagenes de bytes a img
+  formatImage(img: any): any {
+    return 'data:image/jpeg;base64,' + img;
+  }
+
+  public seleccionarFoto(event: any): void{
+    this.fotoSeleccionada = event.target.files[0];
+    console.info(this.fotoSeleccionada);
+
+    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
+      Swal.fire('Error', 'El archivo deber del tipo imagen', 'error');
+    }
+  }
+
+  public crearConFoto(): void{
+    if(!this.fotoSeleccionada){
+
+    }else{
+      this.service.crearConFoto(this.manufacturado, this.fotoSeleccionada)
+      .subscribe(articulo => {
+        console.log(articulo);
+        Swal.fire('Nuevo ', `${articulo.denominacion} creado con exito`, 'success');
+        this.volver();
+      }, err => {
+        if (err.status === 400) {
+          this.error = err.error;
+          console.log(this.error);
+        }
+      })
+
+    }
+  }
+
+  public editarConFoto(): void{
+    if(!this.fotoSeleccionada){
+
+    }else{
+      this.service.editarConFoto(this.manufacturado, this.fotoSeleccionada)
+      .subscribe(articulo => {
+        console.log(articulo);
+        Swal.fire('Modificado ', `${articulo.denominacion} modificado con exito`, 'success');
+        this.volver();
+      }, err => {
+        if (err.status === 400) {
+          this.error = err.error;
+          console.log(this.error);
+        }
+      })
+
+    }
+  }
 }
 

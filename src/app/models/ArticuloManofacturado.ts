@@ -10,7 +10,7 @@ export class ArticuloManofacturado implements Base{
     denominacion!: string;
     precioVenta!: number;
     //fotoHashCode!: number;
-    imagen!:string;
+    imagen!:number;
     articuloManofactudaroDetalle!:ArticuloManofacturadoDetalle;
     rubroGeneral!: RubroGeneral;
 }
