@@ -4,14 +4,14 @@
 
 
 <body class="container">
-    <h5 *ngIf="abierto">{{labelHorario}}</h5>
-    <h5 *ngIf="!abierto">{{labelHorario}}</h5>
+    <h5 *ngIf="abierto" style="color:orange;">{{labelHorario}}</h5>
+    <h5 *ngIf="!abierto" style="color:orange;">{{labelHorario}}</h5>
     
     <table className="table">
 
         <tbody>
             <div class="row">
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of articulosManofaturados">
+            <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo of articulosManofaturados">
 
                 <tr>
                     <td>
@@ -53,7 +53,7 @@
             </body>
 
         
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo">
+            <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo">
 
                 <tr>
                     <td>

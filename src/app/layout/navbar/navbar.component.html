@@ -44,56 +44,45 @@
       </a>
 
 
-
       <ul class="dropdown-menu">
         <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articulosManofaturadosCarrito">
           <div class="card-body">
             <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
               (click)="eliminarArticuloManofacturadoDelCarro(articulo.id)">x</button>
-
             <h6 class="card-title p-3">
               {{articulo.denominacion}}
+
             </h6>
-            <ul class="dropdown-menu">
-              <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articulosManofaturadosCarrito">
-                <div class="card-body">
-                  <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
-                    (click)="eliminarArticuloManofacturadoDelCarro(articulo.id)">x</button>
-                  <h6 class="card-title p-3">
-                    {{articulo.denominacion}}
 
-                  </h6>
+            <img *ngIf="articulo.imagen"
+                            [src]="formatImage(articulo.imagen)"
+                            class= "img-thumbnail rounded"
+                            style= "width: 250px; cursor:pointer;">
 
-                  <img *ngIf="articulo.imagen" [src]="formatImage(articulo.imagen)" class="img-thumbnail rounded"
-                    style="width: 250px; cursor:pointer;">
+            <p>Tiempo estimado de cocina:{{articulo.tiempoEstimadoCocina}}</p>
+            <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
 
-                  <p>Tiempo estimado de cocina:{{articulo.tiempoEstimadoCocina}}</p>
-                  <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
+          </div>
 
-                </div>
+        </div>
 
-              </div>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articuloInsumoCarrito">
+          <div class="card-body">
+            <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
+              (click)="eliminarInsumoDelCarro(articulo.id)">x</button>
+            <h6 class="card-title">
+              {{articulo.denominacion}}
 
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articuloInsumoCarrito">
-                <div class="card-body">
-                  <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
-                    (click)="eliminarInsumoDelCarro(articulo.id)">x</button>
-                  <h6 class="card-title">
-                    {{articulo.denominacion}}
+            </h6>
 
-                  </h6>
+            <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
 
-                  <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
-
-                </div>
-              </div>
-            </ul>  
           </div>
         </div>
-      <button type="submit" class="btn btn-danger m-2 b-2">COMPRAR</button>
+        <button type="submit" class="btn btn-danger m-2 b-2">COMPRAR</button>
       </ul>
     </li>
 
