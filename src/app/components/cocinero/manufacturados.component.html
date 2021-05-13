@@ -2,6 +2,8 @@
 <app-navbar></app-navbar>    
 <button class="btn btn-primary my-2" routerLink="/manufacturados/form" >crear</button>
 
+<button backButton class="btn btn-danger" (click)="volver()" style="float: right">volver</button>
+
     <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado">
 
         <tr>

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-manufacturados',
@@ -19,7 +21,8 @@ export class ManufacturadosComponent implements OnInit {
   constructor(
     private service: ArticuloManofacturadoService,
     private router: Router,
-    protected route: ActivatedRoute) { }
+    protected route: ActivatedRoute,
+    private location: Location){}
 
   ngOnInit(): void {
 
@@ -33,6 +36,10 @@ export class ManufacturadosComponent implements OnInit {
     this.service.listar().subscribe(articulos =>{
       this.ArticuloManofacturado = articulos as ArticuloManofacturado[];
     })
+  }
+
+  volver() {
+    this.location.back();
   }
 
   eliminar(manufacturado: ArticuloManofacturado):void{

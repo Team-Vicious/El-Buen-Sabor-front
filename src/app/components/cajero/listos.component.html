@@ -1,6 +1,7 @@
 <div>
     <app-navbar></app-navbar>   
 
+    <button backButton class="btn btn-danger" (click)="volver()" style="float: right">volver</button>
 
     <body class="card text-white bg-dark m-2 b-2" *ngFor="let pedido of Pedidos">
         <a *ngIf="(pedido.estado)===(3)">

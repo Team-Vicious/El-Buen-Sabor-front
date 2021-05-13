@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pedido } from 'src/app/models/Pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
-import { Factura } from 'src/app/models/Factura';
-import { FacturaService } from 'src/app/services/factura.service';
-import { DetalleFactura } from 'src/app/models/DetalleFactura';
-import { DetalleFacturaService } from 'src/app/services/detalleFactura.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-entrantes',
@@ -21,10 +18,9 @@ export class EntrantesComponent implements OnInit {
   
   constructor(
     private service: PedidoService,
-    private serviceFactura: FacturaService,
-    private serviceDetalleFactura: DetalleFacturaService,
     private router: Router,
-    protected route: ActivatedRoute) { }
+    protected route: ActivatedRoute,
+    private location: Location){}
 
     ngOnInit(): void {
       this.mostrar=0;
@@ -53,6 +49,10 @@ export class EntrantesComponent implements OnInit {
 
   mostrarEstado(numero: number){
     this.mostrar=numero;
+  }
+
+  volver() {
+    this.location.back();
   }
 
   asignarEstado(pedido:Pedido){

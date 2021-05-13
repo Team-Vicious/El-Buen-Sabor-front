@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pedido } from 'src/app/models/Pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-listos',
@@ -18,7 +19,8 @@ export class ListosComponent implements OnInit {
   constructor(
     private service: PedidoService,
     private router: Router,
-    protected route: ActivatedRoute) { }
+    protected route: ActivatedRoute,
+    private location: Location){}
 
     ngOnInit(): void {
 
@@ -31,6 +33,10 @@ export class ListosComponent implements OnInit {
       this.Pedidos = pedido as Pedido[];
     })
 
+  }
+
+  volver() {
+    this.location.back();
   }
 
   asignarEstado(pedido:Pedido){
