@@ -1,16 +1,16 @@
 .navbar{
     box-shadow: 2px 2px 5px #000;
     opacity: .9;
+    
+    
+    
 }
 
-.navbar .nav-item .nav-link{
-    color: aliceblue;
-}
+
 
 .header {
 
-    background-image: url(../img/fondo1.jpg); 
-    min-height: 1000px; 
+    min-height: 220px; 
     background-size: cover;
     
 }
