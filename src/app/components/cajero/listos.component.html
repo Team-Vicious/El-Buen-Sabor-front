@@ -1,0 +1,26 @@
+<div>
+    <app-navbar></app-navbar>   
+
+
+    <body class="card text-white bg-dark m-2 b-2" *ngFor="let pedido of Pedidos">
+        <a *ngIf="(pedido.estado)===(3)">
+        <a *ngIf="asignarEstado(pedido)"></a>
+        <tr>
+            <a>Número de pedido: {{pedido.id}}</a>
+        </tr>
+        <tr>
+            <a>Total: {{pedido.total}}</a>
+        </tr>
+        <tr>
+            <a *ngFor="let detalle of pedido.detallePedido">
+                Detalles: {{detalle.articuloManofacturado.denominacion}}
+            </a>
+        </tr>
+        <tr>
+            <a>Estado: {{estado}}</a>
+        </tr>
+        </a>
+    </body>
+
+</div>
+

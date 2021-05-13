@@ -24,6 +24,7 @@ import {
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { DomicilioFormComponent } from './components/register/domicilio-form/domicilio-form.component';
 import { EntrantesComponent } from './components/cajero/entrantes.component';
+import { ListosComponent } from './components/cajero/listos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { EntrantesComponent } from './components/cajero/entrantes.component';
     PedidosComponent,
     InsumoFormComponent,
     DomicilioFormComponent,
-    EntrantesComponent
+    EntrantesComponent,
+    ListosComponent
   ],
   imports: [
     BrowserModule,

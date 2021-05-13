@@ -16,10 +16,6 @@ export class EntrantesComponent implements OnInit {
 
   Pedidos: Pedido[] = [];
   pedido: Pedido = new Pedido();
-  Facturas: Factura[] = [];
-  factura: Factura = new Factura();
-  DetalleFacturas: DetalleFactura[] = [];
-  detalleFactura: DetalleFactura = new DetalleFactura();
   mostrar: number = 1;
   estado!:String;
   
@@ -33,8 +29,7 @@ export class EntrantesComponent implements OnInit {
     ngOnInit(): void {
       this.mostrar=0;
       this.listarPedido();
-      this.listarFactura();
-      this.listarDetalleFactura();
+     
   
     }
  
@@ -45,18 +40,7 @@ export class EntrantesComponent implements OnInit {
 
   }
 
-  listarFactura(){
-    this.serviceFactura.listar().subscribe(factura =>{
-      this.Facturas = factura as Factura[];
-    })
-  }
-
-  listarDetalleFactura(){
-    this.serviceDetalleFactura.listar().subscribe(detalleFactura =>{
-      this.DetalleFacturas = detalleFactura as DetalleFactura[];
-    })
-
-  }
+ 
  
   cambiarEstado(pedido:Pedido,estado:number){
     let currentUrl = this.router.url;
