@@ -1,26 +1,97 @@
 <div>
     <app-navbar></app-navbar>   
 
-    <button backButton class="btn btn-danger" (click)="volver()" style="float: right">volver</button>
+    <button backButton class="btn btn-danger" (click)="volver()" style="float: right">Volver</button>
 
-    <body class="card text-white bg-dark m-2 b-2" *ngFor="let pedido of Pedidos">
-        <a *ngIf="(pedido.estado)===(3)">
-        <a *ngIf="asignarEstado(pedido)"></a>
-        <tr>
-            <a>Número de pedido: {{pedido.id}}</a>
-        </tr>
-        <tr>
-            <a>Total: {{pedido.total}}</a>
-        </tr>
-        <tr>
-            <a *ngFor="let detalle of pedido.detallePedido">
-                Detalles: {{detalle.articuloManofacturado.denominacion}}
-            </a>
-        </tr>
-        <tr>
-            <a>Estado: {{estado}}</a>
-        </tr>
-        </a>
+    <body class="card text-dark bg-white m-2 b-2">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Terminados</button>
+              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Retiro</button>
+              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Entrega</button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                <body  *ngFor="let pedido of Pedidos"class="card text-white bg-dark m-2 b-2">
+                <a *ngIf="(pedido.estado)===(3) && (pedido.tipoEnvio)===(1) || (pedido.tipoEnvio)===(2)">
+                    <a *ngIf="asignarEstado(pedido)"></a>
+                    <tr>
+                        <a>Número de pedido: {{pedido.id}}</a>
+                    </tr>
+                    <tr>
+                        <a>Total: {{pedido.total}}</a>
+                    </tr>
+                    <tr>
+                        <a *ngFor="let detalle of pedido.detallePedido">
+                            Detalles: {{detalle.articuloManofacturado.denominacion}}
+                        </a>
+                    </tr>
+                    <tr>
+                        <a style="color: green;">Estado: {{estado}}</a>
+                    </tr>
+                    <button class="btn btn-success my-2"  style="float: right" (click)="confirmar(pedido)" >aceptar</button>
+                    <td>
+                </a>
+                 </body>
+            </div>
+
+
+
+
+
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                <body  *ngFor="let pedido of Pedidos" class="card text-white bg-dark m-2 b-2">
+                    <a *ngIf="(pedido.tipoEnvio)===(3)" >
+                        <tr>
+                            <a>Número de pedido: {{pedido.id}}</a>
+                        </tr>
+                        <tr>
+                            <a>Total: {{pedido.total}}</a>
+                        </tr>
+                        <tr>
+                            <a *ngFor="let detalle of pedido.detallePedido">
+                                Detalles: {{detalle.articuloManofacturado.denominacion}}
+                            </a>
+                        </tr>
+                        <tr>
+                            <a style="color: green;">Estado: Esperando su retiro</a>
+                        </tr>
+                        <button class="btn btn-success my-2"  style="float: right" >retirado</button>
+                        <td>
+                    </a>
+                     </body>
+
+            </div>
+
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+                <body  *ngFor="let pedido of Pedidos" class="card text-white bg-dark m-2 b-2">
+                    <a *ngIf="(pedido.tipoEnvio)===(4)" >
+                        <tr>
+                            <a>Número de pedido: {{pedido.id}}</a>
+                        </tr>
+                        <tr>
+                            <a>Total: {{pedido.total}}</a>
+                        </tr>
+                        <tr>
+                            <a *ngFor="let detalle of pedido.detallePedido">
+                                Detalles: {{detalle.articuloManofacturado.denominacion}}
+                            </a>
+                        </tr>
+                        <tr>
+                            <a style="color: green;">Estado: Esperando su entrega</a>
+                        </tr>
+                        <td>
+                    </a>
+                     </body>
+
+
+            </div>
+          </div>
     </body>
 
 </div>
