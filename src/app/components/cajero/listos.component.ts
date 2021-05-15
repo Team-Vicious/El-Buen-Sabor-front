@@ -44,5 +44,26 @@ export class ListosComponent implements OnInit {
       this.estado="Listo";}
     }
 
+  confirmar(pedido:Pedido){
+    
+    if(pedido.tipoEnvio===1){
+    let currentUrl = this.router.url;
+      pedido.tipoEnvio=3;
+      this.service.editar(pedido).subscribe(pedido => {
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+          this.router.navigate([currentUrl]);});
+      })
+    }
+
+    if(pedido.tipoEnvio===2){
+      let currentUrl = this.router.url;
+        pedido.tipoEnvio=4;
+        this.service.editar(pedido).subscribe(pedido => {
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate([currentUrl]);});
+        })
+      }}
+    
+
 }
 
