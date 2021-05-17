@@ -4,6 +4,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { InsumoFormComponent } from './components/admin/insumo-form/insumo-form.component';
 import { CajeroComponent } from './components/cajero/cajero.component';
 import { EntrantesComponent } from './components/cajero/entrantes.component';
+import { FacturaComponent } from './components/cajero/factura/factura.component';
 import { ListosComponent } from './components/cajero/listos.component';
 import { CocineroComponent } from './components/cocinero/cocinero.component';
 import { ManufacturadosFormComponent } from './components/cocinero/manufacturados-form.component';
@@ -36,7 +37,9 @@ const routes: Routes = [
   {path:'pedidos', component:PedidosComponent},
   {path:'historialPedidos/:idu', component:HistorialPedidosComponent},
   {path:'entrantes', component:EntrantesComponent},
-  {path:'listos', component:ListosComponent}
+  {path:'listos', component:ListosComponent},
+  {path:'factura/form', component:FacturaComponent},
+  {path:'factura/form/idf', component:FacturaComponent}
 
 
 ];
