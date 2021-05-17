@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+
+<div class="card bg-light mb-3">
+    <div class="card-header">GENERAR FACTURA</div>
+    <div class="card-body">
+        <button class="btn btn-danger my-2" (click)="volver()" >volver</button>
+        <form>
+            <div class="form-group">
+                <label for="montoDescuento">Monto de descuento</label>
+                <input type="text" name="montoDescuento" class="form-control" id="montoDescuento" 
+                [(ngModel)]="factura.montoDescuento">
+                <div class="alert alert-danger" *ngIf="error?.montoDescuento">
+                  {{ error.montoDescuento }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="listaPedido">Forma de Pago</label>
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Forma de Pago: {{formaPago}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item" (click)="asignarFormaPago('Mercado Pago')">Mercado Pago</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>    
+            <div class="form-group">
+                <label for="nroTarjeta">Nro de tarjeta</label>
+                <input type="text" name="nroTarjeta" class="form-control" id="nroTarjeta" 
+                [(ngModel)]="factura.nroTarjeta">
+                <div class="alert alert-danger" *ngIf="error?.nroTarjeta">
+                    {{ error.nroTarjeta }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="totalVenta">Total venta</label>
+                <input type="text" name="totalVenta" class="form-control" id="totalVenta" 
+                [(ngModel)]="factura.totalVenta">
+                <div class="alert alert-danger" *ngIf="error?.totalVenta">
+                    {{ error.totalVenta }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="totalCosto">Total Costo</label>
+                <input type="text" name="totalCosto" class="form-control" id="totalCosto" 
+                [(ngModel)]="factura.totalCosto">
+                <div class="alert alert-danger" *ngIf="error?.totalCosto">
+                    {{ error.totalCosto }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="listaPedido">Asigne la factura al algun pedido!</label>
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Asignar Factura al Pedido: Nroº {{pedido?.numero}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li *ngFor="let ped of listaPedidos">
+                            <a class="dropdown-item" (click)="asignarPedido(ped)">Pedido Nroº {{ped.numero}}</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <button class="btn btn-success my-2" (click)="persistirFactura()" >Completar</button>
+        </form>
+    </div>
+</div>
