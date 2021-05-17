@@ -5,6 +5,17 @@ import { Pedido } from 'src/app/models/Pedido';
 import { Usuario } from 'src/app/models/usuario';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import { DetalleFactura } from 'src/app/models/DetalleFactura';
+import { Factura } from 'src/app/models/Factura';
+import { FacturaService } from 'src/app/services/factura.service';
+//import pdfFonts from 'pdfmake/build/vfs_fonts';
+//import pdfMake from "pdfmake/build/pdfmake";
+//var pdfMake = require('pdfmake/build/pdfmake.js');
+//var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+//pdfMake.vfs = pdfFonts.pdfMake.vfs;
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-historial-pedidos',
@@ -15,6 +26,7 @@ export class HistorialPedidosComponent implements OnInit {
 
   constructor(
     protected pedidoService: PedidoService,
+    protected facturaService: FacturaService,
     protected usuarioService: UsuarioService,
     protected router: Router,
     protected route: ActivatedRoute
@@ -23,6 +35,7 @@ export class HistorialPedidosComponent implements OnInit {
   usuarioId!: number;
   usuario!: Usuario;
   listaPedidos!: any;
+  
 
   ngOnInit(): void {
     //trae usuario
@@ -41,6 +54,37 @@ export class HistorialPedidosComponent implements OnInit {
   //pasar imagenes de bytes a img
   formatImage(img: any): any {
     return 'data:image/jpeg;base64,' + img;
+  }
+
+  //generar factura
+  factura!: Factura;
+  generatePdf(pedido: Pedido){
+      const documentDefinition = this.getDocumentDefinition(pedido);
+      pdfMake.createPdf(documentDefinition).open();
+  }
+
+  getDocumentDefinition(pedido: Pedido) {
+
+    return {
+      
+      content: [
+        '\n [ EL BUEN SABOR ]',
+        `\nPEDIDO NROº ${pedido.numero}`,
+        `fecha del depido: ${pedido.fecha}`,
+        `Tipo de envio: ${pedido.tipoEnvio == 1? 'delivery': 'retiro en el local'}`,
+        `\n FACTURA NROº ${pedido.factura.numero}`,
+        `fecha de la factura: ${pedido.factura.fecha}`,
+        `Monto de descuento: ${pedido.factura.montoDescuento}`,
+        `Forma de pago: ${pedido.factura.formaPago? 'Mercado Pago' : 'Contado'}`,
+        `Nro Tarjeta: ${pedido.factura.nroTarjeta}`,
+        `\n\bDETALLE:\b${pedido.factura.detalleFactura.map((det:DetalleFactura) => {
+
+          return `\n${det.articuloManofacturado.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloManofacturado.precioVenta}]`; 
+
+        })}`,
+        `\n ==[Total: $${pedido.factura.totalVenta}]===`
+      ] 
+    };
   }
 
 }
