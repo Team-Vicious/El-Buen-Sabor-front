@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BASE_ENDPOINT } from '../config/app';
 import { Factura } from '../models/Factura';
 import { Usuario } from '../models/usuario';
@@ -16,5 +17,9 @@ export class FacturaService extends CommonService<Factura>{
 
   protected baseEndPoint = BASE_ENDPOINT + '/factura';
 
+  getFacturaByPedidoId(idPedido:number): Observable<Factura>{
+    return this.http.get<Factura>(`${this.baseEndPoint}/factura-pedidoId/${idPedido}`,
+    {headers: this.cabeceras});
+  }
   
 }
