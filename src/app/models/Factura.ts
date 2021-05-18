@@ -4,7 +4,7 @@ import { DetalleFactura } from "./DetalleFactura";
 
 export class Factura implements Base{
     id!: number;
-    fecha!: string;
+    fecha!: Date;
     numero!: number;
     montoDescuento!: number;
     formaPago!: string;

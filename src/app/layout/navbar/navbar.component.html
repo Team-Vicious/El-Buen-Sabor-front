@@ -87,8 +87,8 @@
     </li>
 
 
-    <li *ngIf="usuario?.cliente?.id ||usuarioAdmin?.cliente?.id" class="nav-item dropdown p-3 b-5 m-3">
-      <a *ngIf="usuarioId && !adminId" class="dropdown-toggle" data-toggle="dropdown" role="button"
+    <li *ngIf="usuario?.cliente?.id || usuarioAdmin?.cliente?.id" class="nav-item dropdown p-3 b-5 m-3">
+      <a *ngIf="usuarioId" class="dropdown-toggle" data-toggle="dropdown" role="button"
         aria-expanded="false" style="color:orange;">
         {{usuario?.cliente?.email}}
       </a>
@@ -98,7 +98,7 @@
       </a>
 
       <ul class="dropdown-menu">
-        <li><a *ngIf="usuario.rol != 'userg'" class="dropdown-item"
+        <li><a *ngIf="usuario?.rol != 'userg'" class="dropdown-item"
             [routerLink]="['/update', usuario?.cliente?.id]">Editar Cuenta</a></li>
         <li><a class="dropdown-item" [routerLink]="['/updateDomicilio', usuario?.id]">Editar Domicilio</a></li>
         <li><a class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">Historial de pedidos</a></li>
