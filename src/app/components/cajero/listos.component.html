@@ -32,7 +32,10 @@
                     <tr>
                         <a style="color: green;">Estado: {{estado}}</a>
                     </tr>
-                    <button class="btn btn-success my-2"  style="float: right" (click)="confirmar(pedido)" >aceptar</button>
+                    <button class="btn btn-success mx-2"  style="float: right" (click)="confirmar(pedido)" >aceptar</button>
+                    <button class="btn btn-info mx-2"  style="float: right" (click)="generatePdf(pedido)" >Ver Factura</button>
+                    <button class="btn btn-warning mx-2"  style="float: right" [routerLink]="['/factura/form/',pedido?.factura?.id]" >Editar Factura</button>
+                    <button class="btn btn-danger mx-2"  style="float: right" (click)="eliminarFactura(pedido)" >Eliminar Factura</button>
                     <td>
                 </a>
                  </body>
@@ -60,6 +63,9 @@
                         <tr>
                             <a style="color: green;">Estado: Esperando su retiro</a>
                         </tr>
+                        <button class="btn btn-info mx-2"  style="float: right" (click)="generatePdf(pedido)" >Ver Factura</button>
+                    <button class="btn btn-warning mx-2"  style="float: right" [routerLink]="['/factura/form/',pedido?.factura?.id]" >Editar Factura</button>
+                    <button class="btn btn-danger mx-2"  style="float: right" (click)="eliminarFactura(pedido)" >Eliminar Factura</button>
                         <button class="btn btn-success my-2"  style="float: right" >retirado</button>
                         <td>
                     </a>

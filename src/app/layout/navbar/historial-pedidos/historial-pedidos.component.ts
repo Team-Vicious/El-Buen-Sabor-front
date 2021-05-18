@@ -56,7 +56,7 @@ export class HistorialPedidosComponent implements OnInit {
     return 'data:image/jpeg;base64,' + img;
   }
 
-  //generar factura
+  //generar factura pdf
   factura!: Factura;
   generatePdf(pedido: Pedido){
       const documentDefinition = this.getDocumentDefinition(pedido);
