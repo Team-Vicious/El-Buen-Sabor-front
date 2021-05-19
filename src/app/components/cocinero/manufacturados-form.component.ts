@@ -17,6 +17,8 @@ export class ManufacturadosFormComponent implements OnInit {
   manufacturado: ArticuloManofacturado = new ArticuloManofacturado();
   error: any;
   fotoSeleccionada!: File;
+  usuarioId:any;
+
   constructor(
     private service: ArticuloManofacturadoService, 
     private router: Router,
@@ -24,8 +26,9 @@ export class ManufacturadosFormComponent implements OnInit {
     private location: Location) { }
 
     ngOnInit() {
+      this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
       this.route.paramMap.subscribe(params => {
-        const id: number = +params.get('idu')!;
+        const id: number = +params.get('idm')!;
         if(id){
           this.service.ver(id).subscribe(manufacturado => this.manufacturado = manufacturado)
         }

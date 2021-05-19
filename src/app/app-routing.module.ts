@@ -29,16 +29,16 @@ const routes: Routes = [
   {path:'admin/:idu', component:AdminComponent},
   {path:'cocinero/:idu', component:CocineroComponent},
   {path:'cajero/:idu', component:CajeroComponent},
-  {path:'manufacturados', component:ManufacturadosComponent},
-  {path:'manufacturados/form/:idu', component:ManufacturadosFormComponent},
-  {path:'manufacturados/form', component:ManufacturadosFormComponent},
+  {path:'manufacturados/:idu', component:ManufacturadosComponent},
+  {path:':idu/manufacturados/form/:idm', component:ManufacturadosFormComponent},
+  {path:':idu/manufacturados/form', component:ManufacturadosFormComponent},
   {path:'insumo/:ida/form', component:InsumoFormComponent},
   {path:'insumo/:ida/form/:idi', component:InsumoFormComponent},
-  {path:'pedidos', component:PedidosComponent},
+  {path:'pedidos/:idu', component:PedidosComponent},
   {path:'historialPedidos/:idu', component:HistorialPedidosComponent},
-  {path:'entrantes', component:EntrantesComponent},
-  {path:'listos', component:ListosComponent},
-  {path:'factura/form', component:FacturaComponent},
+  {path:'entrantes/:idu', component:EntrantesComponent},
+  {path:'listos/:idu', component:ListosComponent},
+  {path:':idu/factura/form', component:FacturaComponent},
   {path:'factura/form/:idf', component:FacturaComponent}
 
 

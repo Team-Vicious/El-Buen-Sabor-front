@@ -15,6 +15,7 @@ export class EntrantesComponent implements OnInit {
   pedido: Pedido = new Pedido();
   mostrar: number = 1;
   estado!:String;
+  usuarioId!:any;
   
   constructor(
     private service: PedidoService,
@@ -23,6 +24,7 @@ export class EntrantesComponent implements OnInit {
     private location: Location){}
 
     ngOnInit(): void {
+      this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
       this.mostrar=0;
       this.listarPedido();
      

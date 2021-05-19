@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
     usuarioAdmin!: Usuario;
     //pedidos: Pedido[] = [];
     pedido: Pedido = new Pedido();
-    validarLogin!: boolean;
+    validarLogin: boolean = false;
 
     @Input() usuarioId!:number;
     @Input() adminId!:number;
@@ -43,6 +43,9 @@ export class NavbarComponent implements OnInit {
         
         this.usuarioService.ver(+this.usuarioId).subscribe( usuario =>{
           this.usuario = usuario;
+
+          //valdiar boton
+          this.validarLogin = true;
         
         });
       }
@@ -52,6 +55,10 @@ export class NavbarComponent implements OnInit {
         
         this.usuarioService.ver(+this.adminId).subscribe( usuario =>{
           this.usuarioAdmin = usuario;
+
+          //valdiar boton
+          this.validarLogin = true;
+        
         
         });
       }

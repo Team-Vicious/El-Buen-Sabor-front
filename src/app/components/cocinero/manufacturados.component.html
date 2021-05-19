@@ -1,6 +1,6 @@
-<div>
-<app-navbar></app-navbar>    
-<button class="btn btn-primary my-2" routerLink="/manufacturados/form" >crear</button>
+<app-navbar [usuarioId]="usuarioId"></app-navbar>
+<div>  
+<button class="btn btn-primary my-2" [routerLink]="['/',usuarioId, 'manufacturados','form']" >crear</button>
 
 <button backButton class="btn btn-danger" (click)="volver()" style="float: right">volver</button>
 
@@ -36,7 +36,7 @@
 
         </tr>
         <td>
-            <button type="button" class="btn btn-warning" routerLinkActive="active" [routerLink]="['/manufacturados/form',articulo.id]">Editar</button>
+            <button type="button" class="btn btn-warning" routerLinkActive="active"  [routerLink]="['/',usuarioId,'manufacturados','form',articulo.id]">Editar</button>
 
             <button type="button" class="btn btn-danger" routerLinkActive="active"  (click)="eliminar(articulo)">Eliminar</button>
         </td>

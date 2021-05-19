@@ -18,6 +18,7 @@ export class FacturaComponent implements OnInit {
   listaPedidos:Pedido[] = [];
   pedido!: Pedido;
   error:any;
+  usuarioId!:any;
 
   constructor(
     private servicePedido: PedidoService,
@@ -27,11 +28,16 @@ export class FacturaComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit(): void {
+    this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
 
+    
     let facturaId = +this.route.snapshot.paramMap.get('idf')!;
-    this.serviceFactura.ver(facturaId).subscribe(factura => {
-      this.factura =factura;
-    });
+    if (facturaId) {
+      
+      this.serviceFactura.ver(facturaId).subscribe(factura => {
+        this.factura =factura;
+      });
+    }
 
     this.servicePedido.listar().subscribe( pedidos => {
       this.listaPedidos = pedidos as Pedido[];

@@ -18,6 +18,8 @@ export class ManufacturadosComponent implements OnInit {
   titulo = "Manufacturado"
   manufacturado: ArticuloManofacturado = new ArticuloManofacturado();
   error: any;
+  usuarioId:any;
+  
   constructor(
     private service: ArticuloManofacturadoService,
     private router: Router,
@@ -25,6 +27,7 @@ export class ManufacturadosComponent implements OnInit {
     private location: Location){}
 
   ngOnInit(): void {
+    this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
 
     this.listarArticuloManofacturados();
 

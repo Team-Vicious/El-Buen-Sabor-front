@@ -38,22 +38,34 @@ export class LoginComponent implements OnInit {
 
   //validar rol
   login() {
-    this.service.validarUser(this.user, this.clave).subscribe(user => {
-      this.usuario = user;
-
-      if (this.usuario.rol == "admin") {
-        this.router.navigate(['/admin/', this.usuario.id]);
-      }
-      if (this.usuario.rol == "cocinero") {
-        this.router.navigate(['/cocinero/', this.usuario.id]);
-      }
-      if (this.usuario.rol == "cajero") {
-        this.router.navigate(['/cajero/', this.usuario.id]);
-      }
-      if (this.usuario.rol == "user") {
-        this.router.navigate(['/home/', this.usuario.id]);
-      }
+    
+      this.service.validarUser(this.user, this.clave).subscribe(user => {
+        try {
+          this.usuario = user;
+          
+          if (this.usuario.rol == "admin") {
+            this.router.navigate(['/admin/', this.usuario.id]);
+          }
+          if (this.usuario.rol == "cocinero") {
+            this.router.navigate(['/cocinero/', this.usuario.id]);
+          }
+          if (this.usuario.rol == "cajero") {
+            this.router.navigate(['/cajero/', this.usuario.id]);
+          }
+          if (this.usuario.rol == "user") {
+            this.router.navigate(['/home/', this.usuario.id]);
+          }
+          if (this.usuario.rol == "userg") {
+            this.router.navigate(['/home/', this.usuario.id]);
+          }
+        } catch (error) {
+          Swal.fire('INCORRECTO!','usuario o contraseña incorrectos! <br> Si no esta registrado, por favor registrese!','error');
+        }
+      }, err => {
+        console.log(err)
+        
     });
+    
 
   }
 
@@ -116,6 +128,7 @@ export class LoginComponent implements OnInit {
       } catch (error) {
 
         console.log("no se pudo loguear ni registrar con google", error);
+        Swal.fire('ERROR!','No se pudo registrar con google','warning');
       }
 
       //cerrar sesion

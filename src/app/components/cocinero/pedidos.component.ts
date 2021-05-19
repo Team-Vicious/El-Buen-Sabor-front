@@ -16,17 +16,20 @@ export class PedidosComponent implements OnInit {
   pedido: Pedido = new Pedido();
   mostrar: number = 1;
   estado!:String;
+  usuarioId:any;
+
   constructor(
     private service: PedidoService,
     private router: Router,
     protected route: ActivatedRoute,
     private location: Location){}
 
-    ngOnInit(): void {
+  ngOnInit(): void {
+    this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
 
-      this.listarPedido();
+    this.listarPedido();
   
-    }
+  }
  
   listarPedido(){
     this.service.listar().subscribe(pedido =>{
