@@ -5,6 +5,7 @@ import { Domicilio } from 'src/app/models/Domicilio';
 import { Usuario } from 'src/app/models/usuario';
 import { DomicilioService } from 'src/app/services/domicilio.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -61,6 +62,7 @@ export class RegisterComponent implements OnInit {
 
     this.usuarioService.crear(this.usuario).subscribe(user => {
       console.log("registrado con exito usuario: "+user.usuario);
+      Swal.fire('CREADO!',`registrado con exito usuario: ${user.usuario}!`,'success');
       
       //si lo crea el admin vuelve al admin, sino es usuario normal y va al home
       if (this.adminId) {
@@ -79,6 +81,7 @@ export class RegisterComponent implements OnInit {
 
     this.usuarioService.editar(this.usuario).subscribe(user => {
       console.log("actualizado con exito usuario: "+user.usuario);
+      Swal.fire('CREADO!',`actualizado con exito usuario: ${user.usuario}!`,'success');
 
       //si lo actualiza el admin vuelve al admin, sino es usuario normal y va al home
       if (this.adminId) {

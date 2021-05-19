@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cocinero',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CocineroComponent implements OnInit {
 
-  constructor() { }
+  usuarioId:any;
+
+  constructor(
+    private router: Router,
+    protected route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
   }
 
 }

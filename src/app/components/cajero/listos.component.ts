@@ -22,6 +22,8 @@ export class ListosComponent implements OnInit {
   pedido: Pedido = new Pedido();
   mostrar: number = 1;
   estado!:String;
+  usuarioId!:any;
+
   constructor(
     private pedidoService: PedidoService,
     private facturaService: FacturaService,
@@ -30,6 +32,7 @@ export class ListosComponent implements OnInit {
     private location: Location){}
 
     ngOnInit(): void {
+      this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
 
       this.listarPedido();
   

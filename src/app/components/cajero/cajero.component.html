@@ -1,21 +1,21 @@
-<app-navbar></app-navbar>
+<app-navbar [usuarioId]="usuarioId"></app-navbar>
 
     <div class="card border-warning mb-3" style="max-width: 90rem;" >
         <div class="card-body">
         <div>
             <div class="card" style="width: 18rem;">
                 <div class="card-body" style="text-align:center;"> 
-                  <a href="/entrantes" class="btn btn-primary">Pedidos Entrantes</a>
+                  <a [routerLink]="['/entrantes', usuarioId]" class="btn btn-primary">Pedidos Entrantes</a>
                 </div>
               </div>
               <div class="card" style="width: 18rem;">
                 <div class="card-body" style="text-align:center;"> 
-                  <a href="/listos" class="btn btn-primary">Pedidos Listos</a>
+                  <a [routerLink]="['/listos', usuarioId]" class="btn btn-primary">Pedidos Listos</a>
                 </div>
               </div>
               <div class="card" style="width: 18rem;">
                 <div class="card-body" style="text-align:center;"> 
-                  <a href="factura/form" class="btn btn-primary">Generar Factura</a>
+                  <a [routerLink]="['/',usuarioId,'factura','form']" class="btn btn-primary">Generar Factura</a>
                 </div>
               </div>
         </div>

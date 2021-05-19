@@ -1,16 +1,16 @@
-<app-navbar></app-navbar>
+<app-navbar [usuarioId]="usuarioId"></app-navbar>
 
     <div class="card border-warning mb-3" style="max-width: 90rem;" >
         <div class="card-body">
         <div>
             <div class="card" style="width: 18rem;">
                 <div class="card-body" style="text-align:center;"> 
-                  <a href="/pedidos" class="btn btn-primary">Pedidos</a>
+                  <a [routerLink]="['/pedidos', usuarioId]" class="btn btn-primary">Pedidos</a>
                 </div>
               </div>
               <div class="card" style="width: 18rem;">
                 <div class="card-body" style="text-align:center;"> 
-                  <a href="/manufacturados" class="btn btn-primary">Manufacturados</a>
+                  <a [routerLink]="['/manufacturados', usuarioId]" class="btn btn-primary">Manufacturados</a>
                 </div>
               </div>
         </div>
