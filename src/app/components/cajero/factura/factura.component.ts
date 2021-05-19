@@ -28,6 +28,11 @@ export class FacturaComponent implements OnInit {
 
   ngOnInit(): void {
 
+    let facturaId = +this.route.snapshot.paramMap.get('idf')!;
+    this.serviceFactura.ver(facturaId).subscribe(factura => {
+      this.factura =factura;
+    });
+
     this.servicePedido.listar().subscribe( pedidos => {
       this.listaPedidos = pedidos as Pedido[];
       console.log(this.listaPedidos)
