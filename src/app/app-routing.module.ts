@@ -39,7 +39,7 @@ const routes: Routes = [
   {path:'entrantes', component:EntrantesComponent},
   {path:'listos', component:ListosComponent},
   {path:'factura/form', component:FacturaComponent},
-  {path:'factura/form/idf', component:FacturaComponent}
+  {path:'factura/form/:idf', component:FacturaComponent}
 
 
 ];
