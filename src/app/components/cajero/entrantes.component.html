@@ -19,8 +19,8 @@
 
     <body class="card text-white bg-dark m-2 b-2" *ngFor="let pedido of Pedidos">
         <a *ngIf="(pedido.estado)===(mostrar)">
-          <a *ngFor="let detalle of pedido.detallePedido">
-            <a *ngIf="asignarEstado(pedido)"></a>
+          <a *ngIf="asignarEstado(pedido)"></a>
+          <a>
             <tr>
                 <a>Número de pedido: {{pedido.id}}</a>
             </tr>
@@ -28,79 +28,87 @@
                 <a>Total: {{pedido.total}}</a>
             </tr>
             <tr>
-                <a>
-                    Detalles: {{detalle.articuloManofacturado.denominacion}}
+                <a>Detalles:</a>
+                <a *ngFor="let articulo of pedido.factura.detalleFactura">
+                  <a *ngIf="articulo.articuloManofacturado">
+                   <br>*{{articulo.articuloManofacturado.denominacion}}
+                  </a>
+                  <a *ngIf="articulo.articuloInsumo">
+                    <br>*{{articulo.articuloInsumo.denominacion}}
+                   </a>
                 </a>
             </tr>
             <tr>
                 <a>Estado: {{estado}}</a>
             </tr>
-            <td *ngIf="(mostrar)===0">
+            <tr *ngIf="(mostrar)===0">
 
                 <button type="button" class="btn btn-success" (click)="cambiarEstado(pedido,1)">Aceptar</button>
                 <button type="button" class="btn btn-danger" (click)="cambiarEstado(pedido,5)">Cancelar</button>
 
-            </td>
-            <td *ngIf="(mostrar)===1">
+            </tr>
+            <tr *ngIf="(mostrar)===1">
 
                 <button type="button" class="btn btn-danger" (click)="cambiarEstado(pedido,5)">Cancelar Pedido</button>
 
-            </td>
-            <td *ngIf="(mostrar)===5">
+            </tr>
+            <tr *ngIf="(mostrar)===5">
 
                 <button type="button" class="btn btn-success" (click)="cambiarEstado(pedido,0)">Devolver a pedidos
                     entrantes</button>
 
-            </td>
+            </tr>
+            <tr>
+              <div class="modal fade" id="exampleModalToggle-{{pedido.id}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                 <div class="modal-dialog modal-dialog-centered">
+                   <div class="modal-content" >
+                     <div class="modal-header">
+                       <h5 class="modal-title" id="exampleModalToggleLabel" style="color:#000000;font-size: 30px">Factura Número: {{pedido.factura.id}}</h5>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                     </div>
+                     <div class="modal-body" style="color:#000000">
+                      <h1 style="font-size: 17px">Forma de Pago: {{pedido.factura.formaPago}}</h1>
+                       <h1 style="font-size: 17px">Número de Tarjeta: {{pedido.factura.nroTarjeta}}</h1>
+                       <h1 style="font-size: 17px">Monto de Descuento: {{pedido.factura.montoDescuento}}</h1>
+                       <h1 style="font-size: 17px; color: rgb(206, 71, 71);">Total venta: {{pedido.factura.totalVenta}}</h1>
+                      <h1 style="font-size: 17px; color: rgb(206, 71, 71);">Total costo: {{pedido.factura.totalCosto}}</h1>
+                       
+                     </div>
+                     <div class="modal-footer">
+                       <button type="button" class="btn btn-outline-primary" data-toggle="modal" [attr.data-target]="'#exampleModalToggle2-' + pedido.factura.id" data-dismiss="modal">Ver Detalle</button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+               <div class="modal fade" id="exampleModalToggle2-{{pedido.factura.id}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2">
+                 
+                 <div class="modal-dialog modal-dialog-centered">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                       <h5 class="modal-title" id="exampleModalToggleLabel2" style="color:#000000;font-size: 30px">Detalle</h5>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                     </div>
+                     <div class="modal-body" style="color:#000000" *ngFor="let detalle of pedido.factura.detalleFactura">
+                       
+                         <h1 style="font-size: 17px">Numero de detalle: {{detalle.id}}</h1>
+                         <h1 style="font-size: 17px" *ngIf="detalle.articuloManofacturado">Articulo: {{detalle.articuloManofacturado.denominacion}}</h1>
+                         <h1 style="font-size: 17px">Cantidad: {{detalle.cantidad}}</h1>
+                         <h1 style="font-size: 17px" *ngIf="detalle.articuloInsumo">Articulo Insumo: {{detalle.articuloInsumo.denominacion}}</h1>
+                       
+                     </div>
+                     <div class="modal-footer">
+                     </div>
+                   </div>
+                 </div>
 
-
-            <td>
-                 <div class="modal fade" id="exampleModalToggle-{{pedido.id}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content" >
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalToggleLabel" style="color:#000000;font-size: 30px">Factura Número: {{pedido.factura.id}}</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body" style="color:#000000">
-                         <h1 style="font-size: 17px">Forma de Pago: {{pedido.factura.formaPago}}</h1>
-                          <h1 style="font-size: 17px">Número de Tarjeta: {{pedido.factura.nroTarjeta}}</h1>
-                          <h1 style="font-size: 17px">Monto de Descuento: {{pedido.factura.montoDescuento}}</h1>
-                          <h1 style="font-size: 17px; color: rgb(206, 71, 71);">Total venta: {{pedido.factura.totalVenta}}</h1>
-                          <h1 style="font-size: 17px; color: rgb(206, 71, 71);">Total costo: {{pedido.factura.totalCosto}}</h1>
-                          
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-primary" data-toggle="modal" [attr.data-target]="'#exampleModalToggle2-' + pedido.factura.id" data-dismiss="modal">Ver Detalle</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal fade" id="exampleModalToggle2-{{pedido.factura.id}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalToggleLabel2" style="color:#000000;font-size: 30px">Detalle</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body" style="color:#000000">
-                            <h1 style="font-size: 17px">Numero de detalle: {{detalle.id}}</h1>
-                            <h1 style="font-size: 17px">Articulo: {{detalle.articuloManofacturado.denominacion}}</h1>
-                            <h1 style="font-size: 17px">Cantidad: {{detalle.cantidad}}</h1>
-                            <h1 style="font-size: 17px">Articulo Insumo: {{detalle.articuloInsumo.denominacion}}</h1>
-                        </div>
-                        <div class="modal-footer">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-outline-primary" data-toggle="modal" [attr.data-target]="'#exampleModalToggle-' + pedido.id">Ver Factura</button>
-            </td>
-            
+               </div>
+         </tr>
+         <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModalToggle-'+pedido.id" style="float: right">Ver Factura</button>
+         
 
 
           </a>

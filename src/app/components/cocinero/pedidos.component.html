@@ -26,9 +26,12 @@
             <a>Total: {{pedido.total}}</a>
         </tr>
         <tr>
-            <a *ngFor="let detalle of pedido.detallePedido">
-                Detalles: {{detalle.articuloManofacturado.denominacion}}
+          <a>Detalles:</a>
+          <a *ngFor="let articulo of pedido.detallePedido">
+            <a *ngIf="articulo.articuloManofacturado">
+             <br>*{{articulo.articuloManofacturado.denominacion}}
             </a>
+          </a>
         </tr>
         <tr *ngIf="(mostrar)!=4">
             <a>Estado: {{estado}}</a>
