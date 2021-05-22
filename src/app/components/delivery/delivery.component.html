@@ -10,8 +10,9 @@
           </nav>
 
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <body  *ngFor="let pedido of Pedidos" class="card text-white bg-dark m-2 b-2">
+            <body  *ngFor="let pedido of Pedidos">
                 <a *ngIf="(pedido.estado)===(3) && (pedido.tipoEnvio)===(4)">
+                    <div class="card text-white bg-dark m-2 b-2">
                     <tr>
                         <a>Número de pedido: {{pedido.id}} </a>
                         <span class="badge bg-success">Listo para retirar</span>
@@ -40,12 +41,13 @@
                     <a style="color: rgb(22, 140, 251); " href="https://www.google.com.ar/maps/place/{{pedido.domicilio.calle}}+{{pedido.domicilio.numero}},+{{pedido.domicilio.localidad}},+Mendoza" target="_blank">ABRIR EN MAPS</a>
     
                     <button class="btn btn-success my-2"  style="float: right"  >tomar pedido</button>
+                </div>
                 </a>
-                 </body>
+                </body>
 
           </div>
 
 
-          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">hola</div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"></div>
 
         </body>

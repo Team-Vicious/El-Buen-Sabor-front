@@ -18,8 +18,9 @@
 
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                <body *ngFor="let pedido of Pedidos" class="card text-white bg-dark m-2 b-2">
+                <body *ngFor="let pedido of Pedidos">
                     <a *ngIf="(pedido.estado)===(3) && (pedido.tipoEnvio)===(1) || (pedido.estado)===(3) && (pedido.tipoEnvio)===(2)">
+                        <div class="card text-white bg-dark m-2 b-2">
                         <a *ngIf="asignarEstado(pedido)"></a>
                         <tr>
                             <a>Número de pedido: {{pedido.id}}</a>
@@ -41,15 +42,17 @@
                         <tr>
                             <a style="color: green;">Estado: {{estado}}</a>
                         </tr>
-                        <button class="btn btn-success mx-2" style="float: right"
+                        <td><button class="btn btn-success mx-2" style="float: right"
                             (click)="confirmar(pedido)">aceptar</button>
+                        
                         <button class="btn btn-info mx-2" style="float: right" (click)="generatePdf(pedido)">Ver
                             Factura</button>
                         <button class="btn btn-warning mx-2" style="float: right"
                             [routerLink]="['/factura/form/',pedido?.factura?.id]">Editar Factura</button>
                         <button class="btn btn-danger mx-2" style="float: right"
                             (click)="eliminarFactura(pedido)">Eliminar Factura</button>
-                        <td>
+                        </td>
+                        </div>
                     </a>
                 </body>
             </div>
@@ -60,8 +63,9 @@
 
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                <body *ngFor="let pedido of Pedidos" class="card text-white bg-dark m-2 b-2">
+                <body *ngFor="let pedido of Pedidos">
                     <a *ngIf="(pedido.tipoEnvio)===(3)">
+                        <div class="card text-white bg-dark m-2 b-2">
                         <tr>
                             <a>Número de pedido: {{pedido.id}}</a>
                         </tr>
@@ -82,7 +86,7 @@
                         <tr>
                             <a style="color: green;">Estado: Esperando su retiro</a>
                         </tr>
-                        
+                        <td>
                         <button class="btn btn-info mx-2" style="float: right" (click)="generatePdf(pedido)">Ver
                             Factura</button>
                         <button class="btn btn-warning mx-2" style="float: right"
@@ -92,7 +96,8 @@
 
                         <button class="btn btn-success" style="float: right" >Retirado</button>
 
-                        <td>
+                        </td>
+                        </div>
                     </a>
                 </body>
 
@@ -100,8 +105,9 @@
 
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 
-                <body *ngFor="let pedido of Pedidos" class="card text-white bg-dark m-2 b-2">
+                <body *ngFor="let pedido of Pedidos">
                     <a *ngIf="(pedido.tipoEnvio)===(4)">
+                        <div class="card text-white bg-dark m-2 b-2">
                         <tr>
                             <a>Número de pedido: {{pedido.id}}</a>
                         </tr>
@@ -122,7 +128,8 @@
                         <tr>
                             <a style="color: green;">Estado: Esperando su entrega</a>
                         </tr>
-                        <td>
+                    
+                    </div>
                     </a>
                 </body>
 
