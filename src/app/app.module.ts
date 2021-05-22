@@ -26,6 +26,7 @@ import { DomicilioFormComponent } from './components/register/domicilio-form/dom
 import { EntrantesComponent } from './components/cajero/entrantes.component';
 import { ListosComponent } from './components/cajero/listos.component';
 import { FacturaComponent } from './components/cajero/factura/factura.component';
+import { DeliveryComponent } from './components/delivery/delivery.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { FacturaComponent } from './components/cajero/factura/factura.component'
     DomicilioFormComponent,
     EntrantesComponent,
     ListosComponent,
-    FacturaComponent
+    FacturaComponent,
+    DeliveryComponent
   ],
   imports: [
     BrowserModule,
