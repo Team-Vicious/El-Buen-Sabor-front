@@ -10,6 +10,7 @@ import { CocineroComponent } from './components/cocinero/cocinero.component';
 import { ManufacturadosFormComponent } from './components/cocinero/manufacturados-form.component';
 import { ManufacturadosComponent } from './components/cocinero/manufacturados.component';
 import { PedidosComponent } from './components/cocinero/pedidos.component';
+import { DeliveryComponent } from './components/delivery/delivery.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { DomicilioFormComponent } from './components/register/domicilio-form/domicilio-form.component';
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path:'entrantes/:idu', component:EntrantesComponent},
   {path:'listos/:idu', component:ListosComponent},
   {path:':idu/factura/form', component:FacturaComponent},
-  {path:'factura/form/:idf', component:FacturaComponent}
+  {path:'factura/form/:idf', component:FacturaComponent},
+  {path:'delivery/:idu', component:DeliveryComponent}
 
 
 ];

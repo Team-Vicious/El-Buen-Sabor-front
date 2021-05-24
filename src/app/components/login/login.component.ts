@@ -76,6 +76,9 @@ export class LoginComponent implements OnInit {
           if (this.usuario.rol == "userg") {
             this.router.navigate(['/home/', this.usuario.id]);
           }
+          if (this.usuario.rol == "delivery") {
+            this.router.navigate(['/delivery/', this.usuario.id]);
+          }
         } catch (error) {
           Swal.fire('INCORRECTO!','usuario o contraseña incorrectos! <br> Si no esta registrado, por favor registrese!','error');
         }
