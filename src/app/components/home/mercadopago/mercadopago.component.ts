@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 //import * as EventEmitter from 'events';
 //import { mercadopago } from 'mercadopago';
 //const mercadopago = require ('mercadopago');
-//const mercadopago = require ('mercadopago');
-//const mercadopago = require ('mercadopago');
+//const mercadopagos = require ('./node_modules/mercadopago/index.js');
+//import * as mercadopago from 'mercadopago'
 
 @Component({
   selector: 'app-mercadopago',
@@ -23,7 +23,7 @@ export class MercadopagoComponent implements OnInit {
   ngOnInit(): void {
     //this.pid = this.route.snapshot.paramMap.get('pid')!;
 
-    //this.abrirmp();
+    this.abrirmp();
   }
 
   abrirmp(){
@@ -33,15 +33,13 @@ export class MercadopagoComponent implements OnInit {
     
     // Agrega credenciales
     
+    
     /*
-    const mp = new mercadopago('PUBLIC_KEY', {
-      locale: 'es-AR'
-    });
 
     // Inicializa el checkout
-    mp.checkout({
+    mercadopago.checkout({
       preference: {
-          id: this.pid
+          id: '736455939-ff08c43d-ed42-4c89-9e47-5e01d1ee894b'
       },
       render: {
             container: '.cho-container', // Indica dónde se mostrará el botón de pago
@@ -49,9 +47,10 @@ export class MercadopagoComponent implements OnInit {
       }
     });
     */
+    
 
     /*
-    let preference = {
+    var preference = {
       back_urls: {
         success: "https://localhost/MercadoPago/success.html",
         failure: "https://localhost/MercadoPago/failure.html",
@@ -68,15 +67,31 @@ export class MercadopagoComponent implements OnInit {
         }
       ]
     };
+    */
     
+    /*
+    mercadopago.configure({
+      access_token: 'APP_USR-26941b07-f466-4ecd-9d0a-d16fefa22623'
+    });
+    let preference = {
+      items: [
+        {
+          title: 'Mi producto',
+          unit_price: 100,
+          quantity: 1,
+        }
+      ]
+    };
+    
+    var idmp;
     mercadopago.preferences.create(preference)
     .then(function(response){
-      console.log(response.body);
-      res.redirect(response.body.init_point);
-     
+    // Este valor reemplazará el string "<%= global.id %>" en tu HTML
+      idmp = response.body.id;
     }).catch(function(error){
       console.log(error);
     });
     */
+    
   }
 }
