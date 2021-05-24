@@ -17,5 +17,5 @@ export class Pedido implements Base{
     domicilio!: Domicilio;
     mercadopagoDatos!: MercadopagoDatos;
     factura!: Factura;
-
+    fechaBaja!: Date;
 }

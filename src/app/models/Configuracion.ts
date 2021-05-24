@@ -5,6 +5,7 @@ export class Configuracion implements Base{
     cantidadCocineros!: number;
     emailEmpresa!: string;
     tokenMercadoPago!: string;
+    fechaBaja!: Date;
     
 
 }

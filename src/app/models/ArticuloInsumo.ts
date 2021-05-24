@@ -11,4 +11,5 @@ export class ArticuloInsumo implements Base{
     unidadMedida!: string;
     esInsumo!: boolean;
     rubroArticulo!: RubroArticulo;
+    fechaBaja!: Date;
 }

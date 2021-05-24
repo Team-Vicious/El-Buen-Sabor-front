@@ -13,4 +13,5 @@ export class ArticuloManofacturado implements Base{
     imagen!:number;
     articuloManofactudaroDetalle!:ArticuloManofacturadoDetalle;
     rubroGeneral!: RubroGeneral;
+    fechaBaja!: Date;
 }
