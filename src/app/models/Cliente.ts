@@ -11,5 +11,6 @@ export class Cliente implements Base{
     email!: string;
     domicilio!: Domicilio;
     pedido!: Pedido[];
+    fechaBaja!: Date;
 
 }

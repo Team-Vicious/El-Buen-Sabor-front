@@ -9,5 +9,5 @@ export class MercadopagoDatos implements Base{
     metodoPago!: string;
     nroTarjeta!: string;
     estado!: string;
-
+    fechaBaja!: Date;
 }

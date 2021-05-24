@@ -6,4 +6,5 @@ export class RubroArticulo implements Base{
     denominacion!: string;
     padre!: RubroArticulo;
     hijos!: RubroArticulo;
+    fechaBaja!: Date;
 }

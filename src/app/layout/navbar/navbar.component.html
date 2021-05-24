@@ -99,7 +99,7 @@
 
       <ul class="dropdown-menu">
         <li><a *ngIf="usuario?.rol != 'userg'" class="dropdown-item"
-            [routerLink]="['/update', usuario?.cliente?.id]">Editar Cuenta</a></li>
+            [routerLink]="['/update', usuario?.id]">Editar Cuenta</a></li>
         <li><a class="dropdown-item" [routerLink]="['/updateDomicilio', usuario?.id]">Editar Domicilio</a></li>
         <li><a class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">Historial de pedidos</a></li>
 

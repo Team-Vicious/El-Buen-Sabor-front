@@ -5,6 +5,8 @@ import { Cliente } from 'src/app/models/Cliente';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js';
+import { envelopeOpenFill } from 'ngx-bootstrap-icons';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,7 @@ export class LoginComponent implements OnInit {
   socialUser!: SocialUser;
   userLogged!: SocialUser;
   isLogged!: boolean;
-
+  passCrypto: string = "lrisK34b";
 
   constructor(
     private service: UsuarioService,
@@ -38,7 +40,23 @@ export class LoginComponent implements OnInit {
 
   //validar rol
   login() {
-    
+    //const hashcode = CryptoJS.MD5(CryptoJS.enc.Latin1.parse("aaa")).toString();
+    //var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Latin1.parse("aaa"), "Secret Passphrase").toString();
+    //var encrypted = CryptoJS.AES.encrypt("aaaa", "Secret Passphrase");
+    //var encrypted = CryptoJS.DES.encrypt("aaa", "Ss").toString();
+    //console.log(encrypted);
+    // convert String to WordArray
+    //var wordArray = CryptoJS.enc.Utf8.parse('Hello, World!').toString();
+
+    // convert WordArray To String
+    //var result1=wordArray.toString(CryptoJS.enc.Utf8);
+    //var result2=CryptoJS.enc.Utf8.stringify(wordArray);
+
+    //console.log(CryptoJS.enc.Utf8.stringify(hashcode));
+    //console.log(result1);
+    //console.log(result2);
+    //console.log(result1===result2);
+      
       this.service.validarUser(this.user, this.clave).subscribe(user => {
         try {
           this.usuario = user;

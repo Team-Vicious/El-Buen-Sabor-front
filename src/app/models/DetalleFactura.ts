@@ -9,5 +9,6 @@ export class DetalleFactura implements Base{
     subtotal!: number;
     articuloManofacturado!: ArticuloManofacturado;
     articuloInsumo!: ArticuloInsumo;
+    fechaBaja!: Date;
     
 }
