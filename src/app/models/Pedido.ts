@@ -13,7 +13,7 @@ export class Pedido implements Base{
     horaEstimadaFin!: string;
     tipoEnvio!: number;
     total!: number;
-    detallePedido!: DetallePedido[];
+    detallePedido: DetallePedido[] = [];
     domicilio!: Domicilio;
     mercadopagoDatos!: MercadopagoDatos;
     factura!: Factura;
