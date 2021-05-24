@@ -7,4 +7,5 @@ export class ArticuloManofacturadoDetalle implements Base{
     cantidad!: number;
     unidadMedida!: string;
     articuloInsumo!: ArticuloInsumo;
+    fechaBaja!: Date;
 }

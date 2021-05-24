@@ -6,5 +6,5 @@ export class Domicilio implements Base{
     calle!: string;
     numero!: number;
     localidad!: string;
-
+    fechaBaja!: Date;
 }

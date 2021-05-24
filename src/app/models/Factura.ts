@@ -12,4 +12,5 @@ export class Factura implements Base{
     totalVenta!: number;
     totalCosto!: number;
     detalleFactura!: DetalleFactura[];
+    fechaBaja!: Date;
 }

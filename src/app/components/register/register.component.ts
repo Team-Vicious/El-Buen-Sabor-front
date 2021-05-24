@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { DomicilioService } from 'src/app/services/domicilio.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
   domicilio: Domicilio = new Domicilio();
   usuarioId!:number;
   adminId!: number;
+  //passCrypto: string = "lrisK34b";
   
   constructor(
     private usuarioService: UsuarioService,
@@ -37,6 +39,9 @@ export class RegisterComponent implements OnInit {
         
       this.usuarioService.ver(+this.usuarioId).subscribe( usuario =>{
         this.usuario = usuario;
+        //console.log("encriptado",this.usuario.clave);
+        //this.usuario.clave = (CryptoJS.AES.decrypt(this.usuario.clave.trim(), this.passCrypto)).toString(CryptoJS.enc.Utf8);
+        //console.log("desencriptado",this.usuario.clave);
         this.cliente = this.usuario.cliente;
         this.domicilio = this.usuario.cliente.domicilio;
       });
@@ -59,6 +64,9 @@ export class RegisterComponent implements OnInit {
     this.usuario.cliente = this.cliente;
     this.usuario.cliente.domicilio =this.domicilio;
     this.usuario.rol = "user";
+    //this.usuario.clave = (CryptoJS.AES.encrypt(this.usuario.clave.trim(), this.passCrypto)).toString();
+    //this.usuario.clave = (CryptoJS.MD5(this.usuario.clave)).toString();
+    //console.log(this.usuario.clave);
 
     this.usuarioService.crear(this.usuario).subscribe(user => {
       console.log("registrado con exito usuario: "+user.usuario);
@@ -78,16 +86,18 @@ export class RegisterComponent implements OnInit {
     //asignar objetos al usuario/cliente
     this.usuario.cliente = this.cliente;
     this.usuario.cliente.domicilio =this.domicilio;
+    //this.usuario.clave = (CryptoJS.AES.encrypt(this.usuario.clave.trim(), this.passCrypto)).toString();
+    //this.usuario.clave  = CryptoJS.enc.Base64.parse('hola').toString();
 
     this.usuarioService.editar(this.usuario).subscribe(user => {
       console.log("actualizado con exito usuario: "+user.usuario);
-      Swal.fire('CREADO!',`actualizado con exito usuario: ${user.usuario}!`,'success');
+      Swal.fire('ACTUALIZADO!',`actualizado con exito usuario: ${user.usuario}!`,'success');
 
       //si lo actualiza el admin vuelve al admin, sino es usuario normal y va al home
       if (this.adminId) {
         this.router.navigate(['/admin/',this.adminId]);
       }else{
-        this.router.navigate(['/home/',user.cliente.id]);
+        this.router.navigate(['/home/',user.id]);
       }
 
     })

@@ -8,7 +8,7 @@ export class Usuario implements Base{
     clave!: string;
     rol!: string;
     cliente!: Cliente;
-
+    fechaBaja!: Date;
 }
 
 
