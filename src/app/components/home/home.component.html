@@ -3,137 +3,141 @@
 </app-navbar>
 
 
+<ul class="nav justify-content-center">
+
+
+</ul>
+
 <body class="container">
     <h5 *ngIf="abierto" style="color:orange;">{{labelHorario}}</h5>
     <h5 *ngIf="!abierto" style="color:orange;">{{labelHorario}}</h5>
-    
+
     <table className="table">
 
         <tbody>
             <div class="row">
-            <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo of articulosManofaturados">
 
-                <tr>
-                    <td>
-                        <div>
-                            <!---img class="card-img-top img-fluid" style="width: 200px; height: 150px;" src="assets/images/{{articulo.imagen}}"--->
-                            <img *ngIf="articulo.imagen"
-                            [src]="formatImage(articulo.imagen)"
-                            class= "img-thumbnail rounded"
-                            style= "width: 250px; cursor:pointer;">
-                            <!-- <img src="/src/assets/images/{{articulo.imagen}}"  style="max-height: 150px;"> -->
-                        </div>
+                <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo of articulosManofaturados">
+
+                    <tr>
+                        <td>
+                            <div>
+                                <!---img class="card-img-top img-fluid" style="width: 200px; height: 150px;" src="assets/images/{{articulo.imagen}}"--->
+                                <img *ngIf="articulo.imagen" [src]="formatImage(articulo.imagen)"
+                                    class="img-thumbnail rounded" style="width: 250px; cursor:pointer;">
+                                <!-- <img src="/src/assets/images/{{articulo.imagen}}"  style="max-height: 150px;"> -->
+                            </div>
+                        </td>
+
+                        <td>
+                    <tr>
+                        <a>{{articulo.denominacion}}</a>
+                    </tr>
+                    <tr>
+                        <a>
+                            $ {{articulo.precioVenta}}
+
+                        </a>
+                    </tr>
+
+
                     </td>
 
+                    </tr>
                     <td>
-                <tr>
-                    <a>{{articulo.denominacion}}</a>
-                </tr>
-                <tr>
-                    <a>
-                        $ {{articulo.precioVenta}}
+                        <button *ngIf="abierto" type="button" class="btn btn-success"
+                            (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)"
+                            routerLinkActive="active">
+                            Agregar al carrito
+                        </button>
+                        <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>
 
-                    </a>
-                </tr>
-               
-
-                </td>
-
-                </tr>
-                <td>
-                    <button *ngIf="abierto" type="button" class="btn btn-success"
-                        (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)"
-                        routerLinkActive="active">
-                        Agregar al carrito
-                    </button>
-                    <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5> 
-
-                </td>
-
-            </body>
-
-        
-            <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo">
-
-                <tr>
-                    <td>
-                        <div>
-                            
-                        </div>
                     </td>
 
+                </body>
+
+
+                <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo">
+
+                    <tr>
+                        <td>
+                            <div>
+
+                            </div>
+                        </td>
+
+                        <td>
+                    <tr>
+                        <a>{{articulo2.denominacion}}</a>
+                    </tr>
+                    <tr>
+                        <a>
+                            ${{articulo2.precioVenta}}
+
+                        </a>
+                    </tr>
+                    <tr>
+                        <a>
+                            esInsumo: {{articulo2.esInsumo}}
+
+                        </a>
+                    </tr>
+
+
+                    </td>
+
+                    </tr>
                     <td>
-                <tr>
-                    <a>{{articulo2.denominacion}}</a>
-                </tr>
-                <tr>
-                    <a>
-                        ${{articulo2.precioVenta}}
+                        <button *ngIf="abierto" type="button" class="btn btn-success"
+                            (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">
+                            Agregar al carrito
+                        </button>
+                        <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>
 
-                    </a>
-                </tr>
-                <tr>
-                    <a>
-                        esInsumo: {{articulo2.esInsumo}}
+                    </td>
 
-                    </a>
-                </tr>
+                </body>
 
+                <!-- CARRUSEL -->
 
-                </td>
-
-                </tr>
-                <td>
-                    <button *ngIf="abierto" type="button" class="btn btn-success"
-                        (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">
-                        Agregar al carrito
-                    </button>
-                    <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>    
-
-                </td>
-
-            </body>
-
-    <!-- CARRUSEL -->
-
-    <section id="carrusel">
-        <div class="contenedor carrusel">
+                <section id="carrusel">
+                    <div class="contenedor carrusel">
 
 
 
-            <div id="carrusel-home" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carrusel-home" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carrusel-home" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carrusel-home" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carrusel-home" data-bs-slide-to="3"
-                        aria-label="Slide 4"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="assets/images/fondo1.jpg" class="d-block w-100" alt="...">
+                        <div id="carrusel-home" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carrusel-home" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carrusel-home" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carrusel-home" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#carrusel-home" data-bs-slide-to="3"
+                                    aria-label="Slide 4"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="assets/images/fondo1.jpg" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/fondo2.jpg" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/fondo3.jpg" class="d-block w-100" alt="...">
+                                </div>
+
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-home"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carrusel-home"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="assets/images/fondo2.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="assets/images/fondo3.jpg" class="d-block w-100" alt="...">
-                    </div>
-
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-home"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carrusel-home"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
-            </div>
-        </div>
-    </section>
+                </section>

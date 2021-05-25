@@ -12,6 +12,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -23,7 +24,7 @@ export class NavbarComponent implements OnInit {
     protected usuarioService: UsuarioService,
     protected pedidoService: PedidoService,
     protected router: Router,
-    protected route: ActivatedRoute) { }
+    protected route: ActivatedRoute) {}
     
     id:any;
     usuario!: Usuario;
@@ -96,6 +97,7 @@ export class NavbarComponent implements OnInit {
       })
     }
 
+
     comprar(){
 
       
@@ -157,8 +159,10 @@ export class NavbarComponent implements OnInit {
             console.log("pedido realizado ",usuario.usuario)
           });
           */
+          
 
-          Swal.fire('CONFIRMADO!', ' confirmado', 'success')
+          Swal.fire('CONFIRMADO!', ' confirmado', 'success');
+          this.router.navigate(['/mercadopago/', this.usuario.id,'pedido']);
         } else if (result.isDenied) {
           Swal.fire('CANCELADO!', 'cancelado!', 'warning')
         }
