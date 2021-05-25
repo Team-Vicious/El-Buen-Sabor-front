@@ -1,33 +1,23 @@
-<script>
-    var usuario = prompt("¿Cuál es tu nombre?");
-    alert("¡Hola, " + usuario + "!");
-  </script>
-<script src="./mp.js"></script>
+<app-navbar [usuarioId]="usuarioId"></app-navbar>
 
 <body>
-    
-    <script>
-        alert("holaa");
-        console.log("holaaaaaaaaaaaaaaaasssssssssssssssss")
-    </script>
+    <div class="card m-4">
+        <div class="card-body">
 
+            <title>Pueba mercadopago!</title>
+            <title>Bienvenido!</title>
+            <h4>Elija su metodo de pago!</h4>
+            
+            <button class="btn btn-info m-4 p-4" style="font-size: 2rem;" onclick="abrirCheckout()">
+                <i class="bi bi-cash-coin" style="font-size: 2rem;"></i>
+                MercadoPago
+            </button>
+            
+            <button class="btn btn-warning m-4 p-4" style="font-size: 2rem;">
+                <i class="bi bi-wallet2" style="font-size: 2rem;"></i>
+                Contado Retiro en el Local
+            </button>
+        </div>
+    </div>
 </body>
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-<script>
-    alert("aaaaaaa");
-    // Agrega credenciales de SDK
-      const mp = new MercadoPago('APP_USR-26941b07-f466-4ecd-9d0a-d16fefa22623', {
-            locale: 'es-AR'
-      });
-    
-      // Inicializa el checkout
-      mp.checkout({
-          preference: {
-              id: '736455939-ff08c43d-ed42-4c89-9e47-5e01d1ee894b'
-          },
-          render: {
-                container: '.cho-container', // Indica dónde se mostrará el botón de pago
-                label: 'Pagar', // Cambia el texto del botón de pago (opcional)
-          }
-    });
-</script>
+

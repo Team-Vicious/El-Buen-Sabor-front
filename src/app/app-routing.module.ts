@@ -43,7 +43,8 @@ const routes: Routes = [
   {path:':idu/factura/form', component:FacturaComponent},
   {path:'factura/form/:idf', component:FacturaComponent},
   {path:'delivery/:idu', component:DeliveryComponent},
-  {path:'mercadopago', component:MercadopagoComponent}
+  {path:'mercadopago/:idu/pedido', component:MercadopagoComponent}
+  
 
 
 ];
