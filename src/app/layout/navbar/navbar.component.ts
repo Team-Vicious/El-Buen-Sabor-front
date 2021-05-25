@@ -10,6 +10,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -96,6 +97,8 @@ export class NavbarComponent implements OnInit {
     }
 
     comprar(){
+
+      
       var pedido: Pedido = new Pedido();
       
 
@@ -124,8 +127,46 @@ export class NavbarComponent implements OnInit {
         pedido.detallePedido.push(detallepedido);
       });
 
-      //pasar y actualizar cliente con su pedido
-      this.usuario.cliente.pedido.push(pedido);
+      //alerta para confirmar
+      var totalPedido:number = 0;
+      Swal.fire({
+        title: '<strong><u>|CONFIRMAR PEDIDO|</u></strong>',
+        icon: 'info',
+        html:
+          `Su pedido contiene lo siguiente: 
+          <br> ${pedido.detallePedido.map(detalle => {
+                totalPedido += detalle.articuloManofacturado.precioVenta;
+                return '<br>'+detalle.articuloManofacturado.denominacion + '  $'+ detalle.articuloManofacturado.precioVenta;
+          })}
+          <br> ==[TOTAL]==: $${totalPedido}`,
+          showDenyButton: true,
+          confirmButtonText: `confirmar y pagar`,
+          denyButtonText: `cancelar pedido`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          //pasar y actualizar cliente con su pedido
+          this.usuario.cliente.pedido.push(pedido);
+
+          /*
+          //persistir pedido
+          this.usuarioService.editar(this.usuario).subscribe(usuario => {
+            //reducir stock de insumos
+
+
+            console.log("pedido realizado ",usuario.usuario)
+          });
+          */
+
+          Swal.fire('CONFIRMADO!', ' confirmado', 'success')
+        } else if (result.isDenied) {
+          Swal.fire('CANCELADO!', 'cancelado!', 'warning')
+        }
+      })
+
+      
+
+      
     }
     
     //pasar imagenes de bytes a img
