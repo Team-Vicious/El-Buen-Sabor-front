@@ -10,7 +10,7 @@ export class Cliente implements Base{
     telefono!: string;
     email!: string;
     domicilio!: Domicilio;
-    pedido!: Pedido[];
+    pedido: Pedido[] = [];
     fechaBaja!: Date;
 
 }
