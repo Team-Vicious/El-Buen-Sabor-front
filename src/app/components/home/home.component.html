@@ -57,12 +57,19 @@
                             routerLinkActive="active">
                             Agregar al carrito
                         </button>
+
+                        <button *ngIf="abierto" type="button" class="btn btn-success"
+                            (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)" routerLinkActive="active">
+                            Detalle
+                        </button>
                         <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>
 
+                        
                     </td>
 
                 </body>
 
+                
 
                 <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo">
 
@@ -99,6 +106,12 @@
                             (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">
                             Agregar al carrito
                         </button>
+
+                        <button *ngIf="abierto" type="button" class="btn btn-success"
+                            (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">
+                            Detalle
+                        </button>
+
                         <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>
 
                     </td>
