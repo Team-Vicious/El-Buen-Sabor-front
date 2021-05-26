@@ -23,6 +23,7 @@ export class MercadopagoComponent implements OnInit {
   }
 
   hola(texto: string){
+    //reducir stock de insumos
     alert(texto);
     console.log(texto);
   }
