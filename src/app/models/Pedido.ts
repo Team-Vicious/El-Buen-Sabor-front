@@ -7,10 +7,10 @@ import { MercadopagoDatos } from "./MercadopagoDatos";
 
 export class Pedido implements Base{
     id!: number;
-    fecha!: string;
+    fecha!: Date;
     numero!: number;
     estado!: number;
-    horaEstimadaFin!: string;
+    horaEstimadaFin!: Date;
     tipoEnvio!: number;
     total!: number;
     detallePedido: DetallePedido[] = [];

@@ -2,16 +2,18 @@
 <html lang="en">
 
 <script src="https://sdk.mercadopago.com/js/v2"></script>
+<script src="./app/components/home/mercadopago/mp.js"></script>
 <script>
     
-    function abrirCheckout(){
+    function abrirCheckout(idp){
+        
         const mp = new MercadoPago('APP_USR-26941b07-f466-4ecd-9d0a-d16fefa22623', {
             locale: 'es-AR'
         });
         
         const checkout = mp.checkout({
             preference: {
-                id: '736455939-7b77546b-fc99-47bf-98cf-b801e91f5d9a'
+                id: `${idp}`
             },
             autoOpen: true,
         });
