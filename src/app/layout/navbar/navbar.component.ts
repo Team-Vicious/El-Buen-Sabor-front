@@ -5,6 +5,7 @@ import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { Cliente } from 'src/app/models/Cliente';
 import { DetallePedido } from 'src/app/models/DetallePedido';
+import { Factura } from 'src/app/models/Factura';
 import { Pedido } from 'src/app/models/Pedido';
 import { Usuario } from 'src/app/models/usuario';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -127,10 +128,23 @@ export class NavbarComponent implements OnInit {
 
         //asigno detalle al pedido
         pedido.detallePedido.push(detallepedido);
+
+        
       });
+        
+      //asigno fecha
+      pedido.fecha = new Date();
+
+      //calcular tiempo estimado de preparado del pedido
+      pedido.horaEstimadaFin = new Date();
+
+      //asigno el domicilio
+      pedido.domicilio = this.usuario.cliente.domicilio;
+
+      //en el swalFire saco el total
+      var totalPedido:number = 0;
 
       //alerta para confirmar
-      var totalPedido:number = 0;
       Swal.fire({
         title: '<strong><u>|CONFIRMAR PEDIDO|</u></strong>',
         icon: 'info',
@@ -147,18 +161,46 @@ export class NavbarComponent implements OnInit {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+
+          //total pedido
+          pedido.total = totalPedido;
+
+          //creo la factura
+          var factura: Factura = new Factura();
+
+          //asigno fecha creacion factura
+          factura.fecha = new Date();
+
+          //asigno total a la factura
+          factura.totalVenta = pedido.total;
+
+          //asigno total costo a la factura
+          var totalCosto: number = 0;
+            //recorro detalle pedido(articulosManufacturados del pedido)
+            pedido.detallePedido.map(detallePedido => {
+              //recorro el detale del articulo Manufacturado
+              detallePedido.articuloManofacturado.articuloManofactudaroDetalle.map( detalleArticulo =>{
+                //acumulo el precio de los insumos del detalle del manufacturado
+                totalCosto += detalleArticulo.articuloInsumo.precioCompra;
+              });
+            });
+          factura.totalCosto = totalCosto;
+
+
           //pasar y actualizar cliente con su pedido
           this.usuario.cliente.pedido.push(pedido);
 
           /*
-          //persistir pedido
+          //persistir pedido a traves del usuario
           this.usuarioService.editar(this.usuario).subscribe(usuario => {
             //reducir stock de insumos
+            //obtener el ultimo pedido para obtener su id y pasarlo a mp
 
 
             console.log("pedido realizado ",usuario.usuario)
           });
           */
+          
           
 
           Swal.fire('CONFIRMADO!', ' confirmado', 'success');
