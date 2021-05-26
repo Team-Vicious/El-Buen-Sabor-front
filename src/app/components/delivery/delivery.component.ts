@@ -40,4 +40,14 @@ export class DeliveryComponent implements OnInit {
     this.location.back();
   }
 
+  tomarpedido(pedido: Pedido){
+    if(pedido.tipoEnvio===4){
+      let currentUrl = this.router.url;
+        pedido.tipoEnvio=5;
+        this.pedidoService.editar(pedido).subscribe(pedido => {
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate([currentUrl]);});
+        })
+      }}
+
 }
