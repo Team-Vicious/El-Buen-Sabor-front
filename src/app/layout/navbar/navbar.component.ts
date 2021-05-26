@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { asyncScheduler } from 'rxjs';
 import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
+import { ArticuloManofacturadoDetalle } from 'src/app/models/ArticuloManofacturadoDetalle';
 import { Cliente } from 'src/app/models/Cliente';
 import { DetallePedido } from 'src/app/models/DetallePedido';
 import { Factura } from 'src/app/models/Factura';
@@ -178,14 +179,18 @@ export class NavbarComponent implements OnInit {
           var totalCosto: number = 0;
             //recorro detalle pedido(articulosManufacturados del pedido)
             pedido.detallePedido.map(detallePedido => {
+
               //recorro el detale del articulo Manufacturado
-              detallePedido.articuloManofacturado.articuloManofactudaroDetalle.map( detalleArticulo =>{
+              detallePedido.articuloManofacturado.articuloManofacturadoDetalle.map( detalleArticulo =>{
+
                 //acumulo el precio de los insumos del detalle del manufacturado
                 totalCosto += detalleArticulo.articuloInsumo.precioCompra;
               });
             });
           factura.totalCosto = totalCosto;
 
+          //asigno la factura al pedido
+          pedido.factura = factura;
 
           //pasar y actualizar cliente con su pedido
           this.usuario.cliente.pedido.push(pedido);
@@ -193,18 +198,15 @@ export class NavbarComponent implements OnInit {
           /*
           //persistir pedido a traves del usuario
           this.usuarioService.editar(this.usuario).subscribe(usuario => {
-            //reducir stock de insumos
-            //obtener el ultimo pedido para obtener su id y pasarlo a mp
-
-
-            console.log("pedido realizado ",usuario.usuario)
+            
+            
           });
           */
           
           
 
-          Swal.fire('CONFIRMADO!', ' confirmado', 'success');
-          this.router.navigate(['/mercadopago/', this.usuario.id,'pedido']);
+         Swal.fire('CONFIRMADO!', ' confirmado', 'success');
+         this.router.navigate(['/mercadopago/', this.usuario.id,'pedido']);
         } else if (result.isDenied) {
           Swal.fire('CANCELADO!', 'cancelado!', 'warning')
         }
