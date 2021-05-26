@@ -9,10 +9,8 @@
         <tr>
             <td>
                 <div>
-                    <a href=''>
-                        (Imagen)
-
-                    </a>
+                    <img *ngIf="articulo.imagen" [src]="formatImage(articulo.imagen)"
+                                    class="img-thumbnail rounded" style="width: 250px; cursor:pointer;">
                 </div>
             </td>
 
