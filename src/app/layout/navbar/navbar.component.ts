@@ -192,6 +192,9 @@ export class NavbarComponent implements OnInit {
           //asigno la factura al pedido
           pedido.factura = factura;
 
+          //asigno el estado del pedido
+          pedido.estado = 0
+
           //pasar y actualizar cliente con su pedido
           this.usuario.cliente.pedido.push(pedido);
 
