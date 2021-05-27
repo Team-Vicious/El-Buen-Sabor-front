@@ -202,7 +202,11 @@ export class NavbarComponent implements OnInit {
           //persistir pedido a traves del usuario
           this.usuarioService.editar(this.usuario).subscribe(usuario => {
             
-            
+            //esto por el tema del numero del pedido y el auto incremente, entonces numero = pedido.id
+            usuario.cliente.pedido[usuario.cliente.pedido.length -1].numero =usuario.cliente.pedido.id
+            this.pedidoService.editar(usuario.cliente.pedido[usuario.cliente.pedido.length -1]).subscribe( ped =>{
+              console.log("pedido actualizado");
+            })
           });
           */
           
