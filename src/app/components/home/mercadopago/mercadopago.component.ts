@@ -50,9 +50,23 @@ export class MercadopagoComponent implements OnInit {
   mpCheckout(){
     //llamar a la api y que genere el preference id
     this.mercadopagoService.getMPDPreferenceId(this.usuarioId, this.pedido.id, this.pedido).subscribe(mp => {
+
       //asigno mpDatos al pedido y lo actualizo
       this.pedido.mercadopagoDatos = mp;
-      this.pedidoService.editar(this.pedido);
+
+      //asigno el tipo de envio (mp o contado en el local)
+      this.pedido.tipoEnvio = 1
+
+      //actualizo los datos del mp del pedido
+      this.pedido.mercadopagoDatos.fechaCreacion = new Date();
+      this.pedido.mercadopagoDatos.estado = "0";//0 sin pagar, 1 pagado, 2 pendiente
+      
+
+
+      //actualizo el pedido
+      this.pedidoService.editar(this.pedido).subscribe(pedido => {
+        console.log("pedido actualizado!");
+      });
 
       //ejecuto el check out de mp
       new abrirCheckout(this.pedido.mercadopagoDatos.preferenceId);
