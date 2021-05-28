@@ -198,10 +198,11 @@ export class NavbarComponent implements OnInit {
           //pasar y actualizar cliente con su pedido
           this.usuario.cliente.pedido.push(pedido);
 
+          //console.log(this.usuario.cliente.pedido);
           
           //persistir pedido a traves del usuario
           this.usuarioService.editar(this.usuario).subscribe(usuario => {
-            
+            /*
             //esto por el tema del numero del pedido y el auto incremente, entonces numero = pedido.id
             usuario.cliente.pedido[usuario.cliente.pedido.length -1].numero =usuario.cliente.pedido[usuario.cliente.pedido.length -1].id;
             this.pedidoService.editar(usuario.cliente.pedido[usuario.cliente.pedido.length -1]).subscribe( ped =>{
@@ -210,8 +211,11 @@ export class NavbarComponent implements OnInit {
               this.router.navigate(['/mercadopago/', this.usuario.id,'pedido']);
 
 
-            })
+            });
+            */
+            console.log(usuario);
           });
+          
           
           
           
