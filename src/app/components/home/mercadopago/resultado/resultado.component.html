@@ -4,17 +4,19 @@
     <div class="card m-4">
         <div class="card-body">
 
-            <div>
-                <title>Pago Exitoso! su pedido esta siendo preparado!</title>
+            <div *ngIf="resultado == 'exitoso'">
+                <h5>Pedido Exitoso! su pedido esta siendo preparado!</h5>
                 <button class="btn btn-info m-4 p-4" style="font-size: 2rem;" [routerLink]="['/historialPedidos',usuarioId]">OK</button>
             </div>
-            <div>
-                <title>Pago Pendiente!</title>
+
+            <div *ngIf="resultado == 'pendiente'">
+                <h3>Pago Pendiente!</h3>
                 <h5>Esperamos esperando su pago para poder empezar a preparar su pedido!</h5>
                 <button class="btn btn-info m-4 p-4" style="font-size: 2rem;" [routerLink]="['/historialPedidos',usuarioId]">OK</button>
             </div>
-            <div>
-                <title>Hubo un error en el pago!</title>
+
+            <div *ngIf="resultado == 'error'">
+                <h3>Hubo un error en el pago!</h3>
                 <h5>
                     Su pedido paso a su historial de pedido para que pueda volver a 
                     intentarlo o probrar otro metodo de pago
@@ -22,18 +24,6 @@
                 <button class="btn btn-info m-4 p-4" style="font-size: 2rem;" [routerLink]="['/historialPedidos',usuarioId]">OK</button>
             </div>
 
-            <title>Bienvenido!</title>
-            <h4>Elija su metodo de pago!</h4>
-            
-            <button class="btn btn-info m-4 p-4" style="font-size: 2rem;">
-                <i class="bi bi-cash-coin" style="font-size: 2rem;"></i>
-                MercadoPago
-            </button>
-
-            <button class="btn btn-warning m-4 p-4" style="font-size: 2rem;">
-                <i class="bi bi-wallet2" style="font-size: 2rem;"></i>
-                Contado Retiro en el Local
-            </button>
         </div>
     </div>
 </body>
