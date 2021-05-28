@@ -38,13 +38,39 @@ export class MercadopagoComponent implements OnInit {
     });
 
 
-    //this.id = "736455939-7b77546b-fc99-47bf-98cf-b801e91f5d9a";
   }
 
   hola(texto: string){
     //reducir stock de insumos
     alert(texto);
     console.log(texto);
+  }
+
+  metodoPagoContadoRetiroLocal(){
+
+    //10% de descuento en factura
+    this.pedido.factura.totalVenta= (this.pedido.factura.totalVenta* 0.90);
+
+    //10% de descuento en pedido
+    this.pedido.total = (this.pedido.factura.totalVenta* 0.90);
+
+    //asigno la forma de pago
+    this.pedido.factura.formaPago = "Contado";
+
+    //asigno el tipo de envio (mp o contado en el local)
+    this.pedido.tipoEnvio = 1;
+
+    
+    //persistir***********
+    //actualizo el pedido
+    this.pedidoService.editar(this.pedido).subscribe(pedido => {
+      console.log("pedido actualizado!");
+
+      //redirijo al componente resultado
+
+    });
+    
+   this.router.navigate(['/','exitoso', this.usuario.id,'pedido',this.pedido.id]);
   }
 
   mpCheckout(){
@@ -55,18 +81,23 @@ export class MercadopagoComponent implements OnInit {
       this.pedido.mercadopagoDatos = mp;
 
       //asigno el tipo de envio (mp o contado en el local)
-      this.pedido.tipoEnvio = 1
+      this.pedido.tipoEnvio = 2;
 
       //actualizo los datos del mp del pedido
       this.pedido.mercadopagoDatos.fechaCreacion = new Date();
       this.pedido.mercadopagoDatos.estado = "0";//0 sin pagar, 1 pagado, 2 pendiente
+
+      //asigno la forma de pago
+      this.pedido.factura.formaPago = "Mercado Pago";
       
 
-
+      
+      //persistir***********
       //actualizo el pedido
       this.pedidoService.editar(this.pedido).subscribe(pedido => {
         console.log("pedido actualizado!");
       });
+      
 
       //ejecuto el check out de mp
       new abrirCheckout(this.pedido.mercadopagoDatos.preferenceId);
