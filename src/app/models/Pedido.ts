@@ -1,4 +1,5 @@
 import { Base } from "./Base";
+import { Cliente } from "./Cliente";
 import { DetallePedido } from "./DetallePedido";
 import { Domicilio } from "./Domicilio";
 import { Factura } from "./Factura";
@@ -18,4 +19,5 @@ export class Pedido implements Base{
     mercadopagoDatos!: MercadopagoDatos;
     factura!: Factura;
     fechaBaja!: Date;
+    cliente!: Cliente;
 }
