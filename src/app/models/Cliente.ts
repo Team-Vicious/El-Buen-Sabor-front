@@ -4,7 +4,7 @@ import { Pedido } from "./Pedido";
 
 
 export class Cliente implements Base{
-    id!: number;
+    id!:number;
     nombre!: string;
     apellido!: string;
     telefono!: string;
