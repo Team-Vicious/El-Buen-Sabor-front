@@ -30,13 +30,18 @@ export class MercadopagoComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
+
+    
     this.usuarioService.ver(this.usuarioId).subscribe( usuario => {
       this.usuario = usuario;
 
       //obtengo el ultimo pedido del usuario(actual a pagar)
-      this.pedido = usuario.cliente.pedido[usuario.cliente.pedido.length -1];
+      //this.pedido = usuario.cliente.pedido[usuario.cliente.pedido.length -1];
+      this.pedidoService.getPedidosByClienteId(this.usuario.cliente.id).subscribe( pedidos => {
+       this.pedido = pedidos[pedidos.length -1];
+      })
     });
-
+    
 
   }
 
