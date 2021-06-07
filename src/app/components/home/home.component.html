@@ -3,18 +3,6 @@
 </app-navbar>
 
 
-<ul class="nav justify-content-center">
-
-
-    <li class="nav-item">
-        <a class="nav-link" href="http://localhost:5500/src/app/components/home/listaplatos.html">Platos</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="http://localhost:5500/src/app/components/home/listabebidas.html">Bebidas</a>
-    </li>
-
-</ul>
-
 <body class="container">
     <h5 *ngIf="abierto" style="color:orange;">{{labelHorario}}</h5>
     <h5 *ngIf="!abierto" style="color:orange;">{{labelHorario}}</h5>
@@ -111,7 +99,7 @@
                             (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">
                             Detalle
                         </button>
-
+                        
                         <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>
 
                     </td>

@@ -4,6 +4,7 @@ import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
   articulosInsumoNoEsInsumo: ArticuloInsumo[] = [];
   articuloInsumoCarrito: ArticuloInsumo[] = [];
   usuarioId!: number;
+  
 
   ngOnInit(): void {
     this.traerArticulos();
@@ -72,7 +74,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-
+  
   almacenarArticulosManofacturadosSeleccionados(idArtuculo: number) {
 
     this.articulosManofaturados.map(articulo => {
@@ -80,6 +82,8 @@ export class HomeComponent implements OnInit {
         this.articulosManofaturadosCarrito.push(articulo);
       }
     })
+
+
   }
 
   almacenarArticulosInsumoSeleccionados(idArtuculo: number) {
@@ -95,4 +99,6 @@ export class HomeComponent implements OnInit {
   formatImage(img: any): any {
     return 'data:image/jpeg;base64,' + img;
   }
+
+  
 }
