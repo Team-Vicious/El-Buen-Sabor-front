@@ -52,18 +52,25 @@ export class MercadopagoComponent implements OnInit {
   }
 
   metodoPagoContadoRetiroLocal(){
+  
+    //aplico el descuento a la factura
+    this.pedido.factura.montoDescuento = (this.pedido.factura.totalVenta -(this.pedido.factura.totalVenta* 0.90));
 
     //10% de descuento en factura
     this.pedido.factura.totalVenta= (this.pedido.factura.totalVenta* 0.90);
 
     //10% de descuento en pedido
-    this.pedido.total = (this.pedido.factura.totalVenta* 0.90);
+    this.pedido.total = this.pedido.factura.totalVenta;
 
     //asigno la forma de pago
     this.pedido.factura.formaPago = "Contado";
 
     //asigno el tipo de envio (mp o contado en el local)
     this.pedido.tipoEnvio = 1;
+
+    //asigno el numero del pedido
+    this.pedido.numero = this.pedido.id;
+    this.pedido.factura.numero = this.pedido.factura.id;
 
     
     //persistir***********
@@ -96,6 +103,9 @@ export class MercadopagoComponent implements OnInit {
       this.pedido.factura.formaPago = "Mercado Pago";
       
 
+      //asigno el numero del pedido
+      this.pedido.numero = this.pedido.id;
+      this.pedido.factura.numero = this.pedido.factura.id;
       
       //persistir***********
       //actualizo el pedido
