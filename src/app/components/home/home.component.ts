@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     //traer id del cliente para pasar al navbar
     this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
 
-    if(this.fechaActual.getHours() >= 0 && this.fechaActual.getHours() < 23){
+    if(this.fechaActual.getHours() >= 0 && this.fechaActual.getHours() < 25){
       this.abierto = true;
       this.labelHorario = "El local esta Abierto!",this.fechaActual.getTime();
       console.log("El local esta Abierto!",this.fechaActual.getHours());

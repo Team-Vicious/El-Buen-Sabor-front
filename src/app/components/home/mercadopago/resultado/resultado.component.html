@@ -1,0 +1,29 @@
+<app-navbar [usuarioId]="usuarioId"></app-navbar>
+
+<body>
+    <div class="card m-4">
+        <div class="card-body">
+
+            <div *ngIf="resultado == 'exitoso'">
+                <h5>Pedido Exitoso! su pedido esta siendo preparado!</h5>
+                <button class="btn btn-info m-4 p-4" style="font-size: 2rem;" [routerLink]="['/historialPedidos',usuarioId]">OK</button>
+            </div>
+
+            <div *ngIf="resultado == 'pendiente'">
+                <h3>Pago Pendiente!</h3>
+                <h5>Esperamos esperando su pago para poder empezar a preparar su pedido!</h5>
+                <button class="btn btn-info m-4 p-4" style="font-size: 2rem;" [routerLink]="['/historialPedidos',usuarioId]">OK</button>
+            </div>
+
+            <div *ngIf="resultado == 'error'">
+                <h3>Hubo un error en el pago!</h3>
+                <h5>
+                    Su pedido paso a su historial de pedido para que pueda volver a 
+                    intentarlo o probrar otro metodo de pago
+                </h5>
+                <button class="btn btn-info m-4 p-4" style="font-size: 2rem;" [routerLink]="['/historialPedidos',usuarioId]">OK</button>
+            </div>
+
+        </div>
+    </div>
+</body>

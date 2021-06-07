@@ -11,7 +11,7 @@ export class ArticuloManofacturado implements Base{
     precioVenta!: number;
     //fotoHashCode!: number;
     imagen!:number;
-    articuloManofactudaroDetalle:ArticuloManofacturadoDetalle[] = [];
+    articuloManofacturadoDetalle:ArticuloManofacturadoDetalle[] = [];
     rubroGeneral!: RubroGeneral;
     fechaBaja!: Date;
 }

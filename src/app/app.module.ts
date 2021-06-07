@@ -27,6 +27,8 @@ import { EntrantesComponent } from './components/cajero/entrantes.component';
 import { ListosComponent } from './components/cajero/listos.component';
 import { FacturaComponent } from './components/cajero/factura/factura.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
+import { MercadopagoComponent } from './components/home/mercadopago/mercadopago.component';
+import { ResultadoComponent } from './components/home/mercadopago/resultado/resultado.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,9 @@ import { DeliveryComponent } from './components/delivery/delivery.component';
     EntrantesComponent,
     ListosComponent,
     FacturaComponent,
-    DeliveryComponent
+    DeliveryComponent,
+    MercadopagoComponent,
+    ResultadoComponent
   ],
   imports: [
     BrowserModule,

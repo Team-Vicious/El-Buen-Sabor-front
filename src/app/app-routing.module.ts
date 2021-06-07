@@ -12,6 +12,8 @@ import { ManufacturadosComponent } from './components/cocinero/manufacturados.co
 import { PedidosComponent } from './components/cocinero/pedidos.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { HomeComponent } from './components/home/home.component';
+import { MercadopagoComponent } from './components/home/mercadopago/mercadopago.component';
+import { ResultadoComponent } from './components/home/mercadopago/resultado/resultado.component';
 import { LoginComponent } from './components/login/login.component';
 import { DomicilioFormComponent } from './components/register/domicilio-form/domicilio-form.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -41,9 +43,10 @@ const routes: Routes = [
   {path:'listos/:idu', component:ListosComponent},
   {path:':idu/factura/form', component:FacturaComponent},
   {path:'factura/form/:idf', component:FacturaComponent},
-  {path:'delivery/:idu', component:DeliveryComponent}
-
-
+  {path:'delivery/:idu', component:DeliveryComponent},
+  {path:'mercadopago/:idu/pedido', component:MercadopagoComponent},
+  {path:':resultado/:idu/pedido/:idp', component:ResultadoComponent}
+  
 ];
 
 @NgModule({
