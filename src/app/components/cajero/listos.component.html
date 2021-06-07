@@ -18,7 +18,7 @@
 
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                <body *ngFor="let pedido of Pedidos">
+                <a *ngFor="let pedido of Pedidos">
                     <a *ngIf="(pedido.estado)===(3) && (pedido.tipoEnvio)===(1) || (pedido.estado)===(3) && (pedido.tipoEnvio)===(2)">
                         <div class="card text-white bg-dark m-2 b-2">
                         <a *ngIf="asignarEstado(pedido)"></a>
@@ -54,7 +54,7 @@
                         </td>
                         </div>
                     </a>
-                </body>
+                </a>
             </div>
 
 
@@ -63,7 +63,7 @@
 
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                <body *ngFor="let pedido of Pedidos">
+                <a *ngFor="let pedido of Pedidos">
                     <a *ngIf="(pedido.tipoEnvio)===(3)">
                         <div class="card text-white bg-dark m-2 b-2">
                         <tr>
@@ -99,13 +99,13 @@
                         </td>
                         </div>
                     </a>
-                </body>
+                </a>
 
             </div>
 
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 
-                <body *ngFor="let pedido of Pedidos">
+                <a *ngFor="let pedido of Pedidos">
                     <a *ngIf="(pedido.tipoEnvio)===(4)">
                         <div class="card text-white bg-dark m-2 b-2">
                         <tr>
@@ -131,7 +131,7 @@
                     
                     </div>
                     </a>
-                </body>
+                </a>
 
 
             </div>

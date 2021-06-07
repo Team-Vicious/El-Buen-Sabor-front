@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-//import * as EventEmitter from 'events';
-//import { mercadopago } from 'mercadopago';
-//const mercadopago = require ('mercadopago');
-//const mercadopago = require ('mercadopago');
-//const mercadopago = require ('mercadopago');
+import { Pedido } from 'src/app/models/Pedido';
+import { Usuario } from 'src/app/models/usuario';
+import { MercadopagoDatosService } from 'src/app/services/mercadopagoDatos.service';
+import { PedidoService } from 'src/app/services/pedido.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
+
+declare var abrirCheckout: any;
 
 @Component({
   selector: 'app-mercadopago',
@@ -13,70 +15,98 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MercadopagoComponent implements OnInit {
 
-  //pid:string = "";
+  usuarioId: any;
+  usuario!: Usuario;
+  id!: string;
+  texto: string = "soy un texto";
+  pedido!: Pedido;
 
   constructor(
+    protected mercadopagoService: MercadopagoDatosService,
+    protected usuarioService: UsuarioService,
+    protected pedidoService: PedidoService,
     protected router: Router,
-    protected route: ActivatedRoute
-  ) { }
+    protected route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    //this.pid = this.route.snapshot.paramMap.get('pid')!;
+    this.usuarioId = +this.route.snapshot.paramMap.get('idu')!;
 
-    //this.abrirmp();
+    
+    this.usuarioService.ver(this.usuarioId).subscribe( usuario => {
+      this.usuario = usuario;
+
+      //obtengo el ultimo pedido del usuario(actual a pagar)
+      //this.pedido = usuario.cliente.pedido[usuario.cliente.pedido.length -1];
+      this.pedidoService.getPedidosByClienteId(this.usuario.cliente.id).subscribe( pedidos => {
+       this.pedido = pedidos[pedidos.length -1];
+      })
+    });
+    
+
   }
 
-  abrirmp(){
-    
-    // Agrega credenciales de SDK
-    // SDK de Mercado Pago
-    
-    // Agrega credenciales
-    
-    /*
-    const mp = new mercadopago('PUBLIC_KEY', {
-      locale: 'es-AR'
-    });
-
-    // Inicializa el checkout
-    mp.checkout({
-      preference: {
-          id: this.pid
-      },
-      render: {
-            container: '.cho-container', // Indica dónde se mostrará el botón de pago
-            label: 'Pagar', // Cambia el texto del botón de pago (opcional)
-      }
-    });
-    */
-
-    /*
-    let preference = {
-      back_urls: {
-        success: "https://localhost/MercadoPago/success.html",
-        failure: "https://localhost/MercadoPago/failure.html",
-        pending: "https://localhost/MercadoPago/pending.html"
-      },
-      auto_return: "approved",
-      external_reference: "1800",
-      items: [
-        {
-          title:'empanadas',
-          description: 'empanadas',
-          unit_price: parseFloat('500'),
-          quantity: 1,
-        }
-      ]
-    };
-    
-    mercadopago.preferences.create(preference)
-    .then(function(response){
-      console.log(response.body);
-      res.redirect(response.body.init_point);
-     
-    }).catch(function(error){
-      console.log(error);
-    });
-    */
+  hola(texto: string){
+    //reducir stock de insumos
+    alert(texto);
+    console.log(texto);
   }
+
+  metodoPagoContadoRetiroLocal(){
+
+    //10% de descuento en factura
+    this.pedido.factura.totalVenta= (this.pedido.factura.totalVenta* 0.90);
+
+    //10% de descuento en pedido
+    this.pedido.total = (this.pedido.factura.totalVenta* 0.90);
+
+    //asigno la forma de pago
+    this.pedido.factura.formaPago = "Contado";
+
+    //asigno el tipo de envio (mp o contado en el local)
+    this.pedido.tipoEnvio = 1;
+
+    
+    //persistir***********
+    //actualizo el pedido
+    this.pedidoService.editar(this.pedido).subscribe(pedido => {
+      console.log("pedido actualizado!");
+
+      //redirijo al componente resultado
+
+    });
+    
+   this.router.navigate(['/','exitoso', this.usuario.id,'pedido',this.pedido.id]);
+  }
+
+  mpCheckout(){
+    //llamar a la api y que genere el preference id
+    this.mercadopagoService.getMPDPreferenceId(this.usuarioId, this.pedido.id, this.pedido).subscribe(mp => {
+
+      //asigno mpDatos al pedido y lo actualizo
+      this.pedido.mercadopagoDatos = mp;
+
+      //asigno el tipo de envio (mp o contado en el local)
+      this.pedido.tipoEnvio = 2;
+
+      //actualizo los datos del mp del pedido
+      this.pedido.mercadopagoDatos.fechaCreacion = new Date();
+      this.pedido.mercadopagoDatos.estado = "0";//0 sin pagar, 1 pagado, 2 pendiente
+
+      //asigno la forma de pago
+      this.pedido.factura.formaPago = "Mercado Pago";
+      
+
+      
+      //persistir***********
+      //actualizo el pedido
+      this.pedidoService.editar(this.pedido).subscribe(pedido => {
+        console.log("pedido actualizado!");
+      });
+      
+
+      //ejecuto el check out de mp
+      new abrirCheckout(this.pedido.mercadopagoDatos.preferenceId);
+    });
+  }
+
 }

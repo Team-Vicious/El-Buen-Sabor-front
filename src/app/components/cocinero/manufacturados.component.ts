@@ -70,4 +70,9 @@ export class ManufacturadosComponent implements OnInit {
       
       });
     }
+    
+  //pasar imagenes de bytes a img
+  formatImage(img: any): any {
+    return 'data:image/jpeg;base64,' + img;
+  }  
 }

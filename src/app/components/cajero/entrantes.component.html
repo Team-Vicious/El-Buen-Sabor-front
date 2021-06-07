@@ -17,7 +17,7 @@
     <button backButton class="btn btn-danger" (click)="volver()" style="float: right">volver</button>
 
     <div class="card text-dark bg-white m-2 b-2"> Pedidos:
-    <body *ngFor="let pedido of Pedidos">
+    <a *ngFor="let pedido of Pedidos">
         <a *ngIf="(pedido.estado)===(mostrar)">
           <a *ngIf="asignarEstado(pedido)"></a>
           <div class="card text-white bg-dark m-2 b-2">
@@ -115,7 +115,7 @@
           </a>
         </div>
         </a>
-      </body>
+      </a>
     </div>
 
 </div>
