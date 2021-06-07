@@ -111,12 +111,13 @@ export class NavbarComponent implements OnInit {
 
       //detalles para articulos manofacturados
       this.articulosManofaturadosCarrito.map(articulo =>{
-        var countCantidad = 1;
+        //var countCantidad = 1;
 
-        //creo un dealle por cada articulo para asignarle el articulo al detalle
+        //creo un detalle por cada articulo para asignarle el articulo al detalle
         var detallepedido:DetallePedido = new DetallePedido();
         detallepedido.articuloManofacturado = articulo;
 
+        /*
         //recorro los articulo para ver si se repiten y aumentar la cantidad
         this.articulosManofaturadosCarrito.forEach(articuloAux =>{
           if (articulo.id == articuloAux.id) {
@@ -126,16 +127,16 @@ export class NavbarComponent implements OnInit {
 
         //asigno cantidad
         detallepedido.cantidad = countCantidad;
+        */
+        detallepedido.cantidad = 1;
 
         //total precio detalle
-        detallepedido.subtotal= articulo.precioVenta;
+        detallepedido.subTotal= articulo.precioVenta;
 
         //asigno detalle al pedido
         pedido.detallePedido.push(detallepedido);
 
-        //asignar ped al detalle
-
-        
+    
       });
         
       //asigno fecha
@@ -187,7 +188,9 @@ export class NavbarComponent implements OnInit {
 
               //creo detalle de la factura y se los asigno
               var detalleFactura: DetalleFactura = new DetalleFactura();
-              detalleFactura = detallePedido;
+              detalleFactura.articuloManofacturado = detallePedido.articuloManofacturado;
+              detalleFactura.cantidad = detallePedido.cantidad;
+              detalleFactura.subTotal = detallePedido.subTotal;
               factura.detalleFactura.push(detalleFactura);
 
               //recorro el detale del articulo Manufacturado
