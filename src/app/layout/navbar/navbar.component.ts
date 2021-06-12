@@ -197,7 +197,7 @@ export class NavbarComponent implements OnInit {
               detallePedido.articuloManofacturado.articuloManofacturadoDetalle.map( detalleArticulo =>{
 
                 //acumulo el precio de los insumos del detalle del manufacturado
-                totalCosto += detalleArticulo.articuloInsumo.precioCompra;
+                totalCosto += ((detalleArticulo.articuloInsumo.precioCompra)*detalleArticulo.cantidad);
               });
             });
           factura.totalCosto = totalCosto;
