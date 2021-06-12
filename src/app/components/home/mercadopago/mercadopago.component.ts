@@ -62,6 +62,17 @@ export class MercadopagoComponent implements OnInit {
     //10% de descuento en pedido
     this.pedido.total = this.pedido.factura.totalVenta;
 
+    //10% de descuento al detalle pedido
+    this.pedido.detallePedido.map(detallePedido => {
+      detallePedido.subTotal = (detallePedido.articuloManofacturado.precioVenta * 0.90);
+      
+    });
+    
+    //10% de descuento al detalle factura
+    this.pedido.factura.detalleFactura.map(detalleFactura =>{
+      detalleFactura.subTotal = (detalleFactura.articuloManofacturado.precioVenta * 0.90);
+    });
+
     //asigno la forma de pago
     this.pedido.factura.formaPago = "Contado";
 
