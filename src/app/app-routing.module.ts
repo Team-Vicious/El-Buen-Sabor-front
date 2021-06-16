@@ -46,6 +46,7 @@ const routes: Routes = [
   {path:'delivery/:idu', component:DeliveryComponent},
   {path:'mercadopago/:idu/pedido', component:MercadopagoComponent},
   {path:':resultado/:idu/pedido/:idp', component:ResultadoComponent}
+
   
 ];
 

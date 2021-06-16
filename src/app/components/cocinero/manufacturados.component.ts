@@ -19,6 +19,8 @@ export class ManufacturadosComponent implements OnInit {
   manufacturado: ArticuloManofacturado = new ArticuloManofacturado();
   error: any;
   usuarioId:any;
+
+  filterPost!: '';
   
   constructor(
     private service: ArticuloManofacturadoService,
