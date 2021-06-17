@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BASE_ENDPOINT } from '../config/app';
 import { Pedido } from '../models/Pedido';
-import { Usuario } from '../models/usuario';
 import { CommonService } from './common.service';
 
 @Injectable({
