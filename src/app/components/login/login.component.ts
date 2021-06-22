@@ -35,49 +35,41 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe(data => {
       this.userLogged = data;
       this.isLogged = (this.userLogged != null);
-    })
+    });
+    console.log(CryptoJS.AES.encrypt('123', 'teamvicious'));
   }
 
-  //validar rol
+  //loguar y validar rol
   login() {
-    //const hashcode = CryptoJS.MD5(CryptoJS.enc.Latin1.parse("aaa")).toString();
-    //var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Latin1.parse("aaa"), "Secret Passphrase").toString();
-    //var encrypted = CryptoJS.AES.encrypt("aaaa", "Secret Passphrase");
-    //var encrypted = CryptoJS.DES.encrypt("aaa", "Ss").toString();
-    //console.log(encrypted);
-    // convert String to WordArray
-    //var wordArray = CryptoJS.enc.Utf8.parse('Hello, World!').toString();
-
-    // convert WordArray To String
-    //var result1=wordArray.toString(CryptoJS.enc.Utf8);
-    //var result2=CryptoJS.enc.Utf8.stringify(wordArray);
-
-    //console.log(CryptoJS.enc.Utf8.stringify(hashcode));
-    //console.log(result1);
-    //console.log(result2);
-    //console.log(result1===result2);
-      
-      this.service.validarUser(this.user, this.clave).subscribe(user => {
+    
+      this.service.validarUserMail(this.user).subscribe(user => {
         try {
           this.usuario = user;
+          var bytes  = CryptoJS.AES.decrypt(user.clave, 'teamvicious');
           
-          if (this.usuario.rol == "admin") {
+          var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+          if(originalText == this.clave){
+            
+            
+            if (this.usuario.rol == "admin") {
             this.router.navigate(['/admin/', this.usuario.id]);
-          }
-          if (this.usuario.rol == "cocinero") {
-            this.router.navigate(['/cocinero/', this.usuario.id]);
-          }
-          if (this.usuario.rol == "cajero") {
-            this.router.navigate(['/cajero/', this.usuario.id]);
-          }
-          if (this.usuario.rol == "user") {
-            this.router.navigate(['/home/', this.usuario.id]);
-          }
-          if (this.usuario.rol == "userg") {
-            this.router.navigate(['/home/', this.usuario.id]);
-          }
-          if (this.usuario.rol == "delivery") {
-            this.router.navigate(['/delivery/', this.usuario.id]);
+            }
+            if (this.usuario.rol == "cocinero") {
+              this.router.navigate(['/cocinero/', this.usuario.id]);
+            }
+            if (this.usuario.rol == "cajero") {
+              this.router.navigate(['/cajero/', this.usuario.id]);
+            }
+            if (this.usuario.rol == "user") {
+              this.router.navigate(['/home/', this.usuario.id]);
+            }
+            if (this.usuario.rol == "userg") {
+              this.router.navigate(['/home/', this.usuario.id]);
+            }
+            if (this.usuario.rol == "delivery") {
+              this.router.navigate(['/delivery/', this.usuario.id]);
+            }
           }
         } catch (error) {
           Swal.fire('INCORRECTO!','usuario o contraseña incorrectos! <br> Si no esta registrado, por favor registrese!','error');
@@ -85,8 +77,7 @@ export class LoginComponent implements OnInit {
       }, err => {
         console.log(err)
         
-    });
-    
+      });
 
   }
 

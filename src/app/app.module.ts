@@ -29,6 +29,10 @@ import { FacturaComponent } from './components/cajero/factura/factura.component'
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { MercadopagoComponent } from './components/home/mercadopago/mercadopago.component';
 import { ResultadoComponent } from './components/home/mercadopago/resultado/resultado.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from '@angular/material/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,12 +60,10 @@ import { ResultadoComponent } from './components/home/mercadopago/resultado/resu
     LayoutModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    LayoutModule,
-    HttpClientModule,
     FormsModule,
     SocialLoginModule,
     NgxBootstrapIconsModule.pick(allIcons)
+    
   ],
   providers: [
     {

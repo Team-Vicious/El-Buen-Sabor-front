@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
+import { Reporte } from 'src/app/models/Reporte';
 import { Usuario } from 'src/app/models/usuario';
 import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+import {FormGroup, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -16,6 +18,11 @@ import Swal from 'sweetalert2';
 export class AdminComponent implements OnInit {
 
   adminId!:number;
+  reporte: Reporte = new Reporte();
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
 
   constructor(
     private usuarioService: UsuarioService,
@@ -120,6 +127,64 @@ export class AdminComponent implements OnInit {
   //pasar imagenes de bytes a img
   formatImage(img: any): any {
     return 'data:image/jpeg;base64,' + img;
+  }
+
+  
+
+  tipoReporte:number = 0;
+  opcion:string = ""
+  setTipoReporte(tipo:number){
+    this.tipoReporte = tipo;
+    if(this.tipoReporte == 1){
+      this.opcion = "Mejor cliente"; 
+    }
+    if(this.tipoReporte == 2){
+      this.opcion = "Mejor Articulo Manufacturado";
+    }
+    if(this.tipoReporte == 3){
+      this.opcion = "Ingresos";
+    }
+    if(this.tipoReporte == 4){
+      this.opcion = "Ganancias";
+    }
+    
+  }
+  generarReporte(){
+    
+
+    if(this.tipoReporte == 1){
+      //consulta
+      Swal.fire('Reporte',`'Reporte Generado'${this.reporte.fechaInicio},${this.reporte.fechaDestino}`,'success');
+    }
+    if(this.tipoReporte == 2){
+      //consulta
+      Swal.fire('Reporte',`'Reporte Generado'${this.reporte.fechaInicio},${this.reporte.fechaDestino}`,'success');
+    }
+    if(this.tipoReporte == 3){
+      //consulta
+      Swal.fire('Reporte',`'Reporte Generado'${this.reporte.fechaInicio},${this.reporte.fechaDestino}`,'success');
+    }
+    if(this.tipoReporte == 4){
+      //consulta
+      Swal.fire('Reporte',`'Reporte Generado'${this.reporte.fechaInicio},${this.reporte.fechaDestino}`,'success');
+    }
+    //consulta
+        /*
+        return fetch(`//api.github.com/users/${login}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(response.statusText)
+            }
+            return response.json()
+          })
+          .catch(error => {
+            Swal.showValidationMessage(
+              `Request failed: ${error}`
+            )
+          })
+          */
+
+    
   }
 
 }
