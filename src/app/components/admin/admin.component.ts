@@ -9,6 +9,7 @@ import { ArticuloManofacturadoService } from 'src/app/services/articuloManofactu
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 import {FormGroup, FormControl} from '@angular/forms';
+import { ReporteService } from 'src/app/services/reporte.service';
 
 @Component({
   selector: 'app-admin',
@@ -25,6 +26,7 @@ export class AdminComponent implements OnInit {
   });
 
   constructor(
+    private reporteService: ReporteService,
     private usuarioService: UsuarioService,
     private articuloManofacturadoService: ArticuloManofacturadoService,
     private articuloInsumoService: ArticuloInsumoService,
@@ -151,39 +153,34 @@ export class AdminComponent implements OnInit {
   }
   generarReporte(){
     
-
     if(this.tipoReporte == 1){
       //consulta
-      Swal.fire('Reporte',`'Reporte Generado'${this.reporte.fechaInicio},${this.reporte.fechaDestino}`,'success');
+      this.reporteService.generarReportePedidosUsuario(this.reporte).subscribe(reporte =>{
+
+        Swal.fire('Reporte',`Reporte Generado <br>| Cantidad de pedidos por usuario |`,'success');
+      })
     }
     if(this.tipoReporte == 2){
       //consulta
-      Swal.fire('Reporte',`'Reporte Generado'${this.reporte.fechaInicio},${this.reporte.fechaDestino}`,'success');
+      this.reporteService.generarReporteRankingArticulosManufacturados(this.reporte).subscribe(reporte =>{
+
+        Swal.fire('Reporte',`Reporte Generado <br>| Ranking de Articulos Manufacturados mas pedidos |`,'success');
+      })
     }
     if(this.tipoReporte == 3){
       //consulta
-      Swal.fire('Reporte',`'Reporte Generado'${this.reporte.fechaInicio},${this.reporte.fechaDestino}`,'success');
+      this.reporteService.generarReporteIngresos(this.reporte).subscribe(reporte =>{
+
+        Swal.fire('Reporte',`'Reporte Generado <br>| Ingresos |`,'success');
+      })
     }
     if(this.tipoReporte == 4){
       //consulta
-      Swal.fire('Reporte',`'Reporte Generado'${this.reporte.fechaInicio},${this.reporte.fechaDestino}`,'success');
-    }
-    //consulta
-        /*
-        return fetch(`//api.github.com/users/${login}`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(response.statusText)
-            }
-            return response.json()
-          })
-          .catch(error => {
-            Swal.showValidationMessage(
-              `Request failed: ${error}`
-            )
-          })
-          */
+      this.reporteService.generarReporteGanancias(this.reporte).subscribe(reporte =>{
 
+        Swal.fire('Reporte',`Reporte Generado <br>| Ganancias |`,'success');
+      })
+    }
     
   }
 
