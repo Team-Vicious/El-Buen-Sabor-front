@@ -10,6 +10,7 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import { DetalleFactura } from 'src/app/models/DetalleFactura';
 import { Factura } from 'src/app/models/Factura';
 import { FacturaService } from 'src/app/services/factura.service';
+
 //import pdfFonts from 'pdfmake/build/vfs_fonts';
 //import pdfMake from "pdfmake/build/pdfmake";
 //var pdfMake = require('pdfmake/build/pdfmake.js');
@@ -62,6 +63,8 @@ export class HistorialPedidosComponent implements OnInit {
       const documentDefinition = this.getDocumentDefinition(pedido);
       pdfMake.createPdf(documentDefinition).open();
   }
+
+  
 
   getDocumentDefinition(pedido: Pedido) {
 

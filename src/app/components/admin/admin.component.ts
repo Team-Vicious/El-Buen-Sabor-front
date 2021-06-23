@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { Reporte } from 'src/app/models/Reporte';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/Usuario';
 import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -152,28 +152,28 @@ export class AdminComponent implements OnInit {
     
     if(this.tipoReporte == 1){
       //consulta
-      this.reporteService.generarReportePedidosUsuario(this.reporte).subscribe((reporte:string) =>{
+      this.reporteService.generarReportePedidosUsuario(this.reporte).subscribe(() =>{
 
         Swal.fire('Reporte',`Reporte Generado <br>| Cantidad de pedidos por usuario |`,'success');
       })
     }
     if(this.tipoReporte == 2){
       //consulta
-      this.reporteService.generarReporteRankingArticulosManufacturados(this.reporte).subscribe((reporte:string) =>{
+      this.reporteService.generarReporteRankingArticulosManufacturados(this.reporte).subscribe(() =>{
 
         Swal.fire('Reporte',`Reporte Generado <br>| Ranking de Articulos Manufacturados mas pedidos |`,'success');
       })
     }
     if(this.tipoReporte == 3){
       //consulta
-      this.reporteService.generarReporteIngresos(this.reporte).subscribe((reporte:string) =>{
+      this.reporteService.generarReporteIngresos(this.reporte).subscribe(() =>{
 
-        Swal.fire('Reporte',`'Reporte Generado <br>| Ingresos |`,'success');
+        Swal.fire('Reporte',`Reporte Generado <br>| Ingresos |`,'success');
       })
     }
     if(this.tipoReporte == 4){
       //consulta
-      this.reporteService.generarReporteGanancias(this.reporte).subscribe((reporte:string) =>{
+      this.reporteService.generarReporteGanancias(this.reporte).subscribe(() =>{
 
         Swal.fire('Reporte',`Reporte Generado <br>| Ganancias |`,'success');
       })
