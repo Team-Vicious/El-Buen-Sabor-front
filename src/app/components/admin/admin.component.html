@@ -4,6 +4,8 @@
 
 
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+
+
     <li class="nav-item dropdown p-3 b-5 m-3">
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#000000d3;">
             articulos
@@ -16,6 +18,7 @@
         </ul>
     </li>
 
+    
     <li class="nav-item dropdown p-3 b-5 m-3">
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#000000d3;">
             usuarios
@@ -32,10 +35,59 @@
     <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos()">Listar Articulos insumo</button>
     
 </nav>
-
-
+<div class="card text-white bg-secondary mb-3 " >
+    
 
     
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    REPORTES
+</button>
+        <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="color: black;">REPORTES EXCEL</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              TIPO REPORTE {{opcion}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" (click)="setTipoReporte(1)">Mejor Cliente</a></li>
+              <li><a class="dropdown-item" (click)="setTipoReporte(2)">Mejor Articulo Manufacturado</a></li>
+              <li><a class="dropdown-item" (click)="setTipoReporte(3)">Ingresos</a></li>
+              <li><a class="dropdown-item" (click)="setTipoReporte(4)">Ganancias</a></li>
+            </ul>
+        </div>
+        <div class="modal-body">
+            <div>
+                <a>Fecha Desde</a>
+                <input type="datetime-local"
+                [(ngModel)]="reporte.fechaInicio">
+            </div>
+            
+            <div>
+                <a>Fecha Hasta</a>
+                <input type="datetime-local"
+                [(ngModel)]="reporte.fechaDestino">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="generarReporte()">GENERAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+          
+  </div>
+          
+
+
+
+
         <body *ngIf="listarUsuario">
 
             <form class="d-flex" style="margin: 10px;">
@@ -186,4 +238,4 @@
 
             </body>
         </body>
-
+        

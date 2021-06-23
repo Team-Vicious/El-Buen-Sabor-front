@@ -23,4 +23,10 @@ export class UsuarioService extends CommonService<Usuario>{
     {headers: this.cabeceras});
   }
 
+  validarUserMail(usuario:string): Observable<Usuario>{
+
+    return this.http.get<Usuario>(`${this.baseEndPoint}/login/${usuario}`,
+    
+    {headers: this.cabeceras});
+  }
 }
