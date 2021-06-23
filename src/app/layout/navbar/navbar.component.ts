@@ -9,7 +9,7 @@ import { DetalleFactura } from 'src/app/models/DetalleFactura';
 import { DetallePedido } from 'src/app/models/DetallePedido';
 import { Factura } from 'src/app/models/Factura';
 import { Pedido } from 'src/app/models/Pedido';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/Usuario';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { DetallePedidoService } from 'src/app/services/detallePedido.service';
 import { PedidoService } from 'src/app/services/pedido.service';

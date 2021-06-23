@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/models/Cliente';
 import { Domicilio } from 'src/app/models/Domicilio';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/Usuario';
 import { DomicilioService } from 'src/app/services/domicilio.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';

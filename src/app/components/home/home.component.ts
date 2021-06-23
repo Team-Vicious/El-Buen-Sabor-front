@@ -5,6 +5,7 @@ import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -29,6 +30,8 @@ export class HomeComponent implements OnInit {
   articulosInsumoNoEsInsumo: ArticuloInsumo[] = [];
   articuloInsumoCarrito: ArticuloInsumo[] = [];
   usuarioId!: number;
+
+  filterPost!: '';
 
   ngOnInit(): void {
     this.traerArticulos();

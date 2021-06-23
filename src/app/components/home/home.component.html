@@ -1,14 +1,18 @@
 <app-navbar [usuarioId]="usuarioId" [articulosManofaturadosCarrito]="articulosManofaturadosCarrito"
-    [articuloInsumoCarrito]="articuloInsumoCarrito">
+    [articuloInsumoCarrito]="articuloInsumoCarrito">    
 </app-navbar>
+
+<form class="d-flex" style="float: right;">
+    <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar artículo" aria-label="Search"  [(ngModel)]="
+    filterPost" style=" width: 220px;">
+  </form>
 
 
 <ul class="nav justify-content-center">
-
-
 </ul>
 
 <body class="container">
+
     <h5 *ngIf="abierto" style="color:orange;">{{labelHorario}}</h5>
     <h5 *ngIf="!abierto" style="color:orange;">{{labelHorario}}</h5>
 
@@ -17,7 +21,7 @@
         <tbody>
             <div class="row">
 
-                <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo of articulosManofaturados">
+                <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo of articulosManofaturados | filter:filterPost">
 
                     <tr>
                         <td>
@@ -57,7 +61,7 @@
                 </body>
 
 
-                <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo">
+                <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo | filter:filterPost">
 
                     <tr>
                         <td>

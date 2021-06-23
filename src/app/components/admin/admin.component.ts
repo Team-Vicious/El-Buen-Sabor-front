@@ -8,7 +8,6 @@ import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
-import {FormGroup, FormControl} from '@angular/forms';
 import { ReporteService } from 'src/app/services/reporte.service';
 
 @Component({
@@ -19,11 +18,9 @@ import { ReporteService } from 'src/app/services/reporte.service';
 export class AdminComponent implements OnInit {
 
   adminId!:number;
+
   reporte: Reporte = new Reporte();
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+  filterPost!: '';
 
   constructor(
     private reporteService: ReporteService,
@@ -155,28 +152,28 @@ export class AdminComponent implements OnInit {
     
     if(this.tipoReporte == 1){
       //consulta
-      this.reporteService.generarReportePedidosUsuario(this.reporte).subscribe(reporte =>{
+      this.reporteService.generarReportePedidosUsuario(this.reporte).subscribe((reporte:string) =>{
 
         Swal.fire('Reporte',`Reporte Generado <br>| Cantidad de pedidos por usuario |`,'success');
       })
     }
     if(this.tipoReporte == 2){
       //consulta
-      this.reporteService.generarReporteRankingArticulosManufacturados(this.reporte).subscribe(reporte =>{
+      this.reporteService.generarReporteRankingArticulosManufacturados(this.reporte).subscribe((reporte:string) =>{
 
         Swal.fire('Reporte',`Reporte Generado <br>| Ranking de Articulos Manufacturados mas pedidos |`,'success');
       })
     }
     if(this.tipoReporte == 3){
       //consulta
-      this.reporteService.generarReporteIngresos(this.reporte).subscribe(reporte =>{
+      this.reporteService.generarReporteIngresos(this.reporte).subscribe((reporte:string) =>{
 
         Swal.fire('Reporte',`'Reporte Generado <br>| Ingresos |`,'success');
       })
     }
     if(this.tipoReporte == 4){
       //consulta
-      this.reporteService.generarReporteGanancias(this.reporte).subscribe(reporte =>{
+      this.reporteService.generarReporteGanancias(this.reporte).subscribe((reporte:string) =>{
 
         Swal.fire('Reporte',`Reporte Generado <br>| Ganancias |`,'success');
       })
