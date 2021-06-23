@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidosComponent } from 'src/app/components/cocinero/pedidos.component';
 import { Pedido } from 'src/app/models/Pedido';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/Usuario';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';

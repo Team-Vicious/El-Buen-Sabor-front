@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/Usuario';
 import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -16,7 +16,8 @@ import Swal from 'sweetalert2';
 export class AdminComponent implements OnInit {
 
   adminId!:number;
-
+  filterPost!: '';
+  
   constructor(
     private usuarioService: UsuarioService,
     private articuloManofacturadoService: ArticuloManofacturadoService,

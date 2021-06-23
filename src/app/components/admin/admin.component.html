@@ -2,6 +2,7 @@
 
 <app-navbar [adminId]="adminId"></app-navbar>
 
+
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <li class="nav-item dropdown p-3 b-5 m-3">
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#000000d3;">
@@ -29,7 +30,7 @@
     <button type="button" class="btn btn-secondary" (click)="listarArticuloManofacturados()">Listar Articulos
         Manofacturados</button>
     <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos()">Listar Articulos insumo</button>
-
+    
 </nav>
 
 
@@ -37,7 +38,12 @@
     
         <body *ngIf="listarUsuario">
 
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let usuario of usuarios">
+            <form class="d-flex" style="margin: 10px;">
+                <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar usuario" aria-label="Search"  [(ngModel)]="
+                filterPost" style=" width: 220px;">
+            </form>
+
+            <body class="card text-white bg-dark m-2 b-2" *ngFor="let usuario of usuarios | filterUsuario:filterPost">
 
                 <tr>
                     <td>
@@ -68,7 +74,12 @@
 
         <body *ngIf="listarArticuloManofacturado">
 
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado">
+            <form class="d-flex" style="margin: 10px;">
+                <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar manufacturado" aria-label="Search"  [(ngModel)]="
+                filterPost" style=" width: 220px;">
+            </form>
+
+            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado | filter:filterPost">
 
                 <tr>
                     <td>
@@ -109,7 +120,12 @@
 
         <body *ngIf="listarArticuloInsumo">
 
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloInsumo">
+            <form class="d-flex" style="margin: 10px;">
+                <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar insumo" aria-label="Search"  [(ngModel)]="
+                filterPost" style=" width: 220px;">
+            </form>
+
+            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloInsumo | filterInsumo:filterPost">
 
                 <tr>
                     <td>

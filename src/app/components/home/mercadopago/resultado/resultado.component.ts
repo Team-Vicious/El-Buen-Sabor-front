@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pedido } from 'src/app/models/Pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Component({
   selector: 'app-resultado',

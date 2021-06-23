@@ -4,7 +4,12 @@
 
 <button backButton class="btn btn-danger" (click)="volver()" style="float: right">volver</button>
 
-    <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado">
+<form class="d-flex" style="float: right;">
+    <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar artículo" aria-label="Search"  [(ngModel)]="
+    filterPost" style=" width: 220px;">
+  </form>
+
+    <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado | filter:filterPost">
 
         <tr>
             <td>

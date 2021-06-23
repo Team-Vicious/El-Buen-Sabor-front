@@ -29,6 +29,10 @@ import { FacturaComponent } from './components/cajero/factura/factura.component'
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { MercadopagoComponent } from './components/home/mercadopago/mercadopago.component';
 import { ResultadoComponent } from './components/home/mercadopago/resultado/resultado.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { FilterPipeUsuario } from './pipes/filterUsuario.pipe';
+import { FilterPipeInsumo } from './pipes/filterInsumo.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +52,10 @@ import { ResultadoComponent } from './components/home/mercadopago/resultado/resu
     FacturaComponent,
     DeliveryComponent,
     MercadopagoComponent,
-    ResultadoComponent
+    ResultadoComponent,
+    FilterPipe,
+    FilterPipeUsuario,
+    FilterPipeInsumo
   ],
   imports: [
     BrowserModule,

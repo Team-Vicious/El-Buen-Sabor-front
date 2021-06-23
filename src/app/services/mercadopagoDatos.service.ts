@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { BASE_ENDPOINT } from '../config/app';
 import { MercadopagoDatos } from '../models/MercadopagoDatos';
 import { Pedido } from '../models/Pedido';
-import { Usuario } from '../models/usuario';
 import { CommonService } from './common.service';
 
 @Injectable({
