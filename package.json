@@ -33,6 +33,7 @@
     "jquery": "^3.6.0",
     "mercadopago": "^1.5.7",
     "ngx-bootstrap-icons": "^1.4.6",
+    "nodemailer": "^6.6.2",
     "pdfmake": "^0.1.71",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
