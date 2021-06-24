@@ -35,7 +35,10 @@ export class ResultadoComponent implements OnInit {
       
       //actualiar el tipo de pago
       this.tipoPago();
+
+      
     });
+    
   }
 
   tipoPago(){

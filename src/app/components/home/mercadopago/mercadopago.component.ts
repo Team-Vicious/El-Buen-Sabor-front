@@ -91,6 +91,11 @@ export class MercadopagoComponent implements OnInit {
 
       //redirijo al componente resultado
 
+      //enviar mail
+      this.pedidoService.postEmail(pedido).subscribe(ped =>{
+        console.log(ped);
+      });
+
     });
     
    this.router.navigate(['/','exitoso', this.usuario.id,'pedido',this.pedido.id]);
