@@ -60,8 +60,13 @@ export class HistorialPedidosComponent implements OnInit {
   //generar factura pdf
   factura!: Factura;
   generatePdf(pedido: Pedido){
+      var auxPedido = new Pedido();
+      
       const documentDefinition = this.getDocumentDefinition(pedido);
       pdfMake.createPdf(documentDefinition).open();
+      this.pedidoService.postEmail(pedido).subscribe(ped =>{
+        console.log(ped);
+      });
   }
 
   

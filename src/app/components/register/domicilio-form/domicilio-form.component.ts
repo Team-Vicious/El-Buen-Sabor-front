@@ -15,7 +15,7 @@ export class DomicilioFormComponent implements OnInit {
 
   usuarioId!:number;
   usuario!: Usuario;
-  //cliente: Cliente = new Cliente();
+  cliente: Cliente = new Cliente();
   domicilio: Domicilio = new Domicilio();
   
 
@@ -33,15 +33,19 @@ export class DomicilioFormComponent implements OnInit {
     if (this.usuarioId) {
       this.usuarioService.ver(+this.usuarioId).subscribe( usuario =>{
         this.usuario = usuario;
-        //this.cliente = this.usuario.cliente;
-        //this.domicilio = this.usuario.cliente.domicilio;
+
+        if(usuario.cliente.domicilio){
+
+          //this.domicilio = this.usuario.cliente.domicilio;
+          
+          
+          //traer el domicilio
+          this.domicilioService.findDomicilioPorClienteId(this.usuario.cliente.id).subscribe( domicilio =>{
+            this.domicilio = domicilio;
+            this.usuario.cliente.domicilio = this.domicilio;
+          });
+        }
         
-        //traer el domicilio
-        
-        this.domicilioService.findDomicilioPorClienteId(this.usuario.cliente.id).subscribe( domicilio =>{
-          this.domicilio = domicilio;
-          this.usuario.cliente.domicilio = this.domicilio;
-        });
         
       });
 

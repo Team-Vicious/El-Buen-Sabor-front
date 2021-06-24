@@ -39,9 +39,6 @@ export class RegisterComponent implements OnInit {
         
       this.usuarioService.ver(+this.usuarioId).subscribe( usuario =>{
         this.usuario = usuario;
-        //console.log("encriptado",this.usuario.clave);
-        //this.usuario.clave = (CryptoJS.AES.decrypt(this.usuario.clave.trim(), this.passCrypto)).toString(CryptoJS.enc.Utf8);
-        //console.log("desencriptado",this.usuario.clave);
         this.cliente = this.usuario.cliente;
         var bytes  = CryptoJS.AES.decrypt(usuario.clave, 'teamvicious');
         this.usuario.clave = bytes.toString(CryptoJS.enc.Utf8);
@@ -68,9 +65,7 @@ export class RegisterComponent implements OnInit {
     this.usuario.cliente.email = this.usuario.usuario;
     this.usuario.cliente.domicilio =this.domicilio;
     this.usuario.rol = "user";
-    //this.usuario.clave = (CryptoJS.AES.encrypt(this.usuario.clave.trim(), this.passCrypto)).toString();
-    //this.usuario.clave = (CryptoJS.MD5(this.usuario.clave)).toString();
-    //console.log(this.usuario.clave);
+    this.usuario.clave = (CryptoJS.AES.encrypt(this.usuario.clave.trim(), 'teamvicious')).toString();
 
     this.usuarioService.crear(this.usuario).subscribe(user => {
       console.log("registrado con exito usuario: "+user.usuario);
