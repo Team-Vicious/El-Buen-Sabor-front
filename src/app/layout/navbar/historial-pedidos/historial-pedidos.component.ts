@@ -64,9 +64,7 @@ export class HistorialPedidosComponent implements OnInit {
       
       const documentDefinition = this.getDocumentDefinition(pedido);
       pdfMake.createPdf(documentDefinition).open();
-      this.pedidoService.postEmail(pedido).subscribe(ped =>{
-        console.log(ped);
-      });
+      
   }
 
   
