@@ -120,7 +120,7 @@ export class LoginComponent implements OnInit {
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Ok, llenar!',
-                cancelButtonText: 'Acerlo mas tarde'
+                cancelButtonText: 'Hacerlo mas tarde'
               }).then((result) => {
                 if (result.isConfirmed) {
                   this.router.navigate(['/updateDomicilio/', this.usuario.id]);
