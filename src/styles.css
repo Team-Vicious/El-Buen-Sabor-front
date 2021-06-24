@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-body { background-color: rgb(90, 20, 20) !important; }
+body { background-color: rgb(90, 20, 20) !important;
+}
 
 .maps{
     background-color: brown;
