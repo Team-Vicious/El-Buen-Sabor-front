@@ -21,4 +21,10 @@ export class PedidoService extends CommonService<Pedido>{
     {headers: this.cabeceras});
   }
 
+  postEmail(pedido:Pedido): Observable<string>{
+    return this.http.post(`http://localhost:3005/send-email`,
+    pedido,
+    {responseType: 'text'});
+  }
+
 }
