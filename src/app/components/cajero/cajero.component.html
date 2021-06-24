@@ -1,22 +1,33 @@
 <app-navbar [usuarioId]="usuarioId"></app-navbar>
 
-    <div class="card border-warning mb-3" style="max-width: 90rem;" >
-        <div class="card-body">
-        <div>
-            <div class="card" style="width: 18rem;">
+ 
+        
+            <div class="container">
+
+              <h1 class="card1" >
                 <div class="card-body" style="text-align:center;"> 
-                  <a [routerLink]="['/entrantes', usuarioId]" class="btn btn-primary">Pedidos Entrantes</a>
+                  <a [routerLink]="['/entrantes', usuarioId]" class="btn btn-warning" style="font-family: 'Open Sans Condensed', sans-serif;">Pedidos Entrantes</a>
                 </div>
-              </div>
-              <div class="card" style="width: 18rem;">
+              </h1>
+
+              <h1 class="card2">
                 <div class="card-body" style="text-align:center;"> 
-                  <a [routerLink]="['/listos', usuarioId]" class="btn btn-primary">Pedidos Listos</a>
+                  <a [routerLink]="['/listos', usuarioId]" class="btn btn-success" style="font-family: 'Open Sans Condensed', sans-serif;">Pedidos Listos</a>
                 </div>
-              </div>
-              <div class="card" style="width: 18rem;">
+              </h1>
+
+              <h1 class="card3">
                 <div class="card-body" style="text-align:center;"> 
-                  <a [routerLink]="['/',usuarioId,'factura','form']" class="btn btn-primary">Generar Factura</a>
+                  <a [routerLink]="['/',usuarioId,'factura','form']" class="btn btn-secondary" style="font-family: 'Open Sans Condensed', sans-serif;">Generar Factura</a>
                 </div>
-              </div>
-        </div>
-        </div>
+              </h1>
+
+              <h1 class="card4">
+                <div class="card-body" style="text-align:center;"> 
+                  <a [routerLink]="['/','home',2]" class="btn btn-primary" style="font-family: 'Open Sans Condensed', sans-serif;">Crear pedido</a>
+                </div>
+              </h1>
+            </div>
+           
+              
+        

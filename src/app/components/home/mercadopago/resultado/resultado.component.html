@@ -6,7 +6,12 @@
 
             <div *ngIf="resultado == 'exitoso'">
                 <h5>Pedido Exitoso! su pedido esta siendo preparado!</h5>
+                <div *ngIf="usuarioId!=2">
                 <button class="btn btn-info m-4 p-4" style="font-size: 2rem;" [routerLink]="['/historialPedidos',usuarioId]">OK</button>
+                </div>
+                <div *ngIf="usuarioId===2">
+                <button class="btn btn-info m-4 p-4" style="font-size: 2rem;" [routerLink]="['/cajero',3]">Volver a cajero</button>
+                </div>
             </div>
 
             <div *ngIf="resultado == 'pendiente'">
