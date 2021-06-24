@@ -1,0 +1,26 @@
+
+.container{
+    margin: 30px auto; padding-bottom: 200px;
+}
+.card1{
+    width: 22rem; 
+    float: right; 
+    background-color: rgb(227, 240, 110);  
+    box-shadow: -11px 11px 1px rgba(0, 0, 0, 0.3);
+}
+.card2{
+    width: 22rem; 
+    background-color: rgb(102, 243, 89);  
+    box-shadow: -11px 11px 1px rgba(0, 0, 0, 0.3);
+}
+.card3{
+    width: 22rem;  
+    float: right; 
+    background-color: rgb(63, 63, 63);  
+    box-shadow: -11px 11px 1px rgba(0, 0, 0, 0.3);
+}
+.card4{
+    width: 22rem; 
+    background-color: rgb(80, 194, 240);  
+    box-shadow: -11px 11px 1px rgba(0, 0, 0, 0.3);
+}
