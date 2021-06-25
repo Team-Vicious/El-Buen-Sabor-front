@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Pedido } from 'src/app/models/Pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { Usuario } from 'src/app/models/Usuario';
+import { MercadopagoDatos } from 'src/app/models/MercadopagoDatos';
+import { MercadopagoDatosService } from 'src/app/services/mercadopagoDatos.service';
 
 @Component({
   selector: 'app-resultado',
@@ -12,6 +14,7 @@ import { Usuario } from 'src/app/models/Usuario';
 export class ResultadoComponent implements OnInit {
 
   constructor(
+    protected mercadopagoService: MercadopagoDatosService,
     protected pedidoService: PedidoService,
     protected router: Router,
     protected route: ActivatedRoute
@@ -33,7 +36,7 @@ export class ResultadoComponent implements OnInit {
     this.pedidoService.ver(this.pedidoId).subscribe(pedido => {
       this.pedido = pedido;
       
-      //actualiar el tipo de pago
+      //actualiar el tipo de pago para mp
       this.tipoPago();
 
       
@@ -42,6 +45,11 @@ export class ResultadoComponent implements OnInit {
   }
 
   tipoPago(){
+
+    var mercadoP: MercadopagoDatos;
+
+    mercadoP = this.pedido.mercadopagoDatos;
+
     //si tiene mp estonces fue pagado con mp, sino fue pagado de contado retiro en local
     if(this.pedido.mercadopagoDatos){
 
@@ -50,23 +58,52 @@ export class ResultadoComponent implements OnInit {
       //actualizar mp con el tipo de pago
       //this.pedido.mercadopagoDatos.estado = "1";//0 sin pagar, 1 pagado, 2 pendiente
       if(this.resultado == "exitoso"){
-        this.pedido.mercadopagoDatos.metodoPago = "1";
-        this.pedido.mercadopagoDatos.estado = "1";
+        mercadoP.metodoPago = "1";
+        mercadoP.estado = "1";
+        mercadoP.fechaAprobacion = new Date();
+        mercadoP.identidicadorPago = this.pedido.mercadopagoDatos.id;
+        mercadoP.metodoPago = "Tarjeta MP";
+        mercadoP.nroTarjeta = "5031 7557 3453 0604";
+        
       }
       
       if(this.resultado == "pendiente"){
-        this.pedido.mercadopagoDatos.metodoPago = "2";
-        this.pedido.mercadopagoDatos.estado = "0";
+        mercadoP.metodoPago = "2";
+        mercadoP.estado = "0";
+        mercadoP.metodoPago = "RapiPago-PagoFacil";
       }
 
       if(this.resultado == "error"){
-        this.pedido.mercadopagoDatos.metodoPago = "3";
-        this.pedido.mercadopagoDatos.estado = "0";
+        mercadoP.metodoPago = "3";
+        mercadoP.estado = "0";
       }
 
       //persistir***********
-      this.pedidoService.editar(this.pedido).subscribe( pedido => console.log("pedido actualizado",pedido.id));
-      }
+      //primero persisto mp y luego se lo asigno al pedido, lo hago asi
+      //porque por algun bug misterioso si lo hago de otra forma da error
+      this.mercadopagoService.editar(mercadoP).subscribe( mm => {
+        this.pedido.mercadopagoDatos = mm;
+        this.pedido.factura.nroTarjeta = "5031 7557 3453 0604";
+        this.pedidoService.editar(this.pedido).subscribe( p => {
+          console.log("pedido actualizado con exito");
+
+          //enviar mail
+          this.pedidoService.postEmail(p).subscribe(ped =>{
+            console.log(ped);
+          });
+          
+        });
+      })
+      
+      /*
+      //persistir***********
+      this.pedidoService.editar(this.pedido).subscribe( pedido => {
+        console.log("pedido actualizado",pedido.id);
+
+        
+      });
+      */
+    }
   }
 
 }

@@ -17,17 +17,27 @@
             <br>
             <a>Detalles:</a>
             <br>
-            <a *ngFor="let detalle of pedido.detallePedido">
-                <p></p>
-                {{detalle.articuloManofacturado.denominacion}}
-                
-                <div>
-                    <img
-                [src]="formatImage(detalle.articuloManofacturado.imagen)"
-                class= "img-thumbnail rounded mx-5"
-                style= "width: 250px; cursor:pointer;">
-            </div>
-        </a>
+            
+                <a *ngFor="let detalle of pedido.detallePedido">
+                    <div *ngIf="detalle?.articuloManofacturado">
+
+                        <p></p>
+                        {{detalle.articuloManofacturado.denominacion}}
+                        
+                        <div>
+                            <img
+                            [src]="formatImage(detalle.articuloManofacturado.imagen)"
+                            class= "img-thumbnail rounded mx-5"
+                            style= "width: 250px; cursor:pointer;">
+                        </div>
+                    </div>
+                    <div *ngIf="detalle?.articuloInsumo">
+
+                        <p></p>
+                        {{detalle.articuloInsumo.denominacion}}
+                        
+                    </div>
+                </a>
         </body>
     </tr>
     <br>
