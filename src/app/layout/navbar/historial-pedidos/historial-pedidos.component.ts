@@ -77,7 +77,7 @@ export class HistorialPedidosComponent implements OnInit {
         '\n [ EL BUEN SABOR ]',
         `\nPEDIDO NROº ${pedido.numero}`,
         `fecha del depido: ${pedido.fecha}`,
-        `Tipo de envio: ${pedido.tipoEnvio == 1? 'delivery': 'retiro en el local'}`,
+        `Tipo de envio: ${pedido.tipoEnvio == 1? 'retiro en el local':pedido.tipoEnvio == 2? 'delivery': ""}`,
         `\n FACTURA NROº ${pedido.factura.numero}`,
         `fecha de la factura: ${pedido.factura.fecha}`,
         `Monto de descuento: ${pedido.factura.montoDescuento > 0? `Retiro en el local 10% de descuento: ( -$${pedido.factura.montoDescuento} )` : 'no hay descuento'}`,
@@ -85,7 +85,16 @@ export class HistorialPedidosComponent implements OnInit {
         `Nro Tarjeta: ${pedido.factura.nroTarjeta}`,
         `\n\bDETALLE:\b${pedido.factura.detalleFactura.map((det:DetalleFactura) => {
 
-          return `\n${det.articuloManofacturado.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloManofacturado.precioVenta}]`; 
+          if(det.articuloManofacturado){
+            return `\n${det.articuloManofacturado.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloManofacturado.precioVenta}]`; 
+
+          }
+          if(det.articuloInsumo){
+            return `\n${det.articuloInsumo.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloInsumo.precioVenta}]`; 
+
+          }
+          return "";
+
 
         })}`,
         `\n ==[Total: $${pedido.factura.totalVenta}]===`

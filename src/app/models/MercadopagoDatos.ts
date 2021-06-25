@@ -3,6 +3,7 @@ import { Base } from "./Base";
 
 export class MercadopagoDatos implements Base{
     id!: number;
+    identidicadorPago!: number;
     fechaCreacion!: Date;
     fechaAprobacion!: Date;
     formaPago!: string;

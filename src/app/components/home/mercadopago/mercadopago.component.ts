@@ -5,6 +5,7 @@ import { MercadopagoDatosService } from 'src/app/services/mercadopagoDatos.servi
 import { PedidoService } from 'src/app/services/pedido.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/models/Usuario';
+import { MercadopagoDatos } from 'src/app/models/MercadopagoDatos';
 
 declare var abrirCheckout: any;
 
@@ -19,7 +20,7 @@ export class MercadopagoComponent implements OnInit {
   usuario!: Usuario;
   id!: string;
   texto: string = "soy un texto";
-  pedido!: Pedido;
+  pedido: Pedido = new Pedido();
 
   constructor(
     protected mercadopagoService: MercadopagoDatosService,
@@ -39,10 +40,9 @@ export class MercadopagoComponent implements OnInit {
       //this.pedido = usuario.cliente.pedido[usuario.cliente.pedido.length -1];
       this.pedidoService.getPedidosByClienteId(this.usuario.cliente.id).subscribe( pedidos => {
        this.pedido = pedidos[pedidos.length -1];
-      })
+      });
     });
     
-
   }
 
   hola(texto: string){
@@ -62,15 +62,29 @@ export class MercadopagoComponent implements OnInit {
     //10% de descuento en pedido
     this.pedido.total = this.pedido.factura.totalVenta;
 
-    //10% de descuento al detalle pedido
+    //10% de descuento al detalle articuloManufacturado pedido
     this.pedido.detallePedido.map(detallePedido => {
-      detallePedido.subTotal = (detallePedido.articuloManofacturado.precioVenta * 0.90);
+      if(detallePedido.articuloManofacturado){
+        detallePedido.subTotal = (detallePedido.articuloManofacturado.precioVenta * 0.90);
+
+      }
+      if(detallePedido.articuloInsumo){
+        detallePedido.subTotal = (detallePedido.articuloInsumo.precioVenta * 0.90);
+
+      }
       
     });
     
-    //10% de descuento al detalle factura
+    //10% de descuento al detalle factura insumo
     this.pedido.factura.detalleFactura.map(detalleFactura =>{
-      detalleFactura.subTotal = (detalleFactura.articuloManofacturado.precioVenta * 0.90);
+      if(detalleFactura.articuloManofacturado){
+        detalleFactura.subTotal = (detalleFactura.articuloManofacturado.precioVenta * 0.90);
+
+      }
+      if(detalleFactura.articuloInsumo){
+        detalleFactura.subTotal = (detalleFactura.articuloInsumo.precioVenta * 0.90);
+
+      }
     });
 
     //asigno la forma de pago
@@ -105,16 +119,18 @@ export class MercadopagoComponent implements OnInit {
     //llamar a la api y que genere el preference id
     this.mercadopagoService.getMPDPreferenceId(this.usuarioId, this.pedido.id, this.pedido).subscribe(mp => {
 
-      //asigno mpDatos al pedido y lo actualizo
-      this.pedido.mercadopagoDatos = mp;
+      var mercadoP: MercadopagoDatos = new MercadopagoDatos();
+      //asigno mp a mpDatos
+      mercadoP = mp;
 
       //asigno el tipo de envio (mp o contado en el local)
       this.pedido.tipoEnvio = 2;
 
       //actualizo los datos del mp del pedido
-      this.pedido.mercadopagoDatos.fechaCreacion = new Date();
-      this.pedido.mercadopagoDatos.estado = "0";//0 sin pagar, 1 pagado, 2 pendiente
+      mercadoP.fechaCreacion = new Date();
 
+      mercadoP.estado = "0";
+      
       //asigno la forma de pago
       this.pedido.factura.formaPago = "Mercado Pago";
       
@@ -122,16 +138,20 @@ export class MercadopagoComponent implements OnInit {
       //asigno el numero del pedido
       this.pedido.numero = this.pedido.id;
       this.pedido.factura.numero = this.pedido.factura.id;
-      
-      //persistir***********
-      //actualizo el pedido
-      this.pedidoService.editar(this.pedido).subscribe(pedido => {
-        console.log("pedido actualizado!");
-      });
-      
 
-      //ejecuto el check out de mp
-      new abrirCheckout(this.pedido.mercadopagoDatos.preferenceId);
+      //persistir***********
+      //primero persisto mp y luego se lo asigno al pedido, lo hago asi
+      //porque por algun bug misterioso si lo hago de otra forma da error
+      this.mercadopagoService.crear(mercadoP).subscribe( mm => {
+        this.pedido.mercadopagoDatos = mm;
+        this.pedidoService.editar(this.pedido).subscribe( p => {
+          console.log(p,"pedido actualizado con exito");
+
+          //ejecuto el check out de mp
+          new abrirCheckout(p.mercadopagoDatos.preferenceId);
+        });
+      })
+      
     });
   }
 

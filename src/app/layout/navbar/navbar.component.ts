@@ -138,6 +138,36 @@ export class NavbarComponent implements OnInit {
 
     
       });
+
+      //detalles para articulos Insumo
+      this.articuloInsumoCarrito.map(articulo =>{
+        //var countCantidad = 1;
+
+        //creo un detalle por cada articulo para asignarle el articulo al detalle
+        var detallepedido:DetallePedido = new DetallePedido();
+        detallepedido.articuloInsumo = articulo;
+
+        /*
+        //recorro los articulo para ver si se repiten y aumentar la cantidad
+        this.articulosManofaturadosCarrito.forEach(articuloAux =>{
+          if (articulo.id == articuloAux.id) {
+            countCantidad++;
+          }
+        });
+
+        //asigno cantidad
+        detallepedido.cantidad = countCantidad;
+        */
+        detallepedido.cantidad = 1;
+
+        //total precio detalle
+        detallepedido.subTotal= articulo.precioVenta;
+
+        //asigno detalle al pedido
+        pedido.detallePedido.push(detallepedido);
+
+    
+      });
         
       //asigno fecha
       pedido.fecha = new Date();
@@ -158,9 +188,19 @@ export class NavbarComponent implements OnInit {
         html:
           `Su pedido contiene lo siguiente: 
           <br> ${pedido.detallePedido.map(detalle => {
-                totalPedido += detalle.articuloManofacturado.precioVenta;
-                return '<br>'+detalle.articuloManofacturado.denominacion + '  $'+ detalle.articuloManofacturado.precioVenta;
+            if(detalle.articuloManofacturado){
+
+              totalPedido += detalle.articuloManofacturado.precioVenta;
+              return '<br>'+detalle.articuloManofacturado.denominacion + '  $'+ detalle.articuloManofacturado.precioVenta;
+            }
+            if(detalle.articuloInsumo){
+
+              totalPedido += detalle.articuloInsumo.precioVenta;
+              return '<br>'+detalle.articuloInsumo.denominacion + '  $'+ detalle.articuloInsumo.precioVenta;
+            }
+            return ""
           })}
+          
           <br> ==[TOTAL]==: $${totalPedido}`,
           showDenyButton: true,
           confirmButtonText: `confirmar y pagar`,
@@ -183,23 +223,43 @@ export class NavbarComponent implements OnInit {
 
           //asigno total costo a la factura
           var totalCosto: number = 0;
-            //recorro detalle pedido(articulosManufacturados del pedido)
-            pedido.detallePedido.map(detallePedido => {
 
-              //creo detalle de la factura y se los asigno
-              var detalleFactura: DetalleFactura = new DetalleFactura();
+          //recorro detalle pedido(articulosManufacturados o insumo)
+          pedido.detallePedido.map(detallePedido => {
+
+            //creo detalle de la factura y se los asigno para manufacturado o insumo
+            var detalleFactura: DetalleFactura = new DetalleFactura();
+
+            //si tiene articulo Manufacturado
+            if(detallePedido.articuloManofacturado){
               detalleFactura.articuloManofacturado = detallePedido.articuloManofacturado;
               detalleFactura.cantidad = detallePedido.cantidad;
               detalleFactura.subTotal = detallePedido.subTotal;
               factura.detalleFactura.push(detalleFactura);
 
-              //recorro el detale del articulo Manufacturado
+              //recorro el detalle del articulo Manufacturado para acumular el costo
               detallePedido.articuloManofacturado.articuloManofacturadoDetalle.map( detalleArticulo =>{
 
-                //acumulo el precio de los insumos del detalle del manufacturado
-                totalCosto += ((detalleArticulo.articuloInsumo.precioCompra)*detalleArticulo.cantidad);
-              });
+              //acumulo el precio de los insumos del detalle del manufacturado
+              totalCosto += ((detalleArticulo.articuloInsumo.precioCompra)*detalleArticulo.cantidad);
             });
+            }
+
+            //si tiene Insumo
+            if(detallePedido.articuloInsumo){
+              detalleFactura.articuloInsumo = detallePedido.articuloInsumo;
+              detalleFactura.cantidad = detallePedido.cantidad;
+              detalleFactura.subTotal = detallePedido.subTotal;
+              factura.detalleFactura.push(detalleFactura);
+
+              //de paso acumulo al total el precioCosto de la bebida
+              totalCosto += detallePedido.articuloInsumo.precioCompra;
+            }
+
+            
+          });
+
+          
           factura.totalCosto = totalCosto;
 
           //asigno la factura al pedido
@@ -212,29 +272,7 @@ export class NavbarComponent implements OnInit {
           //this.usuario.cliente.pedido.push(pedido);
           pedido.cliente = this.usuario.cliente;
 
-          //console.log(this.usuario.cliente.pedido);
-          
-          /*
-          //persistir pedido a traves del usuario
-          this.usuarioService.editar(this.usuario).subscribe(usuario => {
-
-            
-            //esto por el tema del numero del pedido y el auto incremente, entonces numero = pedido.id
-            usuario.cliente.pedido[usuario.cliente.pedido.length -1].numero =usuario.cliente.pedido[usuario.cliente.pedido.length -1].id;
-            this.pedidoService.editar(usuario.cliente.pedido[usuario.cliente.pedido.length -1]).subscribe( ped =>{
-              
-            });
-            
-
-            console.log("pedido actualizado");
-            Swal.fire('CONFIRMADO!', ' confirmado', 'success');
-            this.router.navigate(['/mercadopago/', this.usuario.id,'pedido']);
-            console.log(usuario);
-          });
-          */
-          
-          
-          
+         
           //persistir el pedido
           this.pedidoService.crear(pedido).subscribe(ped =>{
 
