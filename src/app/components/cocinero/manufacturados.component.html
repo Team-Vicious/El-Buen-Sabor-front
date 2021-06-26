@@ -9,8 +9,8 @@
     filterPost" style=" width: 220px;">
   </form>
 
-    <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado | filter:filterPost">
-
+    <body  *ngFor="let articulo of ArticuloManofacturado | filter:filterPost">
+    <div class="card text-white bg-dark m-2 b-2" *ngIf=" (articulo.fechaBaja)===null">
         <tr>
             <td>
                 <div>
@@ -41,9 +41,9 @@
         <td>
             <button type="button" class="btn btn-warning" routerLinkActive="active"  [routerLink]="['/',usuarioId,'manufacturados','form',articulo.id]">Editar</button>
 
-            <button type="button" class="btn btn-danger" routerLinkActive="active"  (click)="eliminar(articulo)">Eliminar</button>
+            <button type="button" class="btn btn-danger" routerLinkActive="active"  (click)="borrarArticuloManofacturado(articulo)">Eliminar</button>
         </td>
-
+    </div>   
     </body>
 
 </div>
