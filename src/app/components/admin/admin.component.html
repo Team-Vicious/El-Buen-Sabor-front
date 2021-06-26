@@ -93,35 +93,37 @@
 
         <body *ngIf="listarUsuario">
 
+
             <form class="d-flex" style="margin: 10px;">
                 <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar usuario" aria-label="Search"  [(ngModel)]="
                 filterPost" style=" width: 220px;">
             </form>
 
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let usuario of usuarios | filterUsuario:filterPost">
+            <body *ngFor="let usuario of usuarios | filterUsuario:filterPost">
 
+            <div class="card text-white bg-dark m-2 b-2" *ngIf=" (usuario.fechaBaja)===null && (usuario.rol)!='user' && (usuario.rol)!='userg'">
                 <tr>
                     <td>
                         <tr>
-                            <a>{{usuario.cliente.nombre}}</a>
+                            <a>* {{usuario.cliente.nombre}}  {{usuario.cliente.apellido}}</a>
                         </tr>
                         <tr>
                             <a>
-                                {{usuario.cliente.apellido}}
-
+                                * {{usuario.cliente.email}}
                             </a>
                         </tr>
                         <tr>
-                            <a>
-                                {{usuario.cliente.email}}
+                            <a class="badge bg-primary">
+                                {{usuario.rol}}
                             </a>
                         </tr>
                     </td>
                 </tr>
                 <td>
                     <button type="button" class="btn btn-warning" (click)="editarUsuario(usuario.id)" routerLinkActive="active">Editar</button>
-                    <button type="button" class="btn btn-danger"  (click)="eliminarUsuario(usuario.id)" routerLinkActive="active">Eliminar</button>
+                    <button type="button" class="btn btn-danger"  (click)="borrarUsuario(usuario)" routerLinkActive="active">Eliminar</button>
                 </td>
+            </div>
 
             </body>
         </body>
@@ -134,8 +136,9 @@
                 filterPost" style=" width: 220px;">
             </form>
 
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloManofacturado | filter:filterPost">
+            <body *ngFor="let articulo of ArticuloManofacturado | filter:filterPost">
 
+            <div  class="card text-white bg-dark m-2 b-2" *ngIf=" (articulo.fechaBaja)===null">    
                 <tr>
                     <td>
                         <div>
@@ -148,11 +151,11 @@
 
                     <td>
                 <tr>
-                    <a>{{articulo.denominacion}}</a>
+                    <a> * {{articulo.denominacion}}</a>
                 </tr>
                 <tr>
                     <a>
-                        {{articulo.precioVenta}}
+                        * {{articulo.precioVenta}}
 
                     </a>
                 </tr>
@@ -167,9 +170,9 @@
                 </tr>
                 <td>
                     <button type="button" class="btn btn-warning" [routerLink]="['/',adminId,'manufacturados','form', articulo.id]" routerLinkActive="active">Editar</button>
-                    <button type="button" class="btn btn-danger" (click)="eliminarArticuloManofacturado(articulo)" routerLinkActive="active">Eliminar</button>
+                    <button type="button" class="btn btn-danger" (click)="borrarArticuloManofacturado(articulo)" routerLinkActive="active">Eliminar</button>
                 </td>
-
+            </div>
             </body>
         </body>
 
@@ -180,8 +183,9 @@
                 filterPost" style=" width: 220px;">
             </form>
 
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of articuloInsumoArr | filterInsumo:filterPost">
+            <body *ngFor="let articulo of articuloInsumoArr | filterInsumo:filterPost">
 
+            <div class="card text-white bg-dark m-2 b-2" *ngIf=" (articulo.fechaBaja)===null">    
                 <tr>
                     <td>
                         <div>
@@ -195,7 +199,7 @@
                     <td>
                 <tr>
                     <p></p>
-                    <h2>{{articulo.denominacion}}</h2>
+                    <h2> * {{articulo.denominacion}}</h2>
                 </tr>
                 <tr>
                     <a>
@@ -236,9 +240,9 @@
                 <td>
                     <button type="button" class="btn btn-success" (click)="aumentarStockInsumo(articulo)" routerLinkActive="active">Aumentar Stock</button>
                     <button type="button" class="btn btn-warning" [routerLink]="['/insumo',adminId,'form',articulo.id]" routerLinkActive="active">Editar</button>
-                    <button type="button" class="btn btn-danger"  (click)="eliminarInsumo(articulo.id)" routerLinkActive="active">Eliminar</button>
+                    <button type="button" class="btn btn-danger"  (click)="borrarInsumo(articulo)" routerLinkActive="active">Eliminar</button>
                 </td>
-
+            </div>
             </body>
         </body>
         
