@@ -97,13 +97,20 @@ export class AdminComponent implements OnInit {
     }
 
   listarArticuloInsumo:boolean = false;
-  ArticuloInsumo: ArticuloInsumo[] = [];
-  listarArticuloInsumos(){
+  articuloInsumoArr: ArticuloInsumo[] = [];
+  listarArticuloInsumos(tipo: boolean){
+    this.articuloInsumoArr = [];
     this.articuloInsumoService.listar().subscribe(articulos =>{
       this.listarArticuloInsumo = true;
       this.listarArticuloManofacturado = false;
       this.listarUsuario = false;
-      this.ArticuloInsumo = articulos as ArticuloInsumo[];
+      //this.ArticuloInsumo = articulos as ArticuloInsumo[];
+      articulos.map(articulo =>{
+        if(tipo == articulo.esInsumo){
+          this.articuloInsumoArr.push(articulo);
+        }
+      })
+      
     })
   }
 
@@ -120,7 +127,7 @@ export class AdminComponent implements OnInit {
     })
     this.router.navigate(['admin/',this.adminId]);
     //para actualizar la vista
-    this.listarArticuloInsumos();
+    this.listarArticuloInsumos(true);
   }
 
   //pasar imagenes de bytes a img
@@ -180,5 +187,7 @@ export class AdminComponent implements OnInit {
     }
     
   }
+
+  
 
 }

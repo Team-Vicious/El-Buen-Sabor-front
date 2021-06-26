@@ -12,7 +12,7 @@
         </a>
 
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/manufacturados/form">agregar articulo manofacturado</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/',adminId,'manufacturados','form']">agregar articulo manofacturado</a></li>
             <li><a class="dropdown-item" [routerLink]="['/insumo',adminId,'form']">agregar articulo insumo</a></li>
 
         </ul>
@@ -32,7 +32,8 @@
     <button type="button" class="btn btn-secondary" (click)="listarUsuarios()">Listar Usuarios</button>
     <button type="button" class="btn btn-secondary" (click)="listarArticuloManofacturados()">Listar Articulos
         Manofacturados</button>
-    <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos()">Listar Articulos insumo</button>
+    <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos(true)">Listar Articulos insumo</button>
+    <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos(false)">Listar Bebidas</button>
     
 </nav>
 <div class="card text-white bg-secondary mb-3 " >
@@ -52,7 +53,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-warning dropdown-toggle p-2 m-2 b-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               TIPO REPORTE {{opcion}}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -63,17 +64,19 @@
             </ul>
         </div>
         <div class="modal-body">
-            <div>
-                <a>Fecha Desde</a>
+
+            <div class="card b-2 m-2 p-3 bg-info">
+                <h4 style="color: rgb(255, 255, 255); padding: 15px;">Fecha Desde</h4>
                 <input type="datetime-local"
                 [(ngModel)]="reporte.fechaInicio">
             </div>
             
-            <div>
-                <a>Fecha Hasta</a>
+            <div class="card b-2 m-2 p-3 bg-info">
+                <h4 style="color: rgb(255, 255, 255); padding: 15px;">Fecha Hasta</h4>
                 <input type="datetime-local"
                 [(ngModel)]="reporte.fechaDestino">
             </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" (click)="generarReporte()">GENERAR</button>
@@ -177,7 +180,7 @@
                 filterPost" style=" width: 220px;">
             </form>
 
-            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of ArticuloInsumo | filterInsumo:filterPost">
+            <body class="card text-white bg-dark m-2 b-2" *ngFor="let articulo of articuloInsumoArr | filterInsumo:filterPost">
 
                 <tr>
                     <td>

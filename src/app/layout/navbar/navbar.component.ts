@@ -5,12 +5,14 @@ import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { ArticuloManofacturadoDetalle } from 'src/app/models/ArticuloManofacturadoDetalle';
 import { Cliente } from 'src/app/models/Cliente';
+import { Configuracion } from 'src/app/models/Configuracion';
 import { DetalleFactura } from 'src/app/models/DetalleFactura';
 import { DetallePedido } from 'src/app/models/DetallePedido';
 import { Factura } from 'src/app/models/Factura';
 import { Pedido } from 'src/app/models/Pedido';
 import { Usuario } from 'src/app/models/Usuario';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { ConfiguracionService } from 'src/app/services/configuracion.service';
 import { DetallePedidoService } from 'src/app/services/detallePedido.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -25,6 +27,7 @@ import Swal from 'sweetalert2';
 export class NavbarComponent implements OnInit {
   
   constructor( 
+    protected configService: ConfiguracionService,
     protected usuarioService: UsuarioService,
     protected detallePedidoService: DetallePedidoService,
     protected pedidoService: PedidoService,
@@ -37,6 +40,7 @@ export class NavbarComponent implements OnInit {
     //pedidos: Pedido[] = [];
     pedido: Pedido = new Pedido();
     validarLogin: boolean = false;
+    configuracion!: Configuracion;
 
     @Input() usuarioId!:number;
     @Input() adminId!:number;
@@ -69,6 +73,11 @@ export class NavbarComponent implements OnInit {
         
         });
       }
+
+      //trae el objeto de configuracion
+      this.configService.ver(1).subscribe( config =>{
+        this.configuracion = config;
+      });
         
     }
 
@@ -181,15 +190,18 @@ export class NavbarComponent implements OnInit {
       //en el swalFire saco el total
       var totalPedido:number = 0;
 
+      var tiempoCocina:number = 0;
+
       //alerta para confirmar
       Swal.fire({
         title: '<strong><u>|CONFIRMAR PEDIDO|</u></strong>',
         icon: 'info',
         html:
-          `Su pedido contiene lo siguiente: 
+          `<h3>Su pedido contiene lo siguiente:</h3> 
+          <h5>
           <br> ${pedido.detallePedido.map(detalle => {
             if(detalle.articuloManofacturado){
-
+              tiempoCocina += detalle.articuloManofacturado.tiempoEstimadoCocina;
               totalPedido += detalle.articuloManofacturado.precioVenta;
               return '<br>'+detalle.articuloManofacturado.denominacion + '  $'+ detalle.articuloManofacturado.precioVenta;
             }
@@ -200,8 +212,17 @@ export class NavbarComponent implements OnInit {
             }
             return ""
           })}
-          
-          <br> ==[TOTAL]==: $${totalPedido}`,
+          </h5>
+          <br>
+          <br>
+          Tiempo de Concina ${tiempoCocina=tiempoCocina/this.configuracion.cantidadCocineros} Minutos
+          <br>
+          Tiempo delivery 20 Minutos aprox
+          <br>
+          El pedido llegara a su destino en ${20+tiempoCocina} Minutos
+          <br>
+          <br>
+          <br><h1> ==[TOTAL]==: $${totalPedido}</h1>`,
           showDenyButton: true,
           confirmButtonText: `confirmar y pagar`,
           denyButtonText: `cancelar pedido`,

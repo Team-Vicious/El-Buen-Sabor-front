@@ -23,10 +23,12 @@
 
                 <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo of articulosManofaturados | filter:filterPost">
 
-                    <tr>
-                        <td>
-                            <div>
-                                <!---img class="card-img-top img-fluid" style="width: 200px; height: 150px;" src="assets/images/{{articulo.imagen}}"--->
+                    <div>
+
+                        <tr>
+                            <td>
+                                <div>
+                                    <!---img class="card-img-top img-fluid" style="width: 200px; height: 150px;" src="assets/images/{{articulo.imagen}}"--->
                                 <img *ngIf="articulo.imagen" [src]="formatImage(articulo.imagen)"
                                     class="img-thumbnail rounded" style="width: 250px; cursor:pointer;">
                                 <!-- <img src="/src/assets/images/{{articulo.imagen}}"  style="max-height: 150px;"> -->
@@ -34,30 +36,39 @@
                         </td>
 
                         <td>
-                    <tr>
-                        <a>{{articulo.denominacion}}</a>
-                    </tr>
-                    <tr>
-                        <a>
-                            $ {{articulo.precioVenta}}
+                        <tr>
+                            <a>{{articulo.denominacion}}</a>
+                        </tr>
+                        <tr>
+                            <a>
+                                $ {{articulo.precioVenta}}
+                                
+                            </a>
+                        </tr>
 
-                        </a>
-                    </tr>
 
+                        </td>
+                        
+                        </tr>
+                        <td>
+                            <div *ngIf="verificarStockArtManuf(articulo) == true">
 
-                    </td>
-
-                    </tr>
-                    <td>
-                        <button *ngIf="abierto" type="button" class="btn btn-success"
-                            (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)"
-                            routerLinkActive="active">
-                            Agregar al carrito
-                        </button>
-                        <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>
-
-                    </td>
-
+                                <button *ngIf="abierto" type="button" class="btn btn-success"
+                                (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)"
+                                routerLinkActive="active">
+                                Agregar al carrito
+                                </button>
+                            </div>
+                            <div *ngIf="verificarStockArtManuf(articulo) == false">
+                                <h3>
+                                    No hay Stock de este producto!
+                                </h3>
+                            </div>
+                            <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>
+                            
+                        </td>
+                    
+                    </div>
                 </body>
 
 
@@ -92,10 +103,16 @@
 
                     </tr>
                     <td>
-                        <button *ngIf="abierto" type="button" class="btn btn-success"
+                        <div *ngIf="verificarStockArtInsumo(articulo2) == true">
+
+                            <button *ngIf="abierto" type="button" class="btn btn-success"
                             (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">
                             Agregar al carrito
-                        </button>
+                            </button>
+                        </div>
+                        <div *ngIf="verificarStockArtInsumo(articulo2) == false">
+                            <h3>No hay Stock de este producto!</h3>
+                        </div>
                         <h5 *ngIf="!abierto"> El local esta cerrado, no se pueden hacer pedidos!</h5>
 
                     </td>

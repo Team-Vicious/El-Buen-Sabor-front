@@ -74,6 +74,32 @@ export class HomeComponent implements OnInit {
 
   }
 
+  verificarStockArtManuf(articulo:ArticuloManofacturado){
+
+    var validador:Boolean = true;
+    articulo.articuloManofacturadoDetalle.map( articuloDetalle => {
+      if(articuloDetalle.articuloInsumo.stockActual == 0){
+
+        validador = false;
+      }
+    });
+    return validador;
+    
+  }
+
+  verificarStockArtInsumo(articulo:ArticuloInsumo){
+
+    var validador:Boolean = true;
+    
+    if(articulo.stockActual == 0){
+
+      validador = false;
+    }
+    return validador;
+    
+    
+  }
+
 
 
   almacenarArticulosManofacturadosSeleccionados(idArtuculo: number) {
