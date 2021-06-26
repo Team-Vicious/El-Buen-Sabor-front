@@ -183,7 +183,7 @@
                 filterPost" style=" width: 220px;">
             </form>
 
-            <body *ngFor="let articulo of ArticuloInsumo | filterInsumo:filterPost">
+            <body *ngFor="let articulo of articuloInsumoArr | filterInsumo:filterPost">
 
             <div class="card text-white bg-dark m-2 b-2" *ngIf=" (articulo.fechaBaja)===null">    
                 <tr>
