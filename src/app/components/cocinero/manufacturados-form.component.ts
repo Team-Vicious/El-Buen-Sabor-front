@@ -4,6 +4,8 @@ import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
+import { RubroGeneralService } from 'src/app/services/rubroGeneral.service';
+import { RubroGeneral } from 'src/app/models/RubroGeneral';
 
 @Component({
   selector: '[app-manufacturados-form,backButton]',
@@ -19,8 +21,10 @@ export class ManufacturadosFormComponent implements OnInit {
   fotoSeleccionada!: File;
   usuarioId:any;
   validadorFoto!: Number;
+  rubrosGenerales!: RubroGeneral[];
 
   constructor(
+    private serviceRubros: RubroGeneralService, 
     private service: ArticuloManofacturadoService, 
     private router: Router,
     private route: ActivatedRoute,
@@ -33,6 +37,10 @@ export class ManufacturadosFormComponent implements OnInit {
         if(id){
           this.service.ver(id).subscribe(manufacturado => this.manufacturado = manufacturado)
         }
+      });
+
+      this.serviceRubros.listar().subscribe(rubros =>{
+        this.rubrosGenerales = rubros as RubroGeneral[];
       })
     }
   
@@ -130,6 +138,12 @@ export class ManufacturadosFormComponent implements OnInit {
     }}
 
     else{this.editar()}
+  }
+
+  asignarRubro(rubro:RubroGeneral){
+    this.manufacturado.rubroGeneral = rubro as RubroGeneral;
+    console.log("rubro asignado",this.manufacturado.rubroGeneral.denominacion);
+    this.service.editar(this.manufacturado).subscribe( manuf => console.log("rubro actualizado"));
   }
 }
 
