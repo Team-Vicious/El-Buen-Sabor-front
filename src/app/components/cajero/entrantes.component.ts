@@ -69,6 +69,16 @@ export class EntrantesComponent implements OnInit {
     }
 
    
-    
+    borrarPedido(pedido:Pedido){
+      let currentUrl = this.router.url;
+      pedido.fechaBaja= new Date();
+      this.service.editar(pedido).subscribe(pedido => {
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);});
+    })
+
+     
+      }
+  
 
 }

@@ -80,7 +80,7 @@
                   </tr>
                   <a style="color: rgb(22, 140, 251); " href="https://www.google.com.ar/maps/place/{{pedido.domicilio.calle}}+{{pedido.domicilio.numero}},+{{pedido.domicilio.localidad}},+Mendoza" target="_blank">ABRIR EN MAPS</a>
   
-                  <button class="btn btn-success my-2"  style="float: right">Entregado</button>
+                  <button class="btn btn-success my-2"  style="float: right" (click)=" cambiarEstado(pedido,6)">Entregado</button>
               </div>
               </a>
             </a>
