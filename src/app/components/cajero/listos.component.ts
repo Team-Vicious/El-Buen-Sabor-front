@@ -114,6 +114,16 @@ export class ListosComponent implements OnInit {
     //}
     //)
   }
+
+  cambiarEstado(pedido: Pedido, estado: number) {
+    let currentUrl = this.router.url;
+    pedido.estado = estado;
+    this.pedidoService.editar(pedido).subscribe(pedido => {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate([currentUrl]);
+      });
+    })
+  }
     
 
 }

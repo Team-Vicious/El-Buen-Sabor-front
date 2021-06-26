@@ -11,11 +11,11 @@ import { Location } from '@angular/common';
 })
 export class DeliveryComponent implements OnInit {
 
-  usuarioId:any;
+  usuarioId: any;
   Pedidos: Pedido[] = [];
   pedido: Pedido = new Pedido();
   mostrar: number = 1;
-  estado!:String;
+  estado!: String;
 
   constructor(
     private router: Router,
@@ -29,8 +29,8 @@ export class DeliveryComponent implements OnInit {
     this.listarPedido();
   }
 
-  listarPedido(){
-    this.pedidoService.listar().subscribe(pedido =>{
+  listarPedido() {
+    this.pedidoService.listar().subscribe(pedido => {
       this.Pedidos = pedido as Pedido[];
     })
 
@@ -40,14 +40,26 @@ export class DeliveryComponent implements OnInit {
     this.location.back();
   }
 
-  tomarpedido(pedido: Pedido){
-    if(pedido.tipoEnvio===4){
+  tomarpedido(pedido: Pedido) {
+    if (pedido.tipoEnvio === 4) {
       let currentUrl = this.router.url;
-        pedido.tipoEnvio=5;
-        this.pedidoService.editar(pedido).subscribe(pedido => {
-          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-            this.router.navigate([currentUrl]);});
-        })
-      }}
+      pedido.tipoEnvio = 5;
+      this.pedidoService.editar(pedido).subscribe(pedido => {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([currentUrl]);
+        });
+      })
+    }
+  }
+
+  cambiarEstado(pedido: Pedido, estado: number) {
+    let currentUrl = this.router.url;
+    pedido.estado = estado;
+    this.pedidoService.editar(pedido).subscribe(pedido => {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate([currentUrl]);
+      });
+    })
+  }
 
 }

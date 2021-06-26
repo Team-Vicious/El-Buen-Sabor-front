@@ -18,7 +18,7 @@
 
     <div class="card text-dark bg-white m-2 b-2"> Pedidos:
     <a *ngFor="let pedido of Pedidos">
-        <a *ngIf="(pedido.estado)===(mostrar)">
+        <a *ngIf="(pedido.estado)===(mostrar) && (pedido.fechaBaja)===null">
           <a *ngIf="asignarEstado(pedido)"></a>
           <div class="card text-white bg-dark m-2 b-2">
           <a>
@@ -55,8 +55,9 @@
             </tr>
             <tr *ngIf="(mostrar)===5">
 
-                <button type="button" class="btn btn-success" (click)="cambiarEstado(pedido,0)">Devolver a pedidos
-                    entrantes</button>
+                <button type="button" class="btn btn-success" (click)="cambiarEstado(pedido,0)">Devolver a pedidos entrantes</button>
+                <p>
+                <p><button type="button" class="btn btn-danger" (click)="borrarPedido(pedido)">Borrar pedido</button>
 
             </tr>
             <tr>
@@ -74,7 +75,6 @@
                        <h1 style="font-size: 17px">Número de Tarjeta: {{pedido.factura.nroTarjeta}}</h1>
                        <h1 style="font-size: 17px">Monto de Descuento: {{pedido.factura.montoDescuento}}</h1>
                        <h1 style="font-size: 17px; color: rgb(206, 71, 71);">Total venta: {{pedido.factura.totalVenta}}</h1>
-                      <h1 style="font-size: 17px; color: rgb(206, 71, 71);">Total costo: {{pedido.factura.totalCosto}}</h1>
                        
                      </div>
                      <div class="modal-footer">
