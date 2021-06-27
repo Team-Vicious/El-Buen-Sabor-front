@@ -4,6 +4,8 @@ import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
+import { RubroArticuloService } from 'src/app/services/rubroArticulo.service';
+import { RubroArticulo } from 'src/app/models/RubroArticulo';
 
 @Component({
   selector: 'app-insumo-form',
@@ -13,7 +15,8 @@ import Swal from 'sweetalert2';
 export class InsumoFormComponent implements OnInit {
 
   constructor(
-    private service: ArticuloInsumoService, 
+    private service: ArticuloInsumoService,
+    private serviceRubroArticulo: RubroArticuloService, 
     private router: Router,
     private route: ActivatedRoute,
     private location: Location) { }
@@ -22,6 +25,8 @@ export class InsumoFormComponent implements OnInit {
   error: any;
   titulo = "Insumo"
   adminId!: any;
+  rubros: RubroArticulo[] = [];
+
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -32,6 +37,9 @@ export class InsumoFormComponent implements OnInit {
       }
     })
 
+    this.serviceRubroArticulo.listar().subscribe( rubro =>{
+      this.rubros = rubro as RubroArticulo[];
+    });
     
   }
 
@@ -70,5 +78,10 @@ export class InsumoFormComponent implements OnInit {
   setearInsumo(esInsumo: boolean){
     this.insumo.esInsumo = esInsumo;
   }
+
+  asignarRubro(rubro : RubroArticulo){
+    this.insumo.rubroArticulo = rubro;
+  }
+
 
 }
