@@ -13,6 +13,6 @@ export class RubroArticuloService extends CommonService<RubroArticulo>{
     super(http);
    }
 
-  protected baseEndPoint = BASE_ENDPOINT + '/rubroArticulo';
+  protected baseEndPoint = BASE_ENDPOINT + '/rubroArticulos';
 
 }

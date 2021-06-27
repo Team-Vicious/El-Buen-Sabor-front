@@ -4,6 +4,7 @@ import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
 import { ArticuloManofacturado } from 'src/app/models/ArticuloManofacturado';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -123,5 +124,26 @@ export class HomeComponent implements OnInit {
   //pasar imagenes de bytes a img
   formatImage(img: any): any {
     return 'data:image/jpeg;base64,' + img;
+  }
+
+  verDetalle(articuloMf:ArticuloManofacturado){
+
+    Swal.fire({
+      icon: 'info',
+      title: `Detalles de ${articuloMf.denominacion}`,
+      html: `
+      <br>
+      <h5>
+      ${articuloMf.articuloManofacturadoDetalle.map( detalles => {
+        return `<br><br>${detalles.articuloInsumo.denominacion}
+                <br>cantidad: ${detalles.cantidad}
+                <br>medida: ${detalles.unidadMedida}`
+      })}
+      </h5>
+      <br>
+      
+      `
+    })
+
   }
 }

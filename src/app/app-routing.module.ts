@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
 import { InsumoFormComponent } from './components/admin/insumo-form/insumo-form.component';
+import { RubroFormComponent } from './components/admin/rubro-form/rubro-form.component';
 import { CajeroComponent } from './components/cajero/cajero.component';
 import { EntrantesComponent } from './components/cajero/entrantes.component';
 import { FacturaComponent } from './components/cajero/factura/factura.component';
@@ -45,7 +46,9 @@ const routes: Routes = [
   {path:'factura/form/:idf', component:FacturaComponent},
   {path:'delivery/:idu', component:DeliveryComponent},
   {path:'mercadopago/:idu/pedido', component:MercadopagoComponent},
-  {path:':resultado/:idu/pedido/:idp', component:ResultadoComponent}
+  {path:':resultado/:idu/pedido/:idp', component:ResultadoComponent},
+  {path:'admin/:idu/rubro/:tipo', component:RubroFormComponent},
+  {path:'admin/:idu/rubro/:tipo/:idr', component:RubroFormComponent}
 
   
 ];

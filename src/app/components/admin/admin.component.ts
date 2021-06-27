@@ -9,6 +9,10 @@ import { ArticuloManofacturadoService } from 'src/app/services/articuloManofactu
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 import { ReporteService } from 'src/app/services/reporte.service';
+import { RubroArticulo } from 'src/app/models/RubroArticulo';
+import { RubroGeneralService } from 'src/app/services/rubroGeneral.service';
+import { RubroArticuloService } from 'src/app/services/rubroArticulo.service';
+import { RubroGeneral } from 'src/app/models/RubroGeneral';
 
 
 @Component({
@@ -26,6 +30,8 @@ export class AdminComponent implements OnInit {
   constructor(
     private reporteService: ReporteService,
     private usuarioService: UsuarioService,
+    private rubroGeneralService: RubroGeneralService,
+    private rubroArticuloService: RubroArticuloService,
     private articuloManofacturadoService: ArticuloManofacturadoService,
     private articuloInsumoService: ArticuloInsumoService,
     private router: Router,
@@ -42,6 +48,8 @@ export class AdminComponent implements OnInit {
       this.listarUsuario = true;
       this.listarArticuloManofacturado = false;
       this.listarArticuloInsumo = false;
+      this.listarRubroArticulo = false;
+      this.listarRubroGeneral = false;
       this.usuarios = usuarios as Usuario[];
     })
   }
@@ -59,6 +67,8 @@ export class AdminComponent implements OnInit {
       this.listarArticuloManofacturado = true;
       this.listarUsuario = false;
       this.listarArticuloInsumo = false;
+      this.listarRubroArticulo = false;
+      this.listarRubroGeneral = false;
       this.ArticuloManofacturado = articulos as ArticuloManofacturado[];
     })
   }
@@ -72,6 +82,8 @@ export class AdminComponent implements OnInit {
       this.listarArticuloInsumo = true;
       this.listarArticuloManofacturado = false;
       this.listarUsuario = false;
+      this.listarRubroArticulo = false;
+      this.listarRubroGeneral = false;
       //this.ArticuloInsumo = articulos as ArticuloInsumo[];
       articulos.map(articulo =>{
         if(tipo == articulo.esInsumo){
@@ -233,6 +245,46 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  listarRubroArticulo: boolean = false;
+  rubroArticuloArr: RubroArticulo[] = [];
+  listarRubrosArticulo(){
+    this.rubroArticuloService.listar().subscribe( rubros => {
+      this.listarRubroArticulo = true;
+      this.listarRubroGeneral = false;
+      this.listarArticuloManofacturado = false;
+      this.listarUsuario = false;
+      this.listarArticuloInsumo = false;
+      this.rubroArticuloArr = rubros as RubroArticulo[];
+      console.log("listados");
+    });
+  }
 
+  eliminarRubroArticulo(rubro: RubroArticulo){
+    rubro.fechaBaja = new Date();
+    this.rubroArticuloService.editar(rubro).subscribe( rubroUpdate =>{
+      console.log("rubro dado de baja!");
+    });
+  }
+
+  listarRubroGeneral: boolean = false;
+  rubroGeneralArr: RubroGeneral[] = [];
+  listarRubrosGeneral(){
+    this.rubroGeneralService.listar().subscribe( rubros => {
+      this.listarRubroGeneral = true;
+      this.listarRubroArticulo = false;
+      this.listarArticuloManofacturado = false;
+      this.listarUsuario = false;
+      this.listarArticuloInsumo = false;
+      this.rubroGeneralArr = rubros as RubroGeneral[];
+      console.log("listados");
+    });
+  }
+
+  eliminarRubroGeneral(rubro: RubroGeneral){
+    rubro.fechaBaja = new Date();
+    this.rubroGeneralService.editar(rubro).subscribe( rubroUpdate =>{
+      console.log("rubro dado de baja!");
+    });
+  }
 
 }
