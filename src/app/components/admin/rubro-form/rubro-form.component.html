@@ -1,0 +1,57 @@
+<app-navbar [usuarioId]="usuarioId"></app-navbar>   
+<div class="card bg-light mb-3">
+    <div class="card-header" *ngIf="formGeneral">{{ rubroGeneral.id? 'Editar Rubro': 'Crear Rubro' }}</div>
+    <div class="card-header" *ngIf="formArticulo">{{ rubroArticulo.id? 'Editar Rubro': 'Crear Rubro' }}</div>
+    <div class="card-body">
+        <button backButton class="btn btn-secondary my-2" (click)="volver()" >volver</button>
+        <form>
+            <div class="form-group" *ngIf="formArticulo">
+                <label for="denominacion">Denominacion</label>
+                <input type="text" name="denominacion" class="form-control" id="denominacion" 
+                [(ngModel)]="rubroArticulo.denominacion">
+            </div>
+
+            <div class="form-group" *ngIf="formGeneral">
+                <label for="denominacion">Denominacion</label>
+                <input type="text" name="denominacion" class="form-control" id="denominacion" 
+                [(ngModel)]="rubroGeneral.denominacion">
+            </div>
+
+            <div *ngIf="tipoRubro == 'articulo' && formArticulo">
+                <h5>Si este rubro va a tener padre, seleccionelo en el desplegable</h5>
+                <div class="dropdown py-3" >
+                    
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Rubro Padre {{rubroArticulo?.padre?.denominacion}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        
+                        <li *ngFor="let rubro of rubrosArticulos">
+                            <a class="dropdown-item" *ngIf="!rubro.padre" (click)="asignarRubroPadre(rubro)">{{rubro.denominacion}}</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" (click)="sacarRubroPadre()">Sacar rubro padre</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+           
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" 
+                *ngIf="formArticulo"
+                (click)="rubroArticulo.id? editarRubro(): crearRubro()">
+                {{ rubroArticulo.id? 'Editar': 'Crear' }}
+                </button>
+
+                <button type="button" class="btn btn-primary" 
+                *ngIf="formGeneral"
+                (click)="rubroGeneral.id? editarRubro(): crearRubro()">
+                {{ rubroGeneral.id? 'Editar': 'Crear' }}
+                </button>
+           
+            </div>
+                
+            
+        </form>
+    </div>
+</div>

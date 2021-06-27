@@ -33,6 +33,7 @@ import { ResultadoComponent } from './components/home/mercadopago/resultado/resu
 import { FilterPipe } from './pipes/filter.pipe';
 import { FilterPipeUsuario } from './pipes/filterUsuario.pipe';
 import { FilterPipeInsumo } from './pipes/filterInsumo.pipe';
+import { RubroFormComponent } from './components/admin/rubro-form/rubro-form.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { FilterPipeInsumo } from './pipes/filterInsumo.pipe';
     ResultadoComponent,
     FilterPipe,
     FilterPipeUsuario,
-    FilterPipeInsumo
+    FilterPipeInsumo,
+    RubroFormComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@
 </app-navbar>
 
 <form class="d-flex" style="float: right;">
-    <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar artículo" aria-label="Search"  [(ngModel)]="
+    <input class="form-control m-5"  name="filterPost" type="search" placeholder="Buscar artículo" aria-label="Search"  [(ngModel)]="
     filterPost" style=" width: 220px;">
   </form>
 
@@ -21,7 +21,7 @@
         <tbody>
             <div class="row">
 
-                <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo of articulosManofaturados | filter:filterPost">
+                <body class="card text-white bg-dark p-2 m-2 b-2 py-2" *ngFor="let articulo of articulosManofaturados | filter:filterPost">
 
                     <div>
 
@@ -30,7 +30,7 @@
                                 <div>
                                     <!---img class="card-img-top img-fluid" style="width: 200px; height: 150px;" src="assets/images/{{articulo.imagen}}"--->
                                 <img *ngIf="articulo.imagen" [src]="formatImage(articulo.imagen)"
-                                    class="img-thumbnail rounded" style="width: 250px; cursor:pointer;">
+                                    class="img-thumbnail rounded p-2 m-2 b-2 py-2" style="width: 250px; cursor:pointer;">
                                 <!-- <img src="/src/assets/images/{{articulo.imagen}}"  style="max-height: 150px;"> -->
                             </div>
                         </td>
@@ -53,10 +53,16 @@
                         <td>
                             <div *ngIf="verificarStockArtManuf(articulo) == true">
 
-                                <button *ngIf="abierto" type="button" class="btn btn-success"
+                                <button *ngIf="abierto" type="button" class="btn btn-success p-2 m-2 b-2 py-2"
                                 (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)"
                                 routerLinkActive="active">
                                 Agregar al carrito
+                                </button>
+                                
+                                <button *ngIf="abierto" type="button" class="btn btn-warning p-2 m-2 b-2 py-2"
+                                (click)="verDetalle(articulo)"
+                                routerLinkActive="active">
+                                Ver Detalle
                                 </button>
                             </div>
                             <div *ngIf="verificarStockArtManuf(articulo) == false">
@@ -72,7 +78,7 @@
                 </body>
 
 
-                <body class="card text-white bg-dark my-2 by-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo | filter:filterPost">
+                <body class="card text-white bg-dark p-2 m-2 b-2 py-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo | filter:filterPost">
 
                     <tr>
                         <td>
@@ -105,7 +111,7 @@
                     <td>
                         <div *ngIf="verificarStockArtInsumo(articulo2) == true">
 
-                            <button *ngIf="abierto" type="button" class="btn btn-success"
+                            <button *ngIf="abierto" type="button" class="btn btn-success p-2 m-2 b-2 py-2"
                             (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">
                             Agregar al carrito
                             </button>
