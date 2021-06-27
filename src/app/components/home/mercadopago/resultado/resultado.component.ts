@@ -5,6 +5,8 @@ import { PedidoService } from 'src/app/services/pedido.service';
 import { Usuario } from 'src/app/models/Usuario';
 import { MercadopagoDatos } from 'src/app/models/MercadopagoDatos';
 import { MercadopagoDatosService } from 'src/app/services/mercadopagoDatos.service';
+import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
+import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
 
 @Component({
   selector: 'app-resultado',
@@ -16,6 +18,7 @@ export class ResultadoComponent implements OnInit {
   constructor(
     protected mercadopagoService: MercadopagoDatosService,
     protected pedidoService: PedidoService,
+    protected insumoService: ArticuloInsumoService,
     protected router: Router,
     protected route: ActivatedRoute
     ) { }
@@ -39,9 +42,36 @@ export class ResultadoComponent implements OnInit {
       //actualiar el tipo de pago para mp
       this.tipoPago();
 
-      
+      //reducir stock si el pedido es exitoso
+      if(this.resultado == "exitoso"){
+        this.pedido.detallePedido.map( detalle => {
+          
+          if(detalle.articuloManofacturado){
+            detalle.articuloManofacturado.articuloManofacturadoDetalle.map( manufDetalle => {
+              manufDetalle.articuloInsumo.stockActual = manufDetalle.articuloInsumo.stockActual-1;
+
+              //obtengo el articulo insumo del pedido y los paso con el stock reducido al editar
+              this.insumoService.editar(manufDetalle.articuloInsumo).subscribe( insumo =>{
+                console.log("insumo de articulo manufacturado reducido");
+              }); 
+            });
+          }
+
+          if(detalle.articuloInsumo){
+            detalle.articuloInsumo.stockActual = detalle.articuloInsumo.stockActual -1;
+
+            //obtengo el articulo insumo del pedido y los paso con el stock reducido al editar
+            this.insumoService.editar(detalle.articuloInsumo).subscribe( insumo =>{
+              console.log("insumo bebida reducido");
+            }); 
+          }
+
+        })
+
+        
+      }
     });
-    
+
   }
 
   tipoPago(){

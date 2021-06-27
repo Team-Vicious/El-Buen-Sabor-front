@@ -81,13 +81,6 @@ export class NavbarComponent implements OnInit {
         
     }
 
-    /*
-    traerPedidos(){
-        this.pedidoService.getPedidosByClienteId(+this.clienteId).subscribe( pedidos=>{
-          this.pedidos = pedidos as Pedido[];
-        })
-    }
-    */
 
     eliminarArticuloManofacturadoDelCarro(id:number){
       
@@ -126,17 +119,6 @@ export class NavbarComponent implements OnInit {
         var detallepedido:DetallePedido = new DetallePedido();
         detallepedido.articuloManofacturado = articulo;
 
-        /*
-        //recorro los articulo para ver si se repiten y aumentar la cantidad
-        this.articulosManofaturadosCarrito.forEach(articuloAux =>{
-          if (articulo.id == articuloAux.id) {
-            countCantidad++;
-          }
-        });
-
-        //asigno cantidad
-        detallepedido.cantidad = countCantidad;
-        */
         detallepedido.cantidad = 1;
 
         //total precio detalle
@@ -156,17 +138,6 @@ export class NavbarComponent implements OnInit {
         var detallepedido:DetallePedido = new DetallePedido();
         detallepedido.articuloInsumo = articulo;
 
-        /*
-        //recorro los articulo para ver si se repiten y aumentar la cantidad
-        this.articulosManofaturadosCarrito.forEach(articuloAux =>{
-          if (articulo.id == articuloAux.id) {
-            countCantidad++;
-          }
-        });
-
-        //asigno cantidad
-        detallepedido.cantidad = countCantidad;
-        */
         detallepedido.cantidad = 1;
 
         //total precio detalle
