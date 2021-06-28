@@ -1,4 +1,5 @@
-<app-navbar [usuarioId]="usuarioId" [adminId]="adminId"></app-navbar>
+<app-navbar *ngIf="usuarioId && !adminId" [usuarioId]="usuarioId"></app-navbar>
+<app-navbar *ngIf="adminId && usuarioId"  [adminId]="adminId"></app-navbar>
 <div class="card text-white bg-primary p-4 b-5 m-4">
     <div class="card text-white bg-secondary mb-3">
 
@@ -78,6 +79,7 @@
           <li><a class="dropdown-item" (click)="setearRol('user')">Usuario</a></li>
           <li><a class="dropdown-item" (click)="setearRol('cocinero')">Cocinero</a></li>
           <li><a class="dropdown-item" (click)="setearRol('cajero')">Cajero</a></li>
+          <li><a class="dropdown-item" (click)="setearRol('delivery')">Delivery</a></li>
           <li><a class="dropdown-item" (click)="setearRol('admin')">Admin</a></li>
         </ul>
     </div>
