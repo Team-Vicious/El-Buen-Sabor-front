@@ -50,9 +50,11 @@ export class RegisterComponent implements OnInit {
     
     if (this.adminId) {
         
-      this.usuarioService.ver(+this.adminId).subscribe( usuario =>{
+      this.usuarioService.ver(+this.usuarioId).subscribe( usuario =>{
         this.usuario = usuario;
         this.cliente = this.usuario.cliente;
+        var bytes  = CryptoJS.AES.decrypt(usuario.clave, 'teamvicious');
+        this.usuario.clave = bytes.toString(CryptoJS.enc.Utf8);
         this.domicilio = this.usuario.cliente.domicilio;
       });
 
