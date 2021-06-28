@@ -56,7 +56,7 @@ export class AdminComponent implements OnInit {
 
   editarUsuario(usuarioId: number) {
 
-    this.router.navigate(['update/', this.adminId , 'admin', usuarioId]);
+    this.router.navigate(['update/', usuarioId, 'admin', this.adminId]);
   }
 
 
