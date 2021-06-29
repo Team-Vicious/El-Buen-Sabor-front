@@ -55,19 +55,20 @@ export class AdminComponent implements OnInit {
       this.listarRubroArticulo = false;
       this.listarRubroGeneral = false;
       this.usuarios = usuarios as Usuario[];
+      
+      //verificar cantidad de cocineros
+      var cantCocineros= 0;
+      this.usuarios.map(us =>{
+        if(us.rol == 'cocinero'){
+          cantCocineros = cantCocineros+1;
+        }
+      })
+      this.configuracionService.ver(1).subscribe(configuracion =>{
+        configuracion.cantidadCocineros = cantCocineros;
+        this.configuracionService.editar(configuracion).subscribe(conf => console.log('cantidad cocineros actualizada'));
+      });
     })
 
-    //verificar cantidad de cocineros
-    var cantidadCocineros= 0;
-    this.usuarios.map(us =>{
-      if(us.rol == 'cocinero'){
-        cantidadCocineros++;
-      }
-    })
-    this.configuracionService.ver(1).subscribe(configuracion =>{
-      configuracion.cantidadCocineros = cantidadCocineros;
-      this.configuracionService.editar(configuracion).subscribe(conf => console.log('cantidad cocineros actualizada'));
-    });
   }
 
   editarUsuario(usuarioId: number) {

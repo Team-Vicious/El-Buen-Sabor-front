@@ -110,7 +110,7 @@
         <li><a *ngIf="usuario?.rol != 'userg'" class="dropdown-item"
             [routerLink]="['/update', usuario?.id]">Editar Cuenta</a></li>
         <li><a class="dropdown-item" [routerLink]="['/updateDomicilio', usuario?.id]">Editar Domicilio</a></li>
-        <li><a class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">Historial de pedidos</a></li>
+        <li><a *ngIf="!adminId" class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">Historial de pedidos</a></li>
 
         <li><a *ngIf="adminId || usuario?.rol == 'admin'" class="dropdown-item" [routerLink]="['/admin', usuario?.id]">Panel Admmin</a></li>
         <li>
