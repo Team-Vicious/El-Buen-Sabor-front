@@ -5,6 +5,7 @@ import { RubroGeneral } from 'src/app/models/RubroGeneral';
 import { RubroArticuloService } from 'src/app/services/rubroArticulo.service';
 import { RubroGeneralService } from 'src/app/services/rubroGeneral.service';
 import { Location } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rubro-form',
@@ -72,6 +73,8 @@ export class RubroFormComponent implements OnInit {
     if(this.tipoRubro == 'general'){
       this.serviceRubroGeneral.crear(this.rubroGeneral).subscribe( rubro => {
         console.log("rubro general creado");
+        Swal.fire('CREADO!',`Rubro creado con exito`,'success');
+        this.volver();
       });
 
     }
@@ -79,6 +82,8 @@ export class RubroFormComponent implements OnInit {
     if(this.tipoRubro == 'articulo'){
       this.serviceRubroArticulo.crear(this.rubroArticulo).subscribe( rubro => {
         console.log("rubro articulo creado");
+        Swal.fire('CREADO!',`Rubro creado con exito`,'success');
+        this.volver();
       });
 
     }
@@ -90,6 +95,8 @@ export class RubroFormComponent implements OnInit {
       if(this.rubroId){
         this.serviceRubroGeneral.editar(this.rubroGeneral).subscribe( rubro => {
           console.log("rubro general editado");
+          Swal.fire('EDITADO!',`Rubro editado con exito`,'success');
+          this.volver();
         });
 
       }
@@ -100,6 +107,8 @@ export class RubroFormComponent implements OnInit {
       if(this.rubroId){
         this.serviceRubroArticulo.editar(this.rubroArticulo).subscribe( rubro => {
           console.log("rubro articulo editado");
+          Swal.fire('EDITADO!',`Rubro editado con exito`,'success');
+          this.volver();
         });
 
       }

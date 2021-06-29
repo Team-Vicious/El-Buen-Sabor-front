@@ -316,7 +316,7 @@ export class AdminComponent implements OnInit {
               </h5>
               <br>
               <h5>
-              Cantidad de codineros: ${config.cantidadCocineros}
+              Cantidad de cocineros: ${config.cantidadCocineros}
               </h5>
               <br>
               <br>
