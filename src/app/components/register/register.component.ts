@@ -66,7 +66,9 @@ export class RegisterComponent implements OnInit {
     this.usuario.cliente = this.cliente;
     this.usuario.cliente.email = this.usuario.usuario;
     this.usuario.cliente.domicilio =this.domicilio;
+    if (this.route.snapshot.paramMap.get('ida')===null){
     this.usuario.rol = "user";
+    }
     this.usuario.clave = (CryptoJS.AES.encrypt(this.usuario.clave.trim(), 'teamvicious')).toString();
 
     this.usuarioService.crear(this.usuario).subscribe(user => {

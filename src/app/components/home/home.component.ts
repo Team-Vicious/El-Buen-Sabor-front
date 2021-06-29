@@ -105,11 +105,16 @@ export class HomeComponent implements OnInit {
 
   almacenarArticulosManofacturadosSeleccionados(idArtuculo: number) {
 
+    if (this.route.snapshot.paramMap.get('idu')===null){
+      Swal.fire('Acción necesaria!',`Para agregar al carrito este producto es necesario loguearse`,'warning');   
+    }
+    else{
     this.articulosManofaturados.map(articulo => {
       if (articulo.id == idArtuculo) {
         this.articulosManofaturadosCarrito.push(articulo);
       }
     })
+    }
   }
 
   almacenarArticulosInsumoSeleccionados(idArtuculo: number) {
