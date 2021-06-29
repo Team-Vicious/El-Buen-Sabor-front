@@ -186,7 +186,7 @@ export class NavbarComponent implements OnInit {
           </h5>
           <br>
           <br>
-          Tiempo de Concina ${tiempoCocina=tiempoCocina/this.configuracion.cantidadCocineros} Minutos
+          Tiempo de Cocina ${tiempoCocina=tiempoCocina/this.configuracion.cantidadCocineros} Minutos
           <br>
           Tiempo delivery 20 Minutos aprox
           <br>
