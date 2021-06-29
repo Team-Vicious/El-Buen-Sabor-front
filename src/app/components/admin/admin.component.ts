@@ -13,6 +13,7 @@ import { RubroArticulo } from 'src/app/models/RubroArticulo';
 import { RubroGeneralService } from 'src/app/services/rubroGeneral.service';
 import { RubroArticuloService } from 'src/app/services/rubroArticulo.service';
 import { RubroGeneral } from 'src/app/models/RubroGeneral';
+import { ConfiguracionService } from 'src/app/services/configuracion.service';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class AdminComponent implements OnInit {
   constructor(
     private reporteService: ReporteService,
     private usuarioService: UsuarioService,
+    private configuracionService: ConfiguracionService,
     private rubroGeneralService: RubroGeneralService,
     private rubroArticuloService: RubroArticuloService,
     private articuloManofacturadoService: ArticuloManofacturadoService,
@@ -39,6 +41,8 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.adminId = +this.route.snapshot.paramMap.get('idu')!;
+
+    
   }
 
   listarUsuario: boolean = false;
@@ -52,6 +56,18 @@ export class AdminComponent implements OnInit {
       this.listarRubroGeneral = false;
       this.usuarios = usuarios as Usuario[];
     })
+
+    //verificar cantidad de cocineros
+    var cantidadCocineros= 0;
+    this.usuarios.map(us =>{
+      if(us.rol == 'cocinero'){
+        cantidadCocineros++;
+      }
+    })
+    this.configuracionService.ver(1).subscribe(configuracion =>{
+      configuracion.cantidadCocineros = cantidadCocineros;
+      this.configuracionService.editar(configuracion).subscribe(conf => console.log('cantidad cocineros actualizada'));
+    });
   }
 
   editarUsuario(usuarioId: number) {
@@ -284,6 +300,35 @@ export class AdminComponent implements OnInit {
     rubro.fechaBaja = new Date();
     this.rubroGeneralService.editar(rubro).subscribe( rubroUpdate =>{
       console.log("rubro dado de baja!");
+    });
+  }
+
+  mostrarConfiguracion(){
+
+    this.configuracionService.ver(1).subscribe( config => {
+
+      Swal.fire({
+        icon: 'info',
+        html: `
+              <h5>
+              Email de la empresa: ${config.emailEmpresa}
+              </h5>
+              <br>
+              <h5>
+              Cantidad de codineros: ${config.cantidadCocineros}
+              </h5>
+              <br>
+              <br>
+              Token Mercado Pago: 
+              <br>
+              ${config.tokenMercadoPago} 
+              <br>
+              <br>
+              Public Key Mercado Pago: 
+              <br>
+              TEST-5e5336b3-df68-40ba-8aa8-6882cc2bdf42`
+      });
+
     });
   }
 
