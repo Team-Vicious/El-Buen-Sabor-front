@@ -282,12 +282,12 @@
 
 
     <form class="d-flex" style="margin: 10px;">
-        <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar usuario"
+        <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar rubro"
             aria-label="Search" [(ngModel)]="
                     filterPost" style=" width: 220px;">
     </form>
 
-    <body *ngFor="let rubro of rubroArticuloArr | filterUsuario:filterPost">
+    <body *ngFor="let rubro of rubroArticuloArr | filterInsumo:filterPost">
 
         <div class="card text-white bg-dark p-2 m-2 b-2 py-2" *ngIf="(rubro.fechaBaja)===null">
             <tr>
@@ -319,12 +319,12 @@
 
 
     <form class="d-flex" style="margin: 10px;">
-        <input class="form-control p-2 m-2 b-2 py-2" name="filterPost" type="search" placeholder="Buscar usuario"
+        <input class="form-control p-2 m-2 b-2 py-2" name="filterPost" type="search" placeholder="Buscar rubro"
             aria-label="Search" [(ngModel)]="
                     filterPost" style=" width: 220px;">
     </form>
 
-    <body *ngFor="let rubro of rubroGeneralArr | filterUsuario:filterPost">
+    <body *ngFor="let rubro of rubroGeneralArr | filterInsumo:filterPost">
 
         <div class="card text-white bg-dark p-2 m-2 b-2 py-2" *ngIf="(rubro.fechaBaja)===null">
             <tr>
