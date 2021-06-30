@@ -1,29 +1,29 @@
-<app-navbar [usuarioId]="usuarioId"></app-navbar>   
+<app-navbar [usuarioId]="usuarioId"></app-navbar>
 <div class="card bg-light mb-3">
     <div class="card-header">{{titulo}}</div>
     <div class="card-body">
-        <button backButton class="btn btn-secondary my-2" (click)="volver()" >volver</button>
+        <button backButton class="btn btn-secondary my-2" (click)="volver()">volver</button>
         <form>
             <div class="form-group">
                 <label for="denominacion">Denominacion</label>
-                <input type="text" name="denominacion" class="form-control" id="denominacion" 
-                [(ngModel)]="manufacturado.denominacion">
+                <input type="text" name="denominacion" class="form-control" id="denominacion"
+                    [(ngModel)]="manufacturado.denominacion">
                 <div class="alert alert-danger" *ngIf="error?.denominacion">
-                  {{ error.denominacion }}
+                    {{ error.denominacion }}
                 </div>
             </div>
             <div class="form-group">
                 <label for="precioVenta">Precio Venta</label>
-                <input type="text" name="precioVenta" class="form-control" id="precioVenta" 
-                [(ngModel)]="manufacturado.precioVenta">
+                <input type="text" name="precioVenta" class="form-control" id="precioVenta"
+                    [(ngModel)]="manufacturado.precioVenta">
                 <div class="alert alert-danger" *ngIf="error?.precioVenta">
                     {{ error.precioVenta }}
                 </div>
             </div>
             <div class="form-group">
                 <label for="tiempoEstimadoCocina">Tiempo Estimado Cocina</label>
-                <input type="text" name="tiempoEstimadoCocina" class="form-control" id="tiempoEstimadoCocina" 
-                [(ngModel)]="manufacturado.tiempoEstimadoCocina">
+                <input type="text" name="tiempoEstimadoCocina" class="form-control" id="tiempoEstimadoCocina"
+                    [(ngModel)]="manufacturado.tiempoEstimadoCocina">
                 <div class="alert alert-danger" *ngIf="error?.tiempoEstimadoCocina">
                     {{ error.tiempoEstimadoCocina }}
                 </div>
@@ -33,32 +33,86 @@
                     <label class="input-group-text" for="inputGroupFile01">Upload Imagen</label>
                     <input (change)="seleccionarFoto($event)" type="file" class="form-control" id="inputGroupFile01">
                 </div>
-                <img *ngIf="manufacturado.imagen"
-                            [src]="formatImage(manufacturado.imagen)"
-                            class= "img-thumbnail rounded"
-                            style= "width: 250px; cursor:pointer;">
+                <img *ngIf="manufacturado.imagen" [src]="formatImage(manufacturado.imagen)"
+                    class="img-thumbnail rounded" style="width: 250px; cursor:pointer;">
             </div>
 
             <div class="dropdown py-3">
-                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Rubros {{manufacturado.rubroGeneral?.denominacion}}
+                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Rubro: {{manufacturado.rubroGeneral?.denominacion}}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li *ngFor="let rubro of rubrosGenerales">
-                      <a class="dropdown-item" (click)="asignarRubro(rubro)">{{rubro.denominacion}}</a>
+                        <a class="dropdown-item" (click)="asignarRubro(rubro)">{{rubro.denominacion}}</a>
                     </li>
-                  
+
                 </ul>
-              </div>
-           
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" 
-                (click)="manufacturado.id? editarConFoto(): crearConFoto()">
-                {{ manufacturado.id? 'Editar': 'Crear' }}
-                </button>
-           
             </div>
-            
+
+            <div class="card p-2 m-2 b-2 y-2 bg-secondary border-dark mb-3" *ngIf="manufacturado.id">
+                <div class="card p-2 m-2 b-2 y-2 border-dark mb-3">
+                    <div class="card-header border-dark mb-3">
+                        <h3>Crear Detalle</h3>
+
+                    </div>
+
+                    <div class="dropdown py-3">
+                        <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Insumo {{articuloInsumo?.denominacion}}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li *ngFor="let insumo of articulosInsumos">
+                                <a class="dropdown-item" (click)="asignarInsumo(insumo)">{{insumo.denominacion}}</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="text" name="cantidad" class="form-control" id="cantidad"
+                            [(ngModel)]="detalleArticuloManufacturado.cantidad">
+                    </div>
+                    <div class="form-group">
+                        <label for="unidadMedida">Unidad de Medida</label>
+                        <input type="text" name="unidadMedida" class="form-control" id="unidadMedida"
+                            [(ngModel)]="detalleArticuloManufacturado.unidadMedida">
+                    </div>
+                    <button class="btn btn-success" (click)="asignarDetalle()">
+                        Crear Detalle
+                    </button>
+                </div>
+
+                <div class="card p-2 m-2 b-2 y-4 border-dark mb-3">
+                    <div class="card-header border-dark mb-3">
+                        <h3>Lista de detalles del Articulo Manufacturado</h3>
+                    </div>
+                    <div class="card p-2 m-2 b-2 y-2 border-primary mb-3"
+                        *ngFor="let detalle of manufacturado.articuloManofacturadoDetalle">
+                        <div *ngIf="!detalle.fechaBaja" class="card p-2 m-2 b-2 y-2">
+
+                            <div class="card-body">
+                                <p>Cantidad: {{detalle.cantidad}}</p>
+                                <p>Unidad de Medida: {{detalle.unidadMedida}}</p>
+                                <p>Insumo: {{detalle.articuloInsumo?.denominacion}}</p>
+                            </div>
+                            <button class="btn btn-danger" (click)="eliminarDetalle(detalle)">
+                                X
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-primary"
+                    (click)="manufacturado.id? editarConFoto(): crearConFoto()">
+                    {{ manufacturado.id? 'Editar': 'Crear' }}
+                </button>
+
+            </div>
+
         </form>
     </div>
 </div>
