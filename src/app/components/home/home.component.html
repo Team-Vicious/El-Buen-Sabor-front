@@ -1,11 +1,42 @@
 <app-navbar [usuarioId]="usuarioId" [articulosManofaturadosCarrito]="articulosManofaturadosCarrito"
     [articuloInsumoCarrito]="articuloInsumoCarrito">    
 </app-navbar>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);"  for="btnradio1">Facebook</label>
+  
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio2">Twetter</label>
+  
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio3">Instagram</label>
+  
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio4">Ubicacion</label>
+  
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio5">Horario de Atencion</label>
+  
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio6">Contacto</label>
+  
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio7" autocomplete="off">
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio7">Info Adicional</label>
+  
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio8" autocomplete="off">
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio8">Acerca De...</label>
+  
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio9" autocomplete="off">
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio9">Info Del Local</label>
+  
+    </div>
+  </nav>
 
 <form class="d-flex" style="float: right;">
     <input class="form-control m-5"  name="filterPost" type="search" placeholder="Buscar artículo" aria-label="Search"  [(ngModel)]="
     filterPost" style=" width: 220px;">
-  </form>
+</form>
 
 
 <ul class="nav justify-content-center">

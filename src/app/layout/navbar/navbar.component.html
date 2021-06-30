@@ -1,143 +1,121 @@
-<body>
+<!-- NAVIGATION -->
 
-  <!-- NAVIGATION -->
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/home',usuarioId]" *ngIf="usuarioId">
+      <img src="assets/images/logo1.png" alt="El Buen Sabor" style="width: 100%">
 
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" [routerLink]="['/home',usuarioId]" *ngIf="usuarioId">
-        <img src="assets/images/logo1.png" alt="El Buen Sabor" style="width: 100%">
+    </a>
+    <a class="navbar-brand" [routerLink]="['/home',adminId]" *ngIf="adminId">
+      <img src="assets/images/logo1.png" alt="El Buen Sabor" style="width: 100%">
 
-      </a>
-      <a class="navbar-brand" [routerLink]="['/home',adminId]" *ngIf="adminId">
-        <img src="assets/images/logo1.png" alt="El Buen Sabor" style="width: 100%">
+    </a>
+    <a class="navbar-brand" routerLink="/home" *ngIf="!adminId && !usuarioId">
+      <img src="assets/images/logo1.png" alt="El Buen Sabor" style="width: 100%">
 
-      </a>
-      <a class="navbar-brand" routerLink="/home" *ngIf="!adminId && !usuarioId">
-        <img src="assets/images/logo1.png" alt="El Buen Sabor" style="width: 100%">
+    </a>
 
-      </a>
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
 
-      </button>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
 
 
 
-          <li class="nav-item">
-            <a class="nav-link" href="/home" routerLink="/home" routerLinkActive="active">Acerca de...</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home" routerLink="/home" routerLinkActive="active">Acerca de...</a>
+        </li>
 
-        </ul>
+      </ul>
 
-
-      </div>
 
     </div>
 
-    <form class="d-flex">
-      <button *ngIf="validarLogin == false"
-        class="btn btn-outline-success" routerLink="/login" routerLinkActive="active">
-        Ingresar
-      </button>
-    </form>
+  </div>
 
-    <li *ngIf="usuario?.cliente?.id && usuario?.rol == 'user' || usuario?.rol == 'userg'" class="nav-item dropdown p-5 b-2 m-2">
-      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:orange;">
-        CARRITO
-      </a>
+  <form class="d-flex">
+    <button *ngIf="validarLogin == false" class="btn btn-outline-success" routerLink="/login" routerLinkActive="active">
+      Ingresar
+    </button>
+  </form>
+
+  <li *ngIf="usuario?.cliente?.id && usuario?.rol == 'user' || usuario?.rol == 'userg'"
+    class="nav-item dropdown p-5 b-2 m-2">
+    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:orange;">
+      CARRITO
+    </a>
 
 
-      <ul class="dropdown-menu">
-        <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articulosManofaturadosCarrito">
-          <div class="card-body">
-            <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
-              (click)="eliminarArticuloManofacturadoDelCarro(articulo.id)">x</button>
-            <h6 class="card-title p-3">
-              {{articulo.denominacion}}
+    <ul class="dropdown-menu">
+      <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articulosManofaturadosCarrito">
+        <div class="card-body">
+          <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
+            (click)="eliminarArticuloManofacturadoDelCarro(articulo.id)">x</button>
+          <h6 class="card-title p-3">
+            {{articulo.denominacion}}
 
-            </h6>
+          </h6>
 
-            <img *ngIf="articulo.imagen"
-                            [src]="formatImage(articulo.imagen)"
-                            class= "img-thumbnail rounded"
-                            style= "width: 250px; cursor:pointer;">
+          <img *ngIf="articulo.imagen" [src]="formatImage(articulo.imagen)" class="img-thumbnail rounded"
+            style="width: 250px; cursor:pointer;">
 
-            <p>Tiempo estimado de cocina:{{articulo.tiempoEstimadoCocina}}</p>
-            <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
-
-          </div>
+          <p>Tiempo estimado de cocina:{{articulo.tiempoEstimadoCocina}}</p>
+          <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
 
         </div>
-
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-        <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articuloInsumoCarrito">
-          <div class="card-body">
-            <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
-              (click)="eliminarInsumoDelCarro(articulo.id)">x</button>
-            <h6 class="card-title">
-              {{articulo.denominacion}}
-
-            </h6>
-
-            <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
-
-          </div>
-        </div>
-        <button type="submit" (click)="comprar()" class="btn btn-danger m-2 b-2">COMPRAR</button>
-      </ul>
-    </li>
-
-
-    <li *ngIf="usuario?.cliente?.id || usuarioAdmin?.cliente?.id" class="nav-item dropdown p-3 b-5 m-3">
-      <a *ngIf="usuarioId" class="dropdown-toggle" data-toggle="dropdown" role="button"
-        aria-expanded="false" style="color:orange;">
-        {{usuario?.cliente?.email}}
-      </a>
-      <a *ngIf="adminId" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
-        style="color:orange;">
-        {{usuarioAdmin?.cliente?.email}}
-      </a>
-
-      <ul class="dropdown-menu">
-        <li><a *ngIf="usuario?.rol != 'userg'" class="dropdown-item"
-            [routerLink]="['/update', usuario?.id]">Editar Cuenta</a></li>
-        <li><a class="dropdown-item" [routerLink]="['/updateDomicilio', usuario?.id]">Editar Domicilio</a></li>
-        <li><a *ngIf="!adminId" class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">Historial de pedidos</a></li>
-
-        <li><a *ngIf="adminId || usuario?.rol == 'admin'" class="dropdown-item" [routerLink]="['/admin', usuario?.id]">Panel Admmin</a></li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-        <li><a class="dropdown-item" routerLink="/home">Log Out</a></li>
-      </ul>
-    </li>
-
-  </nav>
-
-  <!-- HEADER -->
-
-  <header class="header">
-
-    <div class="background-overlay text-white py-5">
-      <div class="container">
 
       </div>
 
-    </div>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <div class="card m-2 b-2" style="width: 18rem;" *ngFor="let articulo of articuloInsumoCarrito">
+        <div class="card-body">
+          <button type="submit" class="btn btn-warning m-2 b-2" style="position: absolute; top: 0; right:0;"
+            (click)="eliminarInsumoDelCarro(articulo.id)">x</button>
+          <h6 class="card-title">
+            {{articulo.denominacion}}
 
-  </header>
+          </h6>
 
-  <!-- BOOTSTRAP JS-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
-    </script>
+          <h6 class="card-subtitle mb-2 text-muted">${{articulo.precioVenta}}</h6>
 
-</body>
+        </div>
+      </div>
+      <button type="submit" (click)="comprar()" class="btn btn-danger m-2 b-2">COMPRAR</button>
+    </ul>
+  </li>
+
+
+  <li *ngIf="usuario?.cliente?.id || usuarioAdmin?.cliente?.id" class="nav-item dropdown p-3 b-5 m-3">
+    <a *ngIf="usuarioId" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
+      style="color:orange;">
+      {{usuario?.cliente?.email}}
+    </a>
+    <a *ngIf="adminId" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
+      style="color:orange;">
+      {{usuarioAdmin?.cliente?.email}}
+    </a>
+
+    <ul class="dropdown-menu">
+      <li><a *ngIf="usuario?.rol != 'userg'" class="dropdown-item" [routerLink]="['/update', usuario?.id]">Editar
+          Cuenta</a></li>
+      <li><a class="dropdown-item" [routerLink]="['/updateDomicilio', usuario?.id]">Editar Domicilio</a></li>
+      <li><a *ngIf="!adminId" class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">Historial de
+          pedidos</a></li>
+
+      <li><a *ngIf="adminId || usuario?.rol == 'admin'" class="dropdown-item"
+          [routerLink]="['/admin', usuario?.id]">Panel Admmin</a></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li><a class="dropdown-item" routerLink="/home">Log Out</a></li>
+    </ul>
+  </li>
+
+</nav>
