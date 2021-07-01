@@ -1,28 +1,33 @@
 <app-navbar [usuarioId]="usuarioId">
 </app-navbar>
 
-<body class="card text-white bg-dark m-4 p-4 " *ngFor="let pedido of listaPedidos">
+<body class="card text-white bg-dark m-4 p-4 border-white " *ngFor="let pedido of listaPedidos">
     <tr>
-        <a>Número de pedido: {{pedido.id}}</a>
+        <h5>Número de pedido: {{pedido.id}}</h5>
     </tr>
     <tr>
-        <a>Fecha del pedido: {{pedido.fecha}}</a>
+        <h5>Fecha del pedido: {{pedido.fecha | date:"MM/dd/yy"}}</h5>
     </tr>
     <tr>
-        <a>Total: {{pedido.total}}</a>
+        <h5>Total: ${{pedido.total}}</h5>
     </tr>
     <tr>
-        <body class="card text-white bg-dark mx-4 px-4" >
+        <body class="card text-white bg-secondary p-2 m-2 b-2 py-2" >
             
             <br>
-            <a>Detalles:</a>
+            <h5 style="color: white; font-size: 20px;">Detalles:</h5>
             <br>
             
-                <a *ngFor="let detalle of pedido.detallePedido">
-                    <div *ngIf="detalle?.articuloManofacturado">
+                <div *ngFor="let detalle of pedido.detallePedido">
+                    <div class="card text-dark bg-dark mb-3 p-2 m-2 b-2 py-2" *ngIf="detalle?.articuloManofacturado">
 
-                        <p></p>
-                        {{detalle.articuloManofacturado.denominacion}}
+                        <br>
+                        <h5 style="color: white; font-size: 20px;">
+                            {{detalle.articuloManofacturado.denominacion}}
+                        </h5>
+                        <h5 style="color: white; font-size: 20px;">
+                            Sub-Total: ${{detalle.subTotal}}
+                        </h5>
                         
                         <div>
                             <img
@@ -31,18 +36,23 @@
                             style= "width: 250px; cursor:pointer;">
                         </div>
                     </div>
-                    <div *ngIf="detalle?.articuloInsumo">
+                    <div class="card text-dark bg-dark p-2 m-2 b-2 py-2" *ngIf="detalle?.articuloInsumo">
 
-                        <p></p>
-                        {{detalle.articuloInsumo.denominacion}}
+                        <br>
+                        <h5 style="color: white; font-size: 20px;">
+                            {{detalle.articuloInsumo.denominacion}}
+                        </h5>
+                        <h5 style="color: white; font-size: 20px;">
+                            Sub-Total: ${{detalle.subTotal}}
+                        </h5>
                         
                     </div>
-                </a>
+                </div>
         </body>
     </tr>
     <br>
-    <button type="button" class="btn btn-warning" (click)="generatePdf(pedido)" >
-        Mostrar Factura
+    <button type="button" class="btn" style="background-color:rgb(230, 18, 18); color:rgb(255, 255, 255);" (click)="generatePdf(pedido)" >
+        Mostrar Factura en PDF <i class="bi bi-clipboard"></i>
     </button>
 </body>
 

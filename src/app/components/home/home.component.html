@@ -26,6 +26,7 @@
   </nav>
 
 <form class="d-flex" style="float: right;">
+    
     <input class="form-control m-5"  name="filterPost" type="search" placeholder="Buscar artículo" aria-label="Search"  [(ngModel)]="
     filterPost" style=" width: 220px;">
 </form>
@@ -44,7 +45,7 @@
         <tbody>
             <div class="row">
 
-                <body class="card text-white bg-dark p-2 m-2 b-2 py-2" *ngFor="let articulo of articulosManofaturados | filter:filterPost">
+                <body class="card text-white bg-dark p-2 m-2 b-2 py-2 border-light"  *ngFor="let articulo of articulosManofaturados | filter:filterPost">
 
                     <div>
 
@@ -60,13 +61,13 @@
 
                         <td>
                         <tr>
-                            <a>{{articulo.denominacion}}</a>
+                            <h5>{{articulo.denominacion}}</h5>
                         </tr>
                         <tr>
-                            <a>
+                            <h4>
                                 $ {{articulo.precioVenta}}
                                 
-                            </a>
+                            </h4>
                         </tr>
 
 
@@ -78,14 +79,14 @@
 
                                 <button *ngIf="abierto" type="button" class="btn btn-success p-2 m-2 b-2 py-2"
                                 (click)="almacenarArticulosManofacturadosSeleccionados(articulo.id)"
-                                routerLinkActive="active">
-                                Agregar al carrito
+                                routerLinkActive="active" style="font-size: 17px;">
+                                Agregar al carrito <i class="bi bi-cart4"></i>
                                 </button>
                                 
                                 <button *ngIf="abierto" type="button" class="btn btn-warning p-2 m-2 b-2 py-2"
                                 (click)="verDetalle(articulo)"
-                                routerLinkActive="active">
-                                Ver Detalle
+                                routerLinkActive="active" style="font-size: 17px;">
+                                Ver Detalle <i class="bi bi-border-width"></i>
                                 </button>
                             </div>
                             <div *ngIf="verificarStockArtManuf(articulo) == false">

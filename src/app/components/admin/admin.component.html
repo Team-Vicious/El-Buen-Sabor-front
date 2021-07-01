@@ -17,6 +17,19 @@
         </ul>
     </li>
 
+    
+
+    <li class="nav-item dropdown p-3 b-5 m-3">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#000000d3;">
+            usuarios
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" [routerLink]="['/register/admin',adminId]">agregar usuario</a></li>
+
+        </ul>
+    </li>
+
     <div class="dropdown py-3">
 
         <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -35,24 +48,12 @@
 
         </ul>
     </div>
-
-
-    <li class="nav-item dropdown p-3 b-5 m-3">
-        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#000000d3;">
-            usuarios
-        </a>
-
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" [routerLink]="['/register/admin',adminId]">agregar usuario</a></li>
-
-        </ul>
-    </li>
-    <button type="button" class="btn btn-secondary" (click)="listarUsuarios()">Listar Usuarios</button>
-    <button type="button" class="btn btn-secondary" (click)="listarArticuloManofacturados()">Listar Articulos
+    <button type="button" class="btn btn-primary" (click)="listarUsuarios()"><i class="bi bi-person-square"></i> Listar Usuarios</button>
+    <button type="button" class="btn btn-primary" (click)="listarArticuloManofacturados()"><i class="bi bi-egg-fried"></i> Listar Articulos
         Manofacturados</button>
-    <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos(true)">Listar Articulos
-        insumo</button>
-    <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos(false)">Listar Bebidas</button>
+    <button type="button" class="btn btn-primary" (click)="listarArticuloInsumos(true)"><i class="bi bi-egg"></i> Listar Articulos
+        insumo </button>
+    <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos(false)">Listar Bebidas <i class="bi bi-cup-straw"></i></button>
     <button type="button" class="btn btn-secondary" (click)="listarRubrosGeneral()">Listar Rubros de Articulos
         Manufacturados</button>
     <button type="button" class="btn btn-secondary" (click)="listarRubrosArticulo()">Listar Rubros de Articulos
@@ -149,7 +150,7 @@
                 <button type="button" class="btn btn-warning p-2 m-2 b-2 py-2" (click)="editarUsuario(usuario.id)"
                     routerLinkActive="active">Editar</button>
                 <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="borrarUsuario(usuario)"
-                    routerLinkActive="active">Eliminar</button>
+                    routerLinkActive="active"><i class="bi bi-trash-fill"></i> Eliminar</button>
             </td>
         </div>
 
@@ -200,7 +201,7 @@
                     [routerLink]="['/',adminId,'manufacturados','form', articulo.id]"
                     routerLinkActive="active">Editar</button>
                 <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="borrarArticuloManofacturado(articulo)"
-                    routerLinkActive="active">Eliminar</button>
+                    routerLinkActive="active"><i class="bi bi-trash-fill"></i> Eliminar</button>
             </td>
         </div>
     </body>
@@ -274,7 +275,7 @@
                 <button type="button" class="btn btn-warning p-2 m-2 b-2 py-2" [routerLink]="['/insumo',adminId,'form',articulo.id]"
                     routerLinkActive="active">Editar</button>
                 <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="borrarInsumo(articulo)"
-                    routerLinkActive="active">Eliminar</button>
+                    routerLinkActive="active"><i class="bi bi-trash-fill"></i> Eliminar</button>
             </td>
         </div>
     </body>
@@ -310,7 +311,7 @@
                     [routerLink]="['/admin',adminId,'rubro','articulo',rubro.id]"
                     routerLinkActive="active">Editar</button>
                 <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="eliminarRubroArticulo(rubro)"
-                    routerLinkActive="active">Eliminar</button>
+                    routerLinkActive="active"><i class="bi bi-trash-fill"></i> Eliminar</button>
             </td>
         </div>
 
@@ -342,7 +343,7 @@
                     [routerLink]="['/admin',adminId,'rubro','general',rubro.id]"
                     routerLinkActive="active">Editar</button>
                 <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="eliminarRubroGeneral(rubro)"
-                    routerLinkActive="active">Eliminar</button>
+                    routerLinkActive="active"><i class="bi bi-trash-fill"></i> Eliminar</button>
             </td>
         </div>
 
