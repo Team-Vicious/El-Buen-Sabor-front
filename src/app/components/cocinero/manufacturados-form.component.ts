@@ -64,31 +64,35 @@ export class ManufacturadosFormComponent implements OnInit {
 
   public crear(): void {
 
-    //creo el articulo
-    this.service.crear(this.manufacturado).subscribe(manufacturado => {
+    /*
+    //mejor que elija foto obligatoriamente
+    this.service.crear(this.manufacturado)
+      .subscribe(articulo => {
+        articulo.articuloManofacturadoDetalle = [];
+        this.manufacturado.articuloManofacturadoDetalle.map(detalle => {
+          this.serviceArticuloManufacturadoDetalle.crear(detalle).subscribe(det => {
 
-      //recorro los detalles 
-      this.manufacturado.articuloManofacturadoDetalle.map(detalle =>{
-
-        //persisto los detalles y lo asigno al articuloManuf para despues actualizar
-        this.serviceArticuloManufacturadoDetalle.crear(detalle).subscribe(det =>{
-          manufacturado.articuloManofacturadoDetalle.push(det);
+            articulo.articuloManofacturadoDetalle.push(det);
+            //actualizo el manufacturado
+            this.service.editar(articulo).subscribe(manuf => {
+              console.log("manuf detalle agregado");
+            });
+          })
         });
-      });
+        //articulo.articuloManofacturadoDetalle = this.manufacturado.articuloManofacturadoDetalle;
 
-      //actualizo el manufacturado
-      this.service.editar(manufacturado).subscribe(manuf => {
+        //console.log(articulo);
+        Swal.fire('Nuevo ', `${articulo.denominacion} creado con exito`, 'success');
+        this.volver();
 
-      });
-      Swal.fire('Nuevo:', `Manufacturado ${manufacturado.denominacion} creado con éxito`, 'success');
-      this.volver();
-
-    }, err => {
-      if (err.status === 400) {
-        this.error = err.error;
-        console.log(this.error);
-      }
-    });
+      }, err => {
+        if (err.status === 400) {
+          this.error = err.error;
+          console.log(this.error);
+        }
+      })
+      */
+      Swal.fire('ERROR', `falta agregar una imagen!`, 'error');
   }
 
 
@@ -141,21 +145,21 @@ export class ManufacturadosFormComponent implements OnInit {
           .subscribe(articulo => {
             articulo.articuloManofacturadoDetalle = [];
             this.manufacturado.articuloManofacturadoDetalle.map(detalle => {
-              this.serviceArticuloManufacturadoDetalle.crear(detalle).subscribe(det =>{
-                
+              this.serviceArticuloManufacturadoDetalle.crear(detalle).subscribe(det => {
+
                 articulo.articuloManofacturadoDetalle.push(det);
                 //actualizo el manufacturado
                 this.service.editar(articulo).subscribe(manuf => {
-                    console.log("manuf detalle agregado");
+                  console.log("manuf detalle agregado");
                 });
               })
             });
             //articulo.articuloManofacturadoDetalle = this.manufacturado.articuloManofacturadoDetalle;
-            
+
             //console.log(articulo);
             Swal.fire('Nuevo ', `${articulo.denominacion} creado con exito`, 'success');
             this.volver();
-            
+
           }, err => {
             if (err.status === 400) {
               this.error = err.error;
@@ -197,10 +201,10 @@ export class ManufacturadosFormComponent implements OnInit {
     this.manufacturado.rubroGeneral = rubro as RubroGeneral;
     console.log("rubro asignado", this.manufacturado.rubroGeneral.denominacion);
 
-    if(this.manufacturado.id){
+    if (this.manufacturado.id) {
 
       this.service.editar(this.manufacturado).subscribe(manuf => console.log("rubro actualizado"));
-    }else{
+    } else {
       this.manufacturado.rubroGeneral = rubro;
     }
   }
@@ -219,19 +223,19 @@ export class ManufacturadosFormComponent implements OnInit {
     detalleAux.cantidad = this.detalleArticuloManufacturado.cantidad;
     detalleAux.unidadMedida = this.detalleArticuloManufacturado.unidadMedida;
 
-    
 
-    if(this.manufacturado.id){
+
+    if (this.manufacturado.id) {
       this.serviceArticuloManufacturadoDetalle.crear(detalleAux).subscribe(detalle => {
 
         //esto lo hago para que al momento de agregar un articulo o eliminar, que traiga la lista actualizada
         //y despues lo agrega y despues actualiza porque sino quedan detalles en el aire y da error el update
         this.service.ver(this.manufacturado.id).subscribe(manufacturado => {
           this.manufacturado = manufacturado;
-         
+
           //asigno el detalle al articulo
           this.manufacturado.articuloManofacturadoDetalle.push(detalle);
-  
+
           //edito el manufacturado
           this.service.editar(this.manufacturado).subscribe(manu => {
             console.log("detalle agregado");
@@ -239,23 +243,23 @@ export class ManufacturadosFormComponent implements OnInit {
           });
         });
       });
-      
-      
+
+
     }
-    if(!this.manufacturado.id){
+    if (!this.manufacturado.id) {
       //lo asigno al manufacturado
 
       this.manufacturado.articuloManofacturadoDetalle.push(detalleAux);
-      console.log("detalle agregado\n",detalleAux);
+      console.log("detalle agregado\n", detalleAux);
     }
 
-    
-    
+
+
   }
 
   eliminarDetalle(detalleParametro: ArticuloManofacturadoDetalle) {
 
-    if(this.manufacturado.id){
+    if (this.manufacturado.id) {
 
       this.service.ver(this.manufacturado.id).subscribe(manufacturado => {
         this.manufacturado = manufacturado;
@@ -264,27 +268,27 @@ export class ManufacturadosFormComponent implements OnInit {
           if (detalle.id == detalleParametro.id) {
             //dar de baja
             detalle.fechaBaja = new Date();
-            this.serviceArticuloManufacturadoDetalle.editar(detalle).subscribe(det =>{
-              console.log("detalle dado de baja",det);
-            }); 
+            this.serviceArticuloManufacturadoDetalle.editar(detalle).subscribe(det => {
+              console.log("detalle dado de baja", det);
+            });
           }
-          
+
         });
       });
 
-    }else{
+    } else {
       //eliminar del array
       var i: number = 0;
       this.manufacturado.articuloManofacturadoDetalle.map(detalle => {
         if (detalle.articuloInsumo == detalleParametro.articuloInsumo
-        && detalle.cantidad == detalleParametro.cantidad
-        && detalle.unidadMedida == detalleParametro.unidadMedida) {
+          && detalle.cantidad == detalleParametro.cantidad
+          && detalle.unidadMedida == detalleParametro.unidadMedida) {
           this.manufacturado.articuloManofacturadoDetalle.splice(i, 1);
         }
         i++;
       });
     }
-    
+
   }
 }
 
