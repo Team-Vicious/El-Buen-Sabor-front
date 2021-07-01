@@ -1,19 +1,38 @@
 <app-navbar [usuarioId]="usuarioId"></app-navbar>
-<div class="card bg-light mb-3">
+
+
+<button backButton class="btn btn-danger p-2 m-2 b-2 y-2" (click)="volver()"><i class="bi bi-arrow-left-square"></i>  volver</button>
+
+
+<div class="card bg-light py-3">
     <div class="card-header">{{titulo}}</div>
     <div class="card-body">
-        <button backButton class="btn btn-secondary my-2" (click)="volver()">volver</button>
-        <form>
+        <form class="row g-3">
             <div class="form-group">
-                <label for="denominacion">Denominacion</label>
+                <label for="denominacion" class="form-label">Denominacion
+                    <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!manufacturado.denominacion">
+                        *Ingrese un valor| *Obligatorio
+                    </a>
+                    <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="manufacturado.denominacion" style="color: rgb(255, 255, 255);">
+                        ✔
+                    </a>
+                </label>
                 <input type="text" name="denominacion" class="form-control" id="denominacion"
                     [(ngModel)]="manufacturado.denominacion">
                 <div class="alert alert-danger" *ngIf="error?.denominacion">
                     {{ error.denominacion }}
                 </div>
+                
             </div>
             <div class="form-group">
-                <label for="precioVenta">Precio Venta</label>
+                <label for="precioVenta">Precio Venta
+                    <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!manufacturado.precioVenta">
+                        *Ingrese un valor numerico! | *Obligatorio
+                    </a>
+                    <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="manufacturado.precioVenta" style="color: rgb(255, 255, 255);">
+                        ✔
+                    </a>
+                </label>
                 <input type="text" name="precioVenta" class="form-control" id="precioVenta"
                     [(ngModel)]="manufacturado.precioVenta">
                 <div class="alert alert-danger" *ngIf="error?.precioVenta">
@@ -21,7 +40,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="tiempoEstimadoCocina">Tiempo Estimado Cocina</label>
+                <label for="tiempoEstimadoCocina">Tiempo Estimado Cocina
+                    <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!manufacturado.tiempoEstimadoCocina">
+                        *Ingrese un valor Numerico! | *Obligatorio
+                    </a>
+                    <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="manufacturado.tiempoEstimadoCocina" style="color: rgb(255, 255, 255);">
+                        ✔
+                    </a>
+                </label>
                 <input type="text" name="tiempoEstimadoCocina" class="form-control" id="tiempoEstimadoCocina"
                     [(ngModel)]="manufacturado.tiempoEstimadoCocina">
                 <div class="alert alert-danger" *ngIf="error?.tiempoEstimadoCocina">
@@ -30,18 +56,32 @@
             </div>
             <div class="form-group">
                 <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupFile01">Upload Imagen</label>
+                    <label class="input-group-text" for="inputGroupFile01">Upload Imagen
+                    </label>
                     <input (change)="seleccionarFoto($event)" type="file" class="form-control" id="inputGroupFile01">
+                    <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!fotoSeleccionada">
+                        *Ingrese una Foto| *Obligatorio
+                    </a>
+                    <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="fotoSeleccionada" style="color: rgb(255, 255, 255);">
+                        ✔
+                    </a>
                 </div>
                 <img *ngIf="manufacturado.imagen" [src]="formatImage(manufacturado.imagen)"
                     class="img-thumbnail rounded" style="width: 250px; cursor:pointer;">
             </div>
 
             <div class="dropdown py-3">
+                
                 <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Rubro: {{manufacturado.rubroGeneral?.denominacion}}
                 </button>
+                <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!manufacturado.rubroGeneral">
+                    *Seleccione un rubro| *Obligatorio
+                </a>
+                <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="manufacturado.rubroGeneral" style="color: rgb(255, 255, 255);">
+                    ✔
+                </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li *ngFor="let rubro of rubrosGenerales">
                         <a class="dropdown-item" (click)="asignarRubro(rubro)">{{rubro.denominacion}}</a>
@@ -50,7 +90,7 @@
                 </ul>
             </div>
 
-            <div class="card p-2 m-2 b-2 y-2 bg-secondary border-dark mb-3">
+            <div class="card p-2 m-2 b-2 y-2 bg-secondary border-dark ">
                 <div class="card p-2 m-2 b-2 y-2 border-dark mb-3">
                     <div class="card-header border-dark mb-3">
                         <h3>Crear Detalle</h3>
@@ -105,13 +145,16 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <button type="button" class="btn btn-primary"
-                    (click)="manufacturado.id? editarConFoto(): crearConFoto()">
-                    {{ manufacturado.id? 'Editar': 'Crear' }}
-                </button>
+            <div class="col text-center">
 
+                <button type="button" class="btn btn-primary align-items-center" style="height: 130px; width: 270px; left: auto; font-size: 50px;"
+                (click)="manufacturado.id? editarConFoto(): crearConFoto()">
+                {{ manufacturado.id? 'Editar': 'Crear' }}
+                <i class="bi bi-eject-fill"></i>
+                </button>
             </div>
+
+            
 
         </form>
     </div>
