@@ -33,7 +33,7 @@
                         ✔
                     </a>
                 </label>
-                <input type="text" name="precioVenta" class="form-control" id="precioVenta"
+                <input type="number" name="precioVenta" class="form-control" id="precioVenta"
                     [(ngModel)]="manufacturado.precioVenta">
                 <div class="alert alert-danger" *ngIf="error?.precioVenta">
                     {{ error.precioVenta }}
@@ -48,7 +48,7 @@
                         ✔
                     </a>
                 </label>
-                <input type="text" name="tiempoEstimadoCocina" class="form-control" id="tiempoEstimadoCocina"
+                <input type="number" name="tiempoEstimadoCocina" class="form-control" id="tiempoEstimadoCocina"
                     [(ngModel)]="manufacturado.tiempoEstimadoCocina">
                 <div class="alert alert-danger" *ngIf="error?.tiempoEstimadoCocina">
                     {{ error.tiempoEstimadoCocina }}
@@ -59,15 +59,15 @@
                     <label class="input-group-text" for="inputGroupFile01">Upload Imagen
                     </label>
                     <input (change)="seleccionarFoto($event)" type="file" class="form-control" id="inputGroupFile01">
-                    <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!fotoSeleccionada">
+                    <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!fotoSeleccionada && !manufacturado.imagen">
                         *Ingrese una Foto| *Obligatorio
                     </a>
-                    <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="fotoSeleccionada" style="color: rgb(255, 255, 255);">
+                    <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="fotoSeleccionada || manufacturado.imagen" style="color: rgb(255, 255, 255);">
                         ✔
                     </a>
                 </div>
                 <img *ngIf="manufacturado.imagen" [src]="formatImage(manufacturado.imagen)"
-                    class="img-thumbnail rounded" style="width: 250px; cursor:pointer;">
+                    class="img-thumbnail rounded" style="width: 250px; cursor:pointer;"> 
             </div>
 
             <div class="dropdown py-3">
@@ -102,6 +102,12 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Insumo {{articuloInsumo?.denominacion}}
                         </button>
+                        <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!articuloInsumo">
+                            *Ingrese un valor| *Obligatorio
+                        </a>
+                        <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="articuloInsumo" style="color: rgb(255, 255, 255);">
+                            ✔
+                        </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li *ngFor="let insumo of articulosInsumos">
                                 <a class="dropdown-item" (click)="asignarInsumo(insumo)">{{insumo.denominacion}}</a>
@@ -111,11 +117,23 @@
                     </div>
                     <div class="form-group">
                         <label for="cantidad">Cantidad</label>
-                        <input type="text" name="cantidad" class="form-control" id="cantidad"
+                        <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!detalleArticuloManufacturado.cantidad">
+                            *Ingrese un valor numerico! | *Obligatorio
+                        </a>
+                        <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="detalleArticuloManufacturado.cantidad" style="color: rgb(255, 255, 255);">
+                            ✔
+                        </a>
+                        <input type="number" name="cantidad" class="form-control" id="cantidad"
                             [(ngModel)]="detalleArticuloManufacturado.cantidad">
                     </div>
                     <div class="form-group">
                         <label for="unidadMedida">Unidad de Medida</label>
+                        <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!detalleArticuloManufacturado.unidadMedida">
+                            *Ingrese un valor| *Obligatorio
+                        </a>
+                        <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="detalleArticuloManufacturado.unidadMedida" style="color: rgb(255, 255, 255);">
+                            ✔
+                        </a>
                         <input type="text" name="unidadMedida" class="form-control" id="unidadMedida"
                             [(ngModel)]="detalleArticuloManufacturado.unidadMedida">
                     </div>
