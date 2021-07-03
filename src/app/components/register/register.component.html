@@ -6,43 +6,92 @@
         <h3>Credenciales del usuario</h3>
     </div>
     <div class="card-body">
-        <label for="staticEmail" class="col-sm-2 col-form-label">E-Mail</label>
+        <label for="staticEmail" class="col-sm-2 col-form-label" >E-Mail</label>
+        <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!usuario.usuario && usuarioId">
+            *
+        </a>
+        <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="usuario.usuario" style="color: rgb(255, 255, 255);">
+            ✔
+        </a>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="inputUser" [(ngModel)]="usuario.usuario">
+            <div class="alert alert-danger" *ngIf="error && error.usuario">
+                {{error.usuario}}
+            </div>
+            
         </div>
     </div>
+
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!usuario.clave && usuarioId">
+            *
+        </a>
+        <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="usuario.clave" style="color: rgb(255, 255, 255);">
+            ✔
+        </a>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="inputPassword" [(ngModel)]="usuario.clave">
-        </div>
+            <div class="alert alert-danger" *ngIf="error && error.clave">
+                {{error.clave}}
+            </div>
 
+        </div>
+        
     </div>
 
     <div class="card text-white bg-secondary mb-3">
         <h3>Datos del usuario</h3>
-
     </div>
+
     <div class="card-body">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Nombre</label>
+        <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
+        <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!cliente.nombre && usuarioId">
+            *
+        </a>
+        <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="cliente.nombre" style="color: rgb(255, 255, 255);">
+            ✔
+        </a>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="inputNombre" [(ngModel)]="cliente.nombre">
-        </div>
-
+            <div class="alert alert-danger" *ngIf="validador1">
+                El campo nombre no puede estar vacío
+            </div>
+        </div> 
     </div>
+
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Apellido</label>
+        <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!cliente.apellido && usuarioId">
+            *
+        </a>
+        <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="cliente.apellido" style="color: rgb(255, 255, 255);">
+            ✔
+        </a>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputApellido" [(ngModel)]="cliente.apellido">
-        </div>
+            <input type="text" class="form-control" id="inputApellido" [(ngModel)]="cliente.apellido"> 
+            <div class="alert alert-danger" *ngIf="validador2">
+                El campo apellido no puede estar vacío
+            </div>
 
+        </div> 
     </div>
-    <div class="card-body">
-        <label for="inputPassword" class="col-sm-2 col-form-label">telefono</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputTelefono" [(ngModel)]="cliente.telefono">
-        </div>
 
+
+    <div class="card-body">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Telefono</label> 
+        <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!cliente.telefono && usuarioId">
+            *
+        </a>
+        <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="cliente.telefono" style="color: rgb(255, 255, 255);">
+            ✔
+        </a>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="inputTelefono" [(ngModel)]="cliente.telefono">
+            <div class="alert alert-danger" *ngIf="validador3">
+                El campo telefono no puede estar vacío
+            </div>
+        </div>
     </div>
    
 
@@ -60,7 +109,7 @@
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Nro. Domicilio</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputNro" [(ngModel)]="domicilio.numero">
+            <input type="number" class="form-control" id="inputNro" [(ngModel)]="domicilio.numero">
         </div>
 
     </div>
@@ -86,3 +135,11 @@
     <button *ngIf="!usuarioId" type="button" class="btn btn-warning"  (click)="registrar()" routerLinkActive="active">REGISTRAR!</button>
     <button *ngIf="usuarioId" type="button" class="btn btn-success"  (click)="actualizar()" routerLinkActive="active">ACTUALIZAR!</button>
 </div>
+
+
+
+
+
+
+
+
