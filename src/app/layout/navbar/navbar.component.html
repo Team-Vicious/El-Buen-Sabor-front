@@ -25,10 +25,8 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
 
-
-
         <li class="nav-item">
-          <a class="nav-link" href="/home" routerLink="/home" routerLinkActive="active">Acerca de...</a>
+          <a type="button" class="nav-link" (click)="acercaDe()">Acerca de...</a>
         </li>
 
       </ul>
@@ -47,7 +45,7 @@
   <li *ngIf="usuario?.cliente?.id && usuario?.rol == 'user' || usuario?.rol == 'userg'"
     class="nav-item dropdown p-5 b-2 m-2">
     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:orange;">
-      <i class="bi bi-cart3"></i>  CARRITO
+      <i class="bi bi-cart3"></i> CARRITO
     </a>
 
 
@@ -95,7 +93,7 @@
   <li *ngIf="usuario?.cliente?.id || usuarioAdmin?.cliente?.id" class="nav-item dropdown p-3 b-5 m-3">
     <a *ngIf="usuarioId" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
       style="color:orange;">
-      <i class="bi bi-person-circle"></i>  {{usuario?.cliente?.email}}
+      <i class="bi bi-person-circle"></i> {{usuario?.cliente?.email}}
     </a>
     <a *ngIf="adminId" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
       style="color:orange;">
@@ -108,7 +106,7 @@
       <li><a class="dropdown-item" [routerLink]="['/updateDomicilio', usuario?.id]">
           <i class="bi bi-house-door-fill"></i> Editar Domicilio</a></li>
       <li><a *ngIf="!adminId" class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">
-        <i class="bi bi-list-ul"></i> Historial de pedidos</a></li>
+          <i class="bi bi-list-ul"></i> Historial de pedidos</a></li>
 
       <li><a *ngIf="adminId || usuario?.rol == 'admin'" class="dropdown-item"
           [routerLink]="['/admin', usuario?.id]">Panel Admmin</a></li>
@@ -116,7 +114,7 @@
         <hr class="dropdown-divider">
       </li>
       <li><a class="dropdown-item" routerLink="/home">
-        <i class="bi bi-box-arrow-left"></i> Log Out</a></li>
+          <i class="bi bi-box-arrow-left"></i> Log Out</a></li>
     </ul>
   </li>
 
