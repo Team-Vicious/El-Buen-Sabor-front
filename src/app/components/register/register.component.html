@@ -6,43 +6,59 @@
         <h3>Credenciales del usuario</h3>
     </div>
     <div class="card-body">
-        <label for="staticEmail" class="col-sm-2 col-form-label">E-Mail</label>
+        <label for="staticEmail" class="col-sm-2 col-form-label" >E-Mail</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="inputUser" [(ngModel)]="usuario.usuario">
+            <div class="alert alert-danger" *ngIf="error && error.usuario">
+                {{error.usuario}}
+            </div>
+            
         </div>
     </div>
+
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="inputPassword" [(ngModel)]="usuario.clave">
-        </div>
+            <div class="alert alert-danger" *ngIf="error && error.clave">
+                {{error.clave}}
+            </div>
 
+        </div>
+        
     </div>
 
     <div class="card text-white bg-secondary mb-3">
         <h3>Datos del usuario</h3>
-
     </div>
+
     <div class="card-body">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Nombre</label>
+        <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="inputNombre" [(ngModel)]="cliente.nombre">
-        </div>
-
+            <div class="alert alert-danger" *ngIf="validador1">
+                El campo nombre no puede estar vacío
+            </div>
+        </div> 
     </div>
+
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">Apellido</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputApellido" [(ngModel)]="cliente.apellido">
-        </div>
+            <input type="text" class="form-control" id="inputApellido" [(ngModel)]="cliente.apellido"> 
+            <div class="alert alert-danger" *ngIf="validador2">
+                El campo apellido no puede estar vacío
+            </div>
 
+        </div> 
     </div>
+
+
     <div class="card-body">
         <label for="inputPassword" class="col-sm-2 col-form-label">telefono</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="inputTelefono" [(ngModel)]="cliente.telefono">
         </div>
-
     </div>
    
 
@@ -86,3 +102,11 @@
     <button *ngIf="!usuarioId" type="button" class="btn btn-warning"  (click)="registrar()" routerLinkActive="active">REGISTRAR!</button>
     <button *ngIf="usuarioId" type="button" class="btn btn-success"  (click)="actualizar()" routerLinkActive="active">ACTUALIZAR!</button>
 </div>
+
+
+
+
+
+
+
+

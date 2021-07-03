@@ -1,3 +1,7 @@
+
+
+
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/models/Cliente';
@@ -20,6 +24,9 @@ export class RegisterComponent implements OnInit {
   domicilio: Domicilio = new Domicilio();
   usuarioId!:number;
   adminId!: number;
+  error!: any;
+  validador1 = false;
+  validador2 = false;
   //passCrypto: string = "lrisK34b";
   
   constructor(
@@ -63,29 +70,39 @@ export class RegisterComponent implements OnInit {
 
   registrar(){
     //asignar objetos al usuario/cliente
+   try{
     this.usuario.cliente = this.cliente;
     this.usuario.cliente.email = this.usuario.usuario;
     this.usuario.cliente.domicilio =this.domicilio;
     if (this.route.snapshot.paramMap.get('ida')===null){
-    this.usuario.rol = "user";
-    }
+    this.usuario.rol = "user";}
     this.usuario.clave = (CryptoJS.AES.encrypt(this.usuario.clave.trim(), 'teamvicious')).toString();
+    
+   }
+   catch{
+    }
 
     this.usuarioService.crear(this.usuario).subscribe(user => {
       console.log("registrado con exito usuario: "+user.usuario);
       Swal.fire('CREADO!',`registrado con exito usuario: ${user.usuario}!`,'success');
-      
       //si lo crea el admin vuelve al admin, sino es usuario normal y va al home
       if (this.adminId) {
         this.router.navigate(['/admin/',this.adminId]);
       }else{
-        this.router.navigate(['/home/',user.id]);
-      }
-
-    })
+        this.router.navigate(['/home/',user.id]);}
+    }, err => {
+      if(err.status=== 400){
+        this.error = err.error;
+        console.log(this.error,);
+        this.validar(this.cliente);
+      }}
+    );
+    this.validador1=false;
+    this.validador2=false;
   }
 
   actualizar(){
+
     //asignar objetos al usuario/cliente
     this.usuario.cliente = this.cliente;
     this.usuario.cliente.domicilio =this.domicilio;
@@ -103,11 +120,34 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/home/',user.id]);
       }
 
-    })
+    }, err => {
+      if(err.status=== 400){
+        this.error = err.error;
+        console.log(this.error,);
+        this.validar(this.cliente);
+      }}
+      );
+      this.validador1=false;
+      this.validador2=false;
   }
 
+  
   setearRol(rol: string){
     this.usuario.rol = rol;
   }
 
+  validar(cliente: Cliente){
+
+    if(!cliente.nombre){
+      this.validador1=true;
+    }
+    if(!cliente.apellido){
+      this.validador2=true;
+    }
+  }
+
+  
+
 }
+
+
