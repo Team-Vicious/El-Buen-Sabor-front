@@ -29,7 +29,8 @@ export class ManufacturadosFormComponent implements OnInit {
   detallesArticuloManufacturado: ArticuloManofacturadoDetalle[] = [];
   detalleArticuloManufacturado: ArticuloManofacturadoDetalle = new ArticuloManofacturadoDetalle();
   articulosInsumos: ArticuloInsumo[] = [];
-  articuloInsumo: ArticuloInsumo = new ArticuloInsumo();
+  articuloInsumo!: ArticuloInsumo;
+  rubroGeneral!: RubroGeneral;
 
   constructor(
     private serviceRubros: RubroGeneralService,
@@ -61,12 +62,12 @@ export class ManufacturadosFormComponent implements OnInit {
     })
   }
 
- 
+
 
   public crear(): void {
 
     /*
-    //mejor que elija foto obligatoriamente
+    //(validador)mejor que elija foto obligatoriamente
     this.service.crear(this.manufacturado)
       .subscribe(articulo => {
         articulo.articuloManofacturadoDetalle = [];
@@ -93,7 +94,7 @@ export class ManufacturadosFormComponent implements OnInit {
         }
       })
       */
-      Swal.fire('ERROR', `falta agregar una imagen!`, 'error');
+    Swal.fire('ERROR', `falta agregar una imagen!`, 'error');
   }
 
 
@@ -137,77 +138,104 @@ export class ManufacturadosFormComponent implements OnInit {
   }
 
   public crearConFoto(): void {
+    if (this.manufacturado.denominacion && this.manufacturado.precioVenta &&
+      this.manufacturado.tiempoEstimadoCocina && this.manufacturado.rubroGeneral &&
+      this.manufacturado.articuloManofacturadoDetalle && this.manufacturado.articuloManofacturadoDetalle.length > 0) {
 
-    if (this.validadorFoto == 1) {
-      if (!this.fotoSeleccionada) {
 
-      } else {
-        this.service.crearConFoto(this.manufacturado, this.fotoSeleccionada)
-          .subscribe(articulo => {
-            articulo.articuloManofacturadoDetalle = [];
-            this.manufacturado.articuloManofacturadoDetalle.map(detalle => {
-              this.serviceArticuloManufacturadoDetalle.crear(detalle).subscribe(det => {
 
-                articulo.articuloManofacturadoDetalle.push(det);
-                //actualizo el manufacturado
-                this.service.editar(articulo).subscribe(manuf => {
-                  console.log("manuf detalle agregado");
-                });
-              })
-            });
-            //articulo.articuloManofacturadoDetalle = this.manufacturado.articuloManofacturadoDetalle;
 
-            //console.log(articulo);
-            Swal.fire('Nuevo ', `${articulo.denominacion} creado con exito`, 'success');
-            this.volver();
+      if (this.validadorFoto == 1) {
+        if (!this.fotoSeleccionada) {
 
-          }, err => {
-            if (err.status === 400) {
-              this.error = err.error;
-              console.log(this.error);
-            }
-          })
+        } else {
+          this.service.crearConFoto(this.manufacturado, this.fotoSeleccionada)
+            .subscribe(articulo => {
+              articulo.articuloManofacturadoDetalle = [];
+              this.manufacturado.articuloManofacturadoDetalle.map(detalle => {
+                this.serviceArticuloManufacturadoDetalle.crear(detalle).subscribe(det => {
 
+                  articulo.articuloManofacturadoDetalle.push(det);
+                  //actualizo el manufacturado
+                  this.service.editar(articulo).subscribe(manuf => {
+                    console.log("manuf detalle agregado");
+                  });
+                })
+
+              });
+              //articulo.articuloManofacturadoDetalle = this.manufacturado.articuloManofacturadoDetalle;
+
+              articulo.rubroGeneral = this.rubroGeneral;
+              this.service.editar(articulo).subscribe(art => {
+                console.log("rubro asignado");
+                //console.log(articulo);
+                Swal.fire('Nuevo ', `${articulo.denominacion} creado con exito`, 'success');
+                this.volver();
+              });
+
+            }, err => {
+              if (err.status === 400) {
+                this.error = err.error;
+                console.log(this.error);
+              }
+            })
+
+        }
       }
+      else { this.crear() }
+    } else {
+      Swal.fire('Error', `Hay campos incompletos, por favor rellene todos los campos.
+    <br> Tampoco se olvide de los detalles del Manufacturado!`, 'error');
     }
-    else { this.crear() }
   }
 
   public editarConFoto(): void {
+    if (this.manufacturado.denominacion && this.manufacturado.precioVenta &&
+      this.manufacturado.tiempoEstimadoCocina && this.manufacturado.rubroGeneral && this.manufacturado.articuloManofacturadoDetalle) {
 
-    if (this.validadorFoto == 1) {
 
-      if (!this.fotoSeleccionada) {
+      if (this.validadorFoto == 1) {
 
-      } else {
-        this.service.editarConFoto(this.manufacturado, this.fotoSeleccionada)
-          .subscribe(articulo => {
-            console.log(articulo);
-            Swal.fire('Modificado ', `${articulo.denominacion} modificado con exito`, 'success');
-            this.volver();
-          }, err => {
-            if (err.status === 400) {
-              this.error = err.error;
-              console.log(this.error);
-            }
-          })
+        if (!this.fotoSeleccionada) {
 
+        } else {
+          this.service.editarConFoto(this.manufacturado, this.fotoSeleccionada)
+            .subscribe(articulo => {
+              console.log(articulo);
+              Swal.fire('Modificado ', `${articulo.denominacion} modificado con exito`, 'success');
+              this.volver();
+            }, err => {
+              if (err.status === 400) {
+                this.error = err.error;
+                console.log(this.error);
+              }
+            })
+
+        }
       }
-    }
 
-    else { this.editar() }
+      else { this.editar() }
+    } else {
+      Swal.fire('Error', `Hay campos incompletos, por favor rellene todos los campos.
+  <br> Tampoco se olvide de los detalles del Manufacturado!`, 'error');
+    }
   }
 
   asignarRubro(rubro: RubroGeneral) {
+
+
     this.manufacturado.rubroGeneral = rubro as RubroGeneral;
     console.log("rubro asignado", this.manufacturado.rubroGeneral.denominacion);
+
 
     if (this.manufacturado.id) {
 
       this.service.editar(this.manufacturado).subscribe(manuf => console.log("rubro actualizado"));
     } else {
-      this.manufacturado.rubroGeneral = rubro;
+      this.rubroGeneral = rubro;
+      //this.manufacturado.rubroGeneral = rubro;
     }
+
   }
 
   asignarInsumo(insumo: ArticuloInsumo) {
@@ -216,45 +244,50 @@ export class ManufacturadosFormComponent implements OnInit {
   }
 
   asignarDetalle() {
-    //le asigno el insumo
-    console.log(this.articuloInsumo.denominacion);
-    this.detalleArticuloManufacturado.articuloInsumo = this.articuloInsumo;
-    var detalleAux: ArticuloManofacturadoDetalle = new ArticuloManofacturadoDetalle();
-    detalleAux.articuloInsumo = this.detalleArticuloManufacturado.articuloInsumo;
-    detalleAux.cantidad = this.detalleArticuloManufacturado.cantidad;
-    detalleAux.unidadMedida = this.detalleArticuloManufacturado.unidadMedida;
+    if (this.detalleArticuloManufacturado.unidadMedida && this.detalleArticuloManufacturado.cantidad &&
+      this.articuloInsumo) {
+
+      //le asigno el insumo
+      console.log(this.articuloInsumo.denominacion);
+      this.detalleArticuloManufacturado.articuloInsumo = this.articuloInsumo;
+      var detalleAux: ArticuloManofacturadoDetalle = new ArticuloManofacturadoDetalle();
+      detalleAux.articuloInsumo = this.detalleArticuloManufacturado.articuloInsumo;
+      detalleAux.cantidad = this.detalleArticuloManufacturado.cantidad;
+      detalleAux.unidadMedida = this.detalleArticuloManufacturado.unidadMedida;
 
 
 
-    if (this.manufacturado.id) {
-      this.serviceArticuloManufacturadoDetalle.crear(detalleAux).subscribe(detalle => {
+      if (this.manufacturado.id) {
+        this.serviceArticuloManufacturadoDetalle.crear(detalleAux).subscribe(detalle => {
 
-        //esto lo hago para que al momento de agregar un articulo o eliminar, que traiga la lista actualizada
-        //y despues lo agrega y despues actualiza porque sino quedan detalles en el aire y da error el update
-        this.service.ver(this.manufacturado.id).subscribe(manufacturado => {
-          this.manufacturado = manufacturado;
+          //esto lo hago para que al momento de agregar un articulo o eliminar, que traiga la lista actualizada
+          //y despues lo agrega y despues actualiza porque sino quedan detalles en el aire y da error el update
+          this.service.ver(this.manufacturado.id).subscribe(manufacturado => {
+            this.manufacturado = manufacturado;
 
-          //asigno el detalle al articulo
-          this.manufacturado.articuloManofacturadoDetalle.push(detalle);
+            //asigno el detalle al articulo
+            this.manufacturado.articuloManofacturadoDetalle.push(detalle);
 
-          //edito el manufacturado
-          this.service.editar(this.manufacturado).subscribe(manu => {
-            console.log("detalle agregado");
-            this.manufacturado = manu;
+            //edito el manufacturado
+            this.service.editar(this.manufacturado).subscribe(manu => {
+              console.log("detalle agregado");
+              this.manufacturado = manu;
+            });
           });
         });
-      });
 
 
+      }
+      if (!this.manufacturado.id) {
+        //lo asigno al manufacturado
+
+        this.manufacturado.articuloManofacturadoDetalle.push(detalleAux);
+        console.log("detalle agregado\n", detalleAux);
+      }
+
+    } else {
+      Swal.fire('Error', `Hay campos incompletos, por favor rellene todos los campos.`, 'error');
     }
-    if (!this.manufacturado.id) {
-      //lo asigno al manufacturado
-
-      this.manufacturado.articuloManofacturadoDetalle.push(detalleAux);
-      console.log("detalle agregado\n", detalleAux);
-    }
-
-
 
   }
 
