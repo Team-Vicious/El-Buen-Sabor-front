@@ -3,7 +3,7 @@
     <div class="card-header" *ngIf="formGeneral">{{ rubroGeneral.id? 'Editar Rubro': 'Crear Rubro' }}</div>
     <div class="card-header" *ngIf="formArticulo">{{ rubroArticulo.id? 'Editar Rubro': 'Crear Rubro' }}</div>
     <div class="card-body">
-        <button backButton class="btn btn-secondary my-2" (click)="volver()" >volver</button>
+        <button backButton class="btn btn-danger my-2" (click)="volver()" ><i class="bi bi-arrow-left-square"></i> volver</button>
         <form>
             <div class="form-group" *ngIf="formArticulo">
                 <label for="denominacion">Denominacion
@@ -54,18 +54,17 @@
                     </ul>
                 </div>
             </div>
-           
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" 
+            <div class="col text-center">
+                <button type="button" class="btn btn-primary align-items-center" style="height: 130px; width: 270px; left: auto; font-size: 50px;" 
                 *ngIf="formArticulo"
                 (click)="rubroArticulo.id? editarRubro(): crearRubro()">
-                {{ rubroArticulo.id? 'Editar': 'Crear' }}
+                {{ rubroArticulo.id? 'Editar': 'Crear' }} <i class="bi bi-eject-fill"></i>
                 </button>
 
-                <button type="button" class="btn btn-primary" 
+                <button type="button" class="btn btn-primary align-items-center" style="height: 130px; width: 270px; left: auto; font-size: 50px;" 
                 *ngIf="formGeneral"
                 (click)="rubroGeneral.id? editarRubro(): crearRubro()">
-                {{ rubroGeneral.id? 'Editar': 'Crear' }}
+                {{ rubroGeneral.id? 'Editar': 'Crear' }} <i class="bi bi-eject-fill"></i>
                 </button>
            
             </div>

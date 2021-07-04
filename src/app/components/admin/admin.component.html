@@ -4,9 +4,9 @@
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 
 
-    <li class="nav-item dropdown p-3 b-5 m-3">
+    <li class="nav-item dropdown p-1">
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#000000d3;">
-            articulos
+            <i class="bi bi-gear"></i> articulos
         </a>
 
         <ul class="dropdown-menu">
@@ -19,9 +19,9 @@
 
     
 
-    <li class="nav-item dropdown p-3 b-5 m-3">
+    <li class="nav-item dropdown p-3">
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#000000d3;">
-            usuarios
+            <i class="bi bi-gear"></i> usuarios
         </a>
 
         <ul class="dropdown-menu">
@@ -30,11 +30,18 @@
         </ul>
     </li>
 
+    
+    <button type="button" class="btn btn-primary" (click)="listarUsuarios()"><i class="bi bi-person-square"></i> Listar Usuarios</button>
+    <button type="button" class="btn btn-primary" (click)="listarArticuloManofacturados()"><i class="bi bi-egg-fried"></i> Listar Articulos
+        Manofacturados</button>
+    <button type="button" class="btn btn-primary" (click)="listarArticuloInsumos(true)"><i class="bi bi-egg"></i> Listar Articulos
+        insumo </button>
+    <button type="button" class="btn btn-primary" (click)="listarArticuloInsumos(false)"><i class="bi bi-cup-straw"></i> Listar Bebidas</button>
     <div class="dropdown py-3">
 
         <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
             aria-expanded="false">
-            Rubros
+            <i class="bi bi-gear"></i> Rubros
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
@@ -48,18 +55,12 @@
 
         </ul>
     </div>
-    <button type="button" class="btn btn-primary" (click)="listarUsuarios()"><i class="bi bi-person-square"></i> Listar Usuarios</button>
-    <button type="button" class="btn btn-primary" (click)="listarArticuloManofacturados()"><i class="bi bi-egg-fried"></i> Listar Articulos
-        Manofacturados</button>
-    <button type="button" class="btn btn-primary" (click)="listarArticuloInsumos(true)"><i class="bi bi-egg"></i> Listar Articulos
-        insumo </button>
-    <button type="button" class="btn btn-secondary" (click)="listarArticuloInsumos(false)">Listar Bebidas <i class="bi bi-cup-straw"></i></button>
-    <button type="button" class="btn btn-secondary" (click)="listarRubrosGeneral()">Listar Rubros de Articulos
+    <button type="button" class="btn btn-warning" (click)="listarRubrosGeneral()"> <i class="bi bi-list-ul"></i> Listar Rubros de Articulos
         Manufacturados</button>
-    <button type="button" class="btn btn-secondary" (click)="listarRubrosArticulo()">Listar Rubros de Articulos
+    <button type="button" class="btn btn-warning" (click)="listarRubrosArticulo()"><i class="bi bi-list-ul"></i> Listar Rubros de Articulos
         Insumos</button>
-    <button type="button" class="btn btn-secondary" (click)="mostrarConfiguracion()">
-        Informacion de la Empresa</button>    
+    <button type="button" class="btn btn-info" (click)="mostrarConfiguracion()">
+        <i class="bi bi-info-circle"></i> Informacion de la Empresa</button>    
 
 </nav>
 <div class="card text-white bg-secondary mb-3 ">
@@ -68,7 +69,7 @@
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        REPORTES
+        <i class="bi bi-table"></i> REPORTES
     </button>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
