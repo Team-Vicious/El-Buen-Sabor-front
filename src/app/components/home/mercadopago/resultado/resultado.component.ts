@@ -101,6 +101,7 @@ export class ResultadoComponent implements OnInit {
         mercadoP.metodoPago = "2";
         mercadoP.estado = "0";
         mercadoP.metodoPago = "RapiPago-PagoFacil";
+        mercadoP.identidicadorPago = this.pedido.mercadopagoDatos.id;
       }
 
       if(this.resultado == "error"){

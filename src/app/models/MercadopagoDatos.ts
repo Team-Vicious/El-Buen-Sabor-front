@@ -6,7 +6,6 @@ export class MercadopagoDatos implements Base{
     identidicadorPago!: number;
     fechaCreacion!: Date;
     fechaAprobacion!: Date;
-    formaPago!: string;
     metodoPago!: string;
     nroTarjeta!: string;
     estado!: string;
