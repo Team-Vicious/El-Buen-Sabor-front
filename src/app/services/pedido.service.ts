@@ -21,6 +21,11 @@ export class PedidoService extends CommonService<Pedido>{
     {headers: this.cabeceras});
   }
 
+  getPedidoByFacturaId(idFactura:number): Observable<Pedido>{
+    return this.http.get<Pedido>(`${this.baseEndPoint}/pedido-facturaId/${idFactura}`,
+    {headers: this.cabeceras});
+  }
+
   postEmail(pedido:Pedido): Observable<string>{
     return this.http.post(`http://localhost:3005/send-email`,
     pedido,

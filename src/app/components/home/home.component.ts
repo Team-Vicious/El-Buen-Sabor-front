@@ -151,4 +151,118 @@ export class HomeComponent implements OnInit {
     })
 
   }
+
+  infoBar(numero:number){
+
+    if(numero == 1){
+      Swal.fire({
+        icon: 'info',
+        title: ` Ubicación `,
+        html: `
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door"
+            viewBox="0 0 16 16">
+            <path
+              d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+          </svg>
+          <h5>Luzuriaga 385</h5>
+            <br>
+            <br>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3349.9185237874876!2d-68.85901838481483!3d-32.90032238093499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e090a270a64cb%3A0xf1533838bb9322ae!2sLuzuriaga%20385%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1621386248566!5m2!1ses-419!2sar"
+            width="350" height="150" style="border:10px;" allowfullscreen="" loading="lazy">Ubicacion</iframe>
+          
+  
+           
+        </div>
+        `
+      });
+    }
+    if(numero == 2){
+      Swal.fire({
+        icon: 'info',
+        title: `Horario de Atención `,
+        html: `
+        <br>
+        <h5>
+        Lunes a Viernes 
+        <br>11:00 a 15:00 -
+        <br> 20:00 a 23:30,
+        <br> 
+        <br> 
+        <br> sábados y domingos 
+        <br>de 11:00 a 15:00
+        </h5>
+        <br>
+        
+        `
+      });
+    }
+    if(numero == 3){
+      Swal.fire({
+        icon: 'info',
+        title: `Contacto`,
+        html: `
+        <br>
+        <h5>
+        Email: elbuensabormdz@hotmail.com
+        <br>
+        <br>
+        Teléfono: 261-4275726
+        <br>
+        <br>
+        Tambien nos puedes seguir en Facebook!
+        </h5>
+        <a href="https://www.facebook.com/buen.sabor.7771/">
+          Facebook
+        </a>
+        <br>
+        
+        `
+      });
+    }
+    if(numero == 4){
+      Swal.fire({
+        icon: 'info',
+        title: `Información para el usuario`,
+        html: `
+        <br>
+        <h5>
+        Para hacer un pedido tienes que 
+        <br>registrarte o loguearte!
+        <br>Una vez que tengamos todos tus datos,
+        ya podras hacer pedidos!
+        <br>En nuestro sistema podras hacer pedidos,
+        elegir el metodo de pago que prefieras,
+        tambien podras descargar tu factura en pdf, ademas 
+        de que se enviara la factura a tu mail!
+        <br> y mucho mas!
+        </h5>
+        <br>
+        
+        `
+      });
+    }
+    if(numero == 5){
+      Swal.fire({
+        icon: 'info',
+        title: `Info del Local`,
+        html: `
+        <br>
+        <h5>
+        El Buen Sabor es un local de comida rapida que hace entregas
+        por devivery solo pagando por Mercado Pago o tambien podes
+        retirar por el local y te hacemos 10% de descuento!
+        <br>
+        cualquier duda escribenos a nuestro mail! 
+        <br>
+        elbuensabormdz@hotmail.com
+        </h5>
+        <br>
+        
+        `
+      });
+    }
+    
+
+  }
 }

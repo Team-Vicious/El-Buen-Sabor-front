@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
         }
       }, err => {
         console.log(err)
-        
+        Swal.fire('INCORRECTO!','usuario o contraseña incorrectos! <br> Si no esta registrado, por favor registrese!','error');
       });
 
   }

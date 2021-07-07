@@ -1,8 +1,8 @@
 <app-navbar [usuarioId]="usuarioId"></app-navbar>
 <div>  
-<button class="btn btn-primary my-2" [routerLink]="['/',usuarioId, 'manufacturados','form']" >crear</button>
+<button class="btn btn-primary my-2" [routerLink]="['/',usuarioId, 'manufacturados','form']" ><i class="bi bi-arrow-up-square"></i> crear</button>
 
-<button backButton class="btn btn-danger" (click)="volver()" style="float: right">volver</button>
+<button backButton class="btn btn-danger" (click)="volver()" style="float: right"><i class="bi bi-arrow-left-square"></i> volver</button>
 
 <form class="d-flex" style="float: right;">
     <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar artículo" aria-label="Search"  [(ngModel)]="
@@ -10,24 +10,24 @@
   </form>
 
     <body  *ngFor="let articulo of ArticuloManofacturado | filter:filterPost">
-    <div class="card text-white bg-dark m-2 b-2" *ngIf=" (articulo.fechaBaja)===null">
+    <div class="card text-white bg-dark p-2 m-2 b-2 py-2" *ngIf=" (articulo.fechaBaja)===null">
         <tr>
             <td>
                 <div>
                     <img *ngIf="articulo.imagen" [src]="formatImage(articulo.imagen)"
-                                    class="img-thumbnail rounded" style="width: 250px; cursor:pointer;">
+                                    class="img-thumbnail rounded p-2 m-2 b-2 py-2" style="width: 250px; cursor:pointer;">
                 </div>
             </td>
 
             <td>
         <tr>
-            <a>{{articulo.denominacion}}</a>
+            <h3>{{articulo.denominacion}}</h3>
         </tr>
         <tr>
-            <a>
-                {{articulo.precioVenta}}
+            <h3>
+                ${{articulo.precioVenta}}
 
-            </a>
+            </h3>
         </tr>
         <tr>
             <a>
@@ -39,9 +39,9 @@
 
         </tr>
         <td>
-            <button type="button" class="btn btn-warning" routerLinkActive="active"  [routerLink]="['/',usuarioId,'manufacturados','form',articulo.id]">Editar</button>
+            <button type="button" class="btn btn-warning p-2 m-2 b-2 py-2" routerLinkActive="active"  [routerLink]="['/',usuarioId,'manufacturados','form',articulo.id]">Editar</button>
 
-            <button type="button" class="btn btn-danger" routerLinkActive="active"  (click)="borrarArticuloManofacturado(articulo)">Eliminar</button>
+            <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" routerLinkActive="active"  (click)="borrarArticuloManofacturado(articulo)"><i class="bi bi-trash"></i> Eliminar</button>
         </td>
     </div>   
     </body>

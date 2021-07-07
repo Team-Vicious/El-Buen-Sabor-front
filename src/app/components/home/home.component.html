@@ -2,25 +2,22 @@
     [articuloInsumoCarrito]="articuloInsumoCarrito">    
 </app-navbar>
 <nav class="navbar navbar-dark bg-dark">
-    <div class="btn-group" role="group" style="position: relative; left: 185px;" aria-label="Basic radio toggle button group">
+    <div class="btn-group" role="group" style="position: relative; left: 245px;" aria-label="Basic radio toggle button group">
       
       <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
-      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio4">Ubicacion</label>
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio4" (click)="infoBar(1)">Ubicacion</label>
   
       <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
-      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio5">Horario de Atencion</label>
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio5" (click)="infoBar(2)">Horario de Atencion</label>
   
       <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
-      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio6">Contacto</label>
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio6" (click)="infoBar(3)">Contacto</label>
   
       <input type="radio" class="btn-check" name="btnradio" id="btnradio7" autocomplete="off">
-      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio7">Info Adicional</label>
-  
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio8" autocomplete="off">
-      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio8">Acerca De...</label>
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio7" (click)="infoBar(4)">Info Adicional</label>
   
       <input type="radio" class="btn-check" name="btnradio" id="btnradio9" autocomplete="off">
-      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio9">Info Del Local</label>
+      <label class="btn btn-outline-primary" style="color: rgb(255, 255, 255);" for="btnradio9" (click)="infoBar(5)">Info Del Local</label>
   
     </div>
   </nav>
@@ -102,7 +99,7 @@
                 </body>
 
 
-                <body class="card text-white bg-dark p-2 m-2 b-2 py-2" *ngFor="let articulo2 of articulosInsumoNoEsInsumo | filter:filterPost">
+                <body class="card text-white bg-dark p-2 m-2 b-2 py-2 border-light" *ngFor="let articulo2 of articulosInsumoNoEsInsumo | filter:filterPost">
 
                     <tr>
                         <td>
@@ -113,17 +110,17 @@
 
                         <td>
                     <tr>
-                        <a>{{articulo2.denominacion}}</a>
+                        <h5>{{articulo2.denominacion}}</h5>
                     </tr>
                     <tr>
-                        <a>
+                        <h4>
                             ${{articulo2.precioVenta}}
 
-                        </a>
+                        </h4>
                     </tr>
                     <tr>
-                        <a>
-                            esInsumo: {{articulo2.esInsumo}}
+                        <a class="badge bg-primary p-2 m-2 b-2 py-2">
+                            Bebida
 
                         </a>
                     </tr>
@@ -136,8 +133,9 @@
                         <div *ngIf="verificarStockArtInsumo(articulo2) == true">
 
                             <button *ngIf="abierto" type="button" class="btn btn-success p-2 m-2 b-2 py-2"
-                            (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" routerLinkActive="active">
-                            Agregar al carrito
+                            (click)="almacenarArticulosInsumoSeleccionados(articulo2.id)" 
+                            routerLinkActive="active" style="font-size: 17px;">
+                            Agregar al carrito <i class="bi bi-cart4"></i>
                             </button>
                         </div>
                         <div *ngIf="verificarStockArtInsumo(articulo2) == false">
