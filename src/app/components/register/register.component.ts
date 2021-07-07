@@ -11,6 +11,9 @@ import { DomicilioService } from 'src/app/services/domicilio.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 import * as CryptoJS from 'crypto-js';
+import { telephoneMinus } from 'ngx-bootstrap-icons';
+import { waitForAsync } from '@angular/core/testing';
+import { __await } from 'tslib';
 
 @Component({
   selector: 'app-register',
@@ -29,6 +32,7 @@ export class RegisterComponent implements OnInit {
   validador2 = false;
   validador3 = false;
   validador4 = false;
+  
   //passCrypto: string = "lrisK34b";
   
   constructor(
@@ -70,7 +74,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  registrar(){
+  async registrar(){
     //asignar objetos al usuario/cliente
    try{
     this.usuario.cliente = this.cliente;
@@ -83,25 +87,33 @@ export class RegisterComponent implements OnInit {
    }
    catch{
     }
+  
+      if(!this.usuarioService.validarUserMail(this.usuario.usuario)){
+        this.usuarioService.crear(this.usuario).subscribe(user => {
+          console.log("registrado con exito usuario: "+user.usuario);
+          Swal.fire('CREADO!',`registrado con exito usuario: ${user.usuario}!`,'success');
+          //si lo crea el admin vuelve al admin, sino es usuario normal y va al home
+          if (this.adminId) {
+            this.router.navigate(['/admin/',this.adminId]);
+          }else{
+            this.router.navigate(['/home/',user.id]);}
+        }, err => {
+          if(err.status=== 400){
+            this.error = err.error;
+            console.log(this.error,);
+            this.validar(this.cliente);
+          }}
+        );
+        this.validador1=false;
+        this.validador2=false;
+        this.validador3=false;
+        }
+        else{
+          Swal.fire('ERROR!',`el correo introducido pertenece a otro usuario`,'error');
+        }
+    
+    
 
-    this.usuarioService.crear(this.usuario).subscribe(user => {
-      console.log("registrado con exito usuario: "+user.usuario);
-      Swal.fire('CREADO!',`registrado con exito usuario: ${user.usuario}!`,'success');
-      //si lo crea el admin vuelve al admin, sino es usuario normal y va al home
-      if (this.adminId) {
-        this.router.navigate(['/admin/',this.adminId]);
-      }else{
-        this.router.navigate(['/home/',user.id]);}
-    }, err => {
-      if(err.status=== 400){
-        this.error = err.error;
-        console.log(this.error,);
-        this.validar(this.cliente);
-      }}
-    );
-    this.validador1=false;
-    this.validador2=false;
-    this.validador3=false;
   }
 
   actualizar(){
@@ -172,6 +184,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  
+  
   
 
 }
