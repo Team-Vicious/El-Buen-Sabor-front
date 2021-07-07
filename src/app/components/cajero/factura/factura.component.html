@@ -1,58 +1,74 @@
-<app-navbar [usuarioId]="usuarioId"></app-navbar>
+<app-navbar [usuarioId]="usuarioId" [botonIngVisible]="botonIngVisible"></app-navbar>
 
 <div class="card bg-light mb-3">
     <div class="card-header">GENERAR FACTURA</div>
     <div class="card-body">
-        <button class="btn btn-danger my-2" (click)="volver()" >volver</button>
+        <button class="btn btn-danger my-2" (click)="volver()" ><i class="bi bi-arrow-left-square"></i> volver</button>
         <form>
             <div class="form-group">
                 <label for="montoDescuento">Monto de descuento</label>
-                <input type="text" name="montoDescuento" class="form-control" id="montoDescuento" 
+                <input type="number" name="montoDescuento" class="form-control" id="montoDescuento" 
                 [(ngModel)]="factura.montoDescuento">
                 <div class="alert alert-danger" *ngIf="error?.montoDescuento">
                   {{ error.montoDescuento }}
                 </div>
             </div>
             <div class="form-group">
-                <label for="listaPedido">Forma de Pago</label>
+                <label for="listaPedido">Forma de Pago
+                    <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!factura?.formaPago">
+                        *Obligatorio
+                    </a>
+                    <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="factura?.formaPago" style="color: rgb(255, 255, 255);">
+                        ✔
+                    </a>
+                </label>
                 <div class="dropdown">
                     <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Forma de Pago: {{formaPago}}
+                        Forma de Pago: {{factura?.formaPago}}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li>
                             <a class="dropdown-item" (click)="asignarFormaPago('Mercado Pago')">Mercado Pago</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" (click)="asignarFormaPago('Contado')">Contado</a>
                         </li>
                     </ul>
                 </div>
             </div>    
             <div class="form-group">
                 <label for="nroTarjeta">Nro de tarjeta</label>
-                <input type="text" name="nroTarjeta" class="form-control" id="nroTarjeta" 
+                <input type="number" name="nroTarjeta" class="form-control" id="nroTarjeta" 
                 [(ngModel)]="factura.nroTarjeta">
                 <div class="alert alert-danger" *ngIf="error?.nroTarjeta">
                     {{ error.nroTarjeta }}
                 </div>
             </div>
             <div class="form-group">
-                <label for="totalVenta">Total venta</label>
-                <input type="text" name="totalVenta" class="form-control" id="totalVenta" 
+                <label for="totalVenta">Total venta
+                    <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!factura.totalVenta">
+                        *Ingrese un valor| *Obligatorio
+                    </a>
+                    <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="factura.totalVenta" style="color: rgb(255, 255, 255);">
+                        ✔
+                    </a>
+                </label>
+                <input type="number" name="totalVenta" class="form-control" id="totalVenta" 
                 [(ngModel)]="factura.totalVenta">
                 <div class="alert alert-danger" *ngIf="error?.totalVenta">
                     {{ error.totalVenta }}
                 </div>
             </div>
-            <div class="form-group">
-                <label for="totalCosto">Total Costo</label>
-                <input type="text" name="totalCosto" class="form-control" id="totalCosto" 
-                [(ngModel)]="factura.totalCosto">
-                <div class="alert alert-danger" *ngIf="error?.totalCosto">
-                    {{ error.totalCosto }}
-                </div>
-            </div>
 
             <div class="form-group">
-                <label for="listaPedido">Asigne la factura al algun pedido!</label>
+                <label for="listaPedido">Asigne la factura al algun pedido!
+                    <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!pedido?.numero">
+                        *Obligatorio
+                    </a>
+                    <a class="badge bg-transparent p-2 m-2 b-2 py-2" *ngIf="pedido?.numero" style="color: rgb(255, 255, 255);">
+                        ✔
+                    </a>
+                </label>
                 <div class="dropdown">
                     <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         Asignar Factura al Pedido: Nroº {{pedido?.numero}}

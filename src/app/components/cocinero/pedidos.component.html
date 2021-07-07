@@ -14,32 +14,35 @@
       </div>
 
       
-    <button backButton class="btn btn-danger" (click)="volver()" style="float: right">volver</button>
+    <button backButton class="btn btn-danger" (click)="volver()" style="float: right"><i class="bi bi-arrow-left-square"></i> volver</button>
 
     <body *ngFor="let pedido of Pedidos">
         <a *ngIf="(pedido.estado)===(mostrar) || (mostrar)===4 && (pedido.estado)!=0 && (pedido.estado)!=5 && (pedido.tipoEnvio)!=3 && (pedido.tipoEnvio)!=4 && (pedido.tipoEnvio)!=5" >
         <a *ngIf="asignarEstado(pedido)"></a>
-        <div class="card text-white bg-dark m-2 b-2">
+        <div class="card text-white bg-dark border-light p-2 m-2 b-2 py-2">
         <tr>
-            <a>Número de pedido: {{pedido.id}}</a>
+            <h4>Número de pedido: {{pedido.id}}</h4>
         </tr>
         <tr>
-            <a>Total: {{pedido.total}}</a>
+            <h5>Total: {{pedido.total}}</h5>
         </tr>
         <tr>
           <a>Detalles:</a>
           <a *ngFor="let articulo of pedido.detallePedido">
             <a *ngIf="articulo.articuloManofacturado">
-             <br>*{{articulo.articuloManofacturado.denominacion}}
+             <br>*{{articulo.articuloManofacturado?.denominacion}}
             </a>
+            <a *ngIf="articulo.articuloInsumo">
+              <br>*{{articulo.articuloInsumo?.denominacion}}
+             </a>
           </a>
         </tr>
         <tr *ngIf="(mostrar)!=4">
-            <a>Estado: {{estado}}</a>
+            <a class="badge bg-primary p-2 m-2 b-2 py-2">Estado: {{estado}}</a>
         </tr>
         <td>
             <div class="btn-group">
-                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-danger dropdown-toggle p-2 m-2 b-2 py-2" data-toggle="dropdown" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                   Cambiar estado
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" onclick="javascript:console.log( $(event.target).data('mode'))">

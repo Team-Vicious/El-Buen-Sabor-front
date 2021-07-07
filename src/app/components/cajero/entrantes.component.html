@@ -1,7 +1,7 @@
 <app-navbar [usuarioId]="usuarioId"></app-navbar>
 <div>
 
-    <div class="btn-group">
+    <div class="btn-group" style="float: right;">
         <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton"
             aria-haspopup="true" aria-expanded="false">
             Listar:
@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <button backButton class="btn btn-danger" (click)="volver()" style="float: right">volver</button>
+    <button backButton class="btn btn-danger" (click)="volver()" style="float: left;"><i class="bi bi-arrow-left-square"></i> volver</button>
 
     <div class="card text-dark bg-white m-2 b-2"> Pedidos:
     <a *ngFor="let pedido of Pedidos">

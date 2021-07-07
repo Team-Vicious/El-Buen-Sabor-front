@@ -37,8 +37,8 @@
   </div>
 
   <form class="d-flex">
-    <button *ngIf="validarLogin == false" class="btn btn-outline-success" routerLink="/login" routerLinkActive="active">
-      Ingresar
+    <button *ngIf="validarLogin == false && botonIngVisible != false" class="btn btn-outline-success" routerLink="/login" routerLinkActive="active">
+      <i class="bi bi-door-open"></i>Ingresar
     </button>
   </form>
 

@@ -1,23 +1,23 @@
 <app-navbar></app-navbar>
 
-<button type="button" class="btn btn-danger m-4" routerLink="/home" routerLinkActive="active">Volver</button>  
+<button type="button" class="btn btn-danger m-4" routerLink="/home" routerLinkActive="active"><i class="bi bi-arrow-left-square"></i> Volver</button>  
 
 
-<div class="card text-white bg-secondary mb-3 " >
+<div class="card mb-3 border-black" style="background-color: #38343c; box-shadow: 2px 2px 5px #000;" >
     <div class="card-body">
-        <label for="staticEmail" class="col-sm-2 col-form-label">E-Mail</label>
+        <label for="staticEmail" class="col-sm-2 col-form-label" style="color: #ffffff;">E-Mail</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="inputUser" [(ngModel)]="user">
         </div>
     </div>
     <div class="card-body">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label" style="color: #ffffff;">Contraseña</label>
         <div class="col-sm-10">
             <input type="password" class="form-control" id="inputPassword" [(ngModel)]="clave"> 
         </div>
 
     </div>
-    <button type="button" class="btn btn-success" (click)="login()" routerLinkActive="active">Login</button>
+    <button type="button" class="btn btn-success" (click)="login()" routerLinkActive="active">Login <i class="bi bi-box-arrow-in-right"></i></button>
 </div>
 
 <div class="col text-center">
@@ -28,10 +28,10 @@
 </div>
 
 <p></p>
-<div class="card text-white bg-secondary mb-3">
-    <label for="inputPassword" class="col-sm-2 col-form-label">No estas registrado? REGISTRATE!</label>
+<div class="card mb-3 border-black" style="background-color: #38343c; box-shadow: 2px 2px 5px #000;">
+    <label for="inputPassword" class="col-sm-2 col-form-label" style="color: #ffffff;">No estas registrado? REGISTRATE!</label>
     
-    <button type="button" class="btn btn-warning" routerLink="/register" routerLinkActive="active">REGISTRAR</button>
+    <button type="button" class="btn btn-warning" routerLink="/register" routerLinkActive="active"><i class="bi bi-eject-fill"></i>REGISTRAR</button>
     
 </div>
 

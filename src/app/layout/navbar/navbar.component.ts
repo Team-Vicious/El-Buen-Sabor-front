@@ -44,8 +44,9 @@ export class NavbarComponent implements OnInit {
 
   @Input() usuarioId!: number;
   @Input() adminId!: number;
-  @Input() articulosManofaturadosCarrito!: ArticuloManofacturado[];
   @Input() articuloInsumoCarrito!: ArticuloInsumo[];
+  @Input() articulosManofaturadosCarrito!: ArticuloManofacturado[];
+  @Input() botonIngVisible!: boolean;
 
   ngOnInit(): void {
 
