@@ -42,7 +42,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.adminId = +this.route.snapshot.paramMap.get('idu')!;
 
-    
+
   }
 
   listarUsuario: boolean = false;
@@ -55,15 +55,15 @@ export class AdminComponent implements OnInit {
       this.listarRubroArticulo = false;
       this.listarRubroGeneral = false;
       this.usuarios = usuarios as Usuario[];
-      
+
       //verificar cantidad de cocineros
-      var cantCocineros= 0;
-      this.usuarios.map(us =>{
-        if(us.rol == 'cocinero'){
-          cantCocineros = cantCocineros+1;
+      var cantCocineros = 0;
+      this.usuarios.map(us => {
+        if (us.rol == 'cocinero') {
+          cantCocineros = cantCocineros + 1;
         }
       })
-      this.configuracionService.ver(1).subscribe(configuracion =>{
+      this.configuracionService.ver(1).subscribe(configuracion => {
         configuracion.cantidadCocineros = cantCocineros;
         this.configuracionService.editar(configuracion).subscribe(conf => console.log('cantidad cocineros actualizada'));
       });
@@ -91,23 +91,23 @@ export class AdminComponent implements OnInit {
   }
 
 
-  listarArticuloInsumo:boolean = false;
+  listarArticuloInsumo: boolean = false;
   articuloInsumoArr: ArticuloInsumo[] = [];
-  listarArticuloInsumos(tipo: boolean){
+  listarArticuloInsumos(tipo: boolean) {
     this.articuloInsumoArr = [];
-    this.articuloInsumoService.listar().subscribe(articulos =>{
+    this.articuloInsumoService.listar().subscribe(articulos => {
       this.listarArticuloInsumo = true;
       this.listarArticuloManofacturado = false;
       this.listarUsuario = false;
       this.listarRubroArticulo = false;
       this.listarRubroGeneral = false;
       //this.ArticuloInsumo = articulos as ArticuloInsumo[];
-      articulos.map(articulo =>{
-        if(tipo == articulo.esInsumo){
+      articulos.map(articulo => {
+        if (tipo == articulo.esInsumo) {
           this.articuloInsumoArr.push(articulo);
         }
       })
-      
+
     })
   }
 
@@ -146,12 +146,21 @@ export class AdminComponent implements OnInit {
   }
   generarReporte() {
 
+    if(this.reporte.fechaDestino != undefined && this.reporte.fechaInicio != undefined  && this.tipoReporte > 0){
+
+    
     if (this.tipoReporte == 1) {
       //consulta
+
+
       this.reporteService.generarReportePedidosUsuario(this.reporte).subscribe(() => {
 
         Swal.fire('Reporte', `Reporte Generado <br>| Cantidad de pedidos por usuario |`, 'success');
-      })
+      }, error => {
+        Swal.fire('Reporte', `El Reporte no se pudo generar 
+        <br>| verifique que el reporte no este ya generado un su disco D: |`, 'error');
+      });
+
     }
     if (this.tipoReporte == 2) {
       //consulta
@@ -174,6 +183,9 @@ export class AdminComponent implements OnInit {
         Swal.fire('Reporte', `Reporte Generado <br>| Ganancias |`, 'success');
       })
     }
+  }else{
+    Swal.fire('Reporte Error', `Verifique que ha seleccionado el tipo de reporte y las fechas desde-hasta`, 'error');
+  }
 
   }
 
@@ -264,8 +276,8 @@ export class AdminComponent implements OnInit {
 
   listarRubroArticulo: boolean = false;
   rubroArticuloArr: RubroArticulo[] = [];
-  listarRubrosArticulo(){
-    this.rubroArticuloService.listar().subscribe( rubros => {
+  listarRubrosArticulo() {
+    this.rubroArticuloService.listar().subscribe(rubros => {
       this.listarRubroArticulo = true;
       this.listarRubroGeneral = false;
       this.listarArticuloManofacturado = false;
@@ -276,17 +288,17 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  eliminarRubroArticulo(rubro: RubroArticulo){
+  eliminarRubroArticulo(rubro: RubroArticulo) {
     rubro.fechaBaja = new Date();
-    this.rubroArticuloService.editar(rubro).subscribe( rubroUpdate =>{
+    this.rubroArticuloService.editar(rubro).subscribe(rubroUpdate => {
       console.log("rubro dado de baja!");
     });
   }
 
   listarRubroGeneral: boolean = false;
   rubroGeneralArr: RubroGeneral[] = [];
-  listarRubrosGeneral(){
-    this.rubroGeneralService.listar().subscribe( rubros => {
+  listarRubrosGeneral() {
+    this.rubroGeneralService.listar().subscribe(rubros => {
       this.listarRubroGeneral = true;
       this.listarRubroArticulo = false;
       this.listarArticuloManofacturado = false;
@@ -297,16 +309,16 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  eliminarRubroGeneral(rubro: RubroGeneral){
+  eliminarRubroGeneral(rubro: RubroGeneral) {
     rubro.fechaBaja = new Date();
-    this.rubroGeneralService.editar(rubro).subscribe( rubroUpdate =>{
+    this.rubroGeneralService.editar(rubro).subscribe(rubroUpdate => {
       console.log("rubro dado de baja!");
     });
   }
 
-  mostrarConfiguracion(){
+  mostrarConfiguracion() {
 
-    this.configuracionService.ver(1).subscribe( config => {
+    this.configuracionService.ver(1).subscribe(config => {
 
       Swal.fire({
         icon: 'info',
