@@ -26,6 +26,16 @@ export class PedidoService extends CommonService<Pedido>{
     {headers: this.cabeceras});
   }
 
+  getPedidosByEstado(estado:number): Observable<Pedido[]>{
+    return this.http.get<Pedido[]>(`${this.baseEndPoint}/pedidos-estado/${estado}`,
+    {headers: this.cabeceras});
+  }
+
+  getPedidosByTipoEnvio(tipoEnvio:number): Observable<Pedido[]>{
+    return this.http.get<Pedido[]>(`${this.baseEndPoint}/pedidos-tipoEnvio/${tipoEnvio}`,
+    {headers: this.cabeceras});
+  }
+
   postEmail(pedido:Pedido): Observable<string>{
     return this.http.post(`http://localhost:3005/send-email`,
     pedido,

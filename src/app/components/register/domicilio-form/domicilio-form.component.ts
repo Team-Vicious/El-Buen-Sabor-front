@@ -5,7 +5,7 @@ import { Domicilio } from 'src/app/models/Domicilio';
 import { Usuario } from 'src/app/models/Usuario';
 import { DomicilioService } from 'src/app/services/domicilio.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-domicilio-form',
   templateUrl: './domicilio-form.component.html',
@@ -23,7 +23,8 @@ export class DomicilioFormComponent implements OnInit {
     private usuarioService: UsuarioService,
     private domicilioService: DomicilioService,
     private router: Router,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -69,6 +70,10 @@ export class DomicilioFormComponent implements OnInit {
       
 
     })
+  }
+
+  volver() {
+    this.location.back();
   }
 
 }

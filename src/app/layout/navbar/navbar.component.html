@@ -37,12 +37,14 @@
   </div>
 
   <form class="d-flex">
-    <button *ngIf="validarLogin == false && botonIngVisible != false" class="btn btn-outline-success" routerLink="/login" routerLinkActive="active">
+    <button *ngIf="validarLogin == false && botonIngVisible != false" class="btn btn-outline-success"
+      routerLink="/login" routerLinkActive="active">
       <i class="bi bi-door-open"></i>Ingresar
     </button>
   </form>
 
-  <li *ngIf="usuario?.cliente?.id && usuario?.rol == 'user' || usuario?.rol == 'userg'"
+  <li *ngIf="(usuario?.cliente?.id && usuario?.rol == 'user' || usuario?.rol == 'userg') 
+  && articuloInsumoCarrito != undefined || articulosManofaturadosCarrito != undefined"
     class="nav-item dropdown p-5 b-2 m-2">
     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:orange;">
       <i class="bi bi-cart3"></i> CARRITO
@@ -87,8 +89,13 @@
       </div>
       <div class="col text-center">
 
-        <button *ngIf="articuloInsumoCarrito.length > 0 || articulosManofaturadosCarrito.length > 0" type="submit" (click)="comprar()" class="btn btn-success m-2 b-2">COMPRAR</button>
-        <a class="badge bg-danger p-2 m-2 b-2 py-2" style="font-size: 15px;" *ngIf="articuloInsumoCarrito.length < 1 && articulosManofaturadosCarrito.length < 1">
+
+        <button *ngIf="articuloInsumoCarrito.length > 0 || articulosManofaturadosCarrito.length > 0" type="submit"
+          (click)="comprar()" class="btn btn-success m-2 b-2">COMPRAR</button>
+
+
+        <a class="badge bg-danger p-2 m-2 b-2 py-2" style="font-size: 15px;"
+          *ngIf="articuloInsumoCarrito.length < 1 && articulosManofaturadosCarrito.length < 1">
           *No hay articulos en el carrito! <i class="bi bi-emoji-frown"></i>
         </a>
       </div>
@@ -96,7 +103,7 @@
   </li>
 
 
-  <li *ngIf="usuario?.cliente?.id || usuarioAdmin?.cliente?.id" class="nav-item dropdown p-3 b-5 m-3">
+  <li *ngIf="usuarioId || adminId" class="nav-item dropdown p-3 b-5 m-3">
     <a *ngIf="usuarioId" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"
       style="color:orange;">
       <i class="bi bi-person-circle"></i> {{usuario?.cliente?.email}}
@@ -107,15 +114,25 @@
     </a>
 
     <ul class="dropdown-menu">
-      <li><a *ngIf="usuario?.rol != 'userg'" class="dropdown-item" [routerLink]="['/update', usuario?.id]">
+      <li><a *ngIf="usuario" class="dropdown-item" [routerLink]="['/home', usuario?.id]">
+        <i class="bi bi-gear-fill"></i> Inicio</a>
+      </li>
+      <li><a *ngIf="usuarioAdmin" class="dropdown-item" [routerLink]="['/home', usuarioAdmin?.id]">
+        <i class="bi bi-gear-fill"></i> Inicio</a>
+      </li>
+      <li><a *ngIf="usuario?.rol != 'userg' && usuario?.rol != 'admin' && usuarioAdmin?.rol != 'admin'"
+          class="dropdown-item" [routerLink]="['/update', usuario?.id]">
+          <i class="bi bi-gear-fill"></i> Editar Cuenta</a></li>
+      <li><a *ngIf="usuarioAdmin?.rol == 'admin' || usuario?.rol == 'admin'" class="dropdown-item"
+          [routerLink]="['/update', usuarioAdmin?.id]">
           <i class="bi bi-gear-fill"></i> Editar Cuenta</a></li>
       <li><a class="dropdown-item" [routerLink]="['/updateDomicilio', usuario?.id]">
           <i class="bi bi-house-door-fill"></i> Editar Domicilio</a></li>
       <li><a *ngIf="!adminId" class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">
           <i class="bi bi-list-ul"></i> Historial de pedidos</a></li>
 
-      <li><a *ngIf="adminId || usuario?.rol == 'admin'" class="dropdown-item"
-          [routerLink]="['/admin', usuario?.id]"><i class="bi bi-lightning-fill"></i>Panel Admin</a></li>
+      <li><a *ngIf="adminId || usuario?.rol == 'admin'" class="dropdown-item" [routerLink]="['/admin', usuario?.id]"><i
+            class="bi bi-lightning-fill"></i>Panel Admin</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
