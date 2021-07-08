@@ -39,7 +39,13 @@ export class ListosComponent implements OnInit {
     }
  
   listarPedido(){
+    /*
     this.pedidoService.listar().subscribe(pedido =>{
+      this.Pedidos = pedido as Pedido[];
+    })
+    */
+    //codigo nuevo pedidos filtrados desde el back
+    this.pedidoService.getPedidosByEstado(3).subscribe(pedido =>{
       this.Pedidos = pedido as Pedido[];
     })
 

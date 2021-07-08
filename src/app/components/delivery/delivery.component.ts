@@ -30,9 +30,15 @@ export class DeliveryComponent implements OnInit {
   }
 
   listarPedido() {
+    /*
     this.pedidoService.listar().subscribe(pedido => {
       this.Pedidos = pedido as Pedido[];
-    })
+    });
+    */
+    //trae filtrado desde el back
+    this.pedidoService.getPedidosByEstado(3).subscribe(pedido => {
+      this.Pedidos = pedido as Pedido[];
+    });
 
   }
 

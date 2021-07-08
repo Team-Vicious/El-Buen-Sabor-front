@@ -29,4 +29,5 @@ export class UsuarioService extends CommonService<Usuario>{
     
     {headers: this.cabeceras});
   }
+
 }
