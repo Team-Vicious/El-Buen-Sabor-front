@@ -44,7 +44,7 @@
   </form>
 
   <li *ngIf="(usuario?.cliente?.id && usuario?.rol == 'user' || usuario?.rol == 'userg') 
-  && articuloInsumoCarrito != undefined || articulosManofaturadosCarrito != undefined"
+  && (articuloInsumoCarrito != undefined || articulosManofaturadosCarrito != undefined)"
     class="nav-item dropdown p-5 b-2 m-2">
     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:orange;">
       <i class="bi bi-cart3"></i> CARRITO
