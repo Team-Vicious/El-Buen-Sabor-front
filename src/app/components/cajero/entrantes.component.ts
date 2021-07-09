@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Pedido } from 'src/app/models/Pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { Location } from '@angular/common';
+import { MercadopagoDatosService } from 'src/app/services/mercadopagoDatos.service';
+import { MercadopagoDatos } from 'src/app/models/MercadopagoDatos';
 
 @Component({
   selector: 'app-entrantes',
@@ -19,6 +21,7 @@ export class EntrantesComponent implements OnInit {
 
   constructor(
     private service: PedidoService,
+    private serviceMercadopago: MercadopagoDatosService,
     private router: Router,
     protected route: ActivatedRoute,
     private location: Location) { }
@@ -43,6 +46,15 @@ export class EntrantesComponent implements OnInit {
   cambiarEstado(pedido: Pedido, estado: number) {
     let currentUrl = this.router.url;
     pedido.estado = estado;
+    //si se paga en efectiivo con mp y lo acepta el cajero entonces asignar fecha aprobacion mp
+    if(pedido.mercadopagoDatos){
+      var mercadoPago: MercadopagoDatos = pedido.mercadopagoDatos;
+      mercadoPago.fechaAprobacion = new Date();
+      mercadoPago.estado = "1";
+      this.serviceMercadopago.editar(mercadoPago).subscribe(mp =>{
+        console.log("pedido por mp efectivo aprobado");
+      });
+    }
     this.service.editar(pedido).subscribe(pedido => {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate([currentUrl]);

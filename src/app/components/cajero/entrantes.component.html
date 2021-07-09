@@ -29,6 +29,9 @@
                 <a>Total: {{pedido.total}}</a>
             </tr>
             <tr>
+              <a *ngIf="pedido.mercadopagoDatos?.metodoPago == 'RapiPago-PagoFacil'" class="badge bg-info p-2 m-2 b-2 py-2">Revisar-MP RapiPago-PagoFacil</a>
+            </tr>
+            <tr>
                 <a>Detalles:</a>
                 <a *ngFor="let articulo of pedido.factura.detalleFactura">
                   <a *ngIf="articulo.articuloManofacturado">
@@ -44,20 +47,20 @@
             </tr>
             <tr *ngIf="(mostrar)===0">
 
-                <button type="button" class="btn btn-success" (click)="cambiarEstado(pedido,1)">Aceptar</button>
-                <button type="button" class="btn btn-danger" (click)="cambiarEstado(pedido,5)">Cancelar</button>
+                <button type="button" class="btn btn-success p-2 m-2 b-2 py-2" (click)="cambiarEstado(pedido,1)">Aceptar</button>
+                <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="cambiarEstado(pedido,5)">Cancelar</button>
 
             </tr>
             <tr *ngIf="(mostrar)===1">
 
-                <button type="button" class="btn btn-danger" (click)="cambiarEstado(pedido,5)">Cancelar Pedido</button>
+                <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="cambiarEstado(pedido,5)">Cancelar Pedido</button>
 
             </tr>
             <tr *ngIf="(mostrar)===5">
 
-                <button type="button" class="btn btn-success" (click)="cambiarEstado(pedido,0)">Devolver a pedidos entrantes</button>
+                <button type="button" class="btn btn-success p-2 m-2 b-2 py-2" (click)="cambiarEstado(pedido,0)">Devolver a pedidos entrantes</button>
                 <p>
-                <p><button type="button" class="btn btn-danger" (click)="borrarPedido(pedido)">Borrar pedido</button>
+                <p><button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="borrarPedido(pedido)">Borrar pedido</button>
 
             </tr>
             <tr>
