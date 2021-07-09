@@ -87,8 +87,9 @@ export class RegisterComponent implements OnInit {
    }
    catch{
     }
+    
   
-      if(!this.usuarioService.validarUserMail(this.usuario.usuario)){
+      if(this.validador1){
         this.usuarioService.crear(this.usuario).subscribe(user => {
           console.log("registrado con exito usuario: "+user.usuario);
           Swal.fire('CREADO!',`registrado con exito usuario: ${user.usuario}!`,'success');
@@ -184,8 +185,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  
-  
+ 
   
 
 }
