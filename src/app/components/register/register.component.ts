@@ -1,7 +1,5 @@
 
 
-
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/models/Cliente';
@@ -11,9 +9,6 @@ import { DomicilioService } from 'src/app/services/domicilio.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 import * as CryptoJS from 'crypto-js';
-import { telephoneMinus } from 'ngx-bootstrap-icons';
-import { waitForAsync } from '@angular/core/testing';
-import { __await } from 'tslib';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +27,6 @@ export class RegisterComponent implements OnInit {
   validador2 = false;
   validador3 = false;
   validador4 = false;
-  
   //passCrypto: string = "lrisK34b";
 
   constructor(
@@ -188,6 +182,5 @@ export class RegisterComponent implements OnInit {
   }
 
 
+
 }
-
-
