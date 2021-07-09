@@ -70,7 +70,7 @@ export class HistorialPedidosComponent implements OnInit {
   
 
   getDocumentDefinition(pedido: Pedido) {
-
+    
     return {
       
       content: [

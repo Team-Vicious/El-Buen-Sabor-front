@@ -1,91 +1,100 @@
 <app-navbar [usuarioId]="usuarioId"></app-navbar>
 
-  <div>
-    <body class="card text-dark bg-white m-2 b-2">
-          <nav div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Listos para llevar</button>
-              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pedidos en camino</button>
-            </div>
-          </nav>
+<div>
 
-          <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-              <a  *ngFor="let pedido of Pedidos">
-                <a *ngIf="(pedido.estado)===(3) && (pedido.tipoEnvio)===(4)">
-                    <div class="card text-white bg-dark m-2 b-2">
-                    <tr>
-                        <a>Número de pedido: {{pedido.id}} </a>
-                        <span class="badge bg-success">Listo para retirar</span>
-                    </tr>
-                    
-                    <tr>
-                        <a>Total: {{pedido.total}}</a>
-                    </tr>
-                    <tr>
-                        <a>Detalles:</a>
-                        <a *ngFor="let articulo of pedido.detallePedido">
-                          <a *ngIf="articulo.articuloManofacturado">
-                           <br>*{{articulo.articuloManofacturado.denominacion}}
-                          </a>
-                          <a *ngIf="articulo.articuloInsumo">
-                            <br>*{{articulo.articuloInsumo.denominacion}}
-                           </a>
-                        </a>
-                    </tr>
-                    <tr>
-                       <a style="color: rgb(56, 224, 160);">Dirección:</a>
-                       <br> Calle: {{pedido.domicilio.calle}} 
-                       <br> Número: {{pedido.domicilio.numero}} 
-                       <br>Localidad: {{pedido.domicilio.localidad}}
-                    </tr>
-                    <a style="color: rgb(22, 140, 251); " href="https://www.google.com.ar/maps/place/{{pedido.domicilio.calle}}+{{pedido.domicilio.numero}},+{{pedido.domicilio.localidad}},+Mendoza" target="_blank">ABRIR EN MAPS</a>
-    
-                    <button class="btn btn-success my-2"  style="float: right"  (click)="tomarpedido(pedido)">tomar pedido</button>
-                </div>
+  <body class="card text-dark bg-white m-2 b-2">
+    <nav div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+          role="tab" aria-controls="nav-home" aria-selected="true">Listos para llevar</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+          role="tab" aria-controls="nav-profile" aria-selected="false">Pedidos en camino</button>
+      </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <a *ngFor="let pedido of Pedidos">
+          <a *ngIf="(pedido.estado)===(3) && (pedido.tipoEnvio)===(4)">
+            <div class="card text-white bg-dark  p-2 m-2 b-2 py-2">
+              <tr>
+                <a>Número de pedido: {{pedido.id}} </a>
+                <span class="badge bg-success">Listo para retirar</span>
+              </tr>
+
+              <tr>
+                <a>Total: {{pedido.total}}</a>
+              </tr>
+              <tr>
+                <a>Detalles:</a>
+                <a *ngFor="let articulo of pedido.detallePedido">
+                  <a *ngIf="articulo.articuloManofacturado">
+                    <br>*{{articulo.articuloManofacturado.denominacion}}
+                  </a>
+                  <a *ngIf="articulo.articuloInsumo">
+                    <br>*{{articulo.articuloInsumo.denominacion}}
+                  </a>
                 </a>
-              </a>
+              </tr>
+              <tr>
+                <a style="color: rgb(56, 224, 160);">Dirección:</a>
+                <br> Calle: {{pedido.domicilio.calle}}
+                <br> Número: {{pedido.domicilio.numero}}
+                <br>Localidad: {{pedido.domicilio.localidad}}
+              </tr>
+              <a style="color: rgb(22, 140, 251); "
+                href="https://www.google.com.ar/maps/place/{{pedido.domicilio.calle}}+{{pedido.domicilio.numero}},+{{pedido.domicilio.localidad}},+Mendoza"
+                target="_blank">ABRIR EN MAPS</a>
 
-          </div>
+              <button class="btn btn-success my-2" style="float: right" (click)="tomarpedido(pedido)">tomar
+                pedido</button>
+            </div>
+          </a>
+        </a>
+
+      </div>
 
 
-          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-            <a  *ngFor="let pedido of Pedidos">
-              <a *ngIf="(pedido.estado)===(3) && (pedido.tipoEnvio)===(5)">
-                  <div class="card text-white bg-dark m-2 b-2">
-                  <tr>
-                      <a>Número de pedido: {{pedido.id}} </a>
-                      <span class="badge bg-success">En camino</span>
-                  </tr>
-                  
-                  <tr>
-                      <a>Total: {{pedido.total}}</a>
-                  </tr>
-                  <tr>
-                      <a>Detalles:</a>
-                      <a *ngFor="let articulo of pedido.detallePedido">
-                        <a *ngIf="articulo.articuloManofacturado">
-                         <br>*{{articulo.articuloManofacturado.denominacion}}
-                        </a>
-                        <a *ngIf="articulo.articuloInsumo">
-                          <br>*{{articulo.articuloInsumo.denominacion}}
-                         </a>
-                      </a>
-                  </tr>
-                  <tr>
-                     <a style="color: rgb(56, 224, 160);">Dirección:</a>
-                     <br> Calle: {{pedido.domicilio.calle}} 
-                     <br> Número: {{pedido.domicilio.numero}} 
-                     <br>Localidad: {{pedido.domicilio.localidad}}
-                  </tr>
-                  <a style="color: rgb(22, 140, 251); " href="https://www.google.com.ar/maps/place/{{pedido.domicilio.calle}}+{{pedido.domicilio.numero}},+{{pedido.domicilio.localidad}},+Mendoza" target="_blank">ABRIR EN MAPS</a>
-  
-                  <button class="btn btn-success my-2"  style="float: right" (click)=" cambiarEstado(pedido,6)">Entregado</button>
-              </div>
-              </a>
-            </a>
-          </div>
-        </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <a *ngFor="let pedido of Pedidos">
+          <a *ngIf="(pedido.estado)===(3) && (pedido.tipoEnvio)===(5)">
+            <div class="card text-white bg-dark  p-2 m-2 b-2 py-2">
+              <tr>
+                <a>Número de pedido: {{pedido.id}} </a>
+                <span class="badge bg-success">En camino</span>
+              </tr>
 
-        </body>
+              <tr>
+                <a>Total: {{pedido.total}}</a>
+              </tr>
+              <tr>
+                <a>Detalles:</a>
+                <a *ngFor="let articulo of pedido.detallePedido">
+                  <a *ngIf="articulo.articuloManofacturado">
+                    <br>*{{articulo.articuloManofacturado.denominacion}}
+                  </a>
+                  <a *ngIf="articulo.articuloInsumo">
+                    <br>*{{articulo.articuloInsumo.denominacion}}
+                  </a>
+                </a>
+              </tr>
+              <tr>
+                <a style="color: rgb(56, 224, 160);">Dirección:</a>
+                <br> Calle: {{pedido.domicilio.calle}}
+                <br> Número: {{pedido.domicilio.numero}}
+                <br>Localidad: {{pedido.domicilio.localidad}}
+              </tr>
+              <a style="color: rgb(22, 140, 251); "
+                href="https://www.google.com.ar/maps/place/{{pedido.domicilio.calle}}+{{pedido.domicilio.numero}},+{{pedido.domicilio.localidad}},+Mendoza"
+                target="_blank">ABRIR EN MAPS</a>
+
+              <button class="btn btn-success my-2" style="float: right"
+                (click)=" cambiarEstado(pedido,6)">Entregado</button>
+            </div>
+          </a>
+        </a>
+      </div>
     </div>
+
+  </body>
+</div>
