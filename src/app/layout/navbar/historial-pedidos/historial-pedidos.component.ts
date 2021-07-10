@@ -35,7 +35,7 @@ export class HistorialPedidosComponent implements OnInit {
 
   usuarioId!: number;
   usuario!: Usuario;
-  listaPedidos!: any;
+  listaPedidos: Pedido[] = [];
   
 
   ngOnInit(): void {
