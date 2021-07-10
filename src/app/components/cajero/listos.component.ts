@@ -99,12 +99,21 @@ export class ListosComponent implements OnInit {
         `Tipo de envio: ${pedido.tipoEnvio == 1? 'delivery': 'retiro en el local'}`,
         `\n FACTURA NROº ${pedido.factura.numero}`,
         `fecha de la factura: ${pedido.factura.fecha}`,
-        `Monto de descuento: ${pedido.factura.montoDescuento}`,
+        `Monto de descuento: -$${pedido.factura.montoDescuento}`,
         `Forma de pago: ${pedido.factura.formaPago? 'Mercado Pago' : 'Contado'}`,
         `Nro Tarjeta: ${pedido.factura.nroTarjeta}`,
         `\n\bDETALLE:\b${pedido.factura.detalleFactura.map((det:DetalleFactura) => {
 
-          return `\n${det.articuloManofacturado.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloManofacturado.precioVenta}]`; 
+          if(det.articuloManofacturado){
+            return `\n${det.articuloManofacturado.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloManofacturado.precioVenta}]`; 
+
+          }
+          if(det.articuloInsumo){
+            return `\n${det.articuloInsumo.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloInsumo.precioVenta}]`; 
+
+          }
+          return "";
+
 
         })}`,
         `\n ==[Total: $${pedido.factura.totalVenta}]===`
