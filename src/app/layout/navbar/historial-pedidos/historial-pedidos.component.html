@@ -1,6 +1,11 @@
 <app-navbar [usuarioId]="usuarioId">
 </app-navbar>
 
+<h1 class="card1" *ngIf="listaPedidos.length == 0">
+    <div class="card-body" style="text-align:center;"> 
+      <a [routerLink]="['/home', usuarioId]" class="btn btn-warning" style="font-family: 'Open Sans Condensed', sans-serif; font-size: 25px;"><i class="bi bi-bell-fill"></i> Todavia no ha realizado ningun pedido!</a>
+    </div>
+  </h1>
 <body class="card text-white bg-dark m-4 p-4 border-white " *ngFor="let pedido of listaPedidos">
     <tr>
         <h5>Número de pedido: {{pedido.id}}</h5>
