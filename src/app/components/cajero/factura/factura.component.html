@@ -5,6 +5,9 @@
     <div class="card-body">
         <button class="btn btn-danger my-2" (click)="volver()" ><i class="bi bi-arrow-left-square"></i> volver</button>
         <form>
+            <div class="col text-center">
+                <a *ngIf="factura.fechaBaja" class="badge-danger">Factura dada de Baja</a>
+            </div>
             <div class="form-group">
                 <label for="montoDescuento">Monto de descuento</label>
                 <input type="number" name="montoDescuento" class="form-control" id="montoDescuento" 
@@ -60,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="factura.id == null">
                 <label for="listaPedido">Asigne la factura al algun pedido!
                     <a class="badge bg-danger p-2 m-2 b-2 py-2" *ngIf="!pedido?.numero">
                         *Obligatorio

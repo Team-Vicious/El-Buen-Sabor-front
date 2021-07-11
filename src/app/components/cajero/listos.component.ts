@@ -8,6 +8,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import { DetalleFactura } from 'src/app/models/DetalleFactura';
 import { FacturaService } from 'src/app/services/factura.service';
+import Swal from 'sweetalert2';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -122,12 +123,12 @@ export class ListosComponent implements OnInit {
   }
 
   eliminarFactura(pedido: Pedido){
-    //dar bajado logico, porque puede dar error al eliminar por su fk que se utiliza en pedido
-    //this.facturaService.eliminar(pedido.factura.id).subscribe( factura =>{
-      
+    var factura: Factura = pedido.factura;
+    factura.fechaBaja = new Date();
+    this.facturaService.editar(factura).subscribe( factura =>{
+      Swal.fire('OK', `Factura dada de baja!`, 'info');
       console.log("factura eliminada con exito!");
-    //}
-    //)
+    });
   }
 
   cambiarEstado(pedido: Pedido, estado: number) {
