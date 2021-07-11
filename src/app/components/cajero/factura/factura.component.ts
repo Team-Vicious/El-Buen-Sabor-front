@@ -53,6 +53,7 @@ export class FacturaComponent implements OnInit {
   asignarPedido(pedido: Pedido) {
     //selecciono el pedido al que le quiero asignar la factura
     this.pedido = pedido;
+    this.factura.totalVenta = pedido.total;
 
 
   }
