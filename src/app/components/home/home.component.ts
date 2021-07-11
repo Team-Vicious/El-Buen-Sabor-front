@@ -140,9 +140,14 @@ export class HomeComponent implements OnInit {
       <br>
       <h5>
       ${articuloMf.articuloManofacturadoDetalle.map( detalles => {
-        return `<br><br>${detalles.articuloInsumo.denominacion}
-                <br>cantidad: ${detalles.cantidad}
-                <br>medida: ${detalles.unidadMedida}`
+        if(detalles.fechaBaja == null){
+
+          return `<br><br>${detalles.articuloInsumo.denominacion}
+          <br>cantidad: ${detalles.cantidad}
+          <br>medida: ${detalles.unidadMedida}`
+        }else{
+          return "";
+        }
       })}
       </h5>
       <br>
