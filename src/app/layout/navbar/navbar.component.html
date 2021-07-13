@@ -140,10 +140,19 @@
       <li><a *ngIf="adminId" class="dropdown-item" [routerLink]="['/cocinero', adminId]"><i
             class="bi bi-lightning-fill"></i>Panel Cocinero</a></li>
       <li>
+      <li><a *ngIf="usuario?.rol == 'cocinero'" class="dropdown-item" [routerLink]="['/cocinero', usuario?.id]"><i
+            class="bi bi-lightning-fill"></i>Panel Cocinero</a></li>
+      <li>
       <li><a *ngIf="adminId" class="dropdown-item" [routerLink]="['/cajero', adminId]"><i
             class="bi bi-lightning-fill"></i>Panel Cajero</a></li>
       <li>
+      <li><a *ngIf="usuario?.rol == 'cajero'" class="dropdown-item" [routerLink]="['/cajero', usuario?.id]"><i
+            class="bi bi-lightning-fill"></i>Panel Cajero</a></li>
+      <li>
       <li><a *ngIf="adminId" class="dropdown-item" [routerLink]="['/delivery', adminId]"><i
+            class="bi bi-lightning-fill"></i>Panel Delivery</a></li>
+      <li>
+      <li><a *ngIf="usuario?.rol == 'delivery'" class="dropdown-item" [routerLink]="['/delivery', usuario?.id]"><i
             class="bi bi-lightning-fill"></i>Panel Delivery</a></li>
       <li>
         <hr class="dropdown-divider">
