@@ -97,11 +97,11 @@ export class ListosComponent implements OnInit {
         '\n [ EL BUEN SABOR ]',
         `\nPEDIDO NROº ${pedido.numero}`,
         `fecha del depido: ${pedido.fecha}`,
-        `Tipo de envio: ${pedido.tipoEnvio == 1? 'delivery': 'retiro en el local'}`,
+        `Tipo de envio: ${pedido.tipoEnvio == 1 || pedido.tipoEnvio == 3 ? 'retiro en el local': 'delivery'}`,
         `\n FACTURA NROº ${pedido.factura.numero}`,
         `fecha de la factura: ${pedido.factura.fecha}`,
-        `Monto de descuento: -$${pedido.factura.montoDescuento}`,
-        `Forma de pago: ${pedido.factura.formaPago? 'Mercado Pago' : 'Contado'}`,
+        `Monto de descuento: ${pedido.factura.montoDescuento > 0? `Retiro en el local 10% de descuento: ( -$${pedido.factura.montoDescuento} )` : 'no hay descuento'}`,
+        `Forma de pago: ${pedido.factura.formaPago == 'Contado'? 'Contado' : 'Mercado Pago'}`,
         `Nro Tarjeta: ${pedido.factura.nroTarjeta}`,
         `\n\bDETALLE:\b${pedido.factura.detalleFactura.map((det:DetalleFactura) => {
 
