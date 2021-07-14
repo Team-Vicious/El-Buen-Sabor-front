@@ -91,26 +91,29 @@ export class RegisterComponent implements OnInit {
         catch {
         }
 
-        if(!this.validarEmail(this.usuario)){
-        this.usuarioService.crear(this.usuario).subscribe(user => {
-          console.log("registrado con exito usuario: " + user.usuario);
-          Swal.fire('CREADO!', `registrado con exito usuario: ${user.usuario}!`, 'success');
-          //si lo crea el admin vuelve al admin, sino es usuario normal y va al home
-          if (this.adminId) {
-            this.router.navigate(['/admin/', this.adminId]);
-          } else {
-            this.router.navigate(['/home/', user.id]);
+        if (!this.validarEmail(this.usuario)) {
+          this.usuarioService.crear(this.usuario).subscribe(user => {
+            console.log("registrado con exito usuario: " + user.usuario);
+            Swal.fire('CREADO!', `registrado con exito usuario: ${user.usuario}!`, 'success');
+            //si lo crea el admin vuelve al admin, sino es usuario normal y va al home
+            if (this.adminId) {
+              this.router.navigate(['/admin/', this.adminId]);
+            } else {
+              this.router.navigate(['/home/', user.id]);
+            }
+          }, err => {
+            if (err.status === 400) {
+              this.error = err.error;
+              console.log(this.error,);
+              this.validar(this.cliente, this.usuario);
+            }
           }
-        }, err => {
-          if (err.status === 400) {
-            this.error = err.error;
-            console.log(this.error,);
-            this.validar(this.cliente,this.usuario);
-          }
+          );
         }
-        );}
-        else{
+        else {
           Swal.fire('Error', `La dirección de correo no es correcta`, 'error');
+          var bytes = CryptoJS.AES.decrypt(this.usuario.clave, 'teamvicious');
+          this.usuario.clave = bytes.toString(CryptoJS.enc.Utf8);
         }
         this.validador1 = false;
         this.validador2 = false;
@@ -136,26 +139,31 @@ export class RegisterComponent implements OnInit {
       catch {
       }
 
-      if(!this.validarEmail(this.usuario)){
-      this.usuarioService.editar(this.usuario).subscribe(user => {
-        console.log("actualizado con exito usuario: " + user.usuario);
-        Swal.fire('ACTUALIZADO!', `actualizado con exito usuario: ${user.usuario}!`, 'success');
+      if (!this.validarEmail(this.usuario)) {
+        this.usuarioService.editar(this.usuario).subscribe(user => {
+          console.log("actualizado con exito usuario: " + user.usuario);
+          Swal.fire('ACTUALIZADO!', `actualizado con exito usuario: ${user.usuario}!`, 'success');
 
-        //si lo actualiza el admin vuelve al admin, sino es usuario normal y va al home
-        if (this.adminId) {
-          this.router.navigate(['/admin/', this.adminId]);
-        } else {
-          this.router.navigate(['/home/', user.id]);
+          //si lo actualiza el admin vuelve al admin, sino es usuario normal y va al home
+          if (this.adminId) {
+            this.router.navigate(['/admin/', this.adminId]);
+          } else {
+            this.router.navigate(['/home/', user.id]);
+          }
+        }, err => {
+          //var bytes = CryptoJS.AES.decrypt(this.usuario.clave, 'teamvicious');
+          //this.usuario.clave = bytes.toString(CryptoJS.enc.Utf8);
+          if (err.status === 400) {
+            this.error = err.error;
+            console.log(this.error,);
+            this.validar(this.cliente, this.usuario);
+          }
         }
-      }, err => {
-        if (err.status === 400) {
-          this.error = err.error;
-          console.log(this.error,);
-          this.validar(this.cliente,this.usuario);
-        }
+        );
       }
-      );}
-      else{
+      else {
+        var bytes = CryptoJS.AES.decrypt(this.usuario.clave, 'teamvicious');
+        this.usuario.clave = bytes.toString(CryptoJS.enc.Utf8);
         Swal.fire('Error', `La dirección de correo no es correcta`, 'error');
       }
       this.validador1 = false;
