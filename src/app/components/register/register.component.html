@@ -32,8 +32,8 @@
         </a>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="inputPassword" [(ngModel)]="usuario.clave">
-            <div class="alert alert-danger" *ngIf="error && error.clave">
-                {{error.clave}}
+            <div class="alert alert-danger" *ngIf="validador4">
+                El campo contraseña no puede estar vacío
             </div>
 
         </div>

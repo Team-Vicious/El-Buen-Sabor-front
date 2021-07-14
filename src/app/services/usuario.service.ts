@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { filter } from 'ngx-bootstrap-icons';
 import { Observable } from 'rxjs';
 import { BASE_ENDPOINT } from '../config/app';
 import { Usuario } from '../models/Usuario';
@@ -31,3 +32,7 @@ export class UsuarioService extends CommonService<Usuario>{
   }
 
 }
+
+
+
+
