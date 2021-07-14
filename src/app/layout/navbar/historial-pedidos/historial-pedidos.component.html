@@ -18,8 +18,9 @@
     </tr>
     <tr>
         <a *ngIf="pedido.estado == 0" class="badge bg-secondary p-2 m-2 b-2 py-2"> Esperando confirmacion del local</a>
-        <a *ngIf="(pedido.estado == 2 || pedido.estado == 1 || pedido.estado == 3) && pedido.tipoEnvio != 5" class="badge bg-primary p-2 m-2 b-2 py-2"> Tu pedido esta siendo preparado!</a>
+        <a *ngIf="(pedido.estado == 2 || pedido.estado == 1 || pedido.estado == 3) && pedido.tipoEnvio != 5 && pedido.tipoEnvio != 3" class="badge bg-primary p-2 m-2 b-2 py-2"> Tu pedido esta siendo preparado!</a>
         <a *ngIf="pedido.tipoEnvio == 5 && pedido.estado != 6" class="badge bg-info p-2 m-2 b-2 py-2"> El pedido va en camino!</a>
+        <a *ngIf="pedido.estado == 3 && pedido.tipoEnvio == 3" class="badge bg-info p-2 m-2 b-2 py-2"> Tu pedido esta listo para retirar!</a>
         <a *ngIf="pedido.estado == 6" class="badge bg-success p-2 m-2 b-2 py-2"> Entregado</a>
     </tr>
     <tr>

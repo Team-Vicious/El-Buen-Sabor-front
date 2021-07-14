@@ -138,7 +138,7 @@
     <body *ngFor="let usuario of usuarios | filterUsuario:filterPost">
 
         <div class="card text-white bg-dark p-2 m-2 b-2 py-2"
-            *ngIf=" (usuario.fechaBaja)===null && (usuario.rol)!='user' && (usuario.rol)!='userg'">
+            *ngIf=" (usuario.fechaBaja)===null">
             <tr>
                 <td>
             <tr>
