@@ -91,6 +91,7 @@ export class RegisterComponent implements OnInit {
         catch {
         }
 
+        if(!this.validarEmail(this.usuario)){
         this.usuarioService.crear(this.usuario).subscribe(user => {
           console.log("registrado con exito usuario: " + user.usuario);
           Swal.fire('CREADO!', `registrado con exito usuario: ${user.usuario}!`, 'success');
@@ -104,18 +105,23 @@ export class RegisterComponent implements OnInit {
           if (err.status === 400) {
             this.error = err.error;
             console.log(this.error,);
-            this.validar(this.cliente);
+            this.validar(this.cliente,this.usuario);
           }
         }
-        );
+        );}
+        else{
+          Swal.fire('Error', `La dirección de correo no es correcta`, 'error');
+        }
         this.validador1 = false;
         this.validador2 = false;
         this.validador3 = false;
+        this.validador4 = false;
       }
     });
   }
 
   actualizar() {
+
     if (this.usuario.usuario == this.usuario.clave) {
       Swal.fire('ERROR!', `El usuario y contraseña no pueden ser iguales!`, 'error');
     } else {
@@ -129,6 +135,8 @@ export class RegisterComponent implements OnInit {
       }
       catch {
       }
+
+      if(!this.validarEmail(this.usuario)){
       this.usuarioService.editar(this.usuario).subscribe(user => {
         console.log("actualizado con exito usuario: " + user.usuario);
         Swal.fire('ACTUALIZADO!', `actualizado con exito usuario: ${user.usuario}!`, 'success');
@@ -141,18 +149,19 @@ export class RegisterComponent implements OnInit {
         }
       }, err => {
         if (err.status === 400) {
-          if (this.validarEmail(this.usuario)) {
-            Swal.fire('Error', `La dirección de correo no es correcta`, 'error');
-          }
-          else {
-            this.error = err.error;
-            console.log(this.error,);
-            Swal.fire('Error', `Hay campos incompletos o incorrectos
-        <br> Por favor rellene adecuadamente los campos. `, 'error');
-          }
+          this.error = err.error;
+          console.log(this.error,);
+          this.validar(this.cliente,this.usuario);
         }
       }
-      );
+      );}
+      else{
+        Swal.fire('Error', `La dirección de correo no es correcta`, 'error');
+      }
+      this.validador1 = false;
+      this.validador2 = false;
+      this.validador3 = false;
+      this.validador4 = false;
     }
   }
 
@@ -163,7 +172,7 @@ export class RegisterComponent implements OnInit {
     this.usuario.rol = rol;
   }
 
-  validar(cliente: Cliente) {
+  validar(cliente: Cliente, usuario: Usuario) {
 
     if (!cliente.nombre) {
       this.validador1 = true;
@@ -173,6 +182,9 @@ export class RegisterComponent implements OnInit {
     }
     if (!cliente.telefono) {
       this.validador3 = true;
+    }
+    if (!usuario.clave) {
+      this.validador4 = true;
     }
 
   }
