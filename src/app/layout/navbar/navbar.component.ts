@@ -294,7 +294,7 @@ export class NavbarComponent implements OnInit {
     Swal.fire({
       title: 'Acerca de...',
       text: 'La incorporación de una aplicación web tiene beneficios económicos aun cuando la economía se mueve en forma normal. Esto le permita al cliente crear su pedido, ver el estado en el que se encuentra, ver el tiempo estimado y recibir una factura cuando el proceso finaliza mejora la experiencia de usuario. En el largo plazo, esto permite aumentar la cartera de clientes a medida que se busca la manera de mejorar el servicio con promociones o premios por la fidelidad del cliente. ',
-      imageUrl: 'https://imagenes.elcomercio.com/files/article_main_simple/uploads/2019/06/13/5d02843ad35a8.jpeg',
+      imageUrl: 'https://i0.wp.com/goula.lat/wp-content/uploads/2019/12/hamburguesa-beyond-meat-scaled-e1577396155298.jpg?fit=1600%2C1068&ssl=1',
       imageWidth: 400,
       imageHeight: 200,
       imageAlt: 'Custom image',

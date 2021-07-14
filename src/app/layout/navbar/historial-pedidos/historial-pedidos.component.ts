@@ -35,7 +35,7 @@ export class HistorialPedidosComponent implements OnInit {
 
   usuarioId!: number;
   usuario!: Usuario;
-  listaPedidos!: any;
+  listaPedidos: Pedido[] = [];
   
 
   ngOnInit(): void {
@@ -77,7 +77,7 @@ export class HistorialPedidosComponent implements OnInit {
         '\n [ EL BUEN SABOR ]',
         `\nPEDIDO NROº ${pedido.numero}`,
         `fecha del depido: ${pedido.fecha}`,
-        `Tipo de envio: ${pedido.tipoEnvio == 1? 'retiro en el local':pedido.tipoEnvio == 2? 'delivery': ""}`,
+        `Tipo de envio: ${pedido.tipoEnvio == 1 || pedido.tipoEnvio == 3 ? 'retiro en el local': 'delivery'}`,
         `\n FACTURA NROº ${pedido.factura.numero}`,
         `fecha de la factura: ${pedido.factura.fecha}`,
         `Monto de descuento: ${pedido.factura.montoDescuento > 0? `Retiro en el local 10% de descuento: ( -$${pedido.factura.montoDescuento} )` : 'no hay descuento'}`,

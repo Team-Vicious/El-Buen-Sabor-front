@@ -167,6 +167,9 @@ export class AdminComponent implements OnInit {
       this.reporteService.generarReporteRankingArticulosManufacturados(this.reporte).subscribe(() => {
 
         Swal.fire('Reporte', `Reporte Generado <br>| Ranking de Articulos Manufacturados mas pedidos |`, 'success');
+      }, error => {
+        Swal.fire('Reporte', `El Reporte no se pudo generar 
+        <br>| verifique que el reporte no este ya generado un su disco D: |`, 'error');
       })
     }
     if (this.tipoReporte == 3) {
@@ -174,6 +177,9 @@ export class AdminComponent implements OnInit {
       this.reporteService.generarReporteIngresos(this.reporte).subscribe(() => {
 
         Swal.fire('Reporte', `Reporte Generado <br>| Ingresos |`, 'success');
+      }, error => {
+        Swal.fire('Reporte', `El Reporte no se pudo generar 
+        <br>| verifique que el reporte no este ya generado un su disco D: |`, 'error');
       })
     }
     if (this.tipoReporte == 4) {
@@ -181,6 +187,9 @@ export class AdminComponent implements OnInit {
       this.reporteService.generarReporteGanancias(this.reporte).subscribe(() => {
 
         Swal.fire('Reporte', `Reporte Generado <br>| Ganancias |`, 'success');
+      }, error => {
+        Swal.fire('Reporte', `El Reporte no se pudo generar 
+        <br>| verifique que el reporte no este ya generado un su disco D: |`, 'error');
       })
     }
   }else{

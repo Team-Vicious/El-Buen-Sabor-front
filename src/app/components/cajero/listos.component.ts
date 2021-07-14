@@ -8,6 +8,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import { DetalleFactura } from 'src/app/models/DetalleFactura';
 import { FacturaService } from 'src/app/services/factura.service';
+import Swal from 'sweetalert2';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -96,15 +97,24 @@ export class ListosComponent implements OnInit {
         '\n [ EL BUEN SABOR ]',
         `\nPEDIDO NROº ${pedido.numero}`,
         `fecha del depido: ${pedido.fecha}`,
-        `Tipo de envio: ${pedido.tipoEnvio == 1? 'delivery': 'retiro en el local'}`,
+        `Tipo de envio: ${pedido.tipoEnvio == 1 || pedido.tipoEnvio == 3 ? 'retiro en el local': 'delivery'}`,
         `\n FACTURA NROº ${pedido.factura.numero}`,
         `fecha de la factura: ${pedido.factura.fecha}`,
-        `Monto de descuento: ${pedido.factura.montoDescuento}`,
-        `Forma de pago: ${pedido.factura.formaPago? 'Mercado Pago' : 'Contado'}`,
+        `Monto de descuento: ${pedido.factura.montoDescuento > 0? `Retiro en el local 10% de descuento: ( -$${pedido.factura.montoDescuento} )` : 'no hay descuento'}`,
+        `Forma de pago: ${pedido.factura.formaPago == 'Contado'? 'Contado' : 'Mercado Pago'}`,
         `Nro Tarjeta: ${pedido.factura.nroTarjeta}`,
         `\n\bDETALLE:\b${pedido.factura.detalleFactura.map((det:DetalleFactura) => {
 
-          return `\n${det.articuloManofacturado.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloManofacturado.precioVenta}]`; 
+          if(det.articuloManofacturado){
+            return `\n${det.articuloManofacturado.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloManofacturado.precioVenta}]`; 
+
+          }
+          if(det.articuloInsumo){
+            return `\n${det.articuloInsumo.denominacion} === (cantidad: ${det.cantidad}) === [Sub-Total $${det.cantidad*det.articuloInsumo.precioVenta}]`; 
+
+          }
+          return "";
+
 
         })}`,
         `\n ==[Total: $${pedido.factura.totalVenta}]===`
@@ -113,12 +123,12 @@ export class ListosComponent implements OnInit {
   }
 
   eliminarFactura(pedido: Pedido){
-    //dar bajado logico, porque puede dar error al eliminar por su fk que se utiliza en pedido
-    //this.facturaService.eliminar(pedido.factura.id).subscribe( factura =>{
-      
+    var factura: Factura = pedido.factura;
+    factura.fechaBaja = new Date();
+    this.facturaService.editar(factura).subscribe( factura =>{
+      Swal.fire('OK', `Factura dada de baja!`, 'info');
       console.log("factura eliminada con exito!");
-    //}
-    //)
+    });
   }
 
   cambiarEstado(pedido: Pedido, estado: number) {

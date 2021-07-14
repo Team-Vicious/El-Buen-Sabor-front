@@ -115,10 +115,10 @@
 
     <ul class="dropdown-menu">
       <li><a *ngIf="usuario" class="dropdown-item" [routerLink]="['/home', usuario?.id]">
-        <i class="bi bi-gear-fill"></i> Inicio</a>
+          <i class="bi bi-window"></i> Inicio</a>
       </li>
       <li><a *ngIf="usuarioAdmin" class="dropdown-item" [routerLink]="['/home', usuarioAdmin?.id]">
-        <i class="bi bi-gear-fill"></i> Inicio</a>
+          <i class="bi bi-window"></i> Inicio</a>
       </li>
       <li><a *ngIf="usuario?.rol != 'userg' && usuario?.rol != 'admin' && usuarioAdmin?.rol != 'admin'"
           class="dropdown-item" [routerLink]="['/update', usuario?.id]">
@@ -131,8 +131,29 @@
       <li><a *ngIf="!adminId" class="dropdown-item" [routerLink]="['/historialPedidos/', usuario?.id]">
           <i class="bi bi-list-ul"></i> Historial de pedidos</a></li>
 
-      <li><a *ngIf="adminId || usuario?.rol == 'admin'" class="dropdown-item" [routerLink]="['/admin', usuario?.id]"><i
+      <li><a *ngIf="usuario?.rol == 'admin' && !adminId" class="dropdown-item" [routerLink]="['/admin', usuario?.id]"><i
             class="bi bi-lightning-fill"></i>Panel Admin</a></li>
+      <li>
+      <li><a *ngIf="adminId" class="dropdown-item" [routerLink]="['/admin', adminId]"><i
+            class="bi bi-lightning-fill"></i>Panel Admin</a></li>
+      <li>
+      <li><a *ngIf="adminId" class="dropdown-item" [routerLink]="['/cocinero', adminId]"><i
+            class="bi bi-lightning-fill"></i>Panel Cocinero</a></li>
+      <li>
+      <li><a *ngIf="usuario?.rol == 'cocinero'" class="dropdown-item" [routerLink]="['/cocinero', usuario?.id]"><i
+            class="bi bi-lightning-fill"></i>Panel Cocinero</a></li>
+      <li>
+      <li><a *ngIf="adminId" class="dropdown-item" [routerLink]="['/cajero', adminId]"><i
+            class="bi bi-lightning-fill"></i>Panel Cajero</a></li>
+      <li>
+      <li><a *ngIf="usuario?.rol == 'cajero'" class="dropdown-item" [routerLink]="['/cajero', usuario?.id]"><i
+            class="bi bi-lightning-fill"></i>Panel Cajero</a></li>
+      <li>
+      <li><a *ngIf="adminId" class="dropdown-item" [routerLink]="['/delivery', adminId]"><i
+            class="bi bi-lightning-fill"></i>Panel Delivery</a></li>
+      <li>
+      <li><a *ngIf="usuario?.rol == 'delivery'" class="dropdown-item" [routerLink]="['/delivery', usuario?.id]"><i
+            class="bi bi-lightning-fill"></i>Panel Delivery</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
