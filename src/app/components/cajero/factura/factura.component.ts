@@ -67,7 +67,6 @@ export class FacturaComponent implements OnInit {
       this.factura.fecha = new Date();
 
       let facturaId = +this.route.snapshot.paramMap.get('idf')!;
-      if (!facturaId) {
 
 
         //calcular precioCosto y detalles
@@ -111,7 +110,7 @@ export class FacturaComponent implements OnInit {
         });
 
 
-      }
+      
       //asigno descuento
       this.factura.totalVenta = (this.factura.totalVenta - this.factura.montoDescuento);
 
