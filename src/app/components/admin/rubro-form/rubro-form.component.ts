@@ -137,8 +137,10 @@ export class RubroFormComponent implements OnInit {
   sacarRubroPadre() {
     var rubroAuxSinPadre: RubroArticulo = new RubroArticulo();
     //creo un rubro y le paso los valores pero sin padre y actualizo
-    rubroAuxSinPadre.denominacion = this.rubroArticulo.denominacion
+    rubroAuxSinPadre.denominacion = this.rubroArticulo.denominacion;
+    rubroAuxSinPadre.id = this.rubroArticulo.id;
     this.serviceRubroArticulo.editar(rubroAuxSinPadre).subscribe(rubro => {
+      this.rubroArticulo = rubro;
       console.log("rubro padre retirado-actualizado")
     });
   }
