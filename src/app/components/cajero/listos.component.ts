@@ -58,8 +58,9 @@ export class ListosComponent implements OnInit {
 
   asignarEstado(pedido:Pedido){
     if(pedido.estado===3){
-      this.estado="Listo";}
+      this.estado="Listo";
     }
+  }
 
   confirmar(pedido:Pedido){
     

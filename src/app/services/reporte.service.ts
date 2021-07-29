@@ -38,4 +38,10 @@ export class ReporteService {
     reporte,
     {responseType: 'text'});
   }
+
+  generarReportePedidos(reporte:Reporte): Observable<string>{
+    return this.http.post(`${this.baseEndPoint}/reporte-pedidos`,
+    reporte,
+    {responseType: 'text'});
+  }
 }
