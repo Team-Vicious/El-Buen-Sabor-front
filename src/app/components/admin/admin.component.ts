@@ -395,5 +395,9 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  acortarDecimales(numero: number){
+    return numero.toFixed(2);
+  }
+
 
 }
