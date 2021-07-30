@@ -50,6 +50,11 @@ export class ResultadoComponent implements OnInit {
       //reducir stock si el pedido es exitoso
       if (this.resultado == "exitoso") {
 
+        this.insumoService.reducirStock(pedido.detallePedido).subscribe( resultado =>{
+          console.log(resultado);
+        });
+
+        /*
 
         //recorro detalles del pedido
         this.pedido.detallePedido.map(detalle => {
@@ -57,12 +62,15 @@ export class ResultadoComponent implements OnInit {
           //comidas
           if (detalle.articuloManofacturado) {
 
+
+            
             //recorro los detalles del articulo manufacturado
             detalle.articuloManofacturado.articuloManofacturadoDetalle.map(manufDetalle => {
 
-              this.traerInsumo(manufDetalle.articuloInsumo.id, manufDetalle.cantidad);
+              //this.traerInsumo(manufDetalle.articuloInsumo.id, manufDetalle.cantidad);
 
             });
+            
 
           }
 
@@ -78,7 +86,7 @@ export class ResultadoComponent implements OnInit {
 
 
         })
-
+        */
 
       }
     });

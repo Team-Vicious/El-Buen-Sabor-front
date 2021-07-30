@@ -5,6 +5,7 @@ import { ArticuloInsumo } from '../models/ArticuloInsumo';
 import { ArticuloManofacturadoService } from './articuloManofacturado.service';
 import { CommonService } from './common.service';
 import { map } from 'rxjs/operators';
+import { DetallePedido } from '../models/DetallePedido';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,14 @@ export class ArticuloInsumoService extends CommonService<ArticuloInsumo>{
 
   editarNuevo(articulo:ArticuloInsumo){
     return this.http.put(this.baseEndPoint + '/' + articulo.id, articulo,{headers: this.cabeceras}).pipe(
+      map((res:any) => {
+        return res;
+      })
+    );
+  }
+
+  reducirStock(detalles: DetallePedido[]){
+    return this.http.put('http://localhost:8080/api/detallePedido/detalle-pedido-reducirstock',detalles,{headers: this.cabeceras}).pipe(
       map((res:any) => {
         return res;
       })
