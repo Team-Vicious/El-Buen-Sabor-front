@@ -75,6 +75,7 @@ export class ResultadoComponent implements OnInit {
               console.log("insumo bebida reducido");
             });
           }
+          
 
 
         })

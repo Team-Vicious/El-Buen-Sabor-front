@@ -3,12 +3,11 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="col text-center">
         <header>
-            <h1 style="color: rgb(255, 255, 255);"><i
-                class="bi bi-lightning-fill"></i> Panel Admin <i
-                class="bi bi-lightning-fill"></i></h1>
+            <h1 style="color: rgb(255, 255, 255);"><i class="bi bi-lightning-fill"></i> Panel Admin <i
+                    class="bi bi-lightning-fill"></i></h1>
         </header>
     </div>
-  </nav>
+</nav>
 
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 
@@ -26,7 +25,7 @@
         </ul>
     </li>
 
-    
+
 
     <li class="nav-item dropdown p-3">
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:#000000d3;">
@@ -39,13 +38,17 @@
         </ul>
     </li>
 
-    
-    <button type="button" class="btn btn-primary" (click)="listarUsuarios()"><i class="bi bi-person-square"></i> Listar Usuarios</button>
-    <button type="button" class="btn btn-primary" (click)="listarArticuloManofacturados()"><i class="bi bi-egg-fried"></i> Listar Articulos
+
+    <button type="button" class="btn btn-primary" (click)="listarUsuarios()"><i class="bi bi-person-square"></i> Listar
+        Usuarios</button>
+    <button type="button" class="btn btn-primary" (click)="listarArticuloManofacturados()"><i
+            class="bi bi-egg-fried"></i> Listar Articulos
         Manofacturados</button>
-    <button type="button" class="btn btn-primary" (click)="listarArticuloInsumos(true)"><i class="bi bi-egg"></i> Listar Articulos
+    <button type="button" class="btn btn-primary" (click)="listarArticuloInsumos(true)"><i class="bi bi-egg"></i> Listar
+        Articulos
         insumo </button>
-    <button type="button" class="btn btn-primary" (click)="listarArticuloInsumos(false)"><i class="bi bi-cup-straw"></i> Listar Bebidas</button>
+    <button type="button" class="btn btn-primary" (click)="listarArticuloInsumos(false)"><i class="bi bi-cup-straw"></i>
+        Listar Bebidas</button>
     <div class="dropdown py-3">
 
         <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -64,12 +67,16 @@
 
         </ul>
     </div>
-    <button type="button" class="btn btn-warning" (click)="listarRubrosGeneral()"> <i class="bi bi-list-ul"></i> Listar Rubros de Articulos
+    <button type="button" class="btn btn-warning" (click)="listarRubrosGeneral()"> <i class="bi bi-list-ul"></i> Listar
+        Rubros de Articulos
         Manufacturados</button>
-    <button type="button" class="btn btn-warning" (click)="listarRubrosArticulo()"><i class="bi bi-list-ul"></i> Listar Rubros de Articulos
+    <button type="button" class="btn btn-warning" (click)="listarRubrosArticulo()"><i class="bi bi-list-ul"></i> Listar
+        Rubros de Articulos
         Insumos</button>
+    <button type="button" class="btn btn-warning" (click)="listarPedidos()"><i class="bi bi-list-ul"></i> Listar
+        Pedidos</button>
     <button type="button" class="btn btn-info" (click)="mostrarConfiguracion()">
-        <i class="bi bi-info-circle"></i> Informacion de la Empresa</button>    
+        <i class="bi bi-info-circle"></i> Inf. Empresa</button>
 
 </nav>
 <div class="card text-white bg-secondary mb-3 ">
@@ -98,6 +105,7 @@
                         <li><a class="dropdown-item" (click)="setTipoReporte(2)">Mejor Articulo Manufacturado</a></li>
                         <li><a class="dropdown-item" (click)="setTipoReporte(3)">Ingresos</a></li>
                         <li><a class="dropdown-item" (click)="setTipoReporte(4)">Ganancias</a></li>
+                        <li><a class="dropdown-item" >Pedidos</a></li>
                     </ul>
                 </div>
                 <div class="modal-body">
@@ -137,8 +145,7 @@
 
     <body *ngFor="let usuario of usuarios | filterUsuario:filterPost">
 
-        <div class="card text-white bg-dark p-2 m-2 b-2 py-2"
-            *ngIf=" (usuario.fechaBaja)===null">
+        <div class="card text-white bg-dark p-2 m-2 b-2 py-2" *ngIf=" (usuario.fechaBaja)===null">
             <tr>
                 <td>
             <tr>
@@ -182,8 +189,8 @@
             <tr>
                 <td>
                     <div>
-                        <img *ngIf="articulo.imagen" [src]="formatImage(articulo.imagen)" class="img-thumbnail rounded p-2 m-2 b-2 py-2"
-                            style="width: 250px; cursor:pointer;">
+                        <img *ngIf="articulo.imagen" [src]="formatImage(articulo.imagen)"
+                            class="img-thumbnail rounded p-2 m-2 b-2 py-2" style="width: 250px; cursor:pointer;">
                     </div>
                 </td>
 
@@ -210,8 +217,9 @@
                 <button type="button" class="btn btn-warning p-2 m-2 b-2 py-2"
                     [routerLink]="['/',adminId,'manufacturados','form', articulo.id]"
                     routerLinkActive="active">Editar</button>
-                <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="borrarArticuloManofacturado(articulo)"
-                    routerLinkActive="active"><i class="bi bi-trash-fill"></i> Eliminar</button>
+                <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2"
+                    (click)="borrarArticuloManofacturado(articulo)" routerLinkActive="active"><i
+                        class="bi bi-trash-fill"></i> Eliminar</button>
             </td>
         </div>
     </body>
@@ -220,8 +228,8 @@
 <body *ngIf="listarArticuloInsumo">
 
     <form class="d-flex" style="margin: 10px;">
-        <input class="form-control me-2 p-2 m-2 b-2 py-2" name="filterPost" type="search" placeholder="Buscar insumo" aria-label="Search"
-            [(ngModel)]="
+        <input class="form-control me-2 p-2 m-2 b-2 py-2" name="filterPost" type="search" placeholder="Buscar insumo"
+            aria-label="Search" [(ngModel)]="
                 filterPost" style=" width: 220px;">
     </form>
 
@@ -282,8 +290,8 @@
             <td>
                 <button type="button" class="btn btn-success p-2 m-2 b-2 py-2" (click)="aumentarStockInsumo(articulo)"
                     routerLinkActive="active">Aumentar Stock</button>
-                <button type="button" class="btn btn-warning p-2 m-2 b-2 py-2" [routerLink]="['/insumo',adminId,'form',articulo.id]"
-                    routerLinkActive="active">Editar</button>
+                <button type="button" class="btn btn-warning p-2 m-2 b-2 py-2"
+                    [routerLink]="['/insumo',adminId,'form',articulo.id]" routerLinkActive="active">Editar</button>
                 <button type="button" class="btn btn-danger p-2 m-2 b-2 py-2" (click)="borrarInsumo(articulo)"
                     routerLinkActive="active"><i class="bi bi-trash-fill"></i> Eliminar</button>
             </td>
@@ -295,8 +303,8 @@
 
 
     <form class="d-flex" style="margin: 10px;">
-        <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar rubro"
-            aria-label="Search" [(ngModel)]="
+        <input class="form-control me-2" name="filterPost" type="search" placeholder="Buscar rubro" aria-label="Search"
+            [(ngModel)]="
                     filterPost" style=" width: 220px;">
     </form>
 
@@ -358,4 +366,41 @@
         </div>
 
     </body>
+
+
+</body>
+
+<body *ngIf="listarPedido">
+
+    <div class="card text-dark bg-white m-2 b-2">
+        <input type="date" name="begin" placeholder="dd-mm-yyyy" [(ngModel)]="filterPost">
+        <a *ngFor="let pedido of Pedidos | filterPedido:filterPost">
+            <a *ngIf="pedido.estado!=5"> 
+                <div class="card text-white bg-dark m-2 b-2">
+                        <tr>
+                            <a>Número de pedido: {{pedido.id}}</a>
+                        </tr>
+                        <tr>
+                            <b>Cliente: {{pedido.cliente.email}}</b>
+                        </tr>
+                        <tr>
+                            <a>Fecha: {{pedido.fecha | date:"medium"}}</a>
+                        </tr>
+                        <tr>
+                            <a>Total: ${{pedido.total}}</a>
+                        </tr>
+                        <tr>
+                            <a *ngIf="pedido.estado===0" class="badge bg-warning">Por aceptar</a>
+                            <a *ngIf="pedido.estado===1"class="badge bg-warning">Pendiente</a>
+                            <a *ngIf="pedido.estado===2" class="badge bg-warning">En proceso</a>
+                            <a *ngIf="pedido.estado===3" class="badge bg-success">Terminado</a>
+                            <a *ngIf="pedido.estado===6" class="badge bg-success">Entregado</a>
+                        </tr>
+                </div>
+
+            </a>
+        </a>
+    </div>
+
+
 </body>

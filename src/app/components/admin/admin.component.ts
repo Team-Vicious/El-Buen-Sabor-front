@@ -14,6 +14,8 @@ import { RubroGeneralService } from 'src/app/services/rubroGeneral.service';
 import { RubroArticuloService } from 'src/app/services/rubroArticulo.service';
 import { RubroGeneral } from 'src/app/models/RubroGeneral';
 import { ConfiguracionService } from 'src/app/services/configuracion.service';
+import { Pedido } from 'src/app/models/Pedido';
+import { PedidoService } from 'src/app/services/pedido.service';
 
 
 @Component({
@@ -33,6 +35,7 @@ export class AdminComponent implements OnInit {
     private usuarioService: UsuarioService,
     private configuracionService: ConfiguracionService,
     private rubroGeneralService: RubroGeneralService,
+    private pedidoService: PedidoService,
     private rubroArticuloService: RubroArticuloService,
     private articuloManofacturadoService: ArticuloManofacturadoService,
     private articuloInsumoService: ArticuloInsumoService,
@@ -42,8 +45,9 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.adminId = +this.route.snapshot.paramMap.get('idu')!;
 
-
   }
+
+  
 
   listarUsuario: boolean = false;
   usuarios: Usuario[] = [];
@@ -352,6 +356,21 @@ export class AdminComponent implements OnInit {
       });
 
     });
+  }
+
+  listarPedido: boolean = false;
+  Pedidos: Pedido[] = [];
+  listarPedidos() {
+    this.listarPedido = true;
+    this.listarRubroArticulo = false;
+    this.listarArticuloManofacturado = false;
+    this.listarUsuario = false;
+    this.listarArticuloInsumo = false;
+    this.listarRubroGeneral = false;
+    this.pedidoService.listar().subscribe(pedido => {
+      this.Pedidos = pedido as Pedido[];
+    })
+
   }
 
 }
