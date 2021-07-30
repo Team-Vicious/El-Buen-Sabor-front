@@ -373,8 +373,26 @@
 <body *ngIf="listarPedido">
 
     <div class="card text-dark bg-white m-2 b-2">
-        <input type="date" name="begin" placeholder="dd-mm-yyyy" [(ngModel)]="filterPost">
-        <a *ngFor="let pedido of Pedidos | filterPedido:filterPost">
+        <!---input type="date" name="begin" placeholder="dd-mm-yyyy" [(ngModel)]="filterPost"--->
+        <div class="card b-2 m-2 p-3 bg-info">
+            <h4 style="color: rgb(255, 255, 255); padding: 15px;">Fecha Desde</h4>
+            <input type="datetime-local" [(ngModel)]="reporte.fechaInicio">
+        </div>
+
+        <div class="card b-2 m-2 p-3 bg-info">
+            <h4 style="color: rgb(255, 255, 255); padding: 15px;">Fecha Hasta</h4>
+            <input type="datetime-local" [(ngModel)]="reporte.fechaDestino">
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="filtrarPedidosXFecha()">Filtrar por Fecha</button>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-warning" (click)="exportarPedidosExcel()">Exportar a Excel</button>
+        </div>
+
+        <a *ngFor="let pedido of Pedidos">
             <a *ngIf="pedido.estado!=5"> 
                 <div class="card text-white bg-dark m-2 b-2">
                         <tr>
