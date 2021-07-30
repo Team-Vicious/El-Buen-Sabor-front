@@ -393,12 +393,12 @@
         </div>
 
         <a *ngFor="let pedido of Pedidos">
-            <a *ngIf="pedido.estado!=5"> 
+            <a> 
                 <div class="card text-white bg-dark m-2 b-2">
                         <tr>
                             <a>Número de pedido: {{pedido.id}}</a>
                         </tr>
-                        <tr>
+                        <tr *ngIf="pedido?.cliente?.email">
                             <b>Cliente: {{pedido.cliente.email}}</b>
                         </tr>
                         <tr>

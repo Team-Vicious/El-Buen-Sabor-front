@@ -33,7 +33,6 @@ import { ResultadoComponent } from './components/home/mercadopago/resultado/resu
 import { FilterPipe } from './pipes/filter.pipe';
 import { FilterPipeUsuario } from './pipes/filterUsuario.pipe';
 import { FilterPipeInsumo } from './pipes/filterInsumo.pipe';
-import { FilterPipePedido } from './pipes/filterPedido.pipe';
 import { RubroFormComponent } from './components/admin/rubro-form/rubro-form.component';
 
 
@@ -60,7 +59,6 @@ import { RubroFormComponent } from './components/admin/rubro-form/rubro-form.com
     FilterPipe,
     FilterPipeUsuario,
     FilterPipeInsumo,
-    FilterPipePedido,
     RubroFormComponent
   ],
   imports: [
