@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BASE_ENDPOINT } from '../config/app';
 import { Pedido } from '../models/Pedido';
+import { Reporte } from '../models/Reporte';
 import { CommonService } from './common.service';
 
 @Injectable({
@@ -33,6 +34,11 @@ export class PedidoService extends CommonService<Pedido>{
 
   getPedidosByTipoEnvio(tipoEnvio:number): Observable<Pedido[]>{
     return this.http.get<Pedido[]>(`${this.baseEndPoint}/pedidos-tipoEnvio/${tipoEnvio}`,
+    {headers: this.cabeceras});
+  }
+
+  getPedidosByFechas(reporte:Reporte): Observable<Pedido[]>{
+    return this.http.post<Pedido[]>(`${this.baseEndPoint}/pedidos-fecha`,reporte,
     {headers: this.cabeceras});
   }
 
