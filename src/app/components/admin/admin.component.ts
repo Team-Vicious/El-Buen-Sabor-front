@@ -373,4 +373,22 @@ export class AdminComponent implements OnInit {
 
   }
 
+  filtrarPedidosXFecha(){
+    this.listarPedido = false;
+    this.listarPedido = true;
+    this.listarRubroArticulo = false;
+    this.listarArticuloManofacturado = false;
+    this.listarUsuario = false;
+    this.listarArticuloInsumo = false;
+    this.listarRubroGeneral = false;
+    this.pedidoService.getPedidosByFechas(this.reporte).subscribe(pedido => {
+      this.Pedidos = pedido as Pedido[];
+    })
+  }
+
+  exportarPedidosExcel(){
+    //
+  }
+
+
 }
