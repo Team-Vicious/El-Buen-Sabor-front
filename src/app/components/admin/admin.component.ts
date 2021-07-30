@@ -374,7 +374,7 @@ export class AdminComponent implements OnInit {
   }
 
   filtrarPedidosXFecha(){
-    this.listarPedido = false;
+    this.Pedidos = [];
     this.listarPedido = true;
     this.listarRubroArticulo = false;
     this.listarArticuloManofacturado = false;
@@ -387,7 +387,12 @@ export class AdminComponent implements OnInit {
   }
 
   exportarPedidosExcel(){
-    //
+    this.reporteService.generarReportePedidos(this.reporte).subscribe( reporte => {
+      Swal.fire('Reporte', `Reporte Generado <br>| Pedidos |`, 'success');
+    },err => {
+      Swal.fire('Reporte', `El Reporte no se pudo generar 
+      <br>| verifique que el reporte no este ya generado un su disco D: |`, 'error');
+    });
   }
 
 
