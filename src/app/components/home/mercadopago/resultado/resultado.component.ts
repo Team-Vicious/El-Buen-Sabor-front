@@ -7,16 +7,11 @@ import { MercadopagoDatos } from 'src/app/models/MercadopagoDatos';
 import { MercadopagoDatosService } from 'src/app/services/mercadopagoDatos.service';
 import { ArticuloInsumoService } from 'src/app/services/articuloInsumo.service';
 import { ArticuloManofacturadoService } from 'src/app/services/articuloManofacturado.service';
-<<<<<<< HEAD
 import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
 import { DetallePedido } from 'src/app/models/DetallePedido';
 import { mergeMap, switchMap, switchMapTo } from 'rxjs/operators';
 import { empty, observable } from 'rxjs';
 import { Observable } from 'rxjs';
-=======
-import { DetallePedido } from 'src/app/models/DetallePedido';
-import { ArticuloInsumo } from 'src/app/models/ArticuloInsumo';
->>>>>>> issueJoaquin
 
 @Component({
   selector: 'app-resultado',
